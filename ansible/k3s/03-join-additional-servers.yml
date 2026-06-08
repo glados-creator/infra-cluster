@@ -1,0 +1,99 @@
+---
+- name: Join additional K3s servers (HA etcd)
+  hosts: "{{ groups['k3s_servers'][1:] }}"
+  gather_facts: yes
+  become: yes
+  become_method: su
+  serial: 1
+
+  vars:
+    k3s_user: k3su
+    k3s_group: k3sg
+    k3s_bin_dir: "/home/{{ k3s_user }}/k3s-bin"
+    first_server: "{{ groups['k3s_servers'][0] }}"
+
+
+  tasks:
+    # ----- FETCH TOKEN FROM FIRST SERVER (with connection vars) -----
+    - name: Fetch server token from first server
+      ansible.builtin.slurp:
+        src: "/var/lib/rancher/k3s/server/token"
+      register: server_token_b64
+      delegate_to: "{{ first_server }}"
+      vars:
+        ansible_user: "{{ hostvars[first_server].ansible_user }}"
+        ansible_ssh_pass: "{{ hostvars[first_server].ansible_ssh_pass }}"
+        ansible_become_pass: "{{ hostvars[first_server].ansible_become_pass }}"
+        ansible_become_method: "{{ hostvars[first_server].ansible_become_method }}"
+      run_once: true
+
+    - name: Set token fact
+      ansible.builtin.set_fact:
+        k3s_token: "{{ server_token_b64.content | b64decode | trim }}"
+
+    # ----- GATHER FACTS FROM FIRST SERVER -----
+    - name: Gather facts from first server (rpi5a)
+      ansible.builtin.setup:
+      delegate_to: "{{ first_server }}"
+      delegate_facts: true
+      run_once: true
+      vars:
+        ansible_user: "{{ hostvars[first_server].ansible_user }}"
+        ansible_ssh_pass: "{{ hostvars[first_server].ansible_ssh_pass }}"
+        ansible_become_pass: "{{ hostvars[first_server].ansible_become_pass }}"
+        ansible_become_method: "{{ hostvars[first_server].ansible_become_method }}"
+
+    # ----- GET FIRST SERVER IP -----
+    - name: Get first server IP address
+      ansible.builtin.set_fact:
+        first_server_ip: "{{ hostvars[first_server]['ansible_default_ipv4'].address }}"
+      run_once: true
+      delegate_to: localhost
+      delegate_facts: true
+
+    # ----- ENSURE INSTALL SCRIPT IS PRESENT -----
+    - name: Ensure bin directory exists
+      ansible.builtin.file:
+        path: "{{ k3s_bin_dir }}"
+        state: directory
+        owner: "{{ k3s_user }}"
+        group: "{{ k3s_group }}"
+        mode: "0755"
+
+    - name: Check if install script exists
+      ansible.builtin.stat:
+        path: "{{ k3s_bin_dir }}/install.sh"
+      register: install_script
+
+    - name: Download install script if missing (fallback)
+      ansible.builtin.get_url:
+        url: https://get.k3s.io
+        dest: "{{ k3s_bin_dir }}/install.sh"
+        mode: "0755"
+        owner: "{{ k3s_user }}"
+        group: "{{ k3s_group }}"
+      when: not install_script.stat.exists
+
+    # ----- JOIN AS ADDITIONAL SERVER -----
+    - name: Join as additional server using local script
+      environment:
+        K3S_URL: "https://192.168.1.24:6443"
+        K3S_TOKEN: "{{ k3s_token }}"
+        INSTALL_K3S_EXEC: |
+          server
+          --node-name={{ inventory_hostname }}
+          --node-label=server=true
+      ansible.builtin.shell: |
+        {{ k3s_bin_dir }}/install.sh
+      become: yes
+      become_user: root
+      register: install_result
+
+    # ----- WAIT FOR NEW SERVER TO BE READY -----
+    - name: Pause for 10 seconds to allow node to start
+      ansible.builtin.pause:
+        seconds: 5
+
+    - name: Show node join status
+      ansible.builtin.debug:
+        msg: "✅ {{ inventory_hostname }} joined the cluster successfully!"

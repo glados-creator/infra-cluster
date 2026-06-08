@@ -54,12 +54,16 @@
 4. dmz/demilitarized/priviled
 5. private
 
+ip2n the tor thingy / tor
+
 **modes**
 - production
 - dev
 ```bash
 kubectl apply -f overlay/production
 ```
+
+TODO : kustomize patch ingress urls for dev env
 
 for alt see https://github.com/digitalblossom/alternative-frontends
 idk https://github.com/stackryze/FreeDomains

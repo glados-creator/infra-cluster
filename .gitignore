@@ -392,3 +392,6 @@ Cargo.lock
 # Added by cargo
 
 /target
+
+
+**.ini

@@ -1,0 +1,31 @@
+systemctl stop k3s
+rm -rfv /etc/rancher/{k3s,node}
+rm -rfv /var/lib/{rancher/k3s/data,rancher/k3s/server,kubelet,longhorn,etcd,cni}
+find /var/lib/rancher/k3s/agent -mindepth 1 -maxdepth 1 ! -name etc -exec rm -rvf {} +
+find /var/lib/rancher/k3s/agent/etc -mindepth 1 -maxdepth 1 ! -name containerd -exec rm -rvf {} +
+
+rm -rfv /var/lib/etcd/
+sudo cat /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
+systemctl start k3s
+
+cd /home/k3su/k3s-bin
+./kubectl drain X
+./kubectl delete node X
+
+# Get etcd credentials
+etcdctl \
+  --endpoints=https://127.0.0.1:2379 \
+  --cacert=/var/lib/rancher/k3s/server/tls/etcd/server-ca.crt \
+  --cert=/var/lib/rancher/k3s/server/tls/etcd/server-client.crt \
+  --key=/var/lib/rancher/k3s/server/tls/etcd/server-client.key \
+  member list
+
+# Then remove
+etcdctl \
+  --endpoints=https://127.0.0.1:2379 \
+  --cacert=/var/lib/rancher/k3s/server/tls/etcd/server-ca.crt \
+  --cert=/var/lib/rancher/k3s/server/tls/etcd/server-client.crt \
+  --key=/var/lib/rancher/k3s/server/tls/etcd/server-client.key \
+  member remove <member-id>
+
+etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/var/lib/rancher/k3s/server/tls/etcd/server-ca.crt --cert=/var/lib/rancher/k3s/server/tls/etcd/server-client.crt --key=/var/lib/rancher/k3s/server/tls/etcd/server-client.key

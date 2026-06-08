@@ -1,0 +1,18 @@
+# inventory/hosts.ini
+[all:vars]
+ansible_user={{ inventory_hostname }}
+ansible_ssh_pass=<Account-Password>
+ansible_become_pass=<Root-Password>
+ansible_become_method=su
+ansible_python_interpreter=/usr/bin/python3
+ansible_connection=ssh
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+# --- server nodes (k0s controller rootless)
+[k3s_servers]
+rpi5a
+
+# --- worker nodes (external ectd)
+[k3s_workers]
+rpi5b
+rpi3b  ansible_host=rpi3b-w

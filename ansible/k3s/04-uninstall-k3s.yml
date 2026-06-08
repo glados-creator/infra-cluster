@@ -1,0 +1,63 @@
+---
+- name: Uninstall K3s from all nodes
+  hosts: all
+  gather_facts: no
+  become: yes
+  become_method: su
+  serial: 10
+
+  tasks:
+    - name: Check if K3s uninstall script exists (rootful)
+      ansible.builtin.raw: ls /usr/local/bin/k3s-uninstall.sh 2>/dev/null || echo "not_found"
+      register: k3s_uninstall_check_rootful
+
+    - name: Stop and remove OpenRC service 
+      ansible.builtin.raw: |
+        rc-service k3s-agent stop 2>/dev/null || true
+        rc-update del k3s-agent 2>/dev/null || true
+      ignore_errors: yes
+
+    - name: Run K3s server uninstall script
+      ansible.builtin.raw: /usr/local/bin/k3s-uninstall.sh
+      when: "'not_found' not in k3s_uninstall_check_rootful.stdout"
+      ignore_errors: yes
+
+    - name: Remove K3s binaries and directories
+      ansible.builtin.raw: |
+        rm -rvf /root/.kube
+        rm -rvf /etc/cni
+        rm -rvf /opt/cni
+        rm -rvf /var/lib/cni
+        rm -rvf /var/lib/calico
+        rm -rvf /var/lib/kubelet
+        rm -rvf /usr/libexec/kubernetes
+        rm -rvf /var/lib/rancher
+        rm -rvf /etc/rancher
+        rm -rvf /usr/local/bin/k3s
+        rm -rvf /usr/local/bin/kubectl
+        rm -rvf /usr/local/bin/ctr
+        rm -rvf /usr/local/bin/crictl
+        rm -rvf /home/k3su/k3s-bin
+        rm -rvf /home/k3su/.rancher
+        rm -rvf /home/k3su/.kube
+        rm -rvf /run/user/$(id -u k3su 2>/dev/null)/k3s
+        rm -rvf /var/log/k3s.log
+        rm -rvf /var/log/k3s-agent.log
+        rm -rvf /run/k3s
+        rm -rvf /run/k3s.pid
+        rm -rvf /run/openrc/supervise-k3s.ctl
+        rm -rvf /run/openrc/options/k3s
+        rm -rvf /run/openrc/daemons/k3s
+        rm -rvf /run/openrc/started/k3s
+        rm -rvf /etc/runlevels/default/k3s
+        rm -rvf /etc/logrotate.d/k3s
+        rm -rvf /etc/init.d/k3s
+      ignore_errors: yes
+
+    - name: Reload OpenRC
+      ansible.builtin.raw: openrc
+      ignore_errors: yes
+
+    - name: Final cleanup message
+      ansible.builtin.debug:
+        msg: "K3s uninstalled from {{ inventory_hostname }} - install script preserved at /home/k3su/k3s-bin/install.sh"

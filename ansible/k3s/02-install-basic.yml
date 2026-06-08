@@ -1,0 +1,181 @@
+---
+- name: Bootstrap Alpine nodes for K3s
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_method: su
+  serial: 20
+  vars:
+    # cgroup v2 parameters for server nodes (Pi 4/5)
+    server_params:
+      - cgroup_enable=cpuset
+      - cgroup_memory=1
+      - cgroup_enable=memory
+      - cgroup_enable=freezer
+      - cgroup_enable=hugetlb
+      - swapaccount=1
+      - systemd.unified_cgroup_hierarchy=1
+
+    # Legacy cgroup parameters for worker nodes (Pi 3 and older)
+    worker_params:
+      - cgroup_enable=cpuset
+      - cgroup_memory=1
+      - cgroup_enable=memory
+      - cgroup_enable=freezer
+      - cgroup_enable=hugetlb
+      - swapaccount=1
+      # No systemd.unified_cgroup_hierarchy=1 for legacy devices
+
+  tasks:
+    - name: Create a new group k3sg
+      ansible.builtin.group:
+        name: k3sg
+        state: present
+        gid: 1010
+
+    - name: Create a user k3su
+      ansible.builtin.user:
+        name: k3su
+        group: k3sg
+        shell: /bin/bash
+        home: /home/k3su
+        create_home: yes
+        state: present
+
+    - name: Write src to repositories
+      ansible.builtin.copy:
+        content: |
+          https://dl-cdn.alpinelinux.org/alpine/latest-stable/main
+          https://dl-cdn.alpinelinux.org/alpine/latest-stable/community
+        dest: /etc/apk/repositories
+    
+    - name: Update cache and upgrade all packages
+      ansible.builtin.apk:
+        update_cache: true
+        upgrade: true
+
+    - name: Install essential packages
+      apk:
+        name:
+          - nano
+          - curl
+          - bash
+          - sudo
+          - util-linux
+          - e2fsprogs
+          - e2fsprogs-extra
+          - iptables
+          - ip6tables
+          - ca-certificates
+          - lm-sensors
+          - zram-init
+          - iproute2
+          - cgroup-tools
+          - shadow-uidmap
+          - etcd-ctl # for etcdctl --key /var/lib/rancher/k3s/server/tls/etcd/client.key --cert /var/lib/rancher/k3s/server/tls/etcd/client.crt --cacert /var/lib/rancher/k3s/server/tls/etcd/server-ca.crt --endpoints https://127.0.0.1:2379
+        state: present
+
+    - name: Create directory
+      file:
+        path: /home/k3su/k3s-bin
+        state: directory
+        owner: k3su
+        group: k3sg
+        mode: "0755"
+
+    - name: Download K3s install script
+      get_url:
+        url: https://get.k3s.io
+        dest: /home/k3su/k3s-bin/install.sh
+        mode: "0755"
+        owner: k3su
+        group: k3sg
+
+    - name: sys shared
+      ansible.builtin.lineinfile:
+        path: /etc/fstab
+        line: "none /run tmpfs defaults,shared 0 0"
+        create: yes
+      register: cgroup_fstab
+
+    - name: sys shared
+      ansible.builtin.lineinfile:
+        path: /etc/fstab
+        line: "none /sys sysfs defaults,shared 0 0"
+        create: yes
+      register: cgroup_fstab
+    
+    - name: Ensure cgroup2 is mounted at boot
+      ansible.builtin.lineinfile:
+        path: /etc/fstab
+        line: "none /sys/fs/cgroup cgroup2 defaults 0 0"
+        create: yes
+      when: inventory_hostname in groups['k3s_servers']
+      register: cgroup_fstab
+    
+
+    - name: Get current cmdline for servers
+      slurp:
+        src: "/boot/cmdline.txt"
+      register: current_servers
+      when: inventory_hostname in groups['k3s_servers']
+
+    - name: Add missing cgroup parameters for servers (cgroups v2)
+      ansible.builtin.lineinfile:
+        path: "/boot/cmdline.txt"
+        regexp: "^(.*)$"
+        line: '\1 {{ item }}'
+        backrefs: yes
+      loop: "{{ server_params }}"
+      when:
+        - inventory_hostname in groups['k3s_servers']
+        - item not in current_servers.content | b64decode
+      register: server_result
+
+    - name: Get current cmdline for workers
+      slurp:
+        src: "/boot/cmdline.txt"
+      register: current_workers
+      when: inventory_hostname in groups['k3s_workers']
+
+    - name: Add missing cgroup parameters for workers (legacy cgroups)
+      ansible.builtin.lineinfile:
+        path: "/boot/cmdline.txt"
+        regexp: "^(.*)$"
+        line: '\1 {{ item }}'
+        backrefs: yes
+      loop: "{{ worker_params }}"
+      when:
+        - inventory_hostname in groups['k3s_workers']
+        - item not in current_workers.content | b64decode
+      register: worker_result
+
+    - name: Reboot servers if changed
+      reboot:
+        reboot_timeout: 300
+      when:
+        - inventory_hostname in groups['k3s_servers']
+        - server_result is changed or cgroup_fstab is changed
+
+    - name: Reboot workers if changed
+      reboot:
+        reboot_timeout: 300
+      when:
+        - inventory_hostname in groups['k3s_workers']
+        - worker_result is changed or cgroup_fstab is changed
+
+    - name: Wait for servers
+      wait_for_connection:
+        delay: 10
+        timeout: 300
+      when:
+        - inventory_hostname in groups['k3s_servers']
+        - server_result is changed
+
+    - name: Wait for workers
+      wait_for_connection:
+        delay: 10
+        timeout: 300
+      when:
+        - inventory_hostname in groups['k3s_workers']
+        - worker_result is changed

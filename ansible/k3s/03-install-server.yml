@@ -1,0 +1,114 @@
+---
+- name: Install FIRST K3s server (cluster init) with Calico
+  hosts: "{{ groups['k3s_servers'][0] }}"
+  gather_facts: yes
+  become: yes
+  become_method: su
+  serial: 1
+
+  vars:
+    k3s_user: k3su
+    k3s_group: k3sg
+    k3s_bin_dir: "/home/{{ k3s_user }}/k3s-bin"
+    k3s_data_dir: "/var/lib/rancher/k3s"
+
+  tasks:
+    - name: Ensure bin directory exists
+      ansible.builtin.file:
+        path: "{{ k3s_bin_dir }}"
+        state: directory
+        owner: "{{ k3s_user }}"
+        group: "{{ k3s_group }}"
+        mode: "0755"
+
+    # ----- INSTALL K3S USING LOCAL SCRIPT -----
+    - name: Check if install script exists (from 02-install-basic)
+      ansible.builtin.stat:
+        path: "{{ k3s_bin_dir }}/install.sh"
+      register: install_script
+
+    - name: Download install script if missing (fallback)
+      ansible.builtin.get_url:
+        url: https://get.k3s.io
+        dest: "{{ k3s_bin_dir }}/install.sh"
+        mode: "0755"
+        owner: "{{ k3s_user }}"
+        group: "{{ k3s_group }}"
+      when: not install_script.stat.exists
+
+    - name: Install K3s server using local script
+      # --cluster-cidr=192.168.0.0/16
+      environment:
+        INSTALL_K3S_EXEC: |
+          server
+          --cluster-init
+          --disable=traefik
+          --disable=helm-controller
+          --flannel-backend=none
+          --disable-network-policy
+          --node-name={{ inventory_hostname }}
+          --node-label=server=true
+      ansible.builtin.shell: |
+        {{ k3s_bin_dir }}/install.sh
+      become: yes
+      become_user: root
+      register: k3s_install
+
+    # ----- WAIT FOR API -----
+    - name: Wait for API port
+      ansible.builtin.wait_for:
+        host: "{{ ansible_default_ipv4.address }}"
+        port: 6443
+        delay: 10
+        timeout: 60
+      become: yes
+      become_user: root
+
+    - name: Wait for API to be responsive
+      ansible.builtin.shell: |
+        kubectl cluster-info
+      become: yes
+      become_user: "root"
+      register: cluster_info
+      until: cluster_info is success
+      retries: 30
+      delay: 5
+
+    # ----- TOKEN HANDLING -----
+    - name: Read server token
+      ansible.builtin.slurp:
+        src: "{{ k3s_data_dir }}/server/token"
+      register: server_token_file
+
+    - name: Read agent token
+      ansible.builtin.slurp:
+        src: "{{ k3s_data_dir }}/server/agent-token"
+      register: agent_token_file
+      ignore_errors: yes
+
+    - name: Set token facts
+      ansible.builtin.set_fact:
+        k3s_server_token: "{{ server_token_file.content | b64decode | trim }}"
+        k3s_agent_token: "{{ agent_token_file.content | b64decode | trim | default(server_token_file.content | b64decode | trim) }}"
+        cacheable: yes
+
+    - name: Display token preview
+      ansible.builtin.debug:
+        msg:
+          - "✅ First server installed successfully!"
+          - "Server token: {{ k3s_server_token }}"
+          - "Agent token:  {{ k3s_agent_token }}"
+          - "please install the CRDs"
+          - "Cluster is ready for additional servers and workers."
+
+    - name: Save tokens to local file
+      ansible.builtin.copy:
+        content: |
+          # K3s Cluster Tokens - Generated {{ ansible_date_time.iso8601 }}
+          # First server: {{ inventory_hostname }}
+          SERVER_TOKEN={{ k3s_server_token }}
+          AGENT_TOKEN={{ k3s_agent_token }}
+        dest: "./k3s-cluster-tokens-{{ ansible_date_time.date }}.txt"
+      delegate_to: localhost
+      run_once:
+        true

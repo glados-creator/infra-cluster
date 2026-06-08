@@ -1,0 +1,26 @@
+---
+- name: Bootstrap Alpine nodes for K3s
+  hosts: all
+  gather_facts: no  # Start with no facts
+  become: yes
+  become_method: su
+  serial: 20
+  # forks: 20
+  
+  tasks:
+    - name: Update APK repositories
+      raw: apk update
+      register: apk_update
+      changed_when: "'OK' in apk_update.stdout"
+      
+    - name: Install Python 3
+      raw: apk add python3
+      register: python_install
+      
+    - name: Gather facts now that Python is installed
+      setup:  # This re-enables fact gathering
+      when: python_install is changed or python_install is success
+    
+    - name: Update APK package indexes
+      community.general.apk:
+        update_cache: yes
