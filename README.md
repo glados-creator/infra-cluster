@@ -21,18 +21,20 @@
 - stitan (ceph todo)
 
 ### CRD Custome Ressources Definition
-- traefik CRD controller (builtin)
-- calico CNI (network)(TODO)
-- nvidia runtime 
+- [X] traefik CRD controller (builtin)
+- [X] calico CNI (network)(TODO)
+- [X] nvidia runtime 
   ```bash
   # to apply the controller label if it's not done automaticly
   kubectl label node <node-name> nixos-nvidia-cdi=enabled --overwrite
   ```
-- keda (trigger action on event)
-- kubevirt (proxmox but docker)
-- prometheus CRD (monitoring)
-- rook (ceph PV provider)
-- ? velero ? (PV backup) (but maybe i can with ceph)
+- [X] vulcano (gang scheduler gpus)
+- [X] metric server (kubectl top api crd for dozzle)
+- [X] keda (trigger action on event)
+- [] kubevirt (proxmox but docker)
+- [] prometheus CRD (monitoring)
+- [] rook (ceph PV provider)
+- [] ? velero ? (PV backup) (but maybe i can with ceph)
 
 ## zones
 
@@ -177,6 +179,8 @@ rpi5b
 5. install additional servers if HA shared etcd or postgresSQL server see [k3s datastore](https://docs.k3s.io/datastore)
 6. install additional workers
 7. script to uninstall
+
+... please copy all of the .example files and put in the fields
 
 TEMP script to install nfs share for PV
 installing Ceph for storage nodes TODO
