@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: dev-private
+
+resources:
+  - ../../../base/private
+
+patches:
+  - target:
+      kind: ".*"      # applies to all kinds
+    patch: |
+      - op: replace
+        path: /metadata/namespace
+        value: dev-private

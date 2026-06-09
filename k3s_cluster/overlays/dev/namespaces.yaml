@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev-public
+  labels:
+    environment: dev
+    zone: public
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev-dmz
+  labels:
+    environment: dev
+    zone: dmz
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev-private
+  labels:
+    environment: dev
+    zone: private

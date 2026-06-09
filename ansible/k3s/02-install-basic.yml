@@ -58,6 +58,7 @@
       apk:
         name:
           - nano
+          - git
           - curl
           - bash
           - sudo
