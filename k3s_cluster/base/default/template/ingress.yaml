@@ -1,0 +1,20 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ingressroute
+  namespace: <app-ns>
+  labels:
+    app: <app-ns>-<app-name>
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`<app-name>.<app-ns>.home`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+      #middlewares:
+      #  - name: <app-ns>-middleware-auth-sso
+      services:
+        - name: <app-name>-service-dashboard
+          port: 6680
+  #tls: {} 

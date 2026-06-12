@@ -9,9 +9,15 @@ echo "/bhole 192.168.0.0/16(rw,async,wdelay,all_squash,anonuid=1000,anongid=1000
 echo "/home/k3su/infra/k3s_cluster/overlays/production # exportfs -rav"
 
 mkdir /bhole/cluster/default
+mkdir /bhole/cluster/default/dozzle
+
+
 mkdir /bhole/cluster/private
+
 mkdir /bhole/cluster/public
+
 mkdir /bhole/cluster/dmz
+
 sudo chown -R 1000:1000 /bhole/cluster/*
 
 kubectl rollout restart deployment -n prod-dmz dmz-media-qbittorrent-deployment
