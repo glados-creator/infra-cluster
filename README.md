@@ -47,10 +47,8 @@
     + (kube kustomize)
     + (the CRDs)
 2. default/main
-    + (TEMP) ad gaurd dns
     + technitium DNS
     + traefik reverse proxy via ingress-route controller
-    + a glance (app list)
     + a dozzle (logging)
 3. public
 4. dmz/demilitarized/priviled
@@ -66,6 +64,7 @@ kubectl apply -f overlay/production
 ```
 
 TODO : kustomize patch ingress urls for dev env
+TODO : containerdev / devpod & CI
 
 for alt see https://github.com/digitalblossom/alternative-frontends
 idk https://github.com/stackryze/FreeDomains
@@ -134,7 +133,7 @@ todos :
 - [ ] move GH repos to codeforge
 
 ### peripherals
-rpi 2 4k tv
+/// rpi 2 4k tv
 
 ### ansible
 building the cluster with ansible

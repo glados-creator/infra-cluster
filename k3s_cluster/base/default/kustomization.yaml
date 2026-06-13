@@ -4,10 +4,9 @@ kind: Kustomization
 resources:
   - middleware-basic-auth.yaml
   # - middleware-auth-sso.yaml
-  # - traefik
-  # - technitium
+  - traefik
+  - technitium
   - dozzle
-  # - glance
 
 secretGenerator:
   - name: main-basic-auth-secret

@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: default
+  labels:
+    app: main-traefik
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: main-traefik
+  template:
+    metadata:
+      labels:
+        app: main-traefik
+      annotations:
+        prometheus.io/port: "8082"
+        prometheus.io/scrape: "true"
+    spec:
+      serviceAccountName: serviceaccount
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: traefik
+          image: traefik:latest
+          args:
+            - --api
+            - --api.dashboard
+            - --api.insecure
+            - --entrypoints.web.address=:80
+            - --entrypoints.websecure.address=:443
+            # - --entrypoints.web.http.redirections.entrypoint.to=websecure
+            # - --entrypoints.web.http.redirections.entrypoint.scheme=https
+            # - --entrypoints.web.http.redirections.entrypoint.permanent=true
+            # - --entrypoints.dashboard.address=:8080
+            - --providers.kubernetescrd
+            # - --providers.kubernetesnamespaces=default,prod-private,dev-private,prod-dmz,dev-dmz,prod-public,dev-public
+            - --metrics.prometheus.entryPoint=metrics
+            - --entrypoints.metrics.address=:8082
+            - --tracing=true
+            - --accesslog
+            - --experimental.plugins.trauth.moduleName=github.com/leonjza/trauth
+            - --experimental.plugins.trauth.version=v1.6.5
+          ports:
+            - name: web
+              containerPort: 80
+            - name: websecure
+              containerPort: 443
+            - name: dashboard
+              containerPort: 8080
+            - name: metrics
+              containerPort: 8082
+          volumeMounts:
+            - name: trauth-users
+              mountPath: /etc/trauth
+      volumes:
+      - name: trauth-users
+        secret:
+          secretName: main-basic-auth-secret
