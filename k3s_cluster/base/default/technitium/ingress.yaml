@@ -22,7 +22,7 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: ingressroute
+  name: ingressroute-dos
   namespace: default
   labels:
     app: main-technitium
@@ -36,5 +36,5 @@ spec:
       #  - name: main-middleware-basic-auth
       services:
         - name: technitium-service-dashboard
-          port: 2283
+          port: 2284
   #tls: {} 

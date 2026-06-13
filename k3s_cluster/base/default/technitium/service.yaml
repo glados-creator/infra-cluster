@@ -11,35 +11,35 @@ spec:
   selector:
     app: main-technitium
   ports:
-    - name: dns-UDP
+    - name: dns-udp
       port: 53
       targetPort: 53
       protocol: UDP
-    - name: dns-TCP
+    - name: dns-tcp
       port: 53
       targetPort: 53
       protocol: TCP
-    - name: DNS-over-QUIC service
+    - name: dns-over-quic
       port: 853
       targetPort: 853
       protocol: UDP
-    - name: DNS-over-TLS service
+    - name: dns-over-tls
       port: 853
       targetPort: 853
       protocol: TCP
-    # - name : DNS-over-HTTPS service (HTTP/3)
+    # - name : dns-over-https # (HTTP/3)
     #   port: 443
     #   targetPort: 443
     #   protocol: UDP
-    # - name : DNS-over-HTTPS service (HTTP/1.1, HTTP/2)
+    # - name : dns-over-https # (HTTP/1.1, HTTP/2)
     #   port: 443
     #   targetPort: 443
     #   protocol: TCP
-    # - name : DNS-over-HTTP service (use with reverse proxy or certbot certificate renewal)
+    # - name : dns-over-http # (use with reverse proxy or certbot certificate renewal)
     #   port: 80
     #   targetPort: 80
     #   protocol: TCP
-    - name: DNS-over-HTTP service (use with reverse proxy)
+    - name: dns-over-http-rp # (use with reverse proxy)
       port: 8053
       targetPort: 8053
       protocol: TCP
@@ -57,9 +57,9 @@ spec:
   selector:
     app: main-technitium
   ports:
-    - name: http-web
+    - name: dashboard
       port: 5380
       targetPort: 2283
-    - name: https-web
+    - name: dashboardsecure
       port: 53443
-      targetPort: 2283
+      targetPort: 2284
