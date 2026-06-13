@@ -65,6 +65,8 @@ kubectl apply -f overlay/production
 
 TODO : kustomize patch ingress urls for dev env
 TODO : containerdev / devpod & CI
+TODO : soci image
+[soci image](https://github.com/awslabs/soci-snapshotter)
 
 for alt see https://github.com/digitalblossom/alternative-frontends
 idk https://github.com/stackryze/FreeDomains
