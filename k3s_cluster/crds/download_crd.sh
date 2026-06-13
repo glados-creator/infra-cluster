@@ -30,6 +30,9 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 # https://keda.sh/docs/2.19/deploy/
 kubectl apply --server-side -f https://github.com/kedacore/keda/releases/download/v2.19.0/keda-2.19.0.yaml
 
+# spinkube crd
+# https://github.com/spinframework/spin-operator
+
 # prometheus monitoring
 # https://prometheus-operator.dev/docs/getting-started/installation/ 
 # kubectl create -f https://github.com/prometheus-operator/prometheus-operator/releases/download/v0.90.1/bundle.yaml

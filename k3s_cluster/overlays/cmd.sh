@@ -10,6 +10,7 @@ echo "/home/k3su/infra/k3s_cluster/overlays/production # exportfs -rav"
 
 mkdir /bhole/cluster/default
 mkdir /bhole/cluster/default/dozzle
+mkdir /bhole/cluster/default/technitium
 
 
 mkdir /bhole/cluster/private
