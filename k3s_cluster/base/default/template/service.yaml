@@ -5,10 +5,14 @@ metadata:
   namespace: <app-ns>
   labels:
     app: <app-ns>-<app-name>
+  annotations:
+    metallb.io/address-pool: internal-ips
+    # metallb.io/loadBalancerIPs: 192.168.1.1
 spec:
   type: LoadBalancer
   selector:
     app: <app-ns>-<app-name>
+  # loadBalancerIP: 192.168.1.1
   ports:
     - name: web
       protocol: TCP
@@ -19,6 +23,7 @@ spec:
       protocol: TCP
       port: 443
       targetPort: 6643
+  # externalTrafficPolicy: Local
 
 ---
 apiVersion: v1

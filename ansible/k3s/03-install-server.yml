@@ -46,6 +46,7 @@
           --disable=helm-controller
           --flannel-backend=none
           --disable-network-policy
+          --disable=servicelb
           --node-name={{ inventory_hostname }}
           --node-label=server=true
       ansible.builtin.shell: |

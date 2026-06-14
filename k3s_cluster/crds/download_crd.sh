@@ -8,6 +8,10 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.32.0
 # overide default value for ip forward + CIDR
 kubectl apply -f ./calico.yaml
 
+# MetalLB loadbalancer
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.16.0/config/manifests/metallb-native.yaml
+kubectl apply -f metallb.yaml
+
 # traefik
 # https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-crd/
 # Install Traefik Resource Definitions:

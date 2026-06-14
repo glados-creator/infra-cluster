@@ -29,6 +29,7 @@
   kubectl label node <node-name> nixos-nvidia-cdi=enabled --overwrite
   ```
 - [X] vulcano (gang scheduler gpus)
+- [X] MetalLB (LoadBalancer)
 - [X] metric server (kubectl top api crd for dozzle)
 - [X] keda (trigger action on event)
 - [] kubevirt (proxmox but docker)
@@ -43,11 +44,10 @@
     + traeffik ingress controller
     + metric server
     + local-path PV
-    + (TEMP) flannel CNI
     + (kube kustomize)
     + (the CRDs)
 2. default/main
-    + technitium DNS
+    + technitium DNS TMP NodePort
     + traefik reverse proxy via ingress-route controller
     + a dozzle (logging)
 3. public
