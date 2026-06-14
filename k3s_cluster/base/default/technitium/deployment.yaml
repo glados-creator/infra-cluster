@@ -68,6 +68,8 @@ spec:
             secretKeyRef:
               name: technitium-secret
               key: DNS_SERVER_ADMIN_PASSWORD
+        - name: DOTNET_USE_POLLING_FILE_WATCHER
+          value: "1"
         volumeMounts:
         - name: config
           mountPath: /etc/dns
