@@ -16,10 +16,5 @@ configMapGenerator:
   envs:
   - config.env
 
-secretGenerator:
-- name: technitium-secret
-  envs:
-  - secret.env
-
 generatorOptions:
   disableNameSuffixHash: false   # keep hashing for proper rollouts

@@ -63,11 +63,6 @@ spec:
             configMapKeyRef:
               name: technitium-config
               key: TZ
-        - name: DNS_SERVER_ADMIN_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: technitium-secret
-              key: DNS_SERVER_ADMIN_PASSWORD
         - name: DOTNET_USE_POLLING_FILE_WATCHER
           value: "1"
         volumeMounts:
