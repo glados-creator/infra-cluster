@@ -5,6 +5,28 @@ metadata:
   namespace: <app-ns>
   labels:
     app: <app-ns>-<app-name>
+spec:
+  type: ClusterIP
+  selector:
+    app: <app-ns>-<app-name>
+  ports:
+    - name: web
+      protocol: TCP
+      port: 6680 # port of that service
+      targetPort: 80 # port of the container
+    - name: websecure
+      protocol: TCP
+      port: 6680
+      targetPort: 443
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-lb
+  namespace: <app-ns>
+  labels:
+    app: <app-ns>-<app-name>
   annotations:
     metallb.io/address-pool: internal-ips
     # metallb.io/loadBalancerIPs: 192.168.1.1
@@ -12,37 +34,14 @@ spec:
   type: LoadBalancer
   selector:
     app: <app-ns>-<app-name>
-  # loadBalancerIP: 192.168.1.1
+  # loadBalancerIP: 192.168.1.1 # deprecated do annotations
+  # externalTrafficPolicy: Local # keep src ip , but if node doesn't run pod then drop traffic ...
   ports:
-    - name: web
+    - name: web-lb
       protocol: TCP
-      port: 80
-      targetPort: 6680
-      
-    - name: websecure
+      port: 6680
+      targetPort: 80
+    - name: websecure-lb
       protocol: TCP
-      port: 443
-      targetPort: 6643
-  # externalTrafficPolicy: Local
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: service-dashboard
-  namespace: <app-ns>
-  labels:
-    app: <app-ns>-<app-name>
-spec:
-  type: ClusterIP
-  selector:
-    app: <app-ns>-<app-name>
-  ports:
-    - protocol: TCP
-      name: dashboard
-      port: 8080
-      targetPort: 6680
-    - protocol: TCP
-      name: metrics
-      port: 8082
-      targetPort: 6682
+      port: 6643
+      targetPort: 443

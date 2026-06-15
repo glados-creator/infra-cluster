@@ -8,17 +8,6 @@ spec:
   addresses:
   - 192.168.1.1-192.168.1.10  # Your public range
 ---
-# Pool for internal-only services (e.g., 10.43.x.x range)
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
-  name: internal-ips
-  namespace: metallb-system
-spec:
-  autoAssign: true   # makes it the default pool
-  addresses:
-  - 10.43.100.1-10.43.100.250     # Your internal range
----
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
@@ -27,4 +16,3 @@ metadata:
 spec:
   ipAddressPools:
   - public-ips
-  - internal-ips

@@ -22,3 +22,26 @@ mkdir /bhole/cluster/dmz
 sudo chown -R 1000:1000 /bhole/cluster/*
 
 kubectl rollout restart deployment -n prod-dmz dmz-media-qbittorrent-deployment
+
+
+# rm -rf /var/log/calico                                                                                                                                   
+# rm -rf /var/lib/calico                                                                                                                                   
+# rm -rf /etc/cni                                                                                                                                          
+# rm -rf /opt/cni                                                                                                                                          
+# rm -rf /var/log/containers                                                                                                                               /home/k3su/infra-cluster/k3s_cluster/crds # rm -rf /var/log/pods 
+
+# clear iptable for uninstall-reinstall
+# iptables-restore: COMMIT expected
+# iptables -F
+# iptables -X
+# iptables -P INPUT ACCEPT
+# iptables -P OUTPUT ACCEPT
+# iptables -P FORWARD ACCEPT
+# iptables-save
+
+# ip6tables -F
+# ip6tables -X
+# ip6tables -P INPUT ACCEPT
+# ip6tables -P OUTPUT ACCEPT
+# ip6tables -P FORWARD ACCEPT
+# ip6tables-save

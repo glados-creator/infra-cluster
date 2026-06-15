@@ -47,7 +47,7 @@
     + (kube kustomize)
     + (the CRDs)
 2. default/main
-    + technitium DNS TMP NodePort
+    + technitium DNS (use tmp kube-proxy for install)
     + traefik reverse proxy via ingress-route controller
     + a dozzle (logging)
 3. public

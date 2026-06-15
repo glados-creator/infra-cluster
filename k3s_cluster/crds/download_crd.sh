@@ -2,33 +2,37 @@ set -x
 # calico
 # https://docs.tigera.io/calico/latest/getting-started/kubernetes/k3s/quickstart#big-picture
 # https://docs.k3s.io/networking/basic-network-options?cni=Calico#custom-cni
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.32.0/manifests/v1_crd_projectcalico_org.yaml
+kubectl apply --server-side -f https://raw.githubusercontent.com/projectcalico/calico/v3.32.0/manifests/v1_crd_projectcalico_org.yaml
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.32.0/manifests/tigera-operator.yaml
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.32.0/manifests/custom-resources.yaml
 # overide default value for ip forward + CIDR
+sleep 1
 kubectl apply -f ./calico.yaml
+sleep 60
 
 # MetalLB loadbalancer
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.16.0/config/manifests/metallb-native.yaml
-kubectl apply -f metallb.yaml
+kubectl apply --server-side -f https://raw.githubusercontent.com/metallb/metallb/v0.16.0/config/manifests/metallb-native.yaml
+echo "need sleep because crd controller webhook isn't yet up"
+sleep 60
+kubectl apply --server-side -f metallb.yaml
 
 # traefik
 # https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-crd/
 # Install Traefik Resource Definitions:
-kubectl apply -f https://raw.githubusercontent.com/traefik/traefik/v3.7/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml
+kubectl apply --server-side -f https://raw.githubusercontent.com/traefik/traefik/v3.7/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml
 # Install RBAC for Traefik:
-kubectl apply -f https://raw.githubusercontent.com/traefik/traefik/v3.7/docs/content/reference/dynamic-configuration/kubernetes-crd-rbac.yml
+kubectl apply --server-side -f https://raw.githubusercontent.com/traefik/traefik/v3.7/docs/content/reference/dynamic-configuration/kubernetes-crd-rbac.yml
+
+# metric server top api crd for dozzle
+kubectl apply --server-side -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
 # nvidia gpu runtime
 # https://github.com/OlfillasOdikno/generic-cdi-plugin
-kubectl apply -k ./nvidia
+kubectl apply --server-side -k ./nvidia
 
 # vulcano gang scheduler
 # https://volcano.sh/docs/GettingStarted/Installation
-kubectl apply -f https://raw.githubusercontent.com/volcano-sh/volcano/master/installer/volcano-development.yaml
-
-# metric server top api crd for dozzle
-kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+kubectl apply --server-side -f https://raw.githubusercontent.com/volcano-sh/volcano/master/installer/volcano-development.yaml
 
 # keda even driven actions
 # https://keda.sh/docs/2.19/deploy/
