@@ -13,3 +13,10 @@ gatus IP 6601 TODO CONF
 glance IP 4400 TODO CONF
 gatus IP 4401 TODO CONF
 dozzle IP 4415
+
+### private/code
+webui 4425
+ollama 4426
+vscodium 
+vscoduim-pind 
+openclaw 

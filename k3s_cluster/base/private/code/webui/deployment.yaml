@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: private
+  labels:
+    app: private-webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: private-webui
+  template:
+    metadata:
+      labels:
+        app: private-webui
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: webui
+          image: ghcr.io/open-webui/open-webui:main
+          ports:
+            - containerPort: 8080
+              name: http
+          env:
+            - name: OLLAMA_BASE_URL
+              value: "http://private-ollama-service.prod-private.svc.cluster.local:4426"
+            # Optional: enable authentication
+            # - name: WEBUI_AUTH
+            #   value: "True"
+          volumeMounts:
+            - name: webui-data
+              mountPath: /app/backend/data
+      volumes:
+        - name: webui-data
+          persistentVolumeClaim:
+            claimName: data-pvc

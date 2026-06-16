@@ -11,6 +11,7 @@ resources:
   - dozzle
   - glance
   - gatus
+  - code
   # - k8sdashboard
   # - home-assistant
   # - ollama
