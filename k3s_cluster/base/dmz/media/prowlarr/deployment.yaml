@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-media-prowlarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz-media-prowlarr
+  template:
+    metadata:
+      labels:
+        app: dmz-media-prowlarr
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: prowlarr
+          image: lscr.io/linuxserver/prowlarr:latest
+          ports:
+            - containerPort: 9696
+              name: web
+          volumeMounts:
+            - name: media-storage
+              mountPath: /config
+              subPath: prowlarr/config
+      volumes:
+        - name: media-storage
+          persistentVolumeClaim:
+            claimName:  media-pvc

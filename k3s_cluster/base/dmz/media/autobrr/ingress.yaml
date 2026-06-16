@@ -1,0 +1,20 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ingressroute
+  namespace: dmz
+  labels:
+    app: dmz-media-autobrr
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`autobrr.media.dmz.home`)
+      #middlewares:
+      #  - name: dmz-media-middleware-auth-sso
+      services:
+        - name: dmz-media-autobrr-service
+          port: 6665
+  #tls: {} 

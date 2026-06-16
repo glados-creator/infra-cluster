@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-media-bazarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz-media-bazarr
+  template:
+    metadata:
+      labels:
+        app: dmz-media-bazarr
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: bazarr
+          image: lscr.io/linuxserver/bazarr:latest
+          ports:
+            - containerPort: 6767
+              name: web
+          volumeMounts:
+            - name: media-storage
+              mountPath: /config
+              subPath: bazarr/config
+            - name: media-storage
+              mountPath: /movies
+              subPath: media/movies
+            - name: media-storage
+              mountPath: /tv
+              subPath: media/tv
+      volumes:
+        - name: media-storage
+          persistentVolumeClaim:
+            claimName:  media-pvc

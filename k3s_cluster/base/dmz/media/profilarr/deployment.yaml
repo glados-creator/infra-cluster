@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-media-profilarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz-media-profilarr
+  template:
+    metadata:
+      labels:
+        app: dmz-media-profilarr
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: profilarr
+          image: santiagosayshey/profilarr:latest
+          ports:
+            - containerPort: 6868
+              name: web
+          volumeMounts:
+            - name: media-storage
+              mountPath: /config
+              subPath: profilarr/config
+      volumes:
+        - name: media-storage
+          persistentVolumeClaim:
+            claimName:  media-pvc

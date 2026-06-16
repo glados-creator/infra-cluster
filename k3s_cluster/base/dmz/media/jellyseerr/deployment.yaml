@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-media-jellyseerr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz-media-jellyseerr
+  template:
+    metadata:
+      labels:
+        app: dmz-media-jellyseerr
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: jellyseerr
+          image: fallenbagel/jellyseerr:latest
+          ports:
+            - containerPort: 5055
+              name: web
+          volumeMounts:
+            - name: media-storage
+              mountPath: /app/config
+              subPath: jellyseerr/config
+      volumes:
+        - name: media-storage
+          persistentVolumeClaim:
+            claimName:  media-pvc

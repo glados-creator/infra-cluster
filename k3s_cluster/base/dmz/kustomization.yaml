@@ -9,7 +9,7 @@ resources:
   # - redirect
   - glance
   - gatus
-  # - media
+  - media
   # - docker-registry
 
 secretGenerator:

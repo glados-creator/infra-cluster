@@ -9,6 +9,29 @@ gatus IP 9901 TODO CONF
 # dmz
 glance IP 6600 TODO CONF
 gatus IP 6601 TODO CONF
+
+### dmz/media
+┌─────────────────┬─────────┬───────┬─────────────────────────────────────────────────┐
+│ Service         │ Port    │ svc   │ Purpose                                         │
+├─────────────────┼─────────┼───────┼─────────────────────────────────────────────────┤
+│ Jellyfin        │ 8096/8920/7359   │ 6650/6651/6653  │ Media server (streaming)     │
+│ Radarr          │ 7878    │ 6654  │ Movie management                                │
+│ Sonarr          │ 8989    │ 6655  │ TV show management                              │
+│ Lidarr          │ 8686    │ 6656  │ Music management                                │
+│ Readarr         │ 8787    │ 6657  │ Book / audiobook management                     │
+│ Kapowarr        │ 5656    │ 6658  │ Comic management                                │
+│ Prowlarr        │ 9696    │ 6659  │ Indexer manager for *arr apps                   │
+│ Jellyseerr      │ 5055    │ 6660  │ Request management & discovery                  │
+│ qBittorrent     │ 8080/6881 │ 6661/6662    │ BitTorrent client (Web UI) (VPNed gluetun hide.me)            │
+│ Tdarr           │ 8265    │ 6663  │ Media transcoding / optimisation                │
+│ Bazarr          │ 6767    │ 6664  │ Subtitle management                             │
+│ Autobrr         │ 7474    │ 6665  │ IRC / announce bot for instant grabs            │
+│ Jellystat       │ 3001    │ 6666  │ Jellyfin usage statistics                       │
+│ Unpackerr       │ 5656    │ 6667  │ Archive extraction (starts at 5656)             │
+│ Profilarr       │ 6868    │ 6668  │ Radarr/Sonarr profile & custom format sync      │
+│ YouTarr         │ 3087    │ 6669  │ YouTube playlist monitor (Radarr‑like)          │
+└─────────────────┴─────────┴─────────────────────────────────────────────────────────┘
+
 # private
 glance IP 4400 TODO CONF
 gatus IP 4401 TODO CONF

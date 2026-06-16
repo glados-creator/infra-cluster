@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: dmz
+  labels:
+    app: dmz-media-profilarr
+spec:
+  type: ClusterIP
+  selector:
+    app: dmz-media-profilarr
+  ports:
+    - name: web
+      protocol: TCP
+      port: 6668
+      targetPort: 6868

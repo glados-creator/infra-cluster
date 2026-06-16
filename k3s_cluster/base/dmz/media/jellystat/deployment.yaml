@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-media-jellystat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz-media-jellystat
+  template:
+    metadata:
+      labels:
+        app: dmz-media-jellystat
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: jellystat
+          image: ghcr.io/cyfershepard/jellystat:latest
+          ports:
+            - containerPort: 3001
+              name: web
+          volumeMounts:
+            - name: media-storage
+              mountPath: /app/backend/data
+              subPath: jellystat/data
+      volumes:
+        - name: media-storage
+          persistentVolumeClaim:
+            claimName:  media-pvc

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-media-kapowarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz-media-kapowarr
+  template:
+    metadata:
+      labels:
+        app: dmz-media-kapowarr
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: kapowarr
+          image: mrcas/kapowarr:latest
+          ports:
+            - containerPort: 5656
+              name: web
+          volumeMounts:
+            - name: media-storage
+              mountPath: /app/db
+              subPath: kapowarr/db
+            - name: media-storage
+              mountPath: /app/temp_downloads
+              subPath: downloads/kapowarr
+            - name: media-storage
+              mountPath: /comics
+              subPath: media/comics
+      volumes:
+        - name: media-storage
+          persistentVolumeClaim:
+            claimName:  media-pvc

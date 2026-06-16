@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: dmz
+  labels:
+    app: dmz-media-youtarr
+spec:
+  type: ClusterIP
+  selector:
+    app: dmz-media-youtarr
+  ports:
+    - name: web
+      protocol: TCP
+      port: 6669
+      targetPort: 3087

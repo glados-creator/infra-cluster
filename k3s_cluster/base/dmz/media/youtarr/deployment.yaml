@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-media-youtarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz-media-youtarr
+  template:
+    metadata:
+      labels:
+        app: dmz-media-youtarr
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: youtarr
+          image: dialmaster/youtarr:latest
+          ports:
+            - containerPort: 3087
+              name: web
+          volumeMounts:
+            - name: media-storage
+              mountPath: /config
+              subPath: youtarr/config
+      volumes:
+        - name: media-storage
+          persistentVolumeClaim:
+            claimName:  media-pvc

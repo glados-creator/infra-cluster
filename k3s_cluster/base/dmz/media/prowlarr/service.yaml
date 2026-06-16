@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: dmz
+  labels:
+    app: dmz-media-prowlarr
+spec:
+  type: ClusterIP
+  selector:
+    app: dmz-media-prowlarr
+  ports:
+    - name: web
+      protocol: TCP
+      port: 6659
+      targetPort: 9696

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-media-tdarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz-media-tdarr
+  template:
+    metadata:
+      labels:
+        app: dmz-media-tdarr
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: tdarr
+          image: ghcr.io/haveagitgat/tdarr:latest
+          ports:
+            - containerPort: 8265
+              name: web
+          volumeMounts:
+            - name: media-storage
+              mountPath: /app/server
+              subPath: tdarr/server
+            - name: media-storage
+              mountPath: /app/configs
+              subPath: tdarr/configs
+            - name: media-storage
+              mountPath: /app/logs
+              subPath: tdarr/logs
+            - name: media-storage
+              mountPath: /media
+              subPath: media
+            - name: media-storage
+              mountPath: /temp
+              subPath: tdarr/temp
+      volumes:
+        - name: media-storage
+          persistentVolumeClaim:
+            claimName:  media-pvc

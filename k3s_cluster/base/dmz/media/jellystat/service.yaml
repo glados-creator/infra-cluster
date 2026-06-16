@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: dmz
+  labels:
+    app: dmz-media-jellystat
+spec:
+  type: ClusterIP
+  selector:
+    app: dmz-media-jellystat
+  ports:
+    - name: web
+      protocol: TCP
+      port: 6666
+      targetPort: 3001

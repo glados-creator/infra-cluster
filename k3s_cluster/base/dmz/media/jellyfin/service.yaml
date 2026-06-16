@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: dmz
+  labels:
+    app: dmz-media-jellyfin
+spec:
+  type: ClusterIP
+  selector:
+    app: dmz-media-jellyfin
+  ports:
+    - name: web
+      protocol: TCP
+      port: 6650
+      targetPort: 8096
+    - name: websecure
+      protocol: TCP
+      port: 6651
+      targetPort: 8920
+    - name: dlna
+      protocol: TCP
+      port: 6653
+      targetPort: 7359

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: dmz
+  labels:
+    app: dmz-media-jellyseerr
+spec:
+  type: ClusterIP
+  selector:
+    app: dmz-media-jellyseerr
+  ports:
+    - name: web
+      protocol: TCP
+      port: 6660
+      targetPort: 5055

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-media-radarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz-media-radarr
+  template:
+    metadata:
+      labels:
+        app: dmz-media-radarr
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: radarr
+          image: lscr.io/linuxserver/radarr:latest
+          ports:
+            - containerPort: 7878
+              name: web
+          volumeMounts:
+            - name: media-storage
+              mountPath: /config
+              subPath: radarr/config
+            - name: media-storage
+              mountPath: /movies
+              subPath: media/movies
+            - name: media-storage
+              mountPath: /downloads
+              subPath: downloads/radarr
+      volumes:
+        - name: media-storage
+          persistentVolumeClaim:
+            claimName:  media-pvc

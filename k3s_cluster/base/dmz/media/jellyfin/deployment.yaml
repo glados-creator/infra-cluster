@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-media-jellyfin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz-media-jellyfin
+  template:
+    metadata:
+      labels:
+        app: dmz-media-jellyfin
+    spec:
+      # runtimeClassName: nvidia
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: jellyfin
+          image: ghcr.io/jellyfin/jellyfin:latest
+          ports:
+            - containerPort: 8096
+              name: web
+            - containerPort: 8920
+              name: websecure
+            - containerPort: 7359
+              name: dlna
+          volumeMounts:
+            - name: media-storage
+              mountPath: /config
+              subPath: jellyfin/config
+            - name: media-storage
+              mountPath: /cache
+              subPath: jellyfin/cache
+            - name: media-storage
+              mountPath: /data/media
+              subPath: media
+          # resources:
+          #   limits:
+          #     nvidia.com/gpu-all: 1
+          #   requests:
+          #     nvidia.com/gpu-all: 1
+      volumes:
+        - name: media-storage
+          persistentVolumeClaim:
+            claimName:  media-pvc

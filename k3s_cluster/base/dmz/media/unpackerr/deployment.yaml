@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-media-unpackerr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz-media-unpackerr
+  template:
+    metadata:
+      labels:
+        app: dmz-media-unpackerr
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: unpackerr
+          image: golift/unpackerr:latest
+          env:
+            - name: UNPACKERR_WEB_PORT
+              value: "8080"
+          ports:
+            - containerPort: 8080
+              name: web
+          volumeMounts:
+            - name: media-storage
+              mountPath: /config
+              subPath: unpackerr/config
+            - name: media-storage
+              mountPath: /downloads
+              subPath: downloads/unpackerr
+      volumes:
+        - name: media-storage
+          persistentVolumeClaim:
+            claimName:  media-pvc

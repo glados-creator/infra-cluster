@@ -1,0 +1,20 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ingressroute
+  namespace: dmz
+  labels:
+    app: dmz-media-jellyseerr
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`jellyseerr.media.dmz.home`)
+      #middlewares:
+      #  - name: dmz-media-middleware-auth-sso
+      services:
+        - name: dmz-media-jellyseerr-service
+          port: 6660
+  #tls: {} 

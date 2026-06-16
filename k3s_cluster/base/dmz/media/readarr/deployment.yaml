@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-media-readarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz-media-readarr
+  template:
+    metadata:
+      labels:
+        app: dmz-media-readarr
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: readarr
+          image: blampe/rreading-glasses:latest
+          ports:
+            - containerPort: 8787
+              name: web
+          volumeMounts:
+            - name: media-storage
+              mountPath: /config
+              subPath: readarr/config
+            - name: media-storage
+              mountPath: /books
+              subPath: media/books
+            - name: media-storage
+              mountPath: /downloads
+              subPath: downloads/readarr
+      volumes:
+        - name: media-storage
+          persistentVolumeClaim:
+            claimName:  media-pvc
