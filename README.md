@@ -55,6 +55,23 @@
 4. dmz/demilitarized/priviled
     + gatus (monitoring uptime) TODO CONF
     + glance (app dir) TODO CONF
+    + media
+        + Jellyfin
+        + Radarr
+        + Sonarr
+        + Lidarr
+        + Readarr
+        + Kapowarr
+        + Prowlarr
+        + Jellyseerr
+        + qBittorrent
+        + Tdarr
+        + Bazarr
+        + Autobrr
+        + Jellystat
+        + Unpackerr
+        + Profilarr
+        + YouTarr
 5. private
     + dozzle (logging)
     + gatus (monitoring uptime) TODO CONF
