@@ -123,10 +123,10 @@ todos :
     - [ ] Bibliogram [Deprecated] (Instagram)
     - [ ] matrix + element X https://matrix.org/ecosystem/clients/
     - [ ] url shortener
-    - [ ] gluetun (VPN)
+    - [~] gluetun (VPN)
     - [ ] rustdesk
     - [ ] guacamole
-    - [ ] open code + open claw / tiny claw + autogpt ?
+    - [~] open code + open claw / tiny claw + autogpt ?
     - [ ] Pterodactyl https://github.com/pterodactyl/application-eggs
     - [ ] docker repo / harbor
     - [ ] vscodium online server + pdoman in docker + devpod + IA opencodex
@@ -152,6 +152,7 @@ todos :
     - [ ] let's encrypt ?
 - [ ] repair pod
     - [ ] gatus home assistant + notif push
+    - [ ] technituim convert to statefull set for static ip for HA
 - [ ] do soci imagesf
 - [ ] do ceph / rock operator
 - [ ] add peripherals
