@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: dmz
+  labels:
+    app: dmz-glance
+spec:
+  type: ClusterIP
+  selector:
+    app: dmz-glance
+  ports:
+    - name: web
+      protocol: TCP
+      port: 6600 # port of that service
+      targetPort: 80 # port of the container

@@ -50,9 +50,15 @@
     + technitium DNS (use tmp kube-proxy for install) TMP DO statefullset for HA
     + traefik reverse proxy via ingress-route controller
 3. public
+    + gatus (monitoring uptime) TODO CONF
+    + glance (app dir) TODO CONF
 4. dmz/demilitarized/priviled
+    + gatus (monitoring uptime) TODO CONF
+    + glance (app dir) TODO CONF
 5. private
-    + a dozzle (logging)
+    + dozzle (logging)
+    + gatus (monitoring uptime) TODO CONF
+    + glance (app dir) TODO CONF
 
 ip2n the tor thingy / tor
 

@@ -2,12 +2,12 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: pv
-  namespace: default
+  namespace: public
   labels:
-    app: main-technitium
+    app: public-gatus
 spec:
   capacity:
-    storage: 10Gi
+    storage: 1Gi
   accessModes:
     - ReadWriteOnce
     - ReadOnlyMany
@@ -17,4 +17,4 @@ spec:
   storageClassName: nfs
   nfs:
     server: 192.168.1.24  # your NFS server IP
-    path: /bhole/cluster/default/technitium/ # your NFS export path
+    path: /bhole/cluster/public/gatus/ # your NFS export path

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: public
+  labels:
+    app: public-glance
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: public-glance
+  template:
+    metadata:
+      labels:
+        app: public-glance
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: glance
+          image: glanceapp/glance:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: config
+              mountPath: /app/config/
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: glance-config

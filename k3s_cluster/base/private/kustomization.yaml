@@ -9,8 +9,8 @@ resources:
   # - middleware-auth-sso.yaml
   # - redirect
   - dozzle
-  # - glance
-  # - gatus
+  - glance
+  - gatus
   # - k8sdashboard
   # - home-assistant
   # - ollama

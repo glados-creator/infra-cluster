@@ -2,14 +2,14 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: technitium-pvc
-  namespace: default
+  name: data-pvc
+  namespace: dmz
   labels:
-    app: main-technitium
+    app: dmz-gatus
 spec:
   accessModes: [ReadWriteMany]
   storageClassName: nfs
   volumeName: pv
   resources:
     requests:
-      storage: 10Gi
+      storage: 1Gi

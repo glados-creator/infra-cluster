@@ -7,8 +7,8 @@ resources:
   - middleware-basic-auth.yaml
   # - middleware-auth-sso.yaml
   # - redirect
-  # - glance
-  # - gatus
+  - glance
+  - gatus
 
 secretGenerator:
   - name: basic-auth-secret
