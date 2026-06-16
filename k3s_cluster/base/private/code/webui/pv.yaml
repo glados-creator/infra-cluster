@@ -7,7 +7,7 @@ metadata:
     app: private-webui
 spec:
   capacity:
-    storage: <app-cap>Gi
+    storage: 5Gi
   accessModes:
     - ReadWriteOnce
     - ReadOnlyMany

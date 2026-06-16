@@ -12,4 +12,4 @@ spec:
   volumeName: pv
   resources:
     requests:
-      storage: <app-cap>Gi
+      storage: 5Gi

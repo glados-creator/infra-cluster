@@ -6,7 +6,7 @@ namePrefix: private-
 
 resources:
   - middleware-basic-auth.yaml
-  # - middleware-auth-sso.yaml
+  - middleware-auth-sso.yaml
   # - redirect
   - dozzle
   - glance

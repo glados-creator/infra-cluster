@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: middleware-auth-sso
+  namespace: prod-private
+spec:
+  plugin:
+    trauth:
+      domain: ".private.home"
+      # cookiename: "trauth_cookie"
+      # cookiepath: "/"
+      # cookiesecure: false   # set true if using HTTPS
+      # cookiehttponly: true
+      usersfile: "/etc/trauth/auth"

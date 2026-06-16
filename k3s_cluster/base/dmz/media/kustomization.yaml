@@ -28,7 +28,7 @@ namespace: dmz
 
 resources:
   - middleware-basic-auth.yaml
-  # - middleware-auth-sso.yaml
+  - middleware-auth-sso.yaml
   - media-pv.yaml
   - media-pvc.yaml
   - jellyfin
@@ -39,18 +39,18 @@ resources:
   - kapowarr
   - prowlarr
   - jellyseerr
-  - qBittorrent
+  - qbittorrent
   - tdarr
   - bazarr
   - autobrr
   - jellystat
   - unpackerr
   - profilarr
-  - youTarr
+  - youtarr
   
 
 secretGenerator:
-  - name: basic-auth-secret
+  - name: media-basic-auth-secret
     envs:
     - secret.env
     type: Opaque
