@@ -12,8 +12,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`traefik.main.home`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
-      #middlewares:
-      #  - name: main-middleware-basic-auth
+      middlewares:
+        - name: main-middleware-basic-auth
       services:
         - name: api@internal
           kind: TraefikService

@@ -6,7 +6,6 @@ resources:
   # - middleware-auth-sso.yaml
   - traefik
   - technitium
-  - dozzle
 
 secretGenerator:
   - name: main-basic-auth-secret

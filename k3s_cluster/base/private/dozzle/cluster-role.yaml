@@ -3,7 +3,7 @@ kind: ClusterRole
 metadata:
   name: clusterrole
   labels:
-    app: main-dozzle
+    app: private-dozzle
 rules:
   - apiGroups: [""]
     resources: ["pods", "pods/log", "nodes"]

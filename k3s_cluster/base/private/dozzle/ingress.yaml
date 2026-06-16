@@ -2,19 +2,19 @@ apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: ingressroute
-  namespace: default
+  namespace: private
   labels:
-    app: main-dozzle
+    app: private-dozzle
 spec:
   entryPoints:
     - web
     - websecure
   routes:
     - kind: Rule
-      match: Host(`dozzle.main.home`)
+      match: Host(`dozzle.private.home`)
       middlewares:
-        - name: main-middleware-basic-auth
+        - name: private-middleware-basic-auth
       services:
         - name: dozzle-service
-          port: 2215
+          port: 4415
   #tls: {} 

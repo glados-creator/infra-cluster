@@ -3,7 +3,7 @@ kind: ClusterRoleBinding
 metadata:
   name: clusterrolebinding
   labels:
-    app: main-dozzle
+    app: private-dozzle
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -11,4 +11,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: serviceaccount
-    namespace: default
+    namespace: private

@@ -2,15 +2,15 @@ apiVersion: v1
 kind: Service
 metadata:
   name: service
-  namespace: default
+  namespace: private
   labels:
-    app: main-dozzle
+    app: private-dozzle
 spec:
   type: ClusterIP
   selector:
-    app: main-dozzle
+    app: private-dozzle
   ports:
     - name: web
       protocol: TCP
-      port: 2215
+      port: 4415
       targetPort: 8080

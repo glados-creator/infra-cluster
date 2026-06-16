@@ -13,7 +13,7 @@ spec:
     - kind: Rule
       match: Host(`<app-name>.<app-ns>.home`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
       #middlewares:
-      #  - name: <app-ns>-middleware-auth-sso
+      #  - name: <app-ns>-middleware-basic-auth
       services:
         - name: <app-name>-service-dashboard
           port: 6680

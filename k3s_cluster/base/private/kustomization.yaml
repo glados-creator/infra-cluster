@@ -8,6 +8,7 @@ resources:
   - middleware-basic-auth.yaml
   # - middleware-auth-sso.yaml
   # - redirect
+  - dozzle
   # - glance
   # - gatus
   # - k8sdashboard

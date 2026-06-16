@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deployment
-  namespace: default
+  namespace: private
   labels:
-    app: main-dozzle
+    app: private-dozzle
 spec:
   selector:
     matchLabels:
-      app: main-dozzle
+      app: private-dozzle
   template:
     metadata:
       labels:
-        app: main-dozzle
+        app: private-dozzle
     spec:
       serviceAccountName: serviceaccount
       containers:

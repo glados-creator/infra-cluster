@@ -49,10 +49,10 @@
 2. default/main
     + technitium DNS (use tmp kube-proxy for install) TMP DO statefullset for HA
     + traefik reverse proxy via ingress-route controller
-    + a dozzle (logging)
 3. public
 4. dmz/demilitarized/priviled
 5. private
+    + a dozzle (logging)
 
 ip2n the tor thingy / tor
 
@@ -128,8 +128,8 @@ todos :
     - [ ] squid forward proxy
     - [ ] let's encrypt ?
 - [ ] repair pod
-    - [ ] gatus home assistant notif push
-- [ ] do calico CNI
+    - [ ] gatus home assistant + notif push
+- [ ] do soci imagesf
 - [ ] do ceph / rock operator
 - [ ] add peripherals
 - [ ] move GH repos to codeforge
