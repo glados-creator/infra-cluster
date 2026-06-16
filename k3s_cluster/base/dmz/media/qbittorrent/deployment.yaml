@@ -24,6 +24,37 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
+      # Use an initContainer to ensure the VPN is up before the main app starts
+      # https://github.com/passteque/gluetun/issues/1881
+      # initContainers:
+      # - name: gluetun
+      #   image: ghcr.io/qdm12/gluetun
+      #   # The 'Always' restartPolicy makes this a native sidecar container
+      #   restartPolicy: Always
+      #   securityContext:
+      #     capabilities:
+      #       add: ["NET_ADMIN"]  # Required for network configuration
+      #   env:
+      #   # --- Core Configuration ---
+      #   - name: VPN_SERVICE_PROVIDER
+      #     value: "hide me" # Provider name for hide.me[reference:4][reference:5]
+      #   - name: VPN_TYPE
+      #     value: "wireguard" # hide.me supports WireGuard; OpenVPN may also work
+      #   - name: OPENVPN_USER
+      #     value: "your_username" # Your hide.me username
+      #   - name: OPENVPN_PASSWORD
+      #     value: "your_password" # Your hide.me password
+      # 
+      #   # --- Optional but Recommended ---
+      #   - name: TZ
+      #     value: "UTC"
+      #   # Uncomment to specify a server country if needed
+      #   - name: SERVER_COUNTRIES
+      #     value: "Switzerland"
+      # 
+      #   # If you have connection issues, you can enable debug logging:
+      #   # - name: LOG_LEVEL
+      #   #   value: "debug"
       containers:
         - name: qbittorrent
           image: lscr.io/linuxserver/qbittorrent:latest
