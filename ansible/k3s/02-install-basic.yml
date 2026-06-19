@@ -65,8 +65,9 @@
           - util-linux
           - e2fsprogs
           - e2fsprogs-extra
-          - iptables
-          - ip6tables
+          # - iptables
+          # - ip6tables
+          - nftables
           - ca-certificates
           - lm-sensors
           - zram-init
