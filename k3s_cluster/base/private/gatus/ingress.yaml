@@ -15,6 +15,6 @@ spec:
       middlewares:
        - name: private-middleware-basic-auth
       services:
-        - name: gatus-service-dashboard
+        - name: gatus-service
           port: 4401
   #tls: {} 

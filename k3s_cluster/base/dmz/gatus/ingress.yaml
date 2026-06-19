@@ -15,6 +15,6 @@ spec:
       middlewares:
        - name: dmz-middleware-basic-auth
       services:
-        - name: gatus-service-dashboard
+        - name: gatus-service
           port: 6601
   #tls: {} 

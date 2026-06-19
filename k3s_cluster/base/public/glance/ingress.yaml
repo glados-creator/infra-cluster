@@ -15,6 +15,6 @@ spec:
       middlewares:
        - name: public-middleware-basic-auth
       services:
-        - name: glance-service-dashboard
+        - name: glance-service
           port: 9900
   #tls: {} 

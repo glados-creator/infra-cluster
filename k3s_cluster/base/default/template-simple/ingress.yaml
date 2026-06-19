@@ -15,6 +15,6 @@ spec:
       middlewares:
        - name: <app-ns>-middleware-basic-auth
       services:
-        - name: <app-name>-service-dashboard
+        - name: <app-name>-service
           port: 6680
   #tls: {} 

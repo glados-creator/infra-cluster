@@ -14,7 +14,7 @@ spec:
       middlewares:
         - name: main-middleware-basic-auth
       services:
-        - name: technitium-service-dashboard
+        - name: technitium-service
           port: 2283
   #tls: {} 
 
@@ -35,6 +35,6 @@ spec:
       middlewares:
         - name: main-middleware-basic-auth
       services:
-        - name: technitium-service-dashboard
+        - name: technitium-service
           port: 2284
   #tls: {} 
