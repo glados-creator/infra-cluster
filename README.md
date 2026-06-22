@@ -149,6 +149,7 @@ todos :
     - [ ] jarvis home assitant
     - [ ] dolphin games
     - [ ] squid forward proxy
+    - [ ] add steam gaming headless server
     - [ ] let's encrypt ?
 - [ ] repair pod
     - [ ] gatus home assistant + notif push

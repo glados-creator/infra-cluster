@@ -42,20 +42,20 @@
         create_home: yes
         state: present
 
-    - name: Write src to repositories
-      ansible.builtin.copy:
-        content: |
-          https://dl-cdn.alpinelinux.org/alpine/latest-stable/main
-          https://dl-cdn.alpinelinux.org/alpine/latest-stable/community
-        dest: /etc/apk/repositories
+    # - name: Write src to repositories
+    #   ansible.builtin.copy:
+    #     content: |
+    #       https://dl-cdn.alpinelinux.org/alpine/latest-stable/main
+    #       https://dl-cdn.alpinelinux.org/alpine/latest-stable/community
+    #     dest: /etc/apk/repositories
     
     - name: Update cache and upgrade all packages
-      ansible.builtin.apk:
+      ansible.builtin.apt:
         update_cache: true
         upgrade: true
 
     - name: Install essential packages
-      apk:
+      apt:
         name:
           - nano
           - git
@@ -64,17 +64,18 @@
           - sudo
           - util-linux
           - e2fsprogs
-          - e2fsprogs-extra
+          # - e2fsprogs-extra
           - iptables
-          - ip6tables
+          # - ip6tables
+          - iptables-persistent
           - nftables
           - ca-certificates
           - lm-sensors
-          - zram-init
+          # - zram-init
           - iproute2
           - cgroup-tools
-          - shadow-uidmap
-          - etcd-ctl # for etcdctl --key /var/lib/rancher/k3s/server/tls/etcd/client.key --cert /var/lib/rancher/k3s/server/tls/etcd/client.crt --cacert /var/lib/rancher/k3s/server/tls/etcd/server-ca.crt --endpoints https://127.0.0.1:2379
+          - uidmap # shadow-uidmap
+          # - etcd-ctl # for etcdctl --key /var/lib/rancher/k3s/server/tls/etcd/client.key --cert /var/lib/rancher/k3s/server/tls/etcd/client.crt --cacert /var/lib/rancher/k3s/server/tls/etcd/server-ca.crt --endpoints https://127.0.0.1:2379
         state: present
 
     - name: Create directory
@@ -118,13 +119,13 @@
 
     - name: Get current cmdline for servers
       slurp:
-        src: "/boot/cmdline.txt"
+        src: "/boot/firmware/cmdline.txt"
       register: current_servers
       when: inventory_hostname in groups['k3s_servers']
 
     - name: Add missing cgroup parameters for servers (cgroups v2)
       ansible.builtin.lineinfile:
-        path: "/boot/cmdline.txt"
+        path: "/boot/firmware/cmdline.txt"
         regexp: "^(.*)$"
         line: '\1 {{ item }}'
         backrefs: yes
@@ -136,13 +137,13 @@
 
     - name: Get current cmdline for workers
       slurp:
-        src: "/boot/cmdline.txt"
+        src: "/boot/firmware/cmdline.txt"
       register: current_workers
       when: inventory_hostname in groups['k3s_workers']
 
     - name: Add missing cgroup parameters for workers (legacy cgroups)
       ansible.builtin.lineinfile:
-        path: "/boot/cmdline.txt"
+        path: "/boot/firmware/cmdline.txt"
         regexp: "^(.*)$"
         line: '\1 {{ item }}'
         backrefs: yes

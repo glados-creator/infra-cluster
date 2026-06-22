@@ -3,7 +3,9 @@ set -x
 # https://docs.tigera.io/calico/latest/getting-started/kubernetes/k3s/quickstart#big-picture
 # https://docs.k3s.io/networking/basic-network-options?cni=Calico#custom-cni
 kubectl apply --server-side -f https://raw.githubusercontent.com/projectcalico/calico/v3.32.0/manifests/v1_crd_projectcalico_org.yaml
+sleep 1
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.32.0/manifests/tigera-operator.yaml
+sleep 1
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.32.0/manifests/custom-resources.yaml
 # overide default value for ip forward + CIDR
 sleep 1
@@ -19,34 +21,43 @@ kubectl apply --server-side -f metallb.yaml
 # traefik
 # https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-crd/
 # Install Traefik Resource Definitions:
+sleep 1
 kubectl apply --server-side -f https://raw.githubusercontent.com/traefik/traefik/v3.7/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml
 # Install RBAC for Traefik:
+sleep 1
 kubectl apply --server-side -f https://raw.githubusercontent.com/traefik/traefik/v3.7/docs/content/reference/dynamic-configuration/kubernetes-crd-rbac.yml
 
 # metric server top api crd for dozzle
-kubectl apply --server-side -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+sleep 1
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
 # nvidia gpu runtime
 # https://github.com/OlfillasOdikno/generic-cdi-plugin
+sleep 1
 kubectl apply --server-side -k ./nvidia
 
 # vulcano gang scheduler
 # https://volcano.sh/docs/GettingStarted/Installation
+sleep 1
 kubectl apply --server-side -f https://raw.githubusercontent.com/volcano-sh/volcano/master/installer/volcano-development.yaml
 
 # keda even driven actions
 # https://keda.sh/docs/2.19/deploy/
+sleep 1
 kubectl apply --server-side -f https://github.com/kedacore/keda/releases/download/v2.19.0/keda-2.19.0.yaml
 
 # spinkube crd
+sleep 1
 # https://github.com/spinframework/spin-operator
 
 # prometheus monitoring
 # https://prometheus-operator.dev/docs/getting-started/installation/ 
+sleep 1
 # kubectl create -f https://github.com/prometheus-operator/prometheus-operator/releases/download/v0.90.1/bundle.yaml
 
 # mkdir -p prometheus-crd
-# kubectl create namespace "prometheus-crd" 
+sleep 1
+kubectl create namespace "prometheus-crd" 
 # curl -s "https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/refs/tags/v0.90.1/kustomization.yaml" > "prometheus-crd/kustomization.yaml"
 # curl -s "https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/refs/tags/v0.90.1/bundle.yaml" > "prometheus-crd/bundle.yaml"
 # (cd prometheus-crd && kubectl set env namespace "prometheus-crd") && kubectl create -k "prometheus-crd"
