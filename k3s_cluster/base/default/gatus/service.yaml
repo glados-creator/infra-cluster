@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: default
+  labels:
+    app: main-gatus
+spec:
+  type: ClusterIP
+  selector:
+    app: main-gatus
+  ports:
+    - name: web
+      protocol: TCP
+      port: 2201
+      targetPort: 8080

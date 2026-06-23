@@ -2,10 +2,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 namePrefix: dmz-
+namespace: dmz
 
 resources:
-  - middleware-basic-auth.yaml
-  - middleware-auth-sso.yaml
+  # - middleware-auth-basic.yaml
+  # - middleware-auth-trauth.yaml
+  - middleware-auth-authentik.yaml
   # - redirect
   - glance
   - gatus
@@ -13,7 +15,7 @@ resources:
   # - docker-registry
 
 secretGenerator:
-  - name: basic-auth-secret
+  - name: auth-basic-secret
     envs:
     - secret.env
     type: Opaque

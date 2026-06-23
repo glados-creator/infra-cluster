@@ -13,8 +13,8 @@ spec:
     - kind: Rule
       match: Host(`glance.private.home`)
       middlewares:
-       - name: private-middleware-basic-auth
+       - name: private-middleware-auth-authentik
       services:
-        - name: glance-service
+        - name: private-glance-service
           port: 4400
   #tls: {} 

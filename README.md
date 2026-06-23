@@ -12,7 +12,7 @@
 - medium jupiter
 - stitan
 
-- rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
+rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
 
 ### storage
 - rpi5-a/b (temp nfs)
@@ -47,14 +47,19 @@
     + (kube kustomize)
     + (the CRDs)
 2. default/main
-    + technitium DNS (use tmp kube-proxy for install) TMP DO statefullset for HA
+    + technitium DNS (use tmp kube-proxy for install)
     + traefik reverse proxy via ingress-route controller
+    + glance (app dir) TODO CONF
+    + gatus (monitoring uptime) TODO CONF
+    + dozzle (logging)
+    + authentik (auth)
+    + glueton (vpn) TBD
 3. public
-    + gatus (monitoring uptime) TODO CONF
     + glance (app dir) TODO CONF
+    + gatus (monitoring uptime) TODO CONF
 4. dmz/demilitarized/priviled
-    + gatus (monitoring uptime) TODO CONF
     + glance (app dir) TODO CONF
+    + gatus (monitoring uptime) TODO CONF
     + media
         + Jellyfin
         + Radarr
@@ -73,9 +78,9 @@
         + Profilarr
         + YouTarr
 5. private
-    + dozzle (logging)
-    + gatus (monitoring uptime) TODO CONF
     + glance (app dir) TODO CONF
+    + gatus (monitoring uptime) TODO CONF
+    + dozzle (logging) TMp move to monitoring stack
 
 ip2n the tor thingy / tor
 
@@ -101,6 +106,15 @@ stack https://github.com/silveiralexf/monitoring-stack
 this https://github.com/priyazsh/DevProfiles
 alt list https://github.com/awesome-selfhosted/awesome-selfhosted
 todos : 
+- [ ] default
+    - [x] traefik
+    - [x] technitium
+    - [x] glance
+    - [x] dozzle
+    - [x] gatus
+    - [ ] authentik
+    - [ ] glueton TBD
+
 - [ ] TODO do doc
 - [ ] add pod
     - [ ] graphana (monitoring)
@@ -134,7 +148,7 @@ todos :
     - [ ]  ente
     - [ ] wordpress
     - [ ] personal site
-    - [ ] Elasticsearch Logstash:  Kibana:  Beats:  
+    - [ ] monitoring loki Elasticsearch Logstash:  Kibana:  Beats:  
     - [ ] authentik ?
     - [ ] mailu
     - [ ] traefik dmz private auth plugin

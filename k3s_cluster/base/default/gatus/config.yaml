@@ -1,0 +1,12 @@
+storage:
+  type: sqlite
+  path: /data/data.db
+
+metrics: true
+
+endpoints:
+  - name: glance
+    url: "http://glance.main.svc.cluster.local:2200"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"

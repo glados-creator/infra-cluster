@@ -1,9 +1,0 @@
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: middleware-basic-auth
-  namespace: default
-spec:
-  basicAuth:
-    secret: dmz-basic-auth-secret
-    realm: "dmz-middleware-basic-auth"

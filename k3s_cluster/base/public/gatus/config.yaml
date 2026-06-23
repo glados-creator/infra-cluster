@@ -5,14 +5,8 @@ storage:
 metrics: true
 
 endpoints:
-  - name: dozzle
-    url: "http://dozzle.public.home" # .svc.cluster:SVC PORT
-    interval: 30s
-    conditions:
-      - "[STATUS] == 200"
-  
   - name: glance
-    url: "http://glance.public.home"
+    url: "http://glance.public.svc.cluster.local:9900"
     interval: 30s
     conditions:
       - "[STATUS] == 200"

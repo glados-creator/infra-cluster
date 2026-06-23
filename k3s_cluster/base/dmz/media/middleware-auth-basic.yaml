@@ -1,0 +1,9 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: dmz-media-middleware-auth-basic
+  namespace: dmz
+spec:
+  basicAuth:
+    secret: dmz-media-auth-basic-secret
+    realm: "dmz-media-middleware-auth-basic"

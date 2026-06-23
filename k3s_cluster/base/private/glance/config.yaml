@@ -1,14 +1,14 @@
 pages:
-  - name: public
+  - name: private
     columns:
       - size: full
         widgets:
           - type: bookmarks
             groups:
-              - title: public Services
+              - title: private Services
                 # color: 255 255 255
                 links:
                   - title: Gatus
-                    url: http://gatus.public.home
+                    url: http://gatus.private.home
                     description: Service uptime monitoring
                     # icon: material-favorite

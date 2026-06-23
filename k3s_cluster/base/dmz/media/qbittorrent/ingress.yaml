@@ -12,30 +12,30 @@ spec:
   routes:
     - kind: Rule
       match: Host(`qbittorrent.media.dmz.home`)
-      #middlewares:
-      #  - name: dmz-media-middleware-auth-sso
+      middlewares:
+        - name: dmz-media-middleware-auth-authentik
       services:
         - name: dmz-media-qbittorrent-service
           port: 6661
   #tls: {}
----
-apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
-metadata:
-  name: ingressroute-incoming
-  namespace: dmz
-  labels:
-    app: dmz-media-qbittorrent
-spec:
-  entryPoints:
-    - tcp-incoming
-    - udp-incoming
-  routes:
-    - kind: Rule
-      match: Host(`magnet.qbittorrent.media.dmz.home`)
-      #middlewares:
-      #  - name: dmz-media-middleware-auth-sso
-      services:
-        - name: dmz-media-qbittorrent-service
-          port: 6662
-  #tls: {}
+# ---
+# apiVersion: traefik.io/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: ingressroute-incoming
+#   namespace: dmz
+#   labels:
+#     app: dmz-media-qbittorrent
+# spec:
+#   entryPoints:
+#     - tcp-incoming
+#     - udp-incoming
+#   routes:
+#     - kind: Rule
+#       match: Host(`magnet.qbittorrent.media.dmz.home`)
+#       # middlewares:
+#       #   - name: dmz-media-middleware-auth-authentik
+#       services:
+#         - name: dmz-media-qbittorrent-service
+#           port: 6662
+#   #tls: {}

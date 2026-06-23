@@ -13,8 +13,8 @@ spec:
     - kind: Rule
       match: Host(`dozzle.private.home`)
       middlewares:
-        - name: private-middleware-basic-auth
+        - name: private-middleware-auth-authentik
       services:
-        - name: dozzle-service
+        - name: private-dozzle-service
           port: 4415
   #tls: {} 

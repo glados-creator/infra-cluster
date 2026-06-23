@@ -5,6 +5,7 @@ namePrefix: technitium-
 namespace: default
 
 resources:
+  - real-ip.yaml
   - pvc.yaml
   - pv.yaml
   - deployment.yaml

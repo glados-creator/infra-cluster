@@ -13,8 +13,8 @@ spec:
     - kind: Rule
       match: Host(`gatus.public.home`)
       middlewares:
-       - name: public-middleware-basic-auth
+       - name: public-middleware-auth-authentik
       services:
-        - name: gatus-service
+        - name: public-gatus-service
           port: 9901
   #tls: {} 

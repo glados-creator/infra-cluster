@@ -1,14 +1,14 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: middleware-auth-sso
-  namespace: prod-dmz
+  name: dmz-media-middleware-auth-trauth
+  namespace: dmz
 spec:
   plugin:
     trauth:
-      domain: ".dmz.home"
+      domain: ".media.dmz.home"
       # cookiename: "trauth_cookie"
       # cookiepath: "/"
       # cookiesecure: false   # set true if using HTTPS
       # cookiehttponly: true
-      usersfile: "/etc/trauth/auth"
+      usersfile: "/etc/trauth-dmz-media/auth"

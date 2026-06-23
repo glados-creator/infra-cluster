@@ -13,8 +13,8 @@ spec:
     - kind: Rule
       match: Host(`webui.code.private.home`)
       middlewares:
-       - name: private-middleware-basic-auth
+       - name: private-middleware-auth-authentik
       services:
-        - name: webui-service
+        - name: private-code-webui-service
           port: 4425
   #tls: {} 

@@ -27,8 +27,9 @@ namespace: dmz
 # └─────────────────┴─────────┴─────────────────────────────────────────────────────────┘
 
 resources:
-  - middleware-basic-auth.yaml
-  - middleware-auth-sso.yaml
+  # - middleware-auth-basic.yaml
+  # - middleware-auth-trauth.yaml
+  - middleware-auth-authentik.yaml
   - media-pv.yaml
   - media-pvc.yaml
   - jellyfin
@@ -50,7 +51,7 @@ resources:
   
 
 secretGenerator:
-  - name: media-basic-auth-secret
+  - name: media-auth-basic-secret
     envs:
     - secret.env
     type: Opaque

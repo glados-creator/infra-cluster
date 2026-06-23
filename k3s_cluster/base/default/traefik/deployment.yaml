@@ -59,9 +59,29 @@ spec:
             - name: metrics
               containerPort: 8082
           volumeMounts:
-            - name: trauth-users
-              mountPath: /etc/trauth
+            - name: trauth-secret-main
+              mountPath: /etc/trauth-main
+            # - name: trauth-secret-private
+            #   mountPath: /etc/trauth-private
+            # - name: trauth-secret-public
+            #   mountPath: /etc/trauth-public
+            # - name: trauth-secret-dmz
+            #   mountPath: /etc/trauth-dmz
+            # - name: trauth-secret-dmz-media
+            #   mountPath: /etc/trauth-dmz-media
       volumes:
-      - name: trauth-users
+      - name: trauth-secret-main
         secret:
-          secretName: main-basic-auth-secret
+          secretName: main-auth-basic-secret
+      # - name: trauth-secret-private
+      #   secret:
+      #     secretName: private-auth-basic-secret
+      # - name: trauth-secret-public
+      #   secret:
+      #     secretName: public-auth-basic-secret
+      # - name: trauth-secret-dmz
+      #   secret:
+      #     secretName: dmz-auth-basic-secret
+      # - name: trauth-secret-dmz-media
+      #   secret:
+      #     secretName: dmz-media-auth-basic-secret

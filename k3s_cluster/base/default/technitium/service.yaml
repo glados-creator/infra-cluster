@@ -49,18 +49,18 @@ spec:
       port: 853
       targetPort: 853
       protocol: TCP
-    # - name : dns-over-https # (HTTP/3)
-    #   port: 443
-    #   targetPort: 443
-    #   protocol: UDP
-    # - name : dns-over-https # (HTTP/1.1, HTTP/2)
-    #   port: 443
-    #   targetPort: 443
-    #   protocol: TCP
-    # - name : dns-over-http # (use with reverse proxy or certbot certificate renewal)
-    #   port: 80
-    #   targetPort: 80
-    #   protocol: TCP
+    - name : dns-over-https3 # (HTTP/3)
+      port: 443
+      targetPort: 443
+      protocol: UDP
+    - name : dns-over-https2 # (HTTP/1.1, HTTP/2)
+      port: 443
+      targetPort: 443
+      protocol: TCP
+    - name : dns-over-http # (use with reverse proxy or certbot certificate renewal)
+      port: 80
+      targetPort: 80
+      protocol: TCP
     - name: dns-over-http-rp # (use with reverse proxy)
       port: 8053
       targetPort: 8053

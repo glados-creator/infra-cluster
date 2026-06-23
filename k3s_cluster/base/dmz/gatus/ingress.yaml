@@ -13,8 +13,8 @@ spec:
     - kind: Rule
       match: Host(`gatus.dmz.home`)
       middlewares:
-       - name: dmz-middleware-basic-auth
+       - name: dmz-middleware-auth-authentik
       services:
-        - name: gatus-service
+        - name: dmz-gatus-service
           port: 6601
   #tls: {} 

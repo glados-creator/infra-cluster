@@ -13,8 +13,8 @@ spec:
     - kind: Rule
       match: Host(`glance.dmz.home`)
       middlewares:
-       - name: dmz-middleware-basic-auth
+       - name: dmz-middleware-auth-authentik
       services:
-        - name: glance-service
+        - name: dmz-glance-service
           port: 6600
   #tls: {} 
