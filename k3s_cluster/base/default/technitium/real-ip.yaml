@@ -7,6 +7,5 @@ spec:
     # Explicitly set X-Real-IP to the actual client IP
     customRequestHeaders:
       X-Real-IP: "{clientIP}" 
-    # Also forward the full chain for completeness (Technitium prefers X-Real-IP, but supports XFF)
-    customRequestHeaders:
+      # Also forward the full chain for completeness (Technitium prefers X-Real-IP, but supports XFF)
       X-Forwarded-For: "{clientIP}" 

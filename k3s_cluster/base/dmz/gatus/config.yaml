@@ -6,7 +6,7 @@ metrics: true
 
 endpoints:
   - name: glance
-    url: "http://glance.dmz.svc.cluster.local:6600"
+    url: "http://dmz-glance-service.prod-dmz.svc.cluster.local:6600"
     interval: 30s
     conditions:
       - "[STATUS] == 200"

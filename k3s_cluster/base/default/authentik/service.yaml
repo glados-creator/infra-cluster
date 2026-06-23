@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: default
+  labels:
+    app: main-authentik
+spec:
+  type: ClusterIP
+  selector:
+    app: main-authentik
+  ports:
+    - name: web
+      protocol: TCP
+      port: 2288 # port of that service
+      targetPort: 9000 # port of the container
+    - name: websecure
+      protocol: TCP
+      port: 2289
+      targetPort: 9443

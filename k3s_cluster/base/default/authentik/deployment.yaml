@@ -1,0 +1,110 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: default
+  labels:
+    app: main-authentik
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: main-authentik
+  template:
+    metadata:
+      labels:
+        app: main-authentik
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+
+      securityContext:
+        fsGroup: 999
+      containers:
+        # --- Authentik main container ---
+        - name: authentik
+          image: ghcr.io/goauthentik/server:latest
+          args: ["server"]
+          ports:
+            - containerPort: 9000 # HTTP
+            - containerPort: 9443 # HTTPS
+          envFrom:
+            - configMapRef:
+                name: authentik-config
+            - secretRef:
+                name: authentik-secret
+          volumeMounts:
+            - name: authentik-data
+              mountPath: /media
+              subPath: media
+            - name: authentik-data
+              mountPath: /custom-templates
+              subPath: custom-templates
+          # Ensure Authentik waits for PostgreSQL to be ready
+          livenessProbe:
+            httpGet:
+              path: /-/health/live/
+              port: 9000
+            initialDelaySeconds: 60
+            periodSeconds: 10
+
+          readinessProbe:
+            httpGet:
+              path: /-/health/ready/   # readiness has its own endpoint
+              port: 9000
+            initialDelaySeconds: 30
+            periodSeconds: 5
+
+        # --- PostgreSQL sidecar ---
+        - name: postgres
+          image: postgres:18-alpine
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: authentik-config
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-secret
+                  key: AUTHENTIK_POSTGRESQL__PASSWORD
+          volumeMounts:
+            - name: authentik-data
+              mountPath: /var/lib/postgresql # shared PVC
+              subPath: pgdata
+          # Health check for PostgreSQL
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - authentik
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+        # --- Redis sidecar ---
+        - name: redis
+          image: redis:alpine
+          ports:
+            - containerPort: 6379
+          # Optional: add a readiness probe so Authentik knows Redis is ready
+          readinessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+      volumes:
+        - name: authentik-data
+          persistentVolumeClaim:
+            claimName: data-pvc

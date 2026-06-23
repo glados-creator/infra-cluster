@@ -6,7 +6,7 @@ metrics: true
 
 endpoints:
   - name: glance
-    url: "http://glance.main.svc.cluster.local:2200"
+    url: "http://main-glance-service.main.svc.cluster.local:2200"
     interval: 30s
     conditions:
       - "[STATUS] == 200"

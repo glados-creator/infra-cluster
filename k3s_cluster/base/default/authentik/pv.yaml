@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: dozzle-pv
+  name: pv
   namespace: default
   labels:
-    app: main-dozzle
+    app: main-authentik
 spec:
   capacity:
     storage: 1Gi
@@ -17,4 +17,4 @@ spec:
   storageClassName: nfs
   nfs:
     server: 192.168.1.24  # your NFS server IP
-    path: /bhole/cluster/default/dozzle/ # your NFS export path
+    path: /bhole/cluster/default/authentik/ # your NFS export path

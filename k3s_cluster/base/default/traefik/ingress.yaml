@@ -13,7 +13,7 @@ spec:
     - kind: Rule
       match: Host(`traefik.main.home`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
       middlewares:
-        - name: main-middleware-auth-sso
+        - name: main-middleware-auth-trauth
       services:
         - name: api@internal
           kind: TraefikService

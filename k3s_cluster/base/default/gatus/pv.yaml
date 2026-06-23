@@ -17,4 +17,4 @@ spec:
   storageClassName: nfs
   nfs:
     server: 192.168.1.24  # your NFS server IP
-    path: /bhole/cluster/main/gatus/ # your NFS export path
+    path: /bhole/cluster/default/gatus/ # your NFS export path

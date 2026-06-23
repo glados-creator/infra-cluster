@@ -115,6 +115,14 @@ todos :
     - [ ] authentik
     - [ ] glueton TBD
 
+- [ ] TODO fix
+  - [ ] main-authentik-deployment
+  - [ ] dmz-media-jellyfin-deployment
+  - [ ] dmz-media-jellystat-deployment
+  - [ ] dmz-media-readarr-deployment
+  - [ ] dmz-media-youtarr-deployment
+  - [ ] private-homeassistant-deployment
+
 - [ ] TODO do doc
 - [ ] add pod
     - [ ] graphana (monitoring)
@@ -149,9 +157,9 @@ todos :
     - [ ] wordpress
     - [ ] personal site
     - [ ] monitoring loki Elasticsearch Logstash:  Kibana:  Beats:  
-    - [ ] authentik ?
+    - [~] authentik ?
     - [ ] mailu
-    - [ ] traefik dmz private auth plugin
+    - [x] traefik dmz private auth plugin
     - [ ] paperless ?
     - [ ] n8n ?
     - [ ] github action 

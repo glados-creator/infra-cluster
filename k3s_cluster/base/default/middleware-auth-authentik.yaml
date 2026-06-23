@@ -1,11 +1,11 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name:  main-middleware-auth-authentik
+  name:  middleware-auth-authentik
   namespace: default
 spec:
   forwardAuth:
-    address: http://authentik.default.svc.cluster.local:2280/outpost.goauthentik.io/auth/traefik
+    address: http://main-authentik-service.default.svc.cluster.local:2288/outpost.goauthentik.io/auth/traefik
     trustForwardHeader: true
     authResponseHeaders:
       - X-authentik-username

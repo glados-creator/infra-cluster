@@ -15,6 +15,6 @@ spec:
       middlewares:
         - name: main-middleware-auth-authentik
       services:
-        - name: dozzle-service
+        - name: main-dozzle-service
           port: 2215
   #tls: {} 

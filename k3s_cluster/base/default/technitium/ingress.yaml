@@ -12,9 +12,9 @@ spec:
     - kind: Rule
       match: Host(`technitium.main.home`)
       middlewares:
-        - name: main-middleware-auth-sso
+        - name: main-middleware-auth-trauth
       services:
-        - name: technitium-service
+        - name: main-technitium-service
           port: 2283
   #tls: {} 
 
@@ -33,9 +33,9 @@ spec:
     - kind: Rule
       match: Host(`technitium.main.home`)
       middlewares:
-        - name: main-middleware-auth-sso
+        - name: main-middleware-auth-trauth
       services:
-        - name: technitium-service
+        - name: main-technitium-service
           port: 2284
   #tls: {} 
 
@@ -43,7 +43,7 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: ingressroute-DOHS
+  name: ingressroute-dohs
   namespace: default
   labels:
     app: main-technitium
@@ -56,14 +56,14 @@ spec:
       middlewares:
         - name: set-real-ip
       services:
-        - name: technitium-service
+        - name: main-technitium-service
           port: 443
   #tls: {}
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: ingressroute-DOH
+  name: ingressroute-doh
   namespace: default
   labels:
     app: main-technitium
@@ -76,14 +76,14 @@ spec:
       middlewares:
         - name: set-real-ip
       services:
-        - name: technitium-service
+        - name: main-technitium-service
           port: 80
   #tls: {}
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: ingressroute-DOHRP
+  name: ingressroute-dohrp
   namespace: default
   labels:
     app: main-technitium
@@ -96,6 +96,6 @@ spec:
       middlewares:
         - name: set-real-ip
       services:
-        - name: technitium-service
+        - name: main-technitium-service
           port: 8053
   #tls: {}

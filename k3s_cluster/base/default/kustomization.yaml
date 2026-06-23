@@ -1,6 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+namePrefix: main-
 namespace: default
 
 resources:
@@ -9,6 +10,10 @@ resources:
   - middleware-auth-authentik.yaml
   - traefik
   - technitium
+  - authentik
+  - glance
+  - gatus
+  - dozzle
 
 secretGenerator:
   - name: main-auth-basic-secret

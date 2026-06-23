@@ -52,19 +52,9 @@ spec:
               add:
                 - NET_BIND_SERVICE
                 - NET_ADMIN
-        env:
-        - name: DNS_SERVER_DOMAIN
-          valueFrom:
-            configMapKeyRef:
+        envFrom:
+        - configMapRef:
               name: technitium-config
-              key: DNS_SERVER_DOMAIN
-        - name: TZ
-          valueFrom:
-            configMapKeyRef:
-              name: technitium-config
-              key: TZ
-        - name: DOTNET_USE_POLLING_FILE_WATCHER
-          value: "1"
         volumeMounts:
         - name: config
           mountPath: /etc/dns

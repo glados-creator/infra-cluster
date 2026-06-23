@@ -1,0 +1,40 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ingressroute
+  namespace: default
+  labels:
+    app: main-authentik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`authentik.main.home`)
+      # middlewares:
+      #  - name: main-middleware-auth-trauth
+      services:
+        - name: main-authentik-service
+          port: 2288
+  #tls: {} 
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ingressroute-dos
+  namespace: default
+  labels:
+    app: main-authentik
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`authentik.main.home`)
+      # middlewares:
+      #  - name: main-middleware-auth-trauth
+      services:
+        - name: main-authentik-service
+          port: 2289
+  #tls: {} 
