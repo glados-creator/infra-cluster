@@ -1,24 +1,46 @@
-# system
-# main
-glance IP 2200
-gatus IP 2201
-dozzle IP 2215
+# system (11xx)
+
+# main (22xx)
+glance             2200
+gatus              2201
+dozzle             2215
 traefik LB static ip 192.168.1.1 LB 80 443 IP 2280 2282
 technitium LB static ip 192.168.1.2 LB 53 853 443 80 8053 IP 2283 2284
 (kubectl port-forward --address 0.0.0.0 svc/technitium-service 2283:2283)
-authentik IP 2288 2289
-glueton TBD
-redirect IP 2202 TODO
+authentik          2288 2289
+glueton            TBD
+redirect           2202 TODO
 
-# public
-glance IP 9900
-gatus IP 9901
-redirect IP 9902 TODO
+# public (99xx)
+glance             9900
+gatus              9901
+redirect           9902 TODO
+wordpress          9904
 
-# dmz
-glance IP 6600
-gatus IP 6601
-redirect IP 6602 TODO
+# dmz (66xx)
+glance             6600
+gatus              6601
+redirect           6602 TODO
+
+### dmz/cloud
+Immich             6604
+OpenCloud          6605
+Paperless          6606
+
+### dmz/oss
+Forgejo            6608
+Harbor             6609
+
+### dmz/game
+Pterodactyl        6610
+dolphin-games      6611
+halfix             6612
+
+### dmz/alternative-frontends
+matrix-element     6613
+SearXNG            6614
+Invidious-Piped    6615
+Libreddit-Redlib   6616
 
 ### dmz/media
 ┌─────────────────┬─────────┬───────┬─────────────────────────────────────────────────┐
@@ -42,15 +64,44 @@ redirect IP 6602 TODO
 │ YouTarr         │ 3087    │ 6669  │ YouTube playlist monitor (Radarr‑like)          │
 └─────────────────┴─────────┴─────────────────────────────────────────────────────────┘
 
-# private
-glance IP 4400 TODO CONF
-gatus IP 4401 TODO CONF
-redirect IP 4402 TODO
-dozzle IP 4415
+# private (44xx)
+glance             4400
+gatus              4401
+redirect           4402 TODO
+
+### private/home
+OctoPrint          4403
+home-assistant     4404
+Excalidraw         4405
+Kiwix              4406
+steam-gaming       4407
+
+### private/feed
+ntfy               4408
+mollysocket        4409
+RSSHub             4410
+Miniflux           4411
+
+### private/tools
+headscale          4412
+squid              4413
+netboot-playzone   4414
+RustDesk           4417
+Ente-Auth          4418
+Vaultwarden        4419
+
+### private/monitoring
+headlamp           4420
+grafana            4421
+prometheus         4422
+loki               4423
+elasticsearch      4424
+logstash           4427
+kibana             4428
 
 ### private/code
-webui 4425
-ollama 4426
-vscodium 
-vscoduim-pind 
-openclaw 
+n8n                4429
+odysseus           4430
+webtop             4431
+vscodium-server    4432
+openclaw           4433
