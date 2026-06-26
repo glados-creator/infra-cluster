@@ -28,39 +28,57 @@ spec:
       securityContext:
         fsGroup: 999
       containers:
-        # --- Authentik main container ---
-        - name: authentik
+        # --- Authentik Server ---
+        - name: authentik-server
           image: ghcr.io/goauthentik/server:latest
           args: ["server"]
           ports:
-            - containerPort: 9000 # HTTP
-            - containerPort: 9443 # HTTPS
+            - containerPort: 9000   # HTTP
+            - containerPort: 9443   # HTTPS
           envFrom:
             - configMapRef:
                 name: authentik-config
             - secretRef:
                 name: authentik-secret
           volumeMounts:
-            - name: authentik-data
-              mountPath: /media
-              subPath: media
-            - name: authentik-data
+            - name: data
+              mountPath: /data
+              subPath: data
+            - name: data
               mountPath: /custom-templates
               subPath: custom-templates
-          # Ensure Authentik waits for PostgreSQL to be ready
           livenessProbe:
             httpGet:
               path: /-/health/live/
               port: 9000
-            initialDelaySeconds: 60
+            initialDelaySeconds: 30
             periodSeconds: 10
-
           readinessProbe:
             httpGet:
-              path: /-/health/ready/   # readiness has its own endpoint
+              path: /-/health/ready/
               port: 9000
-            initialDelaySeconds: 30
+            initialDelaySeconds: 10
             periodSeconds: 5
+
+        # --- Authentik Worker ---
+        - name: authentik-worker
+          image: ghcr.io/goauthentik/server:latest
+          args: ["worker"]
+          envFrom:
+            - configMapRef:
+                name: authentik-config
+            - secretRef:
+                name: authentik-secret
+          volumeMounts:
+            - name: data
+              mountPath: /data
+              subPath: data
+            - name: data
+              mountPath: /certs
+              subPath: certs
+            - name: data
+              mountPath: /custom-templates
+              subPath: custom-templates
 
         # --- PostgreSQL sidecar ---
         - name: postgres
@@ -77,8 +95,8 @@ spec:
                   name: authentik-secret
                   key: AUTHENTIK_POSTGRESQL__PASSWORD
           volumeMounts:
-            - name: authentik-data
-              mountPath: /var/lib/postgresql # shared PVC
+            - name: data
+              mountPath: /var/lib/postgresql
               subPath: pgdata
           # Health check for PostgreSQL
           readinessProbe:
@@ -87,15 +105,14 @@ spec:
                 - pg_isready
                 - -U
                 - authentik
-            initialDelaySeconds: 10
-            periodSeconds: 5
+            initialDelaySeconds: 5
+            periodSeconds: 2
 
         # --- Redis sidecar ---
         - name: redis
           image: redis:alpine
           ports:
             - containerPort: 6379
-          # Optional: add a readiness probe so Authentik knows Redis is ready
           readinessProbe:
             exec:
               command:
@@ -103,8 +120,15 @@ spec:
                 - ping
             initialDelaySeconds: 5
             periodSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            initialDelaySeconds: 5
+            periodSeconds: 2
 
       volumes:
-        - name: authentik-data
+        - name: data
           persistentVolumeClaim:
             claimName: data-pvc
