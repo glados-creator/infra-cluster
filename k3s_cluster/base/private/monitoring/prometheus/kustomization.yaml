@@ -7,7 +7,6 @@ namespace: private
 resources:
   - pvc.yaml
   - pv.yaml
-  - configmap.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml
