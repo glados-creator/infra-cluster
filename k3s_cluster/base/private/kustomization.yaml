@@ -13,6 +13,7 @@ resources:
   - gatus
   - monitoring
   - code
+  - home
 
 secretGenerator:
   - name: auth-basic-secret

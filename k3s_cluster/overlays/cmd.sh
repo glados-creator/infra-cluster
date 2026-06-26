@@ -23,6 +23,7 @@ mkdir -p /bhole/cluster/private/gatus
 mkdir -p /bhole/cluster/private/monitor/dozzle
 mkdir -p /bhole/cluster/private/monitor/graphana
 mkdir -p /bhole/cluster/private/monitor/prometheus
+mkdir -p /bhole/cluster/private/home/home-assistant/
 
 mkdir -p /bhole/cluster/public
 mkdir -p /bhole/cluster/public/gatus

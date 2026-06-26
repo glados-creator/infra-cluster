@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: private
+  labels:
+    app: private-home-assistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: private-home-assistant
+  template:
+    metadata:
+      labels:
+        app: private-home-assistant
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: home-assistant
+          image: homeassistant/home-assistant:latest
+          ports:
+            - containerPort: 8123
+          env:
+            - name: TZ
+              value: "Europe/Paris"
+          volumeMounts:
+            - name: data
+              mountPath: /config
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc

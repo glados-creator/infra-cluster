@@ -4,4 +4,9 @@ kind: Kustomization
 namePrefix: home-
 namespace: private
 
-# resources:
+resources:
+  - home-assistant
+  # - octoPrint
+  # - excalidraw
+  # - kiwix
+  # - steamgame
