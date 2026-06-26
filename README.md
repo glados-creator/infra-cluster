@@ -104,7 +104,7 @@ todos :
 - [ ] public
     - [ ] personal-site (blog)
     - [ ] wordpress (CMS, multi)
-    - [ ] url shortener (url shortener)
+    - [ ] url shortener (url shortener) ?
     - [ ] redirect
 
 - [ ] dmz
@@ -113,22 +113,22 @@ todos :
         - [ ] Immich (photos, multi)
         - [ ] OpenCloud (file sync, multi)
         - [ ] Paperless (docs, multi)
-    - [ ] code/ (*.oss)
-        - [ ] telnet demo (telnet demo)
+    - [ ] oss/
+        - [ ] ? telnet demo (telnet demo) ?
         - [ ] Forgejo (Git hosting, multi)
-        - [ ] Forgejo push action runner (...)
+        - [ ] ? Forgejo push action runner (...) ?
         - [ ] Harbor (Docker registry, multi)
-    - [ ] gaming/ (*.gg)
-        - [ ] Pterodactyl (game server panel, multi) / modrinth ?
+    - [ ] game/ (*.gg)
+        - [ ] ? Pterodactyl (game server panel, multi) / modrinth ?
         - [ ] dolphin-games (emulator, single)
         - [ ] halfix (VM/emulator, single)
     - [ ] alternative-frontends/ (*.alt)
         - [ ] matrix + element X https://matrix.org/ecosystem/clients/
-        - [ ] navidrom / my own / Hyperpipe / BeatBump (ytb music alt)        
+        - [ ] ? navidrom / my own / Hyperpipe / BeatBump (ytb music alt) ?    
         - [ ] SearXNG / Websurfx / LibreX (search, multi)
         - [ ] Invidious / Piped / Viewtube (YouTube alt, multi)
         - [ ] Libreddit / Redlib (Reddit alt, multi)
-        - [ ] AnonymousOverflow (StackOverflow alt, multi)
+        - [ ] ? AnonymousOverflow (StackOverflow alt, multi) ?
     - [ ] redirect
 
 - [ ] private
@@ -138,7 +138,7 @@ todos :
         - [ ] Excalidraw (drawing, multi)
         - [ ] Kiwix (offline Wikipedia, single)
         - [ ] steam-gaming (headless, multi)
-    - [ ] media/
+    - [ ] feed/
         - [ ] ntfy (push, multi)
         - [ ] mollysocket (Signal bridge, multi)
         - [ ] RSSHub + Miniflux (RSS, multi/single)
@@ -146,10 +146,10 @@ todos :
         - [ ] headscale (Tailscale alt, multi)
         - [ ] squid (forward proxy, multi)    
         - [ ] netboot-playzone (lab, TBD)
-        - [ ] Guacamole (remote gateway, multi)
+        - [ ] ? Guacamole (remote gateway, multi) / webtop ?
         - [ ] RustDesk (remote desktop, multi)
-        - [ ] Ente Auth (multi TBD)
-        - [ ] password-manager (e.g., Vaultwarden, multi)
+        - [ ] ? Ente Auth (multi TBD) ?
+        - [ ] ? password-manager (e.g., Vaultwarden, multi) ?
     - [ ] monitoring/
         - [ ] headlamp (K8s dashboard)
         - [ ] grafana
@@ -159,14 +159,13 @@ todos :
         - [ ] logstash
         - [ ] elasticsearch
         - [ ] kibana
-        - [ ] datadog
+        - [ ] ? datadog ?
     - [ ] code/
         - [ ] n8n (automation, multi)
         - [ ] ollama (LLM)
         - [ ] odysseus (AI chat)
         - [ ] webtop (tmp linux vm)
-        - [ ] vscodium-server (with podman-in-docker)
-        - [ ] opencode (code assistant)
+        - [ ] vscodium-server (with podman-in-docker) + opencode (code assistant)
         - [ ] openclaw (AI agent)
     - [ ] redirect
 
