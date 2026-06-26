@@ -13,7 +13,7 @@ spec:
     - kind: Rule
       match: Host(`glance.main.home`)
       middlewares:
-       - name: main-middleware-auth-trauth # authentik
+       - name: main-middleware-auth-authentik
       services:
         - name: main-glance-service
           port: 2200

@@ -21,5 +21,29 @@ secretGenerator:
     - secret.env
     type: Opaque
 
+# secretGenerator:
+#   - name: public-auth-basic-secret
+#     envs:
+#     - secret.env
+#     type: Opaque
+# 
+# secretGenerator:
+#   - name: private-auth-basic-secret
+#     envs:
+#     - secret.env
+#     type: Opaque
+# 
+# secretGenerator:
+#   - name: dmz-auth-basic-secret
+#     envs:
+#     - secret.env
+#     type: Opaque
+# 
+# secretGenerator:
+#   - name: dmz-media-auth-basic-secret
+#     envs:
+#     - secret.env
+#     type: Opaque
+
 generatorOptions:
   disableNameSuffixHash: true

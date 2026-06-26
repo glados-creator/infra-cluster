@@ -13,7 +13,7 @@ spec:
     - kind: Rule
       match: Host(`dozzle.monitor.private.home`)
       middlewares:
-        - name: private-middleware-auth-trauth # authentik
+        - name: private-middleware-auth-authentik
       services:
         - name: private-dozzle-service
           port: 4415

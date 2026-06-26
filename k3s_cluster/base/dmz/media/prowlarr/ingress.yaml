@@ -13,7 +13,7 @@ spec:
     - kind: Rule
       match: Host(`prowlarr.media.dmz.home`)
       middlewares:
-        - name: dmz-media-middleware-auth-trauth # authentik
+        - name: dmz-media-middleware-auth-authentik
       services:
         - name: dmz-media-prowlarr-service
           port: 6659

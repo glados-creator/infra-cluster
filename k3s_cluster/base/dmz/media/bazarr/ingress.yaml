@@ -13,7 +13,7 @@ spec:
     - kind: Rule
       match: Host(`bazarr.media.dmz.home`)
       middlewares:
-        - name: dmz-media-middleware-auth-trauth # authentik
+        - name: dmz-media-middleware-auth-authentik
       services:
         - name: dmz-media-bazarr-service
           port: 6664

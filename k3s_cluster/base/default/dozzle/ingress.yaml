@@ -13,7 +13,7 @@ spec:
     - kind: Rule
       match: Host(`dozzle.main.home`)
       middlewares:
-        - name: main-middleware-auth-trauth # authentik
+        - name: main-middleware-auth-authentik
       services:
         - name: main-dozzle-service
           port: 2215

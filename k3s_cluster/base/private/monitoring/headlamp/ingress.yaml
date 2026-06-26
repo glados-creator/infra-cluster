@@ -13,7 +13,7 @@ spec:
     - kind: Rule
       match: Host(`headlamp.monitoring.private.home`)
       middlewares:
-        - name: private-middleware-auth-trauth # authentik
+        - name: private-middleware-auth-authentik
       services:
         - name: private-monitor-headlamp-service
           port: 4420
