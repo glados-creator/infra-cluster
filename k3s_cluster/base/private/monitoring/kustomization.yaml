@@ -8,7 +8,7 @@ resources:
   - dozzle
   - grafana
   - prometheus
-  # - headlamp (K8s dashboard)
+  - headlamp
   # - loki
   # - elastic-beats
   # - logstash

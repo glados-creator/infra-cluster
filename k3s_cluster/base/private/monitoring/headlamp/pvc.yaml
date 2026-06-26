@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-pvc
+  namespace: private
+  labels:
+    app: private-headlamp
+spec:
+  accessModes: [ReadWriteMany]
+  storageClassName: nfs
+  volumeName: pv
+  resources:
+    requests:
+      storage: 1Gi

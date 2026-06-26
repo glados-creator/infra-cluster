@@ -23,6 +23,7 @@ mkdir -p /bhole/cluster/private/gatus
 mkdir -p /bhole/cluster/private/monitor/dozzle
 mkdir -p /bhole/cluster/private/monitor/graphana
 mkdir -p /bhole/cluster/private/monitor/prometheus
+mkdir -p /bhole/cluster/private/monitor/headlamp
 mkdir -p /bhole/cluster/private/home/home-assistant/
 
 mkdir -p /bhole/cluster/public
@@ -68,7 +69,7 @@ mkdir -p /bhole/cluster/dmz/media-stack/youtarr/config
 
 sudo chown -R 1000:1000 /bhole/cluster/*
 sudo chown -R 999:999 /bhole/cluster/default/authentik
-
+sudo chown -R 65534:65534 /bhole/cluster/private/monitor/prometheus/
 
 # kubectl rollout restart deployment -n prod-dmz dmz-media-qbittorrent-deployment
 

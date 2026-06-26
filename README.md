@@ -79,10 +79,13 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
 5. private
     + glance (app dir)
     + gatus (monitoring uptime)
+    + home
+      + home-assistant
     + monitoring  
       + dozzle (logging)
       + grafana
       + prometheus
+      + headlamp
       + ... TODO
     + code
       + TODO
@@ -136,7 +139,6 @@ todos :
 - [ ] private
     - [ ] home/
         - [ ] OctoPrint (3D print, single)
-        - [ ] home-assistant (Jarvis, single)
         - [ ] Excalidraw (drawing, multi)
         - [ ] Kiwix (offline Wikipedia, single)
         - [ ] steam-gaming (headless, multi)
@@ -153,7 +155,6 @@ todos :
         - [ ] ? Ente Auth (multi TBD) ?
         - [ ] ? password-manager (e.g., Vaultwarden, multi) ?
     - [ ] monitoring/
-        - [ ] headlamp (K8s dashboard)
         - [ ] loki
         - [ ] elastic-beats
         - [ ] logstash

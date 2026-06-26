@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: private
+  labels:
+    app: private-headlamp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: private-headlamp
+  template:
+    metadata:
+      labels:
+        app: private-headlamp
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      serviceAccountName: serviceaccount
+      containers:
+        - name: headlamp
+          image: ghcr.io/headlamp-k8s/headlamp:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: HEADLAMP_CLUSTER_NAME
+              value: "my-cluster"
+          volumeMounts:
+            - name: data
+              mountPath: /headlamp/config
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc
