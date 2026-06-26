@@ -11,7 +11,7 @@ resources:
   # - redirect
   - glance
   - gatus
-  - dozzle
+  - monitoring
   - code
   # - k8sdashboard
   # - home-assistant

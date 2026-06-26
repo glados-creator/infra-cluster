@@ -11,7 +11,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`dozzle.private.home`)
+      match: Host(`dozzle.monitor.private.home`)
       middlewares:
         - name: private-middleware-auth-authentik
       services:

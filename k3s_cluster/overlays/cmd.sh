@@ -19,8 +19,8 @@ mkdir -p /bhole/cluster/default/authentik/media/public
 
 
 mkdir -p /bhole/cluster/private
-mkdir -p /bhole/cluster/private/dozzle
 mkdir -p /bhole/cluster/private/gatus
+mkdir -p /bhole/cluster/private/monitor/dozzle
 mkdir -p /bhole/cluster/private/code/webui
 
 mkdir -p /bhole/cluster/public
@@ -65,7 +65,7 @@ mkdir -p /bhole/cluster/dmz/media-stack/profilarr/config
 mkdir -p /bhole/cluster/dmz/media-stack/youtarr/config
 
 sudo chown -R 1000:1000 /bhole/cluster/*
-sudo chown 999:999 /bhole/cluster/default/authentik/media/public
+sudo chown -R 999:999 /bhole/cluster/default/authentik
 
 
 # kubectl rollout restart deployment -n prod-dmz dmz-media-qbittorrent-deployment
