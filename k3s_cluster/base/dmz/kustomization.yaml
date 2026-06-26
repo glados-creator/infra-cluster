@@ -5,8 +5,8 @@ namePrefix: dmz-
 namespace: dmz
 
 resources:
-  # - middleware-auth-basic.yaml
-  # - middleware-auth-trauth.yaml
+  - middleware-auth-basic.yaml
+  - middleware-auth-trauth.yaml
   - middleware-auth-authentik.yaml
   # - redirect
   - glance

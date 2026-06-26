@@ -12,7 +12,7 @@ spec:
     - kind: Rule
       match: Host(`jellyfin.media.dmz.home`)
       middlewares:
-        - name: dmz-media-middleware-auth-authentik
+        - name: dmz-media-middleware-auth-trauth # authentik
       services:
         - name: dmz-media-jellyfin-service
           port: 6650
@@ -32,7 +32,7 @@ spec:
     - kind: Rule
       match: Host(`jellyfin.media.dmz.home`)
       middlewares:
-        - name: dmz-media-middleware-auth-authentik
+        - name: dmz-media-middleware-auth-trauth # authentik
       services:
         - name: dmz-media-jellyfin-service
           port: 6651
@@ -52,7 +52,7 @@ spec:
 #     - kind: Rule
 #       match: Host(`dlna.jellyfin.media.dmz.home`)
 #       middlewares:
-#         - name: dmz-media-dmz-media-middleware-auth-authentik
+#         - name: dmz-media-dmz-media-middleware-auth-trauth # authentik
 #       services:
 #         - name: dmz-media-jellyfin-service
 #           port: 6653

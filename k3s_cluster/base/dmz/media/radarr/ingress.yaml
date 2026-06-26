@@ -13,7 +13,7 @@ spec:
     - kind: Rule
       match: Host(`radarr.media.dmz.home`)
       middlewares:
-        - name: dmz-media-middleware-auth-authentik
+        - name: dmz-media-middleware-auth-trauth # authentik
       services:
         - name: dmz-media-radarr-service
           port: 6654

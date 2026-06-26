@@ -27,8 +27,8 @@ namespace: dmz
 # └─────────────────┴─────────┴─────────────────────────────────────────────────────────┘
 
 resources:
-  # - middleware-auth-basic.yaml
-  # - middleware-auth-trauth.yaml
+  - middleware-auth-basic.yaml
+  - middleware-auth-trauth.yaml
   - middleware-auth-authentik.yaml
   - media-pv.yaml
   - media-pvc.yaml

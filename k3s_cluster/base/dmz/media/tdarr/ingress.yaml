@@ -13,7 +13,7 @@ spec:
     - kind: Rule
       match: Host(`tdarr.media.dmz.home`)
       middlewares:
-        - name: dmz-media-middleware-auth-authentik
+        - name: dmz-media-middleware-auth-trauth # authentik
       services:
         - name: dmz-media-tdarr-service
           port: 6663
