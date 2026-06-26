@@ -8,12 +8,17 @@ technitium LB static ip 192.168.1.2 LB 53 853 443 80 8053 IP 2283 2284
 (kubectl port-forward --address 0.0.0.0 svc/technitium-service 2283:2283)
 authentik IP 2288 2289
 glueton TBD
+redirect IP 2202 TODO
+
 # public
-glance IP 9900 TODO CONF
-gatus IP 9901 TODO CONF
+glance IP 9900
+gatus IP 9901
+redirect IP 9902 TODO
+
 # dmz
-glance IP 6600 TODO CONF
-gatus IP 6601 TODO CONF
+glance IP 6600
+gatus IP 6601
+redirect IP 6602 TODO
 
 ### dmz/media
 ┌─────────────────┬─────────┬───────┬─────────────────────────────────────────────────┐
@@ -40,6 +45,7 @@ gatus IP 6601 TODO CONF
 # private
 glance IP 4400 TODO CONF
 gatus IP 4401 TODO CONF
+redirect IP 4402 TODO
 dozzle IP 4415
 
 ### private/code

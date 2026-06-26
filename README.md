@@ -49,17 +49,16 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
 2. default/main
     + technitium DNS (use tmp kube-proxy for install)
     + traefik reverse proxy via ingress-route controller
-    + glance (app dir) TODO CONF
-    + gatus (monitoring uptime) TODO CONF
+    + glance (app dir)
+    + gatus (monitoring uptime)
     + dozzle (logging)
     + authentik (auth)
-    + glueton (vpn) TBD
 3. public
-    + glance (app dir) TODO CONF
-    + gatus (monitoring uptime) TODO CONF
+    + glance (app dir)
+    + gatus (monitoring uptime)
 4. dmz/demilitarized/priviled
-    + glance (app dir) TODO CONF
-    + gatus (monitoring uptime) TODO CONF
+    + glance (app dir)
+    + gatus (monitoring uptime)
     + media
         + Jellyfin
         + Radarr
@@ -78,11 +77,13 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
         + Profilarr
         + YouTarr
 5. private
-    + glance (app dir) TODO CONF
-    + gatus (monitoring uptime) TODO CONF
-    + dozzle (logging) TMp move to monitoring stack
-
-ip2n the tor thingy / tor
+    + glance (app dir)
+    + gatus (monitoring uptime)
+    + monitoring  
+      + dozzle (logging)
+      + ... TODO
+    + code
+      + TODO
 
 **modes**
 - production
@@ -91,11 +92,106 @@ ip2n the tor thingy / tor
 kubectl apply -f overlay/production
 ```
 
+=============================
+todos : 
+- [ ] finish CRDs
+- [ ] default
+    - [ ] gluetun (VPN, single)
+    - [ ] netboot-main (PXE, TBD)
+    - [ ] honeypot (decoy, single)
+    - [ ] redirect
+
+- [ ] public
+    - [ ] personal-site (blog)
+    - [ ] wordpress (CMS, multi)
+    - [ ] url shortener (url shortener)
+    - [ ] redirect
+
+- [ ] dmz
+    - [ ] Mailu (email server, multi)
+    - [ ] cloud/
+        - [ ] Immich (photos, multi)
+        - [ ] OpenCloud (file sync, multi)
+        - [ ] Paperless (docs, multi)
+    - [ ] code/ (*.oss)
+        - [ ] telnet demo (telnet demo)
+        - [ ] Forgejo (Git hosting, multi)
+        - [ ] Forgejo push action runner (...)
+        - [ ] Harbor (Docker registry, multi)
+    - [ ] gaming/ (*.gg)
+        - [ ] Pterodactyl (game server panel, multi) / modrinth ?
+        - [ ] dolphin-games (emulator, single)
+        - [ ] halfix (VM/emulator, single)
+    - [ ] alternative-frontends/ (*.alt)
+        - [ ] matrix + element X https://matrix.org/ecosystem/clients/
+        - [ ] navidrom / my own / Hyperpipe / BeatBump (ytb music alt)        
+        - [ ] SearXNG / Websurfx / LibreX (search, multi)
+        - [ ] Invidious / Piped / Viewtube (YouTube alt, multi)
+        - [ ] Libreddit / Redlib (Reddit alt, multi)
+        - [ ] AnonymousOverflow (StackOverflow alt, multi)
+    - [ ] redirect
+
+- [ ] private
+    - [ ] home/
+        - [ ] OctoPrint (3D print, single)
+        - [ ] home-assistant (Jarvis, single)
+        - [ ] Excalidraw (drawing, multi)
+        - [ ] Kiwix (offline Wikipedia, single)
+        - [ ] steam-gaming (headless, multi)
+    - [ ] media/
+        - [ ] ntfy (push, multi)
+        - [ ] mollysocket (Signal bridge, multi)
+        - [ ] RSSHub + Miniflux (RSS, multi/single)
+    - [ ] tools/
+        - [ ] headscale (Tailscale alt, multi)
+        - [ ] squid (forward proxy, multi)    
+        - [ ] netboot-playzone (lab, TBD)
+        - [ ] Guacamole (remote gateway, multi)
+        - [ ] RustDesk (remote desktop, multi)
+        - [ ] Ente Auth (multi TBD)
+        - [ ] password-manager (e.g., Vaultwarden, multi)
+    - [ ] monitoring/
+        - [ ] headlamp (K8s dashboard)
+        - [ ] grafana
+        - [ ] prometheus
+        - [ ] loki
+        - [ ] elastic-beats
+        - [ ] logstash
+        - [ ] elasticsearch
+        - [ ] kibana
+        - [ ] datadog
+    - [ ] code/
+        - [ ] n8n (automation, multi)
+        - [ ] ollama (LLM)
+        - [ ] odysseus (AI chat)
+        - [ ] webtop (tmp linux vm)
+        - [ ] vscodium-server (with podman-in-docker)
+        - [ ] opencode (code assistant)
+        - [ ] openclaw (AI agent)
+    - [ ] redirect
+
+general TODOS
+- [ ] TODO finish doc
+- [ ] do soci imagesf
+- [ ] do ceph / rock operator
+- [ ] add peripherals
+- [ ] move GH repos to codeforge
+- [ ] repair pod
+    - [x] main-authentik-deployment
+    - [ ] dmz-media-jellyfin-deployment
+    - [ ] dmz-media-jellystat-deployment
+    - [ ] dmz-media-readarr-deployment
+    - [ ] dmz-media-youtarr-deployment
+    - [ ] private-homeassistant-deployment
+    - [ ] gatus home assistant + notif push
+    - [ ] technituim convert to statefull set for static ip for HA
+
 TODO : kustomize patch ingress urls for dev env
 TODO : containerdev / devpod & CI
 TODO : soci image
 [soci image](https://github.com/awslabs/soci-snapshotter)
 
+ip2n the tor thingy / tor
 for alt see https://github.com/digitalblossom/alternative-frontends
 idk https://github.com/stackryze/FreeDomains
 free domaine https://github.com/DigitalPlatDev/FreeDomain
@@ -105,81 +201,6 @@ docker up to date https://github.com/getwud/wud
 stack https://github.com/silveiralexf/monitoring-stack
 this https://github.com/priyazsh/DevProfiles
 alt list https://github.com/awesome-selfhosted/awesome-selfhosted
-todos : 
-- [ ] default
-    - [x] traefik
-    - [x] technitium
-    - [x] glance
-    - [x] dozzle
-    - [x] gatus
-    - [ ] authentik
-    - [ ] glueton TBD
-
-- [ ] TODO fix
-  - [ ] main-authentik-deployment
-  - [ ] dmz-media-jellyfin-deployment
-  - [ ] dmz-media-jellystat-deployment
-  - [ ] dmz-media-readarr-deployment
-  - [ ] dmz-media-youtarr-deployment
-  - [ ] private-homeassistant-deployment
-
-- [ ] TODO do doc
-- [ ] add pod
-    - [ ] graphana (monitoring)
-    - [ ] prometheus (monitoring)
-    - [ ] headscale (tailscale alt)
-    - [ ] immich (image)
-    - [ ] mollysocket signal notif push
-    - [ ] ntfy push notif
-    - [ ] opencloud (nextcloud in go)
-    - [ ] rsshub + miniflux (rss news)
-    - [ ] searxng / Websurfx / LibreX ? (google alt)
-    - [ ] an honeypot (secure)
-    - [ ] sourceforge / forgejo (git)
-    - [ ] Invidious ?? Piped / Viewtube ?? (ytb frontend)
-    - [ ] octoprint (3D print)
-    - [ ] Kiwix (download wikipedia)
-    - [ ] navidrom / my own / Hyperpipe / BeatBump (ytb music alt)
-    - [ ] Libreddit / redlib (reddit alt)
-    - [ ] AnonymousOverflow (StackOverflow alt)
-    - [ ] Bibliogram [Deprecated] (Instagram)
-    - [ ] matrix + element X https://matrix.org/ecosystem/clients/
-    - [ ] url shortener
-    - [~] gluetun (VPN)
-    - [ ] rustdesk
-    - [ ] guacamole
-    - [~] open code + open claw / tiny claw + autogpt ?
-    - [ ] Pterodactyl https://github.com/pterodactyl/application-eggs
-    - [ ] docker repo / harbor
-    - [ ] vscodium online server + pdoman in docker + devpod + IA opencodex
-    - [ ] password manager
-    - [ ]  ente
-    - [ ] wordpress
-    - [ ] personal site
-    - [ ] monitoring loki Elasticsearch Logstash:  Kibana:  Beats:  
-    - [~] authentik ?
-    - [ ] mailu
-    - [x] traefik dmz private auth plugin
-    - [ ] paperless ?
-    - [ ] n8n ?
-    - [ ] github action 
-    - [ ] excalidraw
-    - [ ] ssh / telnet server animation
-    - [ ] Duck cmd helper
-    - [ ] halfix https://github.com/NSG650/halfix
-    - [ ] netboot
-    - [ ] jarvis home assitant
-    - [ ] dolphin games
-    - [ ] squid forward proxy
-    - [ ] add steam gaming headless server
-    - [ ] let's encrypt ?
-- [ ] repair pod
-    - [ ] gatus home assistant + notif push
-    - [ ] technituim convert to statefull set for static ip for HA
-- [ ] do soci imagesf
-- [ ] do ceph / rock operator
-- [ ] add peripherals
-- [ ] move GH repos to codeforge
 
 ### peripherals
 /// rpi 2 4k tv
@@ -232,3 +253,49 @@ rpi5b
 
 TEMP script to install nfs share for PV
 installing Ceph for storage nodes TODO
+
+
+
+===============
+OLD
+- [~] headscale (tailscale alt)
+- [~] immich (image)
+- [~] mollysocket signal notif push
+- [~] ntfy push notif
+- [~] opencloud (nextcloud in go)
+- [~] rsshub + miniflux (rss news)
+- [~] searxng / Websurfx / LibreX ? (google alt)
+- [~] an honeypot (secure)
+- [~] sourceforge / forgejo (git)
+- [~] Invidious ?? Piped / Viewtube ?? (ytb frontend)
+- [~] octoprint (3D print)
+- [~] Kiwix (download wikipedia)
+- [~] navidrom / my own / Hyperpipe / BeatBump (ytb music alt)
+- [~] Libreddit / redlib (reddit alt)
+- [~] AnonymousOverflow (StackOverflow alt)
+- [X] Bibliogram [Deprecated] (Instagram)
+- [~] matrix + element X https://matrix.org/ecosystem/clients/
+- [~] url shortener
+- [~] rustdesk
+- [~] guacamole
+- [~] Pterodactyl https://github.com/pterodactyl/application-eggs
+- [~] docker repo / harbor
+- [~] vscodium online server + pdoman in docker + devpod + IA opencodex
+- [~] password manager
+- [~]  ente
+- [~] wordpress
+- [~] personal site
+- [~] monitoring loki Elasticsearch Logstash:  Kibana:  Beats:  
+- [~] mailu
+- [~] paperless ?
+- [~] n8n ?
+- [~] github action 
+- [~] excalidraw
+- [~] ssh / telnet server animation
+- [X] Duck cmd helper / copy party -> opencloud
+- [~] halfix https://github.com/NSG650/halfix
+- [~] jarvis home assitant
+- [~] dolphin games
+- [~] squid forward proxy
+- [~] add steam gaming headless server
+- [ ] let's encrypt ?

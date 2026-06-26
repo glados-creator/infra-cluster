@@ -5,10 +5,71 @@ pages:
         widgets:
           - type: bookmarks
             groups:
-              - title: dmz Services
-                # color: 255 255 255
+              - title: DMZ Services
                 links:
-                  - title: Gatus
+                  - title: DMZ Gatus
                     url: http://gatus.dmz.home
-                    description: Service uptime monitoring
-                    # icon: material-favorite
+                    description: DMZ monitoring
+
+              - title: Media Services
+                links:
+                  - title: Jellyfin
+                    url: http://jellyfin.media.dmz.home
+                    description: Media server
+                  - title: Radarr
+                    url: http://radarr.media.dmz.home
+                    description: Movie management
+                  - title: Sonarr
+                    url: http://sonarr.media.dmz.home
+                    description: TV show management
+                  - title: Lidarr
+                    url: http://lidarr.media.dmz.home
+                    description: Music management
+                  - title: Readarr
+                    url: http://readarr.media.dmz.home
+                    description: Book/audiobook management
+                  - title: Kapowarr
+                    url: http://kapowarr.media.dmz.home
+                    description: Comic management
+                  - title: Prowlarr
+                    url: http://prowlarr.media.dmz.home
+                    description: Indexer manager
+                  - title: Jellyseerr
+                    url: http://jellyseerr.media.dmz.home
+                    description: Request management
+                  - title: qBittorrent
+                    url: http://qbittorrent.media.dmz.home
+                    description: BitTorrent client (VPNed)
+                  - title: Tdarr
+                    url: http://tdarr.media.dmz.home
+                    description: Media transcoding
+                  - title: Bazarr
+                    url: http://bazarr.media.dmz.home
+                    description: Subtitle management
+                  - title: Autobrr
+                    url: http://autobrr.media.dmz.home
+                    description: IRC/announce bot
+                  - title: Jellystat
+                    url: http://jellystat.media.dmz.home
+                    description: Jellyfin statistics
+                  - title: Unpackerr
+                    url: http://unpackerr.media.dmz.home
+                    description: Archive extraction
+                  - title: Profilarr
+                    url: http://profilarr.media.dmz.home
+                    description: Profile sync tool
+                  - title: YouTarr
+                    url: http://youtarr.media.dmz.home
+                    description: YouTube playlist monitor
+
+              - title: Other Dashboards
+                links:
+                  - title: Main Glance
+                    url: http://glance.main.home
+                    description: Main dashboard
+                  - title: Public Glance
+                    url: http://glance.public.home
+                    description: Public dashboard
+                  - title: Private Glance
+                    url: http://glance.private.home
+                    description: Private dashboard

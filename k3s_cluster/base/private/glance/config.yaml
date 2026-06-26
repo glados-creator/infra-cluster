@@ -5,10 +5,74 @@ pages:
         widgets:
           - type: bookmarks
             groups:
-              - title: private Services
-                # color: 255 255 255
+              - title: Private Core
                 links:
-                  - title: Gatus
+                  - title: Private Gatus
                     url: http://gatus.private.home
-                    description: Service uptime monitoring
-                    # icon: material-favorite
+                    description: Private monitoring
+                  - title: Home Assistant
+                    url: http://homeassistant.private.home
+                    description: Home automation (TODO)
+                  - title: Netboot
+                    url: http://netboot.private.home
+                    description: Netboot playzone (TODO)
+
+              - title: Monitoring Stack
+                links:
+                  - title: Dozzle
+                    url: http://dozzle.monitor.private.home
+                    description: Container log viewer
+                  - title: Headlamp
+                    url: http://headlamp.monitor.private.home
+                    description: Kubernetes dashboard (TODO)
+                  - title: Grafana
+                    url: http://grafana.monitor.private.home
+                    description: Metrics visualization (TODO)
+                  - title: Prometheus
+                    url: http://prometheus.monitor.private.home
+                    description: Metrics collection (TODO)
+                  - title: Kibana
+                    url: http://kibana.monitor.private.home
+                    description: Logs dashboard (Elastic) (TODO)
+                  - title: Elasticsearch
+                    url: http://elasticsearch.monitor.private.home
+                    description: Log search (TODO)
+                  - title: Logstash
+                    url: http://logstash.monitor.private.home
+                    description: Log processing (TODO)
+                  - title: Beats
+                    url: http://beats.monitor.private.home
+                    description: Data shipper (TODO)
+                  - title: Datadog
+                    url: http://datadog.monitor.private.home
+                    description: External monitoring (TODO)
+
+              - title: Code & AI (TODO)
+                links:
+                  - title: Ollama
+                    url: http://ollama.private.home
+                    description: Local LLM (TODO)
+                  - title: Odysseus
+                    url: http://odysseus.private.home
+                    description: AI chat (TODO)
+                  - title: VSCodium Server
+                    url: http://vscodium.private.home
+                    description: Code editor (with podman-in-docker) (TODO)
+                  - title: Opencode
+                    url: http://opencode.private.home
+                    description: Code assistant (TODO)
+                  - title: Openclaw
+                    url: http://openclaw.private.home
+                    description: AI agent (TODO)
+
+              - title: Other Dashboards
+                links:
+                  - title: Main Glance
+                    url: http://glance.main.home
+                    description: Main dashboard
+                  - title: Public Glance
+                    url: http://glance.public.home
+                    description: Public dashboard
+                  - title: DMZ Glance
+                    url: http://glance.dmz.home
+                    description: DMZ dashboard

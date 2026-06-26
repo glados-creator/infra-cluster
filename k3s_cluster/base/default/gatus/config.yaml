@@ -7,6 +7,42 @@ metrics: true
 endpoints:
   - name: glance
     url: "http://main-glance-service.main.svc.cluster.local:2200"
-    interval: 30s
+    interval: 10s
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: gatus
+    url: "http://main-gatus-service.main.svc.cluster.local:2201"
+    interval: 10s
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: dozzle
+    url: "http://main-dozzle-service.main.svc.cluster.local:2215"
+    interval: 10s
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: authentik
+    url: "http://main-authentik-service.main.svc.cluster.local:2288"
+    interval: 10s
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: technitium
+    url: "http://main-technitium-service.main.svc.cluster.local:2283"
+    interval: 10s
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: traefik-dashboard
+    url: "http://main-traefik-service.main.svc.cluster.local:2280"
+    interval: 10s
+    conditions:
+      - "[STATUS] == 200"
+  
+  - name: glueton
+    url: "http://main-glueton-service.main.svc.cluster.local:2299"
+    interval: 10s
     conditions:
       - "[STATUS] == 200"

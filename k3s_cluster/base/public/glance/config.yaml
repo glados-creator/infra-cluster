@@ -5,10 +5,8 @@ pages:
         widgets:
           - type: bookmarks
             groups:
-              - title: public Services
-                # color: 255 255 255
+              - title: Public Services
                 links:
-                  - title: Gatus
+                  - title: Public Gatus
                     url: http://gatus.public.home
-                    description: Service uptime monitoring
-                    # icon: material-favorite
+                    description: Public monitoring

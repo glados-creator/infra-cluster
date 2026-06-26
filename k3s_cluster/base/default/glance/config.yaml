@@ -5,10 +5,35 @@ pages:
         widgets:
           - type: bookmarks
             groups:
-              - title: main Services
-                # color: 255 255 255
+              - title: Main Services
                 links:
                   - title: Gatus
                     url: http://gatus.main.home
-                    description: Service uptime monitoring
-                    # icon: material-favorite
+                    description: Uptime monitoring
+                  - title: Dozzle
+                    url: http://dozzle.main.home
+                    description: Container logs
+                  - title: Authentik
+                    url: http://authentik.main.home
+                    description: Authentication & SSO
+                  - title: Technitium DNS
+                    url: http://technitium.main.home
+                    description: DNS & DHCP
+                  - title: Traefik Dashboard
+                    url: http://traefik.main.home
+                    description: Ingress controller
+                  - title: Glueton
+                    url: http://glueton.main.home
+                    description: TBD (coming soon)
+
+              - title: Other Dashboards
+                links:
+                  - title: Glance (Public)
+                    url: http://glance.public.home
+                    description: Public dashboard
+                  - title: Glance (DMZ)
+                    url: http://glance.dmz.home
+                    description: DMZ dashboard
+                  - title: Glance (Private)
+                    url: http://glance.private.home
+                    description: Private dashboard
