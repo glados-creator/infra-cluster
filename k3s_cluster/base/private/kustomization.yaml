@@ -13,10 +13,6 @@ resources:
   - gatus
   - monitoring
   - code
-  # - k8sdashboard
-  # - home-assistant
-  # - ollama
-  # - webui
 
 secretGenerator:
   - name: auth-basic-secret

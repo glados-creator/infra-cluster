@@ -43,17 +43,17 @@ endpoints:
   #   conditions:
   #     - "[STATUS] == 200"
   #
-  # - name: grafana
-  #   url: "http://private-grafana-service.private.svc.cluster.local:4419"
-  #   interval: 30s
-  #   conditions:
-  #     - "[STATUS] == 200"
-  #
-  # - name: prometheus
-  #   url: "http://private-prometheus-service.private.svc.cluster.local:4420"
-  #   interval: 30s
-  #   conditions:
-  #     - "[STATUS] == 200"
+  - name: grafana
+    url: "http://private-grafana-service.private.svc.cluster.local:4419"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+  
+  - name: prometheus
+    url: "http://private-prometheus-service.private.svc.cluster.local:4420"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
   #
   # - name: kibana
   #   url: "http://private-kibana-service.private.svc.cluster.local:4421"

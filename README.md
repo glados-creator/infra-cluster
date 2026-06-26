@@ -81,6 +81,8 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
     + gatus (monitoring uptime)
     + monitoring  
       + dozzle (logging)
+      + grafana
+      + prometheus
       + ... TODO
     + code
       + TODO
@@ -152,8 +154,6 @@ todos :
         - [ ] ? password-manager (e.g., Vaultwarden, multi) ?
     - [ ] monitoring/
         - [ ] headlamp (K8s dashboard)
-        - [ ] grafana
-        - [ ] prometheus
         - [ ] loki
         - [ ] elastic-beats
         - [ ] logstash

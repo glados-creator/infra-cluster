@@ -6,3 +6,12 @@ namespace: private
 
 resources:
   - dozzle
+  - grafana
+  - prometheus
+  # - headlamp (K8s dashboard)
+  # - loki
+  # - elastic-beats
+  # - logstash
+  # - elasticsearch
+  # - kibana
+  # - ? datadog ?

@@ -1,0 +1,26 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # Scrape Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090'] 
+  
+  # Gatus endpoints (all environments)
+  - job_name: 'gatus-main'
+    static_configs:
+      - targets: ['main-gatus-service.main.svc.cluster.local:2201']
+
+  - job_name: 'gatus-public'
+    static_configs:
+      - targets: ['public-gatus-service.public.svc.cluster.local:9901']
+
+  - job_name: 'gatus-dmz'
+    static_configs:
+      - targets: ['dmz-gatus-service.dmz.svc.cluster.local:6601']
+
+  - job_name: 'gatus-private'
+    static_configs:
+      - targets: ['private-gatus-service.private.svc.cluster.local:4401']

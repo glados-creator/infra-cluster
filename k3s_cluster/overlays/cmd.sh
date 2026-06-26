@@ -21,7 +21,8 @@ mkdir -p /bhole/cluster/default/authentik/media/public
 mkdir -p /bhole/cluster/private
 mkdir -p /bhole/cluster/private/gatus
 mkdir -p /bhole/cluster/private/monitor/dozzle
-mkdir -p /bhole/cluster/private/code/webui
+mkdir -p /bhole/cluster/private/monitor/graphana
+mkdir -p /bhole/cluster/private/monitor/prometheus
 
 mkdir -p /bhole/cluster/public
 mkdir -p /bhole/cluster/public/gatus
