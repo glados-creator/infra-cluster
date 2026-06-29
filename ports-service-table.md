@@ -104,4 +104,6 @@ n8n                4429
 odysseus           4430
 ollama             4431
 openclaw           4432
-vscodium-server    4433
+vscodium           4433
+webui              4434
+comfyui            4435

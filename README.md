@@ -80,15 +80,21 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
     + glance (app dir)
     + gatus (monitoring uptime)
     + home
-      + home-assistant
+        + home-assistant
     + monitoring  
-      + dozzle (logging)
-      + grafana
-      + prometheus
-      + headlamp
-      + ... TODO
+        + dozzle (logging)
+        + grafana
+        + prometheus
+        + headlamp
+        + ... TODO
     + code
-      + TODO
+        + ollama (LLM)
+        + webui
+        + ? comfyui ?
+        + n8n (automation, multi)
+        + odysseus (AI chat)
+        + vscodium-server (with podman-in-docker) + opencode (code assistant)
+        + openclaw (AI agent)
 
 **modes**
 - production
@@ -162,12 +168,7 @@ todos :
         - [ ] kibana
         - [ ] ? datadog ?
     - [ ] code/
-        - [ ] n8n (automation, multi)
-        - [ ] ollama (LLM)
-        - [ ] odysseus (AI chat)
         - [ ] webtop (tmp linux vm)
-        - [ ] vscodium-server (with podman-in-docker) + opencode (code assistant)
-        - [ ] openclaw (AI agent)
     - [ ] redirect
 
 general TODOS
