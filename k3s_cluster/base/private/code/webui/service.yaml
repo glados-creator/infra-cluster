@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: private
+  labels:
+    app: private-webui
+spec:
+  type: ClusterIP
+  selector:
+    app: private-webui
+  ports:
+    - name: web
+      protocol: TCP
+      port: 4434
+      targetPort: 8080

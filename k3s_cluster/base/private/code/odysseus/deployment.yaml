@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: private
+  labels:
+    app: private-odysseus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: private-odysseus
+  template:
+    metadata:
+      labels:
+        app: private-odysseus
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - name: odysseus
+          image: ghcr.io/pewdiepie-archdaemon/odysseus:latest
+          ports:
+            - containerPort: 7000
+          envFrom:
+          - configMapRef:
+              name: odysseus-config
+          resources:
+            requests:
+              memory: "256Mi"
+            limits:
+              memory: "4Gi"
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+            - name: data
+              mountPath: /app/logs
+              subPath: logs
+            - name: data
+              mountPath: /app/.cache/huggingface
+              subPath: huggingface
+            - name: data
+              mountPath: /app/.local
+              subPath: local
+            # Optional: mount Docker socket if you want Odysseus to manage containers
+            # - name: docker-socket
+            #   mountPath: /var/run/docker.sock
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc
+        # Optional: Docker socket (uncomment if needed)
+        # - name: docker-socket
+        #   hostPath:
+        #     path: /var/run/docker.sock
+        #     type: Socket

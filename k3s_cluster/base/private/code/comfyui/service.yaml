@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: private
+  labels:
+    app: private-comfyui
+spec:
+  type: ClusterIP
+  selector:
+    app: private-comfyui
+  ports:
+    - name: web
+      protocol: TCP
+      port: 4435
+      targetPort: 8188

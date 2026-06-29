@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namePrefix: n8n-
+namespace: private
+
+resources:
+  - pvc.yaml
+  - pv.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+
+configMapGenerator:
+- name: n8n-config
+  envs:
+  - config.env
+
+generatorOptions:
+  disableNameSuffixHash: false

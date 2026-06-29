@@ -85,32 +85,44 @@ endpoints:
   #   conditions:
   #     - "[STATUS] == 200"
   #
-  # - name: ollama
-  #   url: "http://private-code-ollama-service.private.svc.cluster.local:4426"
-  #   interval: 30s
-  #   conditions:
-  #     - "[STATUS] == 200"
-  #
-  # - name: odysseus
-  #   url: "http://private-code-odysseus-service.private.svc.cluster.local:4427"
-  #   interval: 30s
-  #   conditions:
-  #     - "[STATUS] == 200"
-  #
-  # - name: vscodium
-  #   url: "http://private-code-vscodium-service.private.svc.cluster.local:4428"
-  #   interval: 30s
-  #   conditions:
-  #     - "[STATUS] == 200"
-  #
-  # - name: opencode
-  #   url: "http://private-code-opencode-service.private.svc.cluster.local:4429"
-  #   interval: 30s
-  #   conditions:
-  #     - "[STATUS] == 200"
-  #
-  # - name: openclaw
-  #   url: "http://private-code-openclaw-service.private.svc.cluster.local:4430"
-  #   interval: 30s
-  #   conditions:
-  #     - "[STATUS] == 200"
+  - name: ollama
+    url: "http://private-code-ollama-service.private.svc.cluster.local:4431"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+  
+  - name: webui
+    url: "http://private-code-webui-service.private.svc.cluster.local:4434"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: comfyui
+    url: "http://private-code-comfyui-service.private.svc.cluster.local:4435"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: odysseus
+    url: "http://private-code-odysseus-service.private.svc.cluster.local:4430"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: vscodium
+    url: "http://private-code-vscodium-service.private.svc.cluster.local:4433"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: n8n
+    url: "http://private-code-n8n-service.private.svc.cluster.local:4429"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: openclaw
+    url: "http://private-code-openclaw-service.private.svc.cluster.local:4432"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"

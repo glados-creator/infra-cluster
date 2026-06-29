@@ -90,10 +90,10 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
     + code
         + ollama (LLM)
         + webui
-        + ? comfyui ?
+        + comfyui
         + n8n (automation, multi)
         + odysseus (AI chat)
-        + vscodium-server (with podman-in-docker) + opencode (code assistant)
+        + vscodium-server (with podman-in-docker TODO) + opencode (code assistant TODO)
         + openclaw (AI agent)
 
 **modes**
@@ -155,7 +155,6 @@ todos :
     - [ ] tools/
         - [ ] headscale (Tailscale alt, multi)
         - [ ] squid (forward proxy, multi)    
-        - [ ] netboot-playzone (lab, TBD)
         - [ ] ? Guacamole (remote gateway, multi) / webtop ?
         - [ ] RustDesk (remote desktop, multi)
         - [ ] ? Ente Auth (multi TBD) ?
@@ -169,6 +168,8 @@ todos :
         - [ ] ? datadog ?
     - [ ] code/
         - [ ] webtop (tmp linux vm)
+        - [ ] podman in docker VScodium
+        - [ ] opencode
     - [ ] redirect
 
 general TODOS

@@ -4,4 +4,11 @@ kind: Kustomization
 namePrefix: code-
 namespace: private
 
-# resources:
+resources:
+  - n8n
+  - ollama
+  - odysseus
+  - vscodium
+  - openclaw
+  - webui
+  - comfyui

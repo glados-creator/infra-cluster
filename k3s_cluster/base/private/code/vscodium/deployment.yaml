@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: private
+  labels:
+    app: private-vscodium
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: private-vscodium
+  template:
+    metadata:
+      labels:
+        app: private-vscodium
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: vscodium
+          image: codercom/code-server:latest
+          ports:
+            - containerPort: 8080
+          env:
+            # Disable telemetry (optional)
+            - name: DO_NOT_TRACK
+              value: "1"
+            # Optionally set a password – but we use Authentik middleware, so we can skip auth.
+            # - name: PASSWORD
+            #   value: "your-password"
+            # Set default workspace folder
+            - name: WORKSPACE
+              value: "/home/coder/project"
+          resources:
+            requests:
+              memory: "8Gi"
+            limits:
+              memory: "32Gi"
+          volumeMounts:
+            - name: data
+              mountPath: /home/coder   # stores all user data and projects
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc

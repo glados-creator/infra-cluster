@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: private
+  labels:
+    app: private-comfyui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: private-comfyui
+  template:
+    metadata:
+      labels:
+        app: private-comfyui
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: comfyui
+          image: ghcr.io/lecode-official/comfyui-docker:latest
+          ports:
+            - containerPort: 8188
+          env:
+            - name: USER_ID
+              value: "1000"
+            - name: GROUP_ID
+              value: "1000"
+          resources:
+            requests:
+              memory: "8Gi"
+              nvidia.com/gpu-all: 1
+            limits:
+              memory: "16Gi"
+              nvidia.com/gpu-all: 1
+          volumeMounts:
+            - name: data
+              mountPath: /opt/comfyui/models
+              subPath: models
+            - name: data
+              mountPath: /opt/comfyui/output
+              subPath: output
+            - name: data
+              mountPath: /opt/comfyui/custom_nodes
+              subPath: custom_nodes
+            - name: data
+              mountPath: /opt/comfyui/input
+              subPath: input
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc

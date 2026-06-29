@@ -25,6 +25,13 @@ mkdir -p /bhole/cluster/private/monitor/graphana
 mkdir -p /bhole/cluster/private/monitor/prometheus
 mkdir -p /bhole/cluster/private/monitor/headlamp
 mkdir -p /bhole/cluster/private/home/home-assistant/
+mkdir -p /bhole/cluster/private/code/ollama
+mkdir -p /bhole/cluster/private/code/vscodium
+mkdir -p /bhole/cluster/private/code/n8n
+mkdir -p /bhole/cluster/private/code/openclaw
+mkdir -p /bhole/cluster/private/code/odysseus
+mkdir -p /bhole/cluster/private/code/comfyui
+mkdir -p /bhole/cluster/private/code/webui
 
 mkdir -p /bhole/cluster/public
 mkdir -p /bhole/cluster/public/gatus

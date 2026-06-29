@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: private
+  labels:
+    app: private-webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: private-webui
+  template:
+    metadata:
+      labels:
+        app: private-webui
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: webui
+          image: ghcr.io/open-webui/open-webui:main
+          ports:
+            - containerPort: 8080
+          envFrom:
+          - configMapRef:
+              name: webui-config
+          resources:
+            requests:
+              memory: "256Mi"
+            limits:
+              memory: "4Gi"
+          volumeMounts:
+            - name: data
+              mountPath: /app/backend/data   # Persistent storage for conversations, settings, and uploads[reference:2]
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc

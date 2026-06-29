@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: private
+  labels:
+    app: private-ollama
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: private-ollama
+  template:
+    metadata:
+      labels:
+        app: private-ollama
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      containers:
+        - name: ollama
+          image: ollama/ollama:latest
+          ports:
+            - containerPort: 11434
+          env:
+            - name: OLLAMA_KEEP_ALIVE # how long a model stay in memory
+              value: "5m"       # optional
+            - name: OLLAMA_HOST
+              value: "0.0.0.0"
+          resources:
+            requests:
+              memory: "8Gi"
+              nvidia.com/gpu-all: 1
+            limits:
+              memory: "64Gi"
+              nvidia.com/gpu-all: 1
+          volumeMounts:
+            - name: data
+              mountPath: /root/.ollama   # model storage directory
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc
