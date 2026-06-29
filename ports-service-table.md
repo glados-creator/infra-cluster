@@ -6,7 +6,7 @@ gatus              2201
 dozzle             2215
 traefik LB static ip 192.168.1.1 LB 80 443 IP 2280 2282
 technitium LB static ip 192.168.1.2 LB 53 853 443 80 8053 IP 2283 2284
-(kubectl port-forward --address 0.0.0.0 svc/technitium-service 2283:2283)
+(kubectl port-forward --address 0.0.0.0 svc/main-technitium-service 2283:2283)
 authentik          2288 2289 (/if/flow/initial-setup/ password URL)
 glueton            TBD
 redirect           2202 TODO
@@ -61,6 +61,7 @@ Libreddit-Redlib   6616
 │ Jellystat       │ 3001    │ 6666  │ Jellyfin usage statistics                       │
 │ Unpackerr       │ 5656    │ 6667  │ Archive extraction (starts at 5656)             │
 │ Profilarr       │ 6868    │ 6668  │ Radarr/Sonarr profile & custom format sync      │
+│ SuggestArr      │ 5000    │ 6670  │ Media Automation & AI-Powered Recommendations   │ 
 │ YouTarr         │ 3087    │ 6669  │ YouTube playlist monitor (Radarr‑like)          │
 └─────────────────┴─────────┴─────────────────────────────────────────────────────────┘
 

@@ -4,17 +4,17 @@ metadata:
   name: ingressroute
   namespace: private
   labels:
-    app: private-home-assistant
+    app: private-homeassistant
 spec:
   entryPoints:
     - web
     - websecure
   routes:
     - kind: Rule
-      match: Host(`home-assistant.home.private.home`)
+      match: Host(`homeassistant.home.private.home`)
       middlewares:
         - name: private-middleware-auth-authentik
       services:
-        - name: private-home-assistant-service
+        - name: private-home-homeassistant-service
           port: 4404
   # tls: {}

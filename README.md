@@ -76,6 +76,7 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
         + Unpackerr
         + Profilarr
         + YouTarr
+        + SuggestArr TODO
 5. private
     + glance (app dir)
     + gatus (monitoring uptime)
@@ -173,20 +174,16 @@ todos :
     - [ ] redirect
 
 general TODOS
-- [ ] TODO finish doc
+- [x] TODO finish doc
+- [ ] repair pod / upgrade pod
+    - [ ] gatus home assistant + notif push
+    - [ ] technituim convert to statefull set for static ip for HA
 - [ ] do soci imagesf
 - [ ] do ceph / rock operator
 - [ ] add peripherals
 - [ ] move GH repos to codeforge
-- [ ] repair pod
-    - [x] main-authentik-deployment
-    - [ ] dmz-media-jellyfin-deployment
-    - [ ] dmz-media-jellystat-deployment
-    - [ ] dmz-media-readarr-deployment
-    - [ ] dmz-media-youtarr-deployment
-    - [ ] private-homeassistant-deployment
-    - [ ] gatus home assistant + notif push
-    - [ ] technituim convert to statefull set for static ip for HA
+
+upgrade paths
 
 TODO : kustomize patch ingress urls for dev env
 TODO : containerdev / devpod & CI

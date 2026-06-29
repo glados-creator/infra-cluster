@@ -52,7 +52,7 @@ spec:
     - websecure # dns-over-https3 dns-over-https2
   routes:
     - kind: Rule
-      match: Host(`technitium.main.home`) && (PathPrefix(`/dns-query`)
+      match: Host(`technitium.main.home`) && PathPrefix(`/dns-query`)
       middlewares:
         - name: set-real-ip
       services:
@@ -72,7 +72,7 @@ spec:
     - web # dns-over-http
   routes:
     - kind: Rule
-      match: Host(`technitium.main.home`) && (PathPrefix(`/dns-query`)
+      match: Host(`technitium.main.home`) && PathPrefix(`/dns-query`)
       middlewares:
         - name: set-real-ip
       services:
@@ -92,7 +92,7 @@ spec:
     - web # dns-over-http-rp
   routes:
     - kind: Rule
-      match: Host(`rp.technitium.main.home`) && (PathPrefix(`/dns-query`)
+      match: Host(`rp.technitium.main.home`) && PathPrefix(`/dns-query`)
       middlewares:
         - name: set-real-ip
       services:

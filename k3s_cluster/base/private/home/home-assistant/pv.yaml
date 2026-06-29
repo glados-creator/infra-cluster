@@ -4,7 +4,7 @@ metadata:
   name: pv
   namespace: private
   labels:
-    app: private-home-assistant
+    app: private-homeassistant
 spec:
   capacity:
     storage: 5Gi
@@ -16,4 +16,4 @@ spec:
   storageClassName: nfs
   nfs:
     server: 192.168.1.24
-    path: /bhole/cluster/private/home/home-assistant/
+    path: /bhole/cluster/private/home/homeassistant/

@@ -24,17 +24,52 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
+
+      # Ensure PostgreSQL user (uid 999) can write to PVC
+      securityContext:
+        fsGroup: 999
+
       containers:
+        # --- Jellystat Main ---
         - name: jellystat
           image: ghcr.io/cyfershepard/jellystat:latest
           ports:
             - containerPort: 3001
               name: web
+          envFrom:
+            - configMapRef:
+                name: jellystat-config
+            - secretRef:
+                name: jellystat-secret
           volumeMounts:
             - name: media-storage
               mountPath: /app/backend/data
               subPath: jellystat/data
+
+        # --- PostgreSQL sidecar ---
+        - name: postgres
+          image: postgres:18-alpine
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: jellystat-config
+            - secretRef:
+                name: jellystat-secret
+          volumeMounts:
+            - name: media-storage
+              mountPath: /var/lib/postgresql
+              subPath: jellystat/pgdata
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - jellystat
+            initialDelaySeconds: 5
+            periodSeconds: 2
+
       volumes:
         - name: media-storage
           persistentVolumeClaim:
-            claimName:  media-pvc
+            claimName: media-pvc

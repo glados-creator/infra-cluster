@@ -24,9 +24,25 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
+      # Ensure PostgreSQL user (uid 999) can write to PVC
+      securityContext:
+        fsGroup: 999
       containers:
         - name: readarr
           image: blampe/rreading-glasses:latest
+          command: ["/main", "serve"]
+          args:
+            - "--upstream=www.goodreads.com"
+          env:
+            - name: POSTGRES_HOST
+              value: 127.0.0.1
+            - name: POSTGRES_DATABASE
+              value: readarr-glasses
+            - name: POSTGRES_USER
+              value: readarr-glasses
+          envFrom:
+            - secretRef:
+                name: readarr-secret
           ports:
             - containerPort: 8787
               name: web
@@ -40,6 +56,32 @@ spec:
             - name: media-storage
               mountPath: /downloads
               subPath: downloads/readarr
+        
+        # --- PostgreSQL sidecar ---
+        - name: postgres
+          image: postgres:18-alpine
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DATABASE
+              value: readarr-glasses
+            - name: POSTGRES_USER
+              value: readarr-glasses
+          envFrom:
+            - secretRef:
+                name: readarr-secret
+          volumeMounts:
+            - name: media-storage
+              mountPath: /var/lib/postgresql
+              subPath: readarr/pgdata
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - readarr-glasses
+            initialDelaySeconds: 5
+            periodSeconds: 2
       volumes:
         - name: media-storage
           persistentVolumeClaim:

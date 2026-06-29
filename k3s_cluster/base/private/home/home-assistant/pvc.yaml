@@ -5,7 +5,7 @@ metadata:
   name: data-pvc
   namespace: private
   labels:
-    app: private-home-assistant
+    app: private-homeassistant
 spec:
   accessModes: [ReadWriteMany]
   storageClassName: nfs

@@ -4,16 +4,16 @@ metadata:
   name: deployment
   namespace: private
   labels:
-    app: private-home-assistant
+    app: private-homeassistant
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: private-home-assistant
+      app: private-homeassistant
   template:
     metadata:
       labels:
-        app: private-home-assistant
+        app: private-homeassistant
     spec:
       tolerations:
         - key: node.kubernetes.io/not-ready
@@ -25,7 +25,7 @@ spec:
           effect: NoExecute
           tolerationSeconds: 10
       containers:
-        - name: home-assistant
+        - name: homeassistant
           image: homeassistant/home-assistant:latest
           ports:
             - containerPort: 8123

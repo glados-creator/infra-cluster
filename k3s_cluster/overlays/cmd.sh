@@ -24,7 +24,7 @@ mkdir -p /bhole/cluster/private/monitor/dozzle
 mkdir -p /bhole/cluster/private/monitor/graphana
 mkdir -p /bhole/cluster/private/monitor/prometheus
 mkdir -p /bhole/cluster/private/monitor/headlamp
-mkdir -p /bhole/cluster/private/home/home-assistant/
+mkdir -p /bhole/cluster/private/home/homeassistant/
 mkdir -p /bhole/cluster/private/code/ollama
 mkdir -p /bhole/cluster/private/code/vscodium
 mkdir -p /bhole/cluster/private/code/n8n

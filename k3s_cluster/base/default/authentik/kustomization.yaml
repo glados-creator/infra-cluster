@@ -14,12 +14,13 @@ resources:
 configMapGenerator:
   - name: authentik-config
     envs:
-      - configmap.env
+      - config.env
 
 secretGenerator:
   - name: authentik-secret
     envs:
       - secret.env
+    type: Opaque
 
 generatorOptions:
   disableNameSuffixHash: true

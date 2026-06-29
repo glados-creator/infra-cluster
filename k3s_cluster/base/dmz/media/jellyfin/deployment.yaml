@@ -35,6 +35,9 @@ spec:
               name: websecure
             - containerPort: 7359
               name: dlna
+          env:
+            - name : DOTNET_USE_POLLING_FILE_WATCHER
+              value: 1
           volumeMounts:
             - name: media-storage
               mountPath: /config

@@ -8,3 +8,12 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
+
+secretGenerator:
+  - name: readarr-secret
+    envs:
+      - secret.env
+    type: Opaque
+
+generatorOptions:
+  disableNameSuffixHash: true

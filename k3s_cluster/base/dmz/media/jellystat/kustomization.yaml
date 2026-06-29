@@ -8,3 +8,17 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
+
+configMapGenerator:
+  - name: jellystat-config
+    envs:
+      - config.env
+
+secretGenerator:
+  - name: jellystat-secret
+    envs:
+      - secret.env
+    type: Opaque
+
+generatorOptions:
+  disableNameSuffixHash: true
