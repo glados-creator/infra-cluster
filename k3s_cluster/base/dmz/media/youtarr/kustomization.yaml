@@ -8,3 +8,17 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
+
+configMapGenerator:
+  - name: youtarr-config
+    envs:
+      - config.env
+
+secretGenerator:
+  - name: youtarr-secret
+    envs:
+      - secret.env
+    type: Opaque
+
+generatorOptions:
+  disableNameSuffixHash: true

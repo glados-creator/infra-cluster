@@ -1,10 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment
-  namespace: dmz
-  labels:
-    app: dmz-media-youtarr
+  name: youtarr
 spec:
   replicas: 1
   selector:
@@ -24,17 +21,72 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
+
+      securityContext:
+        fsGroup: 999   # MariaDB user (mysql) uid
+
       containers:
+        # --- Youtarr main container ---
         - name: youtarr
           image: dialmaster/youtarr:latest
           ports:
-            - containerPort: 3087
+            - containerPort: 3011
               name: web
+          envFrom:
+            - configMapRef:
+                name: youtarr-config
+            - secretRef:
+                name: youtarr-secret
           volumeMounts:
             - name: media-storage
-              mountPath: /config
+              mountPath: /usr/src/app/data
+              subPath: media/videos
+            - name: media-storage
+              mountPath: /app/server/images
+              subPath: youtarr/images
+            - name: media-storage
+              mountPath: /app/config
               subPath: youtarr/config
+            - name: media-storage
+              mountPath: /app/jobs
+              subPath: youtarr/jobs
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 3011
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 3011
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+        # --- MariaDB sidecar ---
+        - name: mariadb
+          image: mariadb:10.3
+          ports:
+            - containerPort: 3306
+          envFrom:
+            - configMapRef:
+                name: youtarr-config
+            - secretRef:
+                name: youtarr-secret
+          volumeMounts:
+            - name: media-storage
+              mountPath: /var/lib/mysql
+              subPath: youtarr/mysql
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - "mysqladmin ping -h localhost -u root -p$MYSQL_ROOT_PASSWORD"
+            initialDelaySeconds: 30
+            periodSeconds: 10
+
       volumes:
         - name: media-storage
           persistentVolumeClaim:
-            claimName:  media-pvc
+            claimName: media-pvc   # override in overlay if needed

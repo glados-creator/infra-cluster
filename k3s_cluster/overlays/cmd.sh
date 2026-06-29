@@ -45,6 +45,7 @@ mkdir -p /bhole/cluster/dmz/media-stack/media/tv
 mkdir -p /bhole/cluster/dmz/media-stack/media/music
 mkdir -p /bhole/cluster/dmz/media-stack/media/books
 mkdir -p /bhole/cluster/dmz/media-stack/media/comics
+mkdir -p /bhole/cluster/dmz/media-stack/media/videos
 mkdir -p /bhole/cluster/dmz/media-stack/downloads
 mkdir -p /bhole/cluster/dmz/media-stack/downloads/radarr
 mkdir -p /bhole/cluster/dmz/media-stack/downloads/sonarr
@@ -59,6 +60,7 @@ mkdir -p /bhole/cluster/dmz/media-stack/radarr/config
 mkdir -p /bhole/cluster/dmz/media-stack/sonarr/config
 mkdir -p /bhole/cluster/dmz/media-stack/lidarr/config
 mkdir -p /bhole/cluster/dmz/media-stack/readarr/config
+mkdir -p /bhole/cluster/dmz/media-stack/readarr/pgdata
 mkdir -p /bhole/cluster/dmz/media-stack/kapowarr/db
 mkdir -p /bhole/cluster/dmz/media-stack/prowlarr/config
 mkdir -p /bhole/cluster/dmz/media-stack/jellyseerr/config
@@ -70,12 +72,19 @@ mkdir -p /bhole/cluster/dmz/media-stack/tdarr/temp
 mkdir -p /bhole/cluster/dmz/media-stack/bazarr/config
 mkdir -p /bhole/cluster/dmz/media-stack/autobrr/config
 mkdir -p /bhole/cluster/dmz/media-stack/jellystat/data
+mkdir -p /bhole/cluster/dmz/media-stack/jellystat/pgdata
 mkdir -p /bhole/cluster/dmz/media-stack/unpackerr/config
 mkdir -p /bhole/cluster/dmz/media-stack/profilarr/config
 mkdir -p /bhole/cluster/dmz/media-stack/youtarr/config
+mkdir -p /bhole/cluster/dmz/media-stack/youtarr/images
+mkdir -p /bhole/cluster/dmz/media-stack/youtarr/jobs
+mkdir -p /bhole/cluster/dmz/media-stack/youtarr/mysql
 
 sudo chown -R 1000:1000 /bhole/cluster/*
 sudo chown -R 999:999 /bhole/cluster/default/authentik
+sudo chown -R 999:999 /bhole/cluster/dmz/media-stack/jellystat/
+sudo chown -R 999:999 /bhole/cluster/dmz/media-stack/readarr/
+sudo chown -R 999:999 /bhole/cluster/dmz/media-stack/youtarr/
 sudo chown -R 65534:65534 /bhole/cluster/private/monitor/prometheus/
 
 # kubectl rollout restart deployment -n prod-dmz dmz-media-qbittorrent-deployment
