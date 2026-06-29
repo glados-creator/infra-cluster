@@ -6,7 +6,7 @@ metadata:
   labels:
     app: main-traefik
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: main-traefik
@@ -14,9 +14,6 @@ spec:
     metadata:
       labels:
         app: main-traefik
-      annotations:
-        prometheus.io/port: "8082"
-        prometheus.io/scrape: "true"
     spec:
       serviceAccountName: serviceaccount
       tolerations:
@@ -40,9 +37,9 @@ spec:
             # - --entrypoints.web.http.redirections.entrypoint.to=websecure
             # - --entrypoints.web.http.redirections.entrypoint.scheme=https
             # - --entrypoints.web.http.redirections.entrypoint.permanent=true
-            # - --entrypoints.dashboard.address=:8080
             - --providers.kubernetescrd
-            # - --providers.kubernetesnamespaces=default,prod-private,dev-private,prod-dmz,dev-dmz,prod-public,dev-public
+            - --providers.kubernetescrd.allowCrossNamespace=true
+            - --providers.kubernetescrd.allowexternalnameservices=true
             - --metrics.prometheus.entryPoint=metrics
             - --entrypoints.metrics.address=:8082
             - --tracing=true
