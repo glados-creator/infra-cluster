@@ -15,12 +15,12 @@ scrape_configs:
 
   - job_name: 'gatus-public'
     static_configs:
-      - targets: ['public-gatus-service.public.svc.cluster.local:9901']
+      - targets: ['public-gatus-service.prod-public.svc.cluster.local:9901']
 
   - job_name: 'gatus-dmz'
     static_configs:
-      - targets: ['dmz-gatus-service.dmz.svc.cluster.local:6601']
+      - targets: ['dmz-gatus-service.prod-dmz.svc.cluster.local:6601']
 
   - job_name: 'gatus-private'
     static_configs:
-      - targets: ['private-gatus-service.private.svc.cluster.local:4401']
+      - targets: ['private-gatus-service.prod-private.svc.cluster.local:4401']

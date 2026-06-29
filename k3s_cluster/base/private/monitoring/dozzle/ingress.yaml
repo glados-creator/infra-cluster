@@ -15,6 +15,6 @@ spec:
       middlewares:
         - name: private-middleware-auth-authentik
       services:
-        - name: private-dozzle-service
+        - name: private-monitor-dozzle-service
           port: 4415
   #tls: {} 

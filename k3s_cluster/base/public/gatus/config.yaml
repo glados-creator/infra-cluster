@@ -6,13 +6,13 @@ metrics: true
 
 endpoints:
   - name: glance
-    url: "http://public-glance-service.public.svc.cluster.local:9900"
+    url: "http://public-glance-service.prod-public.svc.cluster.local:9900"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: gatus
-    url: "http://public-gatus-service.public.svc.cluster.local:9901"
+    url: "http://public-gatus-service.prod-public.svc.cluster.local:9901"
     interval: 30s
     conditions:
       - "[STATUS] == 200"

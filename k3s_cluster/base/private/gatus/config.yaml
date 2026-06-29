@@ -7,122 +7,116 @@ metrics: true
 endpoints:
   # Currently deployed services
   - name: glance-private
-    url: "http://private-glance-service.private.svc.cluster.local:4400"
+    url: "http://private-glance-service.prod-private.svc.cluster.local:4400"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: gatus-private
-    url: "http://private-gatus-service.private.svc.cluster.local:4401"
+    url: "http://private-gatus-service.prod-private.svc.cluster.local:4401"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
 
   - name: home-assistant
-    url: "http://private-home-home-assistant-service.private.svc.cluster.local:4417"   # placeholder
+    url: "http://private-home-home-assistant-service.prod-private.svc.cluster.local:4417"   # placeholder
     interval: 30s
     conditions:
       - "[STATUS] == 200"
-  #
-  # - name: netboot
-  #   url: "http://private-tool-netboot-service.private.svc.cluster.local:4418"   # placeholder
-  #   interval: 30s
-  #   conditions:
-  #     - "[STATUS] == 200"
-  #
+  
   - name: grafana
-    url: "http://private-monitor-grafana-service.private.svc.cluster.local:4419"
+    url: "http://private-monitor-grafana-service.prod-private.svc.cluster.local:4419"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
   
   - name: prometheus
-    url: "http://private-monitor-prometheus-service.private.svc.cluster.local:4420"
+    url: "http://private-monitor-prometheus-service.prod-private.svc.cluster.local:4420"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: dozzle-private
-    url: "http://private-monitor-dozzle-service.private.svc.cluster.local:4415"
+    url: "http://private-monitor-dozzle-service.prod-private.svc.cluster.local:4415"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: headlamp
-    url: "http://private-monitor-headlamp-service.private.svc.cluster.local:4416"   # placeholder port
+    url: "http://private-monitor-headlamp-service.prod-private.svc.cluster.local:4416"   # placeholder port
     interval: 30s
     conditions:
       - "[STATUS] == 200"
   #
   # - name: kibana
-  #   url: "http://private-monitor-kibana-service.private.svc.cluster.local:4421"
+  #   url: "http://private-monitor-kibana-service.prod-private.svc.cluster.local:4421"
   #   interval: 30s
   #   conditions:
   #     - "[STATUS] == 200"
   #
   # - name: elasticsearch
-  #   url: "http://private-monitor-elasticsearch-service.private.svc.cluster.local:4422"
+  #   url: "http://private-monitor-elasticsearch-service.prod-private.svc.cluster.local:4422"
   #   interval: 30s
   #   conditions:
   #     - "[STATUS] == 200"
   #
   # - name: logstash
-  #   url: "http://private-monitor-logstash-service.private.svc.cluster.local:4423"
+  #   url: "http://private-monitor-logstash-service.prod-private.svc.cluster.local:4423"
   #   interval: 30s
   #   conditions:
   #     - "[STATUS] == 200"
   #
   # - name: beats
-  #   url: "http://private-monitor-beats-service.private.svc.cluster.local:4424"
+  #   url: "http://private-monitor-beats-service.prod-private.svc.cluster.local:4424"
   #   interval: 30s
   #   conditions:
   #     - "[STATUS] == 200"
   #
   # - name: datadog
-  #   url: "http://private-monitor-datadog-service.private.svc.cluster.local:4425"
+  #   url: "http://private-monitor-datadog-service.prod-private.svc.cluster.local:4425"
   #   interval: 30s
   #   conditions:
   #     - "[STATUS] == 200"
   #
   - name: ollama
-    url: "http://private-code-ollama-service.private.svc.cluster.local:4431"
+    url: "http://private-code-ollama-service.prod-private.svc.cluster.local:4431"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
   
   - name: webui
-    url: "http://private-code-webui-service.private.svc.cluster.local:4434"
+    url: "http://private-code-webui-service.prod-private.svc.cluster.local:4434"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: comfyui
-    url: "http://private-code-comfyui-service.private.svc.cluster.local:4435"
+    url: "http://private-code-comfyui-service.prod-private.svc.cluster.local:4435"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: odysseus
-    url: "http://private-code-odysseus-service.private.svc.cluster.local:4430"
+    url: "http://private-code-odysseus-service.prod-private.svc.cluster.local:4430"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: vscodium
-    url: "http://private-code-vscodium-service.private.svc.cluster.local:4433"
+    url: "http://private-code-vscodium-service.prod-private.svc.cluster.local:4433"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: n8n
-    url: "http://private-code-n8n-service.private.svc.cluster.local:4429"
+    url: "http://private-code-n8n-service.prod-private.svc.cluster.local:4429"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: openclaw
-    url: "http://private-code-openclaw-service.private.svc.cluster.local:4432"
+    url: "http://private-code-openclaw-service.prod-private.svc.cluster.local:4432"
     interval: 30s
     conditions:
       - "[STATUS] == 200"

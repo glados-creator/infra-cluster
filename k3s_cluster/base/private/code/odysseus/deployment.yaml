@@ -41,6 +41,9 @@ spec:
               memory: "256Mi"
             limits:
               memory: "4Gi"
+          securityContext:
+            capabilities:
+              add: ["CAP_SETGID"]
           volumeMounts:
             - name: data
               mountPath: /app/data

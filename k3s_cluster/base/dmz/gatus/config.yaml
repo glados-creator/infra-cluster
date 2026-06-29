@@ -7,110 +7,110 @@ metrics: true
 endpoints:
   # DMZ core services
   - name: glance-dmz
-    url: "http://dmz-glance-service.dmz.svc.cluster.local:6600"
+    url: "http://dmz-glance-service.prod-dmz.svc.cluster.local:6600"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: gatus-dmz
-    url: "http://dmz-gatus-service.dmz.svc.cluster.local:6601"
+    url: "http://dmz-gatus-service.prod-dmz.svc.cluster.local:6601"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   # Media services (all use svc ports from your table)
   - name: jellyfin
-    url: "http://dmz-media-jellyfin-service.dmz.svc.cluster.local:6650"
+    url: "http://dmz-media-jellyfin-service.prod-dmz.svc.cluster.local:6650"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: radarr
-    url: "http://dmz-media-radarr-service.dmz.svc.cluster.local:6654"
+    url: "http://dmz-media-radarr-service.prod-dmz.svc.cluster.local:6654"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: sonarr
-    url: "http://dmz-media-sonarr-service.dmz.svc.cluster.local:6655"
+    url: "http://dmz-media-sonarr-service.prod-dmz.svc.cluster.local:6655"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: lidarr
-    url: "http://dmz-media-lidarr-service.dmz.svc.cluster.local:6656"
+    url: "http://dmz-media-lidarr-service.prod-dmz.svc.cluster.local:6656"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: readarr
-    url: "http://dmz-media-readarr-service.dmz.svc.cluster.local:6657"
+    url: "http://dmz-media-readarr-service.prod-dmz.svc.cluster.local:6657"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: kapowarr
-    url: "http://dmz-media-kapowarr-service.dmz.svc.cluster.local:6658"
+    url: "http://dmz-media-kapowarr-service.prod-dmz.svc.cluster.local:6658"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: prowlarr
-    url: "http://dmz-media-prowlarr-service.dmz.svc.cluster.local:6659"
+    url: "http://dmz-media-prowlarr-service.prod-dmz.svc.cluster.local:6659"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: jellyseerr
-    url: "http://dmz-media-jellyseerr-service.dmz.svc.cluster.local:6660"
+    url: "http://dmz-media-jellyseerr-service.prod-dmz.svc.cluster.local:6660"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: qbittorrent
-    url: "http://dmz-media-qbittorrent-service.dmz.svc.cluster.local:6661"
+    url: "http://dmz-media-qbittorrent-service.prod-dmz.svc.cluster.local:6661"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: tdarr
-    url: "http://dmz-media-tdarr-service.dmz.svc.cluster.local:6663"
+    url: "http://dmz-media-tdarr-service.prod-dmz.svc.cluster.local:6663"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: bazarr
-    url: "http://dmz-media-bazarr-service.dmz.svc.cluster.local:6664"
+    url: "http://dmz-media-bazarr-service.prod-dmz.svc.cluster.local:6664"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: autobrr
-    url: "http://dmz-media-autobrr-service.dmz.svc.cluster.local:6665"
+    url: "http://dmz-media-autobrr-service.prod-dmz.svc.cluster.local:6665"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: jellystat
-    url: "http://dmz-media-jellystat-service.dmz.svc.cluster.local:6666"
+    url: "http://dmz-media-jellystat-service.prod-dmz.svc.cluster.local:6666"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: unpackerr
-    url: "http://dmz-media-unpackerr-service.dmz.svc.cluster.local:6667"
+    url: "http://dmz-media-unpackerr-service.prod-dmz.svc.cluster.local:6667"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: profilarr
-    url: "http://dmz-media-profilarr-service.dmz.svc.cluster.local:6668"
+    url: "http://dmz-media-profilarr-service.prod-dmz.svc.cluster.local:6668"
     interval: 30s
     conditions:
       - "[STATUS] == 200"
 
   - name: youtarr
-    url: "http://dmz-media-youtarr-service.dmz.svc.cluster.local:6669"
+    url: "http://dmz-media-youtarr-service.prod-dmz.svc.cluster.local:6669"
     interval: 30s
     conditions:
       - "[STATUS] == 200"

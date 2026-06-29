@@ -15,6 +15,6 @@ spec:
       middlewares:
         - name: private-middleware-auth-authentik
       services:
-        - name: private-prometheus-service
+        - name: private-monitor-prometheus-service
           port: 4422
   # tls: {}

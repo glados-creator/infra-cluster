@@ -53,7 +53,7 @@ resources:
   
 
 secretGenerator:
-  - name: media-auth-basic-secret
+  - name: auth-basic-secret
     envs:
     - secret.env
     type: Opaque

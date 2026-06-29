@@ -61,14 +61,14 @@ spec:
           volumeMounts:
             - name: trauth-secret-main
               mountPath: /etc/trauth-main
-            # - name: trauth-secret-private
-            #   mountPath: /etc/trauth-private
-            # - name: trauth-secret-public
-            #   mountPath: /etc/trauth-public
-            # - name: trauth-secret-dmz
-            #   mountPath: /etc/trauth-dmz
-            # - name: trauth-secret-dmz-media
-            #   mountPath: /etc/trauth-dmz-media
+            - name: trauth-secret-main
+              mountPath: /etc/trauth-private
+            - name: trauth-secret-main
+              mountPath: /etc/trauth-public
+            - name: trauth-secret-main
+              mountPath: /etc/trauth-dmz
+            - name: trauth-secret-main # no cross namespace
+              mountPath: /etc/trauth-dmz-media
       volumes:
       - name: trauth-secret-main
         secret:
