@@ -49,11 +49,11 @@ resources:
   - unpackerr
   - profilarr
   - youtarr
-  - suggestarr
+  # - suggestarr
   
 
 secretGenerator:
-  - name: auth-basic-secret
+  - name: media-auth-basic-secret
     envs:
     - secret.env
     type: Opaque

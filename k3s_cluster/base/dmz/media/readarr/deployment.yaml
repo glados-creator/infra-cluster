@@ -35,11 +35,11 @@ spec:
             - "--upstream=www.goodreads.com"
           env:
             - name: POSTGRES_HOST
-              value: 127.0.0.1
+              value: "127.0.0.1"
             - name: POSTGRES_DATABASE
-              value: readarr-glasses
+              value: "readarr-glasses"
             - name: POSTGRES_USER
-              value: readarr-glasses
+              value: "readarr-glasses"
           envFrom:
             - secretRef:
                 name: readarr-secret
@@ -64,9 +64,9 @@ spec:
             - containerPort: 5432
           env:
             - name: POSTGRES_DATABASE
-              value: readarr-glasses
+              value: "readarr-glasses"
             - name: POSTGRES_USER
-              value: readarr-glasses
+              value: "readarr-glasses"
           envFrom:
             - secretRef:
                 name: readarr-secret

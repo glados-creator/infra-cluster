@@ -176,6 +176,9 @@ todos :
 general TODOS
 - [x] TODO finish doc
 - [ ] repair pod / upgrade pod
+    - [ ]  odysseus
+    - [ ]  comfyui
+    - [ ]  openclaw
     - [ ] gatus home assistant + notif push
     - [ ] technituim convert to statefull set for static ip for HA
 - [ ] do soci imagesf

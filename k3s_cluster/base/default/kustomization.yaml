@@ -16,7 +16,7 @@ resources:
   - dozzle
 
 secretGenerator:
-  - name: main-auth-basic-secret
+  - name: auth-basic-secret
     envs:
     - secret.env
     type: Opaque

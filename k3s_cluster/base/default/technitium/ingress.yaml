@@ -11,8 +11,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`technitium.main.home`)
-      middlewares:
-        - name: main-middleware-auth-trauth
+      # middlewares:
+      #   - name: main-middleware-auth-trauth
       services:
         - name: main-technitium-service
           port: 2283
@@ -32,8 +32,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`technitium.main.home`)
-      middlewares:
-        - name: main-middleware-auth-trauth
+      # middlewares:
+      #   - name: main-middleware-auth-trauth
       services:
         - name: main-technitium-service
           port: 2284
@@ -53,10 +53,10 @@ spec:
   routes:
     - kind: Rule
       match: Host(`technitium.main.home`) && PathPrefix(`/dns-query`)
-      middlewares:
-        - name: set-real-ip
+      # middlewares:
+      #   - name: set-real-ip
       services:
-        - name: main-technitium-service
+        - name: main-technitium-service-dns
           port: 443
   #tls: {}
 ---
@@ -73,10 +73,10 @@ spec:
   routes:
     - kind: Rule
       match: Host(`technitium.main.home`) && PathPrefix(`/dns-query`)
-      middlewares:
-        - name: set-real-ip
+      # middlewares:
+      #   - name: set-real-ip
       services:
-        - name: main-technitium-service
+        - name: main-technitium-service-dns
           port: 80
   #tls: {}
 ---
@@ -93,9 +93,9 @@ spec:
   routes:
     - kind: Rule
       match: Host(`rp.technitium.main.home`) && PathPrefix(`/dns-query`)
-      middlewares:
-        - name: set-real-ip
+      # middlewares:
+      #   - name: set-real-ip
       services:
-        - name: main-technitium-service
+        - name: main-technitium-service-dns
           port: 8053
   #tls: {}
