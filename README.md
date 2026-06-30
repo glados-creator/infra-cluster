@@ -176,6 +176,22 @@ todos :
 general TODOS
 - [x] TODO finish doc
 - [ ] repair pod / upgrade pod
+    - [ ] add authentik
+    - [ ] authentik clusterRole
+    - [ ] n8n N8N_SECURE_COOKIE=false
+    - [ ] webui permissions
+    - [ ] HA reverse proxy
+    - [ ] headlamp still trying to get .kube
+    - [ ] jellystat bad gateway ? maybe wrong url ?
+    - [ ] prometheuse scrape gatus maybe wrong urls ?
+    - [ ] radarr can't set perms
+    - [ ] sonarr can't set perms
+    - [ ] qbittorrent can't login
+    - [ ] readarr bad gateway
+    - [ ] tdarr bad gateway
+    - [ ] unpackerr bad gateway
+    - [ ] webui gateway timeout
+
     - [ ]  odysseus
     - [ ]  comfyui
     - [ ]  openclaw
