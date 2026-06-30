@@ -12,8 +12,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`homeassistant.home.private.home`)
-      middlewares:
-        - name: private-middleware-auth-authentik
+      # middlewares:
+      #   - name: private-middleware-auth-authentik
       services:
         - name: private-home-homeassistant-service
           port: 4404

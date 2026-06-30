@@ -12,8 +12,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`qbittorrent.media.dmz.home`)
-      middlewares:
-        - name: dmz-media-middleware-auth-authentik
+      # middlewares:
+      #   - name: dmz-media-middleware-auth-authentik
       services:
         - name: dmz-media-qbittorrent-service
           port: 6661

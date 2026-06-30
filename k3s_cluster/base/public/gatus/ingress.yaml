@@ -12,8 +12,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`gatus.public.home`)
-      middlewares:
-       - name: public-middleware-auth-authentik
+      # middlewares:
+      #  - name: public-middleware-auth-authentik
       services:
         - name: public-gatus-service
           port: 9901

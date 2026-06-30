@@ -12,8 +12,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`autobrr.media.dmz.home`)
-      middlewares:
-        - name: dmz-media-middleware-auth-authentik
+      # middlewares:
+      #   - name: dmz-media-middleware-auth-authentik
       services:
         - name: dmz-media-autobrr-service
           port: 6665

@@ -12,8 +12,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`odysseus.code.private.home`)
-      middlewares:
-        - name: private-middleware-auth-authentik
+      # middlewares:
+      #   - name: private-middleware-auth-authentik
       services:
         - name: private-code-odysseus-service
           port: 4430

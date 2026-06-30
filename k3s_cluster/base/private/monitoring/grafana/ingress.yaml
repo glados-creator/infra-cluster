@@ -12,8 +12,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`grafana.monitor.private.home`)
-      middlewares:
-        - name: private-middleware-auth-authentik
+      # middlewares:
+      #   - name: private-middleware-auth-authentik
       services:
         - name: private-monitor-grafana-service
           port: 4421

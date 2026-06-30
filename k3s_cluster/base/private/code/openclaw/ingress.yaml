@@ -12,8 +12,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`openclaw.code.private.home`)
-      middlewares:
-        - name: private-middleware-auth-authentik
+      # middlewares:
+      #   - name: private-middleware-auth-authentik
       services:
         - name: private-code-openclaw-service
           port: 4432

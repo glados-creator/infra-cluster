@@ -12,8 +12,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`ollama.code.private.home`)
-      middlewares:
-        - name: private-middleware-auth-authentik
+      # middlewares:
+      #   - name: private-middleware-auth-authentik
       services:
         - name: private-code-ollama-service
           port: 4431

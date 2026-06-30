@@ -12,8 +12,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`gatus.dmz.home`)
-      middlewares:
-        - name: dmz-middleware-auth-authentik
+      # middlewares:
+      #   - name: dmz-middleware-auth-authentik
       services:
         - name: dmz-gatus-service
           port: 6601
