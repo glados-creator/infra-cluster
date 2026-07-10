@@ -30,6 +30,11 @@ spec:
         - name: <app-name>
           image: <app-URL>:latest
           imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: youtarr-config
+            - secretRef:
+                name: youtarr-secret
           ports:
           - containerPort: 53
             protocol: UDP
