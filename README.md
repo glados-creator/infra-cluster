@@ -108,8 +108,8 @@ kubectl apply -f overlay/production
 todos : 
 - [ ] finish CRDs
 - [ ] default
+    - [ ] Harbor (Docker registry, multi)
     - [ ] gluetun (VPN, single)
-    - [ ] netboot-main (PXE, TBD)
     - [ ] honeypot (decoy, single)
     - [ ] redirect
 
@@ -129,7 +129,6 @@ todos :
         - [ ] ? telnet demo (telnet demo) ?
         - [ ] Forgejo (Git hosting, multi)
         - [ ] ? Forgejo push action runner (...) ?
-        - [ ] Harbor (Docker registry, multi)
     - [ ] game/ (*.gg)
         - [ ] ? Pterodactyl (game server panel, multi) / modrinth ?
         - [ ] dolphin-games (emulator, single)
@@ -154,6 +153,7 @@ todos :
         - [ ] mollysocket (Signal bridge, multi)
         - [ ] RSSHub + Miniflux (RSS, multi/single)
     - [ ] tools/
+        - [ ] netboot-main (PXE, TBD)
         - [ ] headscale (Tailscale alt, multi)
         - [ ] squid (forward proxy, multi)    
         - [ ] ? Guacamole (remote gateway, multi) / webtop ?

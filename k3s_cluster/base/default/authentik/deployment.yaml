@@ -25,6 +25,7 @@ spec:
           effect: NoExecute
           tolerationSeconds: 10
 
+      serviceAccountName: serviceaccount
       securityContext:
         fsGroup: 999
       containers:
