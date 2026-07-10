@@ -14,3 +14,17 @@ resources:
   - service.yaml
   - ingress.yaml
   # - scaler.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: glance-config
+    files:
+      - glance.yml=config.yaml
+
+secretGenerator:
+  - name: youtarr-secret
+    envs:
+      - secret.env
+    type: Opaque
