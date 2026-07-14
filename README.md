@@ -53,6 +53,7 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
     + gatus (monitoring uptime)
     + dozzle (logging)
     + authentik (auth)
+    + Harbor (Docker registry, multi)
 3. public
     + glance (app dir)
     + gatus (monitoring uptime)
@@ -108,7 +109,6 @@ kubectl apply -f overlay/production
 todos : 
 - [ ] finish CRDs
 - [ ] default
-    - [ ] Harbor (Docker registry, multi)
     - [ ] gluetun (VPN, single)
     - [ ] honeypot (decoy, single)
     - [ ] redirect

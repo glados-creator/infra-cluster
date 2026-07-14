@@ -16,6 +16,17 @@ mkdir -p /bhole/cluster/default/gatus
 mkdir -p /bhole/cluster/default/dozzle
 mkdir -p /bhole/cluster/default/authentik
 mkdir -p /bhole/cluster/default/authentik/media/public
+mkdir -p /bhole/cluster/default/harbor
+mkdir -p /bhole/cluster/default/harbor/core-data
+mkdir -p /bhole/cluster/default/harbor/ca_download
+mkdir -p /bhole/cluster/default/harbor/registry
+mkdir -p /bhole/cluster/default/harbor/registry-root-crt
+mkdir -p /bhole/cluster/default/harbor/job_logs
+mkdir -p /bhole/cluster/default/harbor/trivy-adapter/trivy
+mkdir -p /bhole/cluster/default/harbor/trivy-adapter/reports
+mkdir -p /bhole/cluster/default/harbor/logs
+mkdir -p /bhole/cluster/default/harbor/pgdata
+mkdir -p /bhole/cluster/default/harbor/redis
 
 
 mkdir -p /bhole/cluster/private
@@ -83,6 +94,7 @@ mkdir -p /bhole/cluster/dmz/media-stack/youtarr/mysql
 
 sudo chown -R 1000:1000 /bhole/cluster/*
 sudo chown -R 999:999 /bhole/cluster/default/authentik
+sudo chown -R 999:999 /bhole/cluster/default/harbor
 sudo chown -R 999:999 /bhole/cluster/dmz/media-stack/jellystat/
 sudo chown -R 999:999 /bhole/cluster/dmz/media-stack/readarr/
 sudo chown -R 999:999 /bhole/cluster/dmz/media-stack/youtarr/

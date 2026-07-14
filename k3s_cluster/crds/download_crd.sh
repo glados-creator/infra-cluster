@@ -10,12 +10,13 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.32.0
 # overide default value for ip forward + CIDR
 sleep 1
 kubectl apply -f ./calico.yaml
-sleep 60
+sleep 1
 
 # MetalLB loadbalancer
 kubectl apply --server-side -f https://raw.githubusercontent.com/metallb/metallb/v0.16.0/config/manifests/metallb-native.yaml
 echo "need sleep because crd controller webhook isn't yet up"
-sleep 60
+echo "just run the script twice"
+sleep 1
 kubectl apply --server-side -f metallb.yaml
 
 # traefik

@@ -1,0 +1,29 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ingressroute
+  namespace: default
+  labels:
+    app: main-harbor
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    # Everything the docker/podman CLI and the API talk to goes to core.
+    - kind: Rule
+      match: Host(`harbor.main.home`) && (PathPrefix(`/api`) || PathPrefix(`/service`) || PathPrefix(`/v2`) || PathPrefix(`/c`))
+      priority: 10
+      services:
+        - name: main-harbor-service
+          port: 2290
+    # Everything else (the browser UI) goes to portal.
+    - kind: Rule
+      match: Host(`harbor.main.home`)
+      priority: 1
+      # middlewares:
+      #  - name: main-middleware-auth-authentik
+      services:
+        - name: main-harbor-service
+          port: 2293
+  #tls: {}
