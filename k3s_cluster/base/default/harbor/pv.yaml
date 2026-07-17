@@ -15,6 +15,8 @@ spec:
     # - ReadWriteOncePod
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nfs
+  mountOptions:
+    - nolock
   nfs:
     server: 192.168.1.24  # your NFS server IP
-    path: /bhole/cluster/main/harbor/ # your NFS export path
+    path: /bhole/cluster/default/harbor/ # your NFS export path

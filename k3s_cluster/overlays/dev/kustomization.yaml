@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - namespaces.yaml
-  - ../../base/default
+  # - ../../base/default
   - public
   - dmz
   - private

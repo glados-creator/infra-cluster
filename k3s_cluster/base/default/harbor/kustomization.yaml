@@ -36,9 +36,23 @@ configMapGenerator:
   - name: harbor-config
     envs:
       - config.env
+  # - name: harbor-trust-certs
+  #   files:
+  #     - ca.crt
+  #     # Add more CA files here as needed, e.g. another 'ca2.crt' line —
+  #     # each becomes its own key in the ConfigMap by filename.
 
 secretGenerator:
   - name: harbor-secret
     envs:
       - secret.env
     type: Opaque
+  - name: core-private-key
+    files:
+      - private_key.pem
+  - name: registry-root-crt
+    files:
+      - root.crt
+  - name: core-secretkey
+    files:
+      - secretkey

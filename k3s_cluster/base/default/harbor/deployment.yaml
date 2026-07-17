@@ -30,7 +30,7 @@ spec:
       containers:
         # ---------- core ----------
         - name: core
-          image: goharbor/harbor-core:latest
+          image: goharbor/harbor-core:v2.15.2
           ports:
             - containerPort: 8080
             - containerPort: 8443
@@ -63,12 +63,12 @@ spec:
             - name: core-secretkey
               mountPath: /etc/core/key
               subPath: secretkey
-            - name: trust-certs
-              mountPath: /harbor_cust_cert
+            # - name: trust-certs
+            #   mountPath: /harbor_cust_cert
 
         # ---------- registry ----------
         - name: registry
-          image: goharbor/registry-photon:latest
+          image: goharbor/registry-photon:v2.15.2
           ports:
             - containerPort: 5000
           securityContext:
@@ -84,16 +84,17 @@ spec:
               mountPath: /storage
               subPath: registry
             - name: registry-config
-              mountPath: /etc/registry
+              mountPath: /etc/registry/config.yml
+              subPath: config.yml
             - name: registry-root-crt
               mountPath: /etc/registry/root.crt
               subPath: root.crt
-            - name: trust-certs
-              mountPath: /harbor_cust_cert
+            # - name: trust-certs
+            #   mountPath: /harbor_cust_cert
 
         # ---------- registryctl ----------
         - name: registryctl
-          image: goharbor/harbor-registryctl:latest
+          image: goharbor/harbor-registryctl:v2.15.2
           ports:
             - containerPort: 8081
           envFrom:
@@ -114,16 +115,17 @@ spec:
               mountPath: /storage
               subPath: registry
             - name: registry-config
-              mountPath: /etc/registry
+              mountPath: /etc/registry/config.yml
+              subPath: config.yml
             - name: registryctl-config
               mountPath: /etc/registryctl/config.yml
               subPath: config.yml
-            - name: trust-certs
-              mountPath: /harbor_cust_cert
+            # - name: trust-certs
+            #   mountPath: /harbor_cust_cert
 
         # ---------- portal (web console, static files only) ----------
         - name: portal
-          image: goharbor/harbor-portal:latest
+          image: goharbor/harbor-portal:v2.15.2
           ports:
             - containerPort: 8090
           securityContext:
@@ -141,7 +143,7 @@ spec:
 
         # ---------- jobservice ----------
         - name: jobservice
-          image: goharbor/harbor-jobservice:latest
+          image: goharbor/harbor-jobservice:v2.15.2
           ports:
             - containerPort: 8082
           envFrom:
@@ -164,12 +166,12 @@ spec:
             - name: jobservice-config
               mountPath: /etc/jobservice/config.yml
               subPath: config.yml
-            - name: trust-certs
-              mountPath: /harbor_cust_cert
+            # - name: trust-certs
+            #   mountPath: /harbor_cust_cert
 
         # ---------- trivy-adapter ----------
         - name: trivy-adapter
-          image: goharbor/trivy-adapter-photon:latest
+          image: goharbor/trivy-adapter-photon:v2.15.2
           ports:
             - containerPort: 8083
           envFrom:
@@ -192,12 +194,12 @@ spec:
             - name: data
               mountPath: /home/scanner/.cache/reports
               subPath: trivy-adapter/reports
-            - name: trust-certs
-              mountPath: /harbor_cust_cert
+            # - name: trust-certs
+            #   mountPath: /harbor_cust_cert
 
         # ---------- log ----------
         - name: log
-          image: goharbor/harbor-log:latest
+          image: goharbor/harbor-log:v2.15.2
           ports:
             - containerPort: 1514
           securityContext:
@@ -221,7 +223,7 @@ spec:
 
         # ---------- exporter ----------
         - name: exporter
-          image: goharbor/harbor-exporter:latest
+          image: goharbor/harbor-exporter:v2.15.2
           # Default listen port is 8001 — doesn't collide with anything
           # else in this pod, left unset. Verify in the container logs.
           ports:
@@ -239,9 +241,9 @@ spec:
                 - SETGID
                 - SETUID
                 - NET_BIND_SERVICE          
-          volumeMounts:
-            - name: trust-certs
-              mountPath: /harbor_cust_cert
+          # volumeMounts:
+          #   - name: trust-certs
+          #     mountPath: /harbor_cust_cert
 
         # ---------- postgresql ----------
         - name: postgresql
@@ -328,9 +330,9 @@ spec:
         - name: jobservice-config
           configMap:
             name: harbor-jobservice-config
-        - name: trust-certs
-          configMap:
-            name: harbor-trust-certs
+        # - name: trust-certs
+        #   configMap:
+        #     name: harbor-trust-certs
         - name: registry-root-crt
           secret:
             secretName: harbor-registry-root-crt
