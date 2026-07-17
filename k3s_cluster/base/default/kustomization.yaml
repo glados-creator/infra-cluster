@@ -10,11 +10,11 @@ resources:
   - middleware-auth-authentik.yaml
   - traefik
   - technitium
+  - harbor
   - authentik
   - glance
   - gatus
   - dozzle
-  - harbor
 
 secretGenerator:
   - name: auth-basic-secret

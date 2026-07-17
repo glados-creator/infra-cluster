@@ -28,6 +28,60 @@ spec:
       serviceAccountName: serviceaccount
       securityContext:
         fsGroup: 999
+      
+      initContainers:
+        # --- PostgreSQL sidecar ---
+        - name: postgres
+          image: postgres:18-alpine
+          # Setting restartPolicy: Always makes this a sidecar container.
+          restartPolicy: Always
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: authentik-config
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-secret
+                  key: AUTHENTIK_POSTGRESQL__PASSWORD
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql
+              subPath: pgdata
+          # Health check for PostgreSQL
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - authentik
+            initialDelaySeconds: 5
+            periodSeconds: 2
+
+        # --- Redis sidecar ---
+        - name: redis
+          image: redis:alpine
+          # Setting restartPolicy: Always makes this a sidecar container.
+          restartPolicy: Always
+          ports:
+            - containerPort: 6379
+          readinessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            initialDelaySeconds: 5
+            periodSeconds: 2
+      
       containers:
         # --- Authentik Server ---
         - name: authentik-server
@@ -80,54 +134,6 @@ spec:
             - name: data
               mountPath: /custom-templates
               subPath: custom-templates
-
-        # --- PostgreSQL sidecar ---
-        - name: postgres
-          image: postgres:18-alpine
-          ports:
-            - containerPort: 5432
-          envFrom:
-            - configMapRef:
-                name: authentik-config
-          env:
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: authentik-secret
-                  key: AUTHENTIK_POSTGRESQL__PASSWORD
-          volumeMounts:
-            - name: data
-              mountPath: /var/lib/postgresql
-              subPath: pgdata
-          # Health check for PostgreSQL
-          readinessProbe:
-            exec:
-              command:
-                - pg_isready
-                - -U
-                - authentik
-            initialDelaySeconds: 5
-            periodSeconds: 2
-
-        # --- Redis sidecar ---
-        - name: redis
-          image: redis:alpine
-          ports:
-            - containerPort: 6379
-          readinessProbe:
-            exec:
-              command:
-                - redis-cli
-                - ping
-            initialDelaySeconds: 5
-            periodSeconds: 5
-          livenessProbe:
-            exec:
-              command:
-                - redis-cli
-                - ping
-            initialDelaySeconds: 5
-            periodSeconds: 2
 
       volumes:
         - name: data

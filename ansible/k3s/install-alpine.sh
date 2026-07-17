@@ -4,7 +4,14 @@ set -ex
 apk update
 apk upgrade
 apk add qemu-guest-agent fish zsh
-apk add pciutils usbutils nano git curl bash sudo util-linux e2fsprogs e2fsprogs-extra iptables ip6tables nftables ca-certificates lm-sensors zram-init iproute2 cgroup-tools shadow-uidmap htop btop
+apk add pciutils usbutils nano git curl bash sudo util-linux e2fsprogs e2fsprogs-extra 
+apk add iproute2 cgroup-tools shadow-uidmap 
+apk add iptables ip6tables 
+apk add nftables 
+apk add ca-certificates 
+# apk add lm-sensors zram-init 
+# apk add htop btop fish 
+
 apk add nfs-utils
 
 sudo mkdir -p /bhole
@@ -23,4 +30,13 @@ sync
 reboot
 # mount | grep cgroup
 
-curl https://get.k3s.io | INSTALL_K3S_EXEC="server --cluster-init --disable=traefik --disable=helm-controller --flannel-backend=none --disable-network-policy --disable=servicelb --node-name=k3sm --node-label=server=true" bash
+curl https://get.k3s.io | INSTALL_K3S_EXEC="server \
+  --cluster-init \
+  --disable=traefik \
+  --disable=helm-controller \
+  --flannel-backend=none \
+  --disable-network-policy \
+  --disable=servicelb \
+  --node-name=k3sm \
+  --node-label=server=true \
+  --kubelet-arg=--fail-swap-on=false" bash

@@ -47,7 +47,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: harbor-log-config
+  name: log-config
   namespace: default
 data:
   logrotate.conf: |
@@ -66,10 +66,10 @@ data:
     }
   rsyslog_docker.conf: |
     # rsyslog configuration for Docker logs
-    $ModLoad imuxsock
-    $ModLoad imklog
-    $ModLoad imtcp
-    $InputTCPServerRun 1514
+    # NOTE: imtcp is already loaded and listening on 1514 by the base
+    # goharbor/harbor-log image's own default rsyslog.conf — declaring
+    # it again here just produces a harmless "already in this config"
+    # warning, so it's omitted.
     $template DockerLogs, "/var/log/docker/%$YEAR%-%$MONTH%-%$DAY%.log"
     *.* ?DockerLogs
     & stop
@@ -77,7 +77,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: harbor-registry-config
+  name: registry-config
   namespace: default
 data:
   config.yml: |
@@ -114,7 +114,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: harbor-registryctl-config
+  name: registryctl-config
   namespace: default
 data:
   config.yml: |
@@ -133,7 +133,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: harbor-core-config
+  name: core-config
   namespace: default
 data:
   app.conf: |
@@ -193,12 +193,12 @@ data:
     [metrics]
     enabled = true
     path = /metrics
-    port = 8080
+    port = 8085
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: harbor-portal-config
+  name: portal-config
   namespace: default
 data:
   # See portal-nginx.conf — listens on 8090, core already owns 8080
@@ -249,7 +249,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: harbor-jobservice-config
+  name: jobservice-config
   namespace: default
 data:
   config.yml: |
@@ -258,13 +258,28 @@ data:
     port: 8082
     worker_pool:
       workers: 10
+      backend: "redis"
+      redis_pool:
+        redis_url: "redis://127.0.0.1:6379/0"
+        namespace: "harbor_job_service"
+        idle_timeout_second: 3600
     job_loggers:
-      - name: "file"
+      - name: "FILE"
         level: "INFO"
         settings:
           base_dir: "/var/log/jobs"
+    # Loggers for jobservice's own application logs — separate from
+    # job_loggers above (per-job execution output). Missing this
+    # entirely causes: "missing logger config of job service".
+    loggers:
+      - name: "STD_OUTPUT"
+        level: "INFO"
     redis_url: "redis://127.0.0.1:6379/0"
     core_url: "http://127.0.0.1:8080"
     registration_retry:
       attempts: 5
       interval: 10s
+    metric:
+      enabled: true
+      path: /metrics
+      port: 8085

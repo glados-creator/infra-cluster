@@ -13,6 +13,7 @@ namespace: default
 # | trivy-adapter | 8083        | Vulnerability scanning adapter |
 # | portal        | 8090        | Web UI frontend |
 # | exporter      | 8001        | Default port, untouched |
+# | metric        | 8085        | metric endpoint prometheus |
 # | log (rsyslog) | 1514        | System/logging service |
 # | postgresql    | 5432        | Database |
 # | redis         | 6379        | In-memory cache / broker |

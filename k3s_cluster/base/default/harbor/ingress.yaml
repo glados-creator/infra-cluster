@@ -11,8 +11,12 @@ spec:
     - websecure
   routes:
     # Everything the docker/podman CLI and the API talk to goes to core.
+    # NOTE: trailing slashes matter here — Traefik's PathPrefix is a raw
+    # string-prefix match, not path-segment aware. Without the slash,
+    # PathPrefix(`/c`) also matches portal's own /common.*.js chunk,
+    # misrouting it to core and causing intermittent 502s on that asset.
     - kind: Rule
-      match: Host(`harbor.main.home`) && (PathPrefix(`/api`) || PathPrefix(`/service`) || PathPrefix(`/v2`) || PathPrefix(`/c`))
+      match: Host(`harbor.main.home`) && (PathPrefix(`/api/`) || PathPrefix(`/service/`) || PathPrefix(`/v2/`) || PathPrefix(`/c/`))
       priority: 10
       services:
         - name: main-harbor-service

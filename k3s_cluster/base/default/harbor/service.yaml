@@ -26,3 +26,7 @@ spec:
       protocol: TCP
       port: 2292
       targetPort: 1514
+    - name: metrics
+      protocol: TCP
+      port: 2294 # exporter — project/quota/repo stats for Prometheus
+      targetPort: 8085

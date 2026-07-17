@@ -10,7 +10,7 @@ technitium LB static ip 172.16.0.5 LB 53 853 443 80 8053 IP 2283 2284
 authentik          2288 2289 (/if/flow/initial-setup/ password URL)
 glueton            TBD
 redirect           2202 TODO
-harbor             IP 2290 2291 2292
+harbor             IP 2290 2291 2292 2293 2294
 
 # public (99xx)
 glance             9900
