@@ -1,16 +1,20 @@
 # sudo route add -net 172.16.0.0 netmask 255.255.255.0 gw 192.168.1.252 metric 2
+# alpine v3.22 for CONFIG_IP_NF_* 
 set -ex
 
 apk update
 apk upgrade
-apk add qemu-guest-agent fish zsh
-apk add pciutils usbutils nano git curl bash sudo util-linux e2fsprogs e2fsprogs-extra 
+# apk add qemu-guest-agent
+# rc-update add qemu-guest-agent 
+# rc-service qemu-guest-agent start 
+# apk add pciutils usbutils
+apk add nano git curl bash sudo util-linux e2fsprogs e2fsprogs-extra 
 apk add iproute2 cgroup-tools shadow-uidmap 
 apk add iptables ip6tables 
 apk add nftables 
 apk add ca-certificates 
 # apk add lm-sensors zram-init 
-# apk add htop btop fish 
+# apk add htop btop fish zsh
 
 apk add nfs-utils
 
