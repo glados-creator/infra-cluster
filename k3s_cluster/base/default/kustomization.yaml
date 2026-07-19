@@ -10,6 +10,7 @@ resources:
   - middleware-auth-authentik.yaml
   - traefik
   - technitium
+  - harbor
   - authentik
   - glance
   - gatus

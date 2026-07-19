@@ -1,0 +1,368 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: default
+  labels:
+    app: main-harbor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: main-harbor
+  template:
+    metadata:
+      labels:
+        app: main-harbor
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+
+      serviceAccountName: serviceaccount
+
+      initContainers:
+        # ---------- postgres ----------
+        - name: postgres
+          image: postgres:18-alpine
+          # Setting restartPolicy: Always makes this a sidecar container.
+          restartPolicy: Always
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: harbor-config
+            - secretRef:
+                name: harbor-secret
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
+                - SYS_ADMIN
+                - NET_BIND_SERVICE          
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql
+              subPath: pgdata
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - postgres
+            initialDelaySeconds: 5
+            periodSeconds: 2
+
+        # ---------- redis ----------
+        - name: redis
+          image: redis:alpine
+          # Setting restartPolicy: Always makes this a sidecar container.
+          restartPolicy: Always
+          ports:
+            - containerPort: 6379
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
+                - SYS_ADMIN
+                - NET_BIND_SERVICE          
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/redis
+              subPath: redis
+          readinessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            initialDelaySeconds: 5
+            periodSeconds: 2
+      
+      containers:
+        # ---------- core ----------
+        - name: core
+          image: goharbor/harbor-core:v2.15.2
+          ports:
+            - containerPort: 8080
+            - containerPort: 8443
+            - containerPort: 8085
+          envFrom:
+            - configMapRef:
+                name: harbor-config
+            - secretRef:
+                name: harbor-secret
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
+                - SYS_ADMIN
+                - NET_BIND_SERVICE
+          volumeMounts:
+            - name: data
+              mountPath: /data
+              subPath: core-data
+            - name: data
+              mountPath: /etc/core/ca
+              subPath: ca_download
+            - name: core-config
+              mountPath: /etc/core/app.conf
+              subPath: app.conf
+            - name: core-private-key
+              mountPath: /etc/core/private_key.pem
+              subPath: private_key.pem
+            - name: core-secretkey
+              mountPath: /etc/core/key
+              subPath: secretkey
+            # - name: trust-certs
+            #   mountPath: /harbor_cust_cert
+
+        # ---------- registry ----------
+        - name: registry
+          image: goharbor/registry-photon:v2.15.2
+          ports:
+            - containerPort: 5000
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
+                - SYS_ADMIN
+                - NET_BIND_SERVICE          
+          volumeMounts:
+            - name: data
+              mountPath: /storage
+              subPath: registry
+            - name: registry-config
+              mountPath: /etc/registry/config.yml
+              subPath: config.yml
+            - name: registry-root-crt
+              mountPath: /etc/registry/root.crt
+              subPath: root.crt
+            # - name: trust-certs
+            #   mountPath: /harbor_cust_cert
+
+        # ---------- registryctl ----------
+        - name: registryctl
+          image: goharbor/harbor-registryctl:v2.15.2
+          ports:
+            - containerPort: 8081
+          envFrom:
+            - configMapRef:
+                name: harbor-config
+            - secretRef:
+                name: harbor-secret
+          env:
+            - name: CONFIG_PATH
+              value: /etc/registryctl/config.yml
+            - name: REGISTRY_CONFIG
+              value: /etc/registry/config.yml
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
+                - SYS_ADMIN
+                - NET_BIND_SERVICE          
+          volumeMounts:
+            - name: data
+              mountPath: /storage
+              subPath: registry
+            - name: registry-config
+              mountPath: /etc/registry/config.yml
+              subPath: config.yml
+            - name: registryctl-config
+              mountPath: /etc/registryctl/config.yml
+              subPath: config.yml
+            # - name: trust-certs
+            #   mountPath: /harbor_cust_cert
+
+        # ---------- portal (web console, static files only) ----------
+        - name: portal
+          image: goharbor/harbor-portal:v2.15.2
+          ports:
+            - containerPort: 8090
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
+                - SYS_ADMIN
+                - NET_BIND_SERVICE          
+          volumeMounts:
+            - name: portal-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+
+        # ---------- jobservice ----------
+        - name: jobservice
+          image: goharbor/harbor-jobservice:v2.15.2
+          ports:
+            - containerPort: 8082
+          envFrom:
+            - configMapRef:
+                name: harbor-config
+            - secretRef:
+                name: harbor-secret
+          env:
+            - name: CONFIG_PATH
+              value: /etc/jobservice/config.yml
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
+                - SYS_ADMIN
+                - NET_BIND_SERVICE          
+          volumeMounts:
+            - name: data
+              mountPath: /var/log/jobs
+              subPath: job_logs
+            - name: jobservice-config
+              mountPath: /etc/jobservice/config.yml
+              subPath: config.yml
+            # - name: trust-certs
+            #   mountPath: /harbor_cust_cert
+
+        # ---------- trivy-adapter ----------
+        - name: trivy-adapter
+          image: goharbor/trivy-adapter-photon:v2.15.2
+          ports:
+            - containerPort: 8083
+          envFrom:
+            - configMapRef:
+                name: harbor-config
+            - secretRef:
+                name: harbor-secret
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
+                - SYS_ADMIN
+                - NET_BIND_SERVICE          
+          volumeMounts:
+            - name: data
+              mountPath: /home/scanner/.cache/trivy
+              subPath: trivy-adapter/trivy
+            - name: data
+              mountPath: /home/scanner/.cache/reports
+              subPath: trivy-adapter/reports
+            # - name: trust-certs
+            #   mountPath: /harbor_cust_cert
+
+        # ---------- log ----------
+        - name: log
+          image: goharbor/harbor-log:v2.15.2
+          ports:
+            - containerPort: 1514
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
+                - SYS_ADMIN
+                - NET_BIND_SERVICE          
+          volumeMounts:
+            - name: data
+              mountPath: /var/log/docker
+              subPath: logs
+            - name: log-config
+              mountPath: /etc/logrotate.d/logrotate.conf
+              subPath: logrotate.conf
+            - name: log-config
+              mountPath: /etc/rsyslog.d/rsyslog_docker.conf
+              subPath: rsyslog_docker.conf
+
+        # ---------- exporter ----------
+        - name: exporter
+          image: goharbor/harbor-exporter:v2.15.2
+          # Default listen port is 8001 — doesn't collide with anything
+          # else in this pod, left unset. Verify in the container logs.
+          ports:
+            - containerPort: 8001
+          envFrom:
+            - configMapRef:
+                name: harbor-config
+            - secretRef:
+                name: harbor-secret
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
+                - SYS_ADMIN
+                - NET_BIND_SERVICE          
+          # volumeMounts:
+          #   - name: trust-certs
+          #     mountPath: /harbor_cust_cert
+
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc
+        - name: log-config
+          configMap:
+            name: log-config
+        - name: registry-config
+          configMap:
+            name: registry-config
+        - name: registryctl-config
+          configMap:
+            name: registryctl-config
+        - name: core-config
+          configMap:
+            name: core-config
+        - name: portal-config
+          configMap:
+            name: portal-config
+        - name: jobservice-config
+          configMap:
+            name: jobservice-config
+        # - name: trust-certs
+        #   configMap:
+        #     name: harbor-trust-certs
+        - name: registry-root-crt
+          secret:
+            secretName: harbor-registry-root-crt
+        - name: core-private-key
+          secret:
+            secretName: harbor-core-private-key
+        - name: core-secretkey
+          secret:
+            secretName: harbor-core-secretkey

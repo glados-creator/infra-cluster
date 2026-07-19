@@ -29,26 +29,12 @@ spec:
       securityContext:
         fsGroup: 999
 
-      containers:
-        # --- Jellystat Main ---
-        - name: jellystat
-          image: ghcr.io/cyfershepard/jellystat:latest
-          ports:
-            - containerPort: 3001
-              name: web
-          envFrom:
-            - configMapRef:
-                name: jellystat-config
-            - secretRef:
-                name: jellystat-secret
-          volumeMounts:
-            - name: media-storage
-              mountPath: /app/backend/data
-              subPath: jellystat/data
-
-        # --- PostgreSQL sidecar ---
+      initContainers:
+        # --- postgres sidecar ---
         - name: postgres
           image: postgres:18-alpine
+          # Setting restartPolicy: Always makes this a sidecar container.
+          restartPolicy: Always
           ports:
             - containerPort: 5432
           envFrom:
@@ -68,6 +54,23 @@ spec:
                 - jellystat
             initialDelaySeconds: 5
             periodSeconds: 2
+
+      containers:
+        # --- Jellystat Main ---
+        - name: jellystat
+          image: ghcr.io/cyfershepard/jellystat:latest
+          ports:
+            - containerPort: 3001
+              name: web
+          envFrom:
+            - configMapRef:
+                name: jellystat-config
+            - secretRef:
+                name: jellystat-secret
+          volumeMounts:
+            - name: media-storage
+              mountPath: /app/backend/data
+              subPath: jellystat/data
 
       volumes:
         - name: media-storage

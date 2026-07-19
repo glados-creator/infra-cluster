@@ -53,6 +53,7 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
     + gatus (monitoring uptime)
     + dozzle (logging)
     + authentik (auth)
+    + Harbor (Docker registry, multi)
 3. public
     + glance (app dir)
     + gatus (monitoring uptime)
@@ -109,7 +110,6 @@ todos :
 - [ ] finish CRDs
 - [ ] default
     - [ ] gluetun (VPN, single)
-    - [ ] netboot-main (PXE, TBD)
     - [ ] honeypot (decoy, single)
     - [ ] redirect
 
@@ -129,7 +129,6 @@ todos :
         - [ ] ? telnet demo (telnet demo) ?
         - [ ] Forgejo (Git hosting, multi)
         - [ ] ? Forgejo push action runner (...) ?
-        - [ ] Harbor (Docker registry, multi)
     - [ ] game/ (*.gg)
         - [ ] ? Pterodactyl (game server panel, multi) / modrinth ?
         - [ ] dolphin-games (emulator, single)
@@ -154,6 +153,7 @@ todos :
         - [ ] mollysocket (Signal bridge, multi)
         - [ ] RSSHub + Miniflux (RSS, multi/single)
     - [ ] tools/
+        - [ ] netboot-main (PXE, TBD)
         - [ ] headscale (Tailscale alt, multi)
         - [ ] squid (forward proxy, multi)    
         - [ ] ? Guacamole (remote gateway, multi) / webtop ?

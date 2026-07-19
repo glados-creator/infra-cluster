@@ -26,10 +26,83 @@ spec:
           tolerationSeconds: 10
       serviceAccountName: serviceaccount
       # runtimeClassName: nvidia
+      initContainers:
+        # ---------- postgres ----------
+        - name: postgres
+          image: postgres:18-alpine
+          # Setting restartPolicy: Always makes this a sidecar container.
+          restartPolicy: Always
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: harbor-config
+            - secretRef:
+                name: harbor-secret
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
+                - NET_BIND_SERVICE          
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql
+              subPath: pgdata
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - postgres
+            initialDelaySeconds: 5
+            periodSeconds: 2
+
+        # ---------- redis ----------
+        - name: redis
+          image: redis:alpine
+          # Setting restartPolicy: Always makes this a sidecar container.
+          restartPolicy: Always
+          ports:
+            - containerPort: 6379
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
+                - NET_BIND_SERVICE          
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/redis
+              subPath: redis
+          readinessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            initialDelaySeconds: 5
+            periodSeconds: 2
+      
       containers:
         - name: <app-name>
           image: <app-URL>:latest
           imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: youtarr-config
+            - secretRef:
+                name: youtarr-secret
           ports:
           - containerPort: 53
             protocol: UDP

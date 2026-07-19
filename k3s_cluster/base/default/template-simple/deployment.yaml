@@ -27,6 +27,11 @@ spec:
       containers:
         - name: <app-name>
           image: <app-URL>:latest
+          envFrom:
+            - configMapRef:
+                name: youtarr-config
+            - secretRef:
+                name: youtarr-secret
           ports:
           - containerPort: 80
           - containerPort: 443

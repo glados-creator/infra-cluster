@@ -1,0 +1,285 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-config
+  namespace: default
+data:
+  fluent.conf: |
+    # Source: tail container logs (CRI format for containerd)
+    <source>
+      @type tail
+      path /var/log/containers/*.log
+      pos_file /var/log/fluentd-containers.log.pos
+      tag kubernetes.*
+      read_from_head true
+      <parse>
+        @type cri
+      </parse>
+    </source>
+ 
+    # Add Kubernetes metadata (pod, namespace, container)
+    <filter kubernetes.**>
+      @type kubernetes_metadata
+    </filter>
+ 
+    # Forward to harbor-log service via syslog (TCP)
+    # NOTE: the bundled gem is fluent-plugin-remote_syslog, which
+    # registers itself as type "remote_syslog", not "syslog".
+    <match **>
+      @type remote_syslog
+      host harbor-service.default.svc.cluster.local
+      port 2292
+      protocol tcp
+      program fluentd
+      severity info
+      packet_size 65535
+      <format>
+        @type single_value
+        message_key message
+        add_newline false
+      </format>
+      <buffer>
+        @type memory
+        flush_interval 5s
+      </buffer>
+    </match>
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: log-config
+  namespace: default
+data:
+  logrotate.conf: |
+    /var/log/docker/*.log {
+        daily
+        rotate 7
+        compress
+        delaycompress
+        missingok
+        notifempty
+        create 0644 root root
+        sharedscripts
+        postrotate
+            /usr/bin/killall -HUP rsyslogd 2>/dev/null || true
+        endscript
+    }
+  rsyslog_docker.conf: |
+    # rsyslog configuration for Docker logs
+    # NOTE: imtcp is already loaded and listening on 1514 by the base
+    # goharbor/harbor-log image's own default rsyslog.conf — declaring
+    # it again here just produces a harmless "already in this config"
+    # warning, so it's omitted.
+    $template DockerLogs, "/var/log/docker/%$YEAR%-%$MONTH%-%$DAY%.log"
+    *.* ?DockerLogs
+    & stop
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: registry-config
+  namespace: default
+data:
+  config.yml: |
+    version: 0.1
+    log:
+      level: info
+      fields:
+        service: registry
+    storage:
+      filesystem:
+        rootdirectory: /storage
+      delete:
+        enabled: true
+    http:
+      addr: :5000
+      secret: placeholder-secret
+      headers:
+        X-Content-Type-Options: [nosniff]
+    health:
+      storagedriver:
+        enabled: true
+        interval: 10s
+        threshold: 3
+    # REQUIRED: without this block the registry has no authentication at
+    # all — any client can push/pull. This makes it validate the bearer
+    # tokens that core issues.
+    auth:
+      token:
+        issuer: harbor-token-issuer
+        realm: http://harbor.main.home/service/token
+        rootcertbundle: /etc/registry/root.crt
+        service: harbor-registry
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: registryctl-config
+  namespace: default
+data:
+  config.yml: |
+    ---
+    protocol: "http"
+    port: 8081
+    log_level: "info"
+    registry_storage_provider_name: "filesystem"
+    registry_storage_provider_config:
+      rootdirectory: /storage
+    redis_url: "redis://127.0.0.1:6379"
+    core_url: "http://127.0.0.1:8080"
+    token_service_url: "http://127.0.0.1:8080/service/token"
+    jobservice_url: "http://127.0.0.1:8082"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: core-config
+  namespace: default
+data:
+  app.conf: |
+    appname = Harbor
+    runmode = prod
+    enablegzip = true
+
+    [server]
+    protocol = http
+    addr = 0.0.0.0:8080
+    tls = false
+
+    [database]
+    db_type = postgres
+    host = 127.0.0.1
+    port = 5432
+    user = postgres
+    password = placeholder
+    name = registry
+    sslmode = disable
+    max_idle_conns = 50
+    max_open_conns = 100
+
+    [redis]
+    url = redis://127.0.0.1:6379/0
+
+    [auth]
+    mode = db_auth
+    self_registration = true
+    token_duration = 30
+
+    [email]
+    # optional – leave defaults
+
+    [notification]
+    enable = true
+
+    [jobservice]
+    endpoint = http://127.0.0.1:8082
+
+    [registry]
+    url = http://127.0.0.1:5000
+
+    [token]
+    issuer = harbor-token-issuer
+    rootcert = /etc/core/ca/root.crt
+    private_key = /etc/core/private_key.pem
+    expiration = 30
+    # Must be the externally-reachable URL: docker CLI hits this
+    # directly, not core-internal, during login/push/pull.
+    realm = http://harbor.main.home/service/token
+
+    [scan]
+    trivy_enabled = true
+    trivy_url = http://127.0.0.1:8083
+
+    [metrics]
+    enabled = true
+    path = /metrics
+    port = 8085
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: portal-config
+  namespace: default
+data:
+  # See portal-nginx.conf — listens on 8090, core already owns 8080
+  # in this shared pod.
+  nginx.conf: |
+    worker_processes auto;
+    pid /tmp/nginx.pid;
+
+    events {
+      worker_connections 1024;
+    }
+
+    http {
+      client_body_temp_path /tmp/client_body_temp;
+      proxy_temp_path       /tmp/proxy_temp;
+      fastcgi_temp_path     /tmp/fastcgi_temp;
+      uwsgi_temp_path       /tmp/uwsgi_temp;
+      scgi_temp_path        /tmp/scgi_temp;
+
+      include       mime.types;
+      default_type  application/octet-stream;
+
+      gzip on;
+      gzip_min_length 1000;
+      gzip_proxied expired no-cache no-store private auth;
+      gzip_types text/plain text/css application/json application/javascript
+                 application/x-javascript text/xml application/xml
+                 application/xml+rss text/javascript;
+
+      server {
+        listen 8090;
+        listen [::]:8090;
+        server_name localhost;
+
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+
+        location / {
+          try_files $uri $uri/ /index.html;
+        }
+
+        location = /index.html {
+          add_header Cache-Control "no-store, no-cache, must-revalidate";
+        }
+      }
+    }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jobservice-config
+  namespace: default
+data:
+  config.yml: |
+    ---
+    protocol: "http"
+    port: 8082
+    worker_pool:
+      workers: 10
+      backend: "redis"
+      redis_pool:
+        redis_url: "redis://127.0.0.1:6379/0"
+        namespace: "harbor_job_service"
+        idle_timeout_second: 3600
+    job_loggers:
+      - name: "FILE"
+        level: "INFO"
+        settings:
+          base_dir: "/var/log/jobs"
+    # Loggers for jobservice's own application logs — separate from
+    # job_loggers above (per-job execution output). Missing this
+    # entirely causes: "missing logger config of job service".
+    loggers:
+      - name: "STD_OUTPUT"
+        level: "INFO"
+    redis_url: "redis://127.0.0.1:6379/0"
+    core_url: "http://127.0.0.1:8080"
+    registration_retry:
+      attempts: 5
+      interval: 10s
+    metric:
+      enabled: true
+      path: /metrics
+      port: 8085
