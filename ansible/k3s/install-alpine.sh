@@ -30,6 +30,7 @@ nano /etc/rc.conf
 # rc_cgroup_mode="unified"
 rc-update add cgroups
 rc-service cgroups start
+# echo " cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory cgroup_enable=freezer cgroup_enable=hugetlb swapaccount=1 systemd.unified_cgroup_hierarchy=1" >> /boot/cmdline.txt
 sync
 reboot
 # mount | grep cgroup
@@ -44,3 +45,15 @@ curl https://get.k3s.io | INSTALL_K3S_EXEC="server \
   --node-name=k3sm \
   --node-label=server=true \
   --kubelet-arg=--fail-swap-on=false" bash
+
+curl -sfL https://get.k3s.io | sh -s - server \
+  --token K10cXXX::server:XXX \
+  --cluster-init \
+  --disable=traefik \
+  --disable=helm-controller \
+  --flannel-backend=none \
+  --disable-network-policy \
+  --disable=servicelb \
+  # --node-name=k3sm \
+  --node-label=server=true \
+  --kubelet-arg=--fail-swap-on=false
