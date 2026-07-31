@@ -109,6 +109,7 @@ kubectl apply -f overlay/production
 todos : 
 - [ ] finish CRDs
 - [ ] default
+    - [ ] Harbor (Docker registry, multi)
     - [ ] gluetun (VPN, single)
     - [ ] honeypot (decoy, single)
     - [ ] redirect
