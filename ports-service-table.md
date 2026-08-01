@@ -4,8 +4,9 @@
 glance             2200
 gatus              2201
 dozzle             2215
-traefik LB static ip 172.16.0.1 LB 80 443 IP 2280 2282
-technitium LB static ip 172.16.0.5 LB 53 853 443 80 8053 IP 2283 2284
+OPNsense LB static ip 172.16.0.1 192.168.1.252 XXX TBD
+traefik LB static ip 172.16.0.2 LB 80 443 IP 2280 2282
+technitium LB static ip 172.16.0.3 LB 53 853 443 80 8053 IP 2283 2284
 (kubectl port-forward --address 0.0.0.0 svc/main-technitium-service 2283:2283)
 authentik          2288 2289 (/if/flow/initial-setup/ password URL)
 glueton            TBD

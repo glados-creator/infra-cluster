@@ -27,7 +27,7 @@ metadata:
     app: main-technitium
   annotations:
     metallb.io/address-pool: public-ips
-    metallb.io/loadBalancerIPs: 172.16.0.1
+    metallb.io/loadBalancerIPs: 172.16.0.3
 spec:
   type: LoadBalancer
   selector:

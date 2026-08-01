@@ -4,6 +4,7 @@ set -ex
 
 apk update
 apk upgrade
+apk add tree
 # apk add qemu-guest-agent
 # rc-update add qemu-guest-agent 
 # rc-service qemu-guest-agent start 
@@ -15,6 +16,7 @@ apk add nftables
 apk add ca-certificates 
 # apk add lm-sensors zram-init 
 # apk add htop btop fish zsh
+# apk add etcd-ctl
 
 apk add nfs-utils
 
@@ -54,6 +56,7 @@ curl -sfL https://get.k3s.io | sh -s - server \
   --flannel-backend=none \
   --disable-network-policy \
   --disable=servicelb \
-  # --node-name=k3sm \
+  --disable=metrics-server \
   --node-label=server=true \
   --kubelet-arg=--fail-swap-on=false
+  # --node-name=k3sm \
