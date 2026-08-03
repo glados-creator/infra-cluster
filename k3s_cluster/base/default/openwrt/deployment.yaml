@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: default
+  labels:
+    app: main-openwrt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: main-openwrt
+  template:
+    metadata:
+      labels:
+        app: main-openwrt
+      annotations:
+        # Multus network attachments
+        k8s.v1.cni.cncf.io/networks: |
+          [
+            { "name": "internal-net", "interface": "eth0", "ips": ["172.16.0.1/24"] },
+            { "name": "isp-net", "interface": "eth1", "ips": ["192.168.1.252/24"] },
+            { "name": "vpn-net", "interface": "eth2", "ips": ["172.16.99.1/24"] }
+          ]
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      
+      nodeSelector:
+        kubernetes.io/hostname: rpi5a
+
+      containers:
+        - name: openwrt
+          image: openwrt/rootfs:latest   # or a more specific tag
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+          securityContext:
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+                - NET_ADMIN
+                - NET_RAW
+                - SYS_ADMIN
+          volumeMounts:
+            - name: data
+              mountPath: /etc         # persist OpenWrt config
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc

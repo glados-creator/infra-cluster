@@ -5,7 +5,16 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-  - 172.16.0.1-172.16.0.9
+    - 172.16.0.1-172.16.0.9
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: vpn-ips
+  namespace: metallb-system
+spec:
+  addresses:
+    - 172.16.99.1-172.16.99.254
 ---
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
@@ -14,7 +23,7 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-  - 192.168.1.252-192.168.1.252
+    - 192.168.1.252-192.168.1.252
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
@@ -23,7 +32,16 @@ metadata:
   namespace: metallb-system
 spec:
   ipAddressPools:
-  - public-ips
+    - public-ips
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: vpn-l2
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+    - vpn-ips
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
@@ -32,4 +50,4 @@ metadata:
   namespace: metallb-system
 spec:
   ipAddressPools:
-  - internal-ips
+    - internal-ips

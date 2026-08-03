@@ -8,6 +8,7 @@ resources:
   - middleware-auth-basic.yaml
   - middleware-auth-trauth.yaml
   - middleware-auth-authentik.yaml
+  - openwrt
   - traefik
   - technitium
   - harbor

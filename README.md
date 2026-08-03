@@ -14,6 +14,11 @@
 
 rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
 
+TODO : put harbor as mirror in k3s config file 
+TODO : put mutltus config file in /etc/CNI/ truc
+TODO : do opnsense deployement
+TODO : deploye base secrets
+
 ### storage
 - rpi5-a/b (temp nfs)
 - big astra (ceph todo)
@@ -110,7 +115,7 @@ kubectl apply -f overlay/production
 todos : 
 - [ ] finish CRDs
 - [ ] default
-    - [ ] opnsense router
+    - [ ] openwrt router
     - [ ] gluetun (VPN, single)
     - [ ] honeypot (decoy, single)
     - [ ] redirect

@@ -2,13 +2,13 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: data-pvc
-  namespace: <app-ns>
+  namespace: default
   labels:
-    app: <app-ns>-<app-name>
+    app: main-openwrt
 spec:
   accessModes: [ReadWriteMany]
   storageClassName: nfs
   volumeName: pv
   resources:
     requests:
-      storage: <app-cap>Gi
+      storage: 5Gi

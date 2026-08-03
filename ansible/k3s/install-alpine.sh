@@ -22,9 +22,10 @@ apk add nfs-utils
 
 sudo mkdir -p /bhole
 rc-update add netmount
-echo "none /run tmpfs defaults,shared 0 0" >> /etc/fstab
-echo "none /sys sysfs defaults,shared 0 0" >> /etc/fstab
-echo "none /sys/fs/cgroup cgroup2 defaults 0 0" >> /etc/fstab
+# add shared,lazytime too /
+echo "none /run tmpfs defaults,shared,lazytime 0 0" >> /etc/fstab
+echo "none /sys sysfs defaults,shared,lazytime 0 0" >> /etc/fstab
+echo "none /sys/fs/cgroup cgroup2 defaults,lazytime 0 0" >> /etc/fstab
 echo "192.168.1.24:/bhole /bhole nfs defaults,_netdev,lazytime 0 0" >> /etc/fstab
 # mount -t nfs 192.168.1.24:/bhole /bhole
 
