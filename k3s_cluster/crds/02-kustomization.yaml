@@ -1,49 +1,48 @@
-# cp 02-kustomization.yaml kustomization.yaml
-# kubectl apply -k .
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+
+# nano /etc/cni/net.d/00-multus.conf
+# add 
+# socket": "/run/multus/multus.sock",
 
 resources:
   # Multus CNI - thick (client/server) daemonset
   # features (CNI STATUS support, CNI spec 1.1.0). Pinned to the latest
   # https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/quickstart.md
-  # - https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset-thick.yml
-
-  # MetalLB loadbalancer
-  # https://github.com/metallb/metallb
-  - https://raw.githubusercontent.com/metallb/metallb/v0.16.0/config/manifests/metallb-native.yaml
-  # - metallb.yaml
-
-  # Traefik CRDs + RBAC
-  # https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-crd/
-  - https://raw.githubusercontent.com/traefik/traefik/v3.7/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml
-  - https://raw.githubusercontent.com/traefik/traefik/v3.7/docs/content/reference/dynamic-configuration/kubernetes-crd-rbac.yml
-
-  # metrics.k8s.io API + metrics-server, needed for `kubectl top` (used by dozzle and prometheus)
-  - https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-
-  # Volcano gang scheduler
-  # https://volcano.sh/docs/GettingStarted/Installation
-  - https://raw.githubusercontent.com/volcano-sh/volcano/master/installer/volcano-development.yaml
-
-  # spinkube wasm/wasi pod sheduler
-  # https://github.com/spinframework/spin-operator/releases/
+  - https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset-thick.yml
+  
+  # needed for spinkube
   - https://github.com/cert-manager/cert-manager/releases/download/v1.20.0/cert-manager.yaml
-  - https://github.com/spinframework/spin-operator/releases/download/v0.6.1/spin-operator.crds.yaml
-  - https://github.com/spinframework/spin-operator/releases/download/v0.6.1/spin-operator.runtime-class.yaml
-  - spinkube
 
-  # KubeVirt operator VMs
-  # https://kubevirt.io/user-guide/cluster_admin/installation/
-  # https://github.com/kubevirt/kubevirt/releases/tag/v1.9.0
-  - https://github.com/kubevirt/kubevirt/releases/download/v1.9.0/kubevirt-operator.yaml
 
-  # Rook-Ceph operator + its CRDs/RBAC/CSI operator
-  # https://rook.github.io/docs/rook/latest-release/Getting-Started/quickstart/
-  # https://github.com/rook/rook/releases/tag/v1.20.2
-  - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/crds.yaml
-  - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/common.yaml
-  - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/csi-operator.yaml
+patches:
+  # 1) Remove resources from the main container
+  - target:
+      kind: DaemonSet
+      name: kube-multus-ds
+      namespace: kube-system
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/resources
+        value: {}
 
-  # nvidia gpu runtime
-  - nvidia
+  # 3) Add "socket" field to the daemon-config.json inside the ConfigMap
+  - target:
+      kind: ConfigMap
+      name: multus-daemon-config
+      namespace: kube-system
+    patch: |-
+      - op: replace
+        path: /data/daemon-config.json
+        value: |
+          {
+              "chrootDir": "/hostroot",
+              "cniVersion": "0.3.1",
+              "logLevel": "verbose",
+              "logToStderr": true,
+              "cniConfigDir": "/host/etc/cni/net.d",
+              "multusAutoconfigDir": "/host/etc/cni/net.d",
+              "multusConfigFile": "auto",
+              "socketDir": "/host/run/multus/",
+              "socket": "/host/run/multus/multus.sock"
+          }

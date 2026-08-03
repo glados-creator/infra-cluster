@@ -22,7 +22,7 @@ apk add nfs-utils
 
 sudo mkdir -p /bhole
 rc-update add netmount
-# add shared,lazytime too /
+# add shared,lazytime to / too
 echo "none /run tmpfs defaults,shared,lazytime 0 0" >> /etc/fstab
 echo "none /sys sysfs defaults,shared,lazytime 0 0" >> /etc/fstab
 echo "none /sys/fs/cgroup cgroup2 defaults,lazytime 0 0" >> /etc/fstab
@@ -52,6 +52,7 @@ curl https://get.k3s.io | INSTALL_K3S_EXEC="server \
 curl -sfL https://get.k3s.io | sh -s - server \
   --token K10cXXX::server:XXX \
   --cluster-init \
+  # --server https://192.168.1.24:6443 \
   --disable=traefik \
   --disable=helm-controller \
   --flannel-backend=none \
