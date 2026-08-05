@@ -31,6 +31,9 @@ echo "192.168.1.24:/bhole /bhole nfs defaults,_netdev,lazytime 0 0" >> /etc/fsta
 
 nano /etc/rc.conf
 # rc_cgroup_mode="unified"
+# rc_ulimit="-n 65535"
+echo 'rc_cgroup_mode="unified"' | sudo tee -a /etc/rc.conf
+echo 'rc_ulimit="-n 65535"' | sudo tee -a /etc/rc.conf
 rc-update add cgroups
 rc-service cgroups start
 # echo " cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory cgroup_enable=freezer cgroup_enable=hugetlb swapaccount=1 systemd.unified_cgroup_hierarchy=1" >> /boot/cmdline.txt
@@ -62,3 +65,46 @@ curl -sfL https://get.k3s.io | sh -s - server \
   --kubelet-arg=--fail-swap-on=false
   # --cluster-init \
   # --node-name=k3sm \
+
+
+echo '''
+{
+  "capabilities": {
+    "portMappings": true
+  },
+  "cniVersion": "0.3.1",
+  "logLevel": "verbose",
+  "logToStderr": true,
+  "name": "multus-cni-network",
+  "clusterNetwork": "/host/etc/cni/net.d/10-calico.conflist",
+  "type": "multus-shim"
+}
+''' > /etc/cni/net.d/00-multus.conf
+
+echo '''
+mirrors:
+  docker.io:
+    endpoint:
+      - "http://harbor.main.home/dockerhub"
+  ghcr.io:
+    endpoint:
+      - "http://harbor.main.home/ghcr"
+  quay.io:
+    endpoint:
+      - "http://harbor.main.home/quay"
+  lscr.io:
+    endpoint:
+      - "http://harbor.main.home/lscr"
+configs:
+  "harbor.main.home":
+    auth:
+      username: <CHANGEME>
+      password: <CHANGEME>
+    tls:
+      insecure_skip_verify: true
+''' > /etc/rancher/k3s/registries.yaml
+
+sysctl -w fs.inotify.max_user_watches=524288
+sysctl -w fs.file-max=65535
+echo "fs.inotify.max_user_watches=524288" > /etc/sysctl.d/00-limits.conf
+echo "fs.file-max=65535" | tee -a /etc/sysctl.d/00-limits.conf
