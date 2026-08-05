@@ -8,9 +8,7 @@ kind: Kustomization
 # docker run --rm --volume ./:/outside -it --entrypoint /bin/sh  alpine/helm
 # helm template spin-operator oci://ghcr.io/spinframework/charts/spin-operator --version 0.6.1  --namespace spin-operator --create-namespace > spinkube-operator.yaml
 
-resources:
-  - metallb.yaml
-  
+resources:  
   # - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/operator.yaml
   # - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/cluster.yaml
   
