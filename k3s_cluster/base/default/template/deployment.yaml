@@ -24,6 +24,12 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
+      
+      # nodeSelector:
+      #   kubernetes.io/hostname: rpi5a
+      # nodeSelector:
+      #   server: "true"
+      
       serviceAccountName: serviceaccount
       # runtimeClassName: nvidia
       initContainers:

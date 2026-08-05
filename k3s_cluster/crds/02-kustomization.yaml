@@ -9,6 +9,7 @@ resources:
   # Multus CNI - thick (client/server) daemonset
   # features (CNI STATUS support, CNI spec 1.1.0). Pinned to the latest
   # https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/quickstart.md
+  - multus
   # - https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset-thick.yml
   
   # MetalLB loadbalancer
@@ -20,36 +21,3 @@ resources:
   - https://github.com/cert-manager/cert-manager/releases/download/v1.20.0/cert-manager.yaml
   - https://github.com/spinframework/spin-operator/releases/download/v0.6.1/spin-operator.crds.yaml
   - https://github.com/spinframework/spin-operator/releases/download/v0.6.1/spin-operator.runtime-class.yaml
-
-
-patches:
-  # 1) Remove resources from the main container
-  - target:
-      kind: DaemonSet
-      name: kube-multus-ds
-      namespace: kube-system
-    patch: |-
-      - op: replace
-        path: /spec/template/spec/containers/0/resources
-        value: {}
-
-  # 3) Add "socket" field to the daemon-config.json inside the ConfigMap
-  - target:
-      kind: ConfigMap
-      name: multus-daemon-config
-      namespace: kube-system
-    patch: |-
-      - op: replace
-        path: /data/daemon-config.json
-        value: |
-          {
-              "chrootDir": "/hostroot",
-              "cniVersion": "0.3.1",
-              "logLevel": "verbose",
-              "logToStderr": true,
-              "cniConfigDir": "/host/etc/cni/net.d",
-              "multusAutoconfigDir": "/host/etc/cni/net.d",
-              "multusConfigFile": "auto",
-              "socketDir": "/host/run/multus/",
-              "socket": "/host/run/multus/multus.sock"
-          }

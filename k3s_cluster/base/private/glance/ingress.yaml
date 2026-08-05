@@ -13,7 +13,7 @@ spec:
     - kind: Rule
       match: Host(`glance.private.home`)
       middlewares:
-       - name: private-middleware-auth-trauth
+       - name: prod-rpivate/private-middleware-auth-basic
       services:
         - name: private-glance-service
           port: 4400

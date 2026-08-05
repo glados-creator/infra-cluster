@@ -18,9 +18,9 @@ spec:
         # Multus network attachments
         k8s.v1.cni.cncf.io/networks: |
           [
-            { "name": "internal-net", "interface": "eth0", "ips": ["172.16.0.1/24"] },
-            { "name": "isp-net", "interface": "eth1", "ips": ["192.168.1.252/24"] },
-            { "name": "vpn-net", "interface": "eth2", "ips": ["172.16.99.1/24"] }
+            { "name": "main-openwrt-internal-net", "interface": "eth1", "ips": ["172.16.0.1/24"] },
+            { "name": "main-openwrt-isp-net", "interface": "eth2", "ips": ["192.168.1.252/24"], "gateway": ["192.168.1.254"] },
+            { "name": "main-openwrt-vpn-net", "interface": "eth3", "ips": ["172.16.99.1/24"] }
           ]
     spec:
       tolerations:
@@ -34,11 +34,11 @@ spec:
           tolerationSeconds: 10
       
       nodeSelector:
-        kubernetes.io/hostname: rpi5a
+        server: "true"
 
       containers:
         - name: openwrt
-          image: openwrt/rootfs:latest   # or a more specific tag
+          image: my-openwrt:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
@@ -50,9 +50,9 @@ spec:
                 - NET_ADMIN
                 - NET_RAW
                 - SYS_ADMIN
-          volumeMounts:
-            - name: data
-              mountPath: /etc         # persist OpenWrt config
+          # volumeMounts:
+          #   - name: data
+          #     mountPath: /etc         # persist OpenWrt config
       volumes:
         - name: data
           persistentVolumeClaim:

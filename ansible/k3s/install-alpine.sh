@@ -20,6 +20,15 @@ apk add ca-certificates
 
 apk add nfs-utils
 
+# install and cp multus ... cni thingy
+apk add cni-plugins
+sudo cp /usr/libexec/cni/ipvlan /opt/cni/bin/
+sudo cp /usr/libexec/cni/static /opt/cni/bin/
+sudo chmod +x /opt/cni/bin/ipvlan /opt/cni/bin/static
+
+sudo apk add podman
+apk add libguestfs-tools
+
 sudo mkdir -p /bhole
 rc-update add netmount
 # add shared,lazytime to / too
