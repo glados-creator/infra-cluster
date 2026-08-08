@@ -8,7 +8,7 @@ set -ex
 MOUNT="/bhole"
 EXPORT_LINE="$MOUNT 192.168.1.0/24(rw,async,wdelay,no_all_squash,no_root_squash,subtree_check)"
 # DEVICE="/dev/sda1"
-# FSTAB_ENTRY="$DEVICE  $MOUNT  ext4  defaults  0  2"
+# FSTAB_ENTRY="$DEVICE  $MOUNT  ext4  defaults,lazytime  0  2"
 # echo "$FSTAB_ENTRY" >> /etc/fstab
 
 echo "=== Installing NFS packages ==="

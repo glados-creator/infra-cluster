@@ -3,6 +3,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+# curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
+
 resources:
   - metallb.yaml
 
@@ -25,7 +27,7 @@ resources:
   # KubeVirt operator VMs
   # https://kubevirt.io/user-guide/cluster_admin/installation/
   # https://github.com/kubevirt/kubevirt/releases/tag/v1.9.0
-  # - https://github.com/kubevirt/kubevirt/releases/download/v1.9.0/kubevirt-operator.yaml
+  - https://github.com/kubevirt/kubevirt/releases/download/v1.9.0/kubevirt-operator.yaml
 
   # Rook-Ceph operator + its CRDs/RBAC/CSI operator
   # https://rook.github.io/docs/rook/latest-release/Getting-Started/quickstart/
@@ -34,5 +36,10 @@ resources:
   - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/common.yaml
   - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/csi-operator.yaml
 
+  # github.com/squat/generic-device-plugin
+  - https://raw.githubusercontent.com/squat/generic-device-plugin/main/manifests/generic-device-plugin.yaml
+
   # nvidia gpu runtime
   - nvidia
+
+# TODO : patch here for generic-device-plugin --device

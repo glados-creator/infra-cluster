@@ -14,11 +14,6 @@
 
 rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
 
-TODO : put harbor as mirror in k3s config file 
-TODO : put mutltus config file in /etc/CNI/ truc
-TODO : do opnsense deployement
-TODO : deploye base secrets
-
 ### storage
 - rpi5-a/b (temp nfs)
 - big astra (ceph todo)
@@ -29,14 +24,17 @@ TODO : deploye base secrets
 - [X] calico CNI (network)
 - [~] mutlus CNI plugin (network)(have multiple interfaces)
 - [~] MetalLB (LoadBalancer)
-- [X] traefik CRD reverse proxy
-- [X] metric server (kubectl top api crd for dozzle)
-- [X] vulcano (gang scheduler gpus)
-- [X] keda (trigger action on event)
+- [~] traefik CRD reverse proxy
+- [~] metric server (kubectl top api crd for dozzle)
+- [~] vulcano (gang scheduler gpus)
+- [~] keda (trigger action on event)
 - [~] spinkube (launch wasm/wasi pod)
 - [~] kubevirt (proxmox but docker)
 - [~] rook (ceph PV provider)
 - [ ] ? velero ? (PV backup) (but maybe i can with ceph)
+- [~] linkerd (mtls mesh)
+- [~] Generic Device Plugin (usb passtrough)
+- [ ] prometheuse node exporter (metrics) / kube-state-metrics (KSM)
 - [X] nvidia runtime 
   ```bash
   # to apply the controller label if it's not done automaticly

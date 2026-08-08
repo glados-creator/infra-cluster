@@ -26,11 +26,9 @@ sudo cp /usr/libexec/cni/ipvlan /opt/cni/bin/
 sudo cp /usr/libexec/cni/static /opt/cni/bin/
 sudo chmod +x /opt/cni/bin/ipvlan /opt/cni/bin/static
 
-sudo apk add podman
-apk add libguestfs-tools
-
 sudo mkdir -p /bhole
 rc-update add netmount
+nano /etc/fstab
 # add shared,lazytime to / too
 echo "none /run tmpfs defaults,shared,lazytime 0 0" >> /etc/fstab
 echo "none /sys sysfs defaults,shared,lazytime 0 0" >> /etc/fstab
@@ -62,7 +60,6 @@ curl https://get.k3s.io | INSTALL_K3S_EXEC="server \
   --kubelet-arg=--fail-swap-on=false" bash
 
 curl -sfL https://get.k3s.io | sh -s - server \
-  --server https://192.168.1.24:6443 \
   --token K102ff3c57c05713895d2f5b576d28a3fecdfca92949468fe3fb17cdc6e8551529e::server:e319597beeb95b6a5a7959aacc0b2eec \
   --disable=traefik \
   --disable=helm-controller \
@@ -71,8 +68,9 @@ curl -sfL https://get.k3s.io | sh -s - server \
   --disable=servicelb \
   --disable=metrics-server \
   --node-label=server=true \
+  --cluster-init \
   --kubelet-arg=--fail-swap-on=false
-  # --cluster-init \
+  # --server https://192.168.1.28:6443 \
   # --node-name=k3sm \
 
 

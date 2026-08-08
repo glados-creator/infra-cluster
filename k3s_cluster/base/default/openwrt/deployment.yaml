@@ -38,7 +38,7 @@ spec:
 
       containers:
         - name: openwrt
-          image: my-openwrt:latest
+          image: openwrt/rootfs:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
