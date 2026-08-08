@@ -112,6 +112,11 @@ kubectl apply -f overlay/production
 =============================
 todos : 
 - [ ] finish CRDs
+    - [ ] tls auth certificate certificate issuer kittizz.github.io/cert-manager-technitium-webhook/
+    - [ ] generic-device-plugin
+    - [ ] kubevirt
+    - [ ] spinkube
+    - [ ] rook
 - [ ] default
     - [ ] openwrt router
     - [ ] gluetun (VPN, single)
@@ -184,7 +189,6 @@ general TODOS
 - [x] TODO finish doc
 - [ ] repair pod / upgrade pod
     - [ ] add authentik
-    - [ ] authentik clusterRole
     - [ ] n8n N8N_SECURE_COOKIE=false
     - [ ] webui permissions
     - [ ] HA reverse proxy
@@ -203,7 +207,6 @@ general TODOS
     - [ ]  comfyui
     - [ ]  openclaw
     - [ ] gatus home assistant + notif push
-    - [ ] technituim convert to statefull set for static ip for HA
 - [ ] do soci imagesf
 - [ ] do ceph / rock operator
 - [ ] add peripherals
