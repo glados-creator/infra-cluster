@@ -5,9 +5,7 @@ namePrefix: main-
 namespace: default
 
 resources:
-  - middleware-auth-basic.yaml
-  - middleware-auth-trauth.yaml
-  - middleware-auth-authentik.yaml
+  - middleware
   - openwrt
   - traefik
   - technitium

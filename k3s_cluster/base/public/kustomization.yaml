@@ -5,10 +5,7 @@ namePrefix: public-
 namespace: public
 
 resources:
-  - middleware-auth-basic.yaml
-  - middleware-auth-trauth.yaml
-  - middleware-auth-authentik.yaml
-  # - redirect
+  - middleware
   - glance
   - gatus
 

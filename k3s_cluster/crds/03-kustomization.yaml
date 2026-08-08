@@ -39,6 +39,8 @@ resources:
   # github.com/squat/generic-device-plugin
   - https://raw.githubusercontent.com/squat/generic-device-plugin/main/manifests/generic-device-plugin.yaml
 
+  # https://kittizz.github.io/cert-manager-technitium-webhook/
+
   # nvidia gpu runtime
   - nvidia
 

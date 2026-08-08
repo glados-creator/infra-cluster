@@ -1,5 +1,3 @@
-# system (11xx)
-
 # main (22xx)
 glance             2200
 gatus              2201
