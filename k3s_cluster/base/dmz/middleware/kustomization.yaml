@@ -8,5 +8,5 @@ resources:
   - auth-basic.yaml
   - auth-trauth.yaml
   - auth-authentik.yaml
-  - redirect-https
+  - redirect-https.yaml
   # - redirect

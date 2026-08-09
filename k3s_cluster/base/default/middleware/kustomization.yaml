@@ -1,12 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namePrefix: main-
+namePrefix: middleware-
 namespace: default
 
 resources:
-  - middleware-auth-basic.yaml
-  - middleware-auth-trauth.yaml
-  - middleware-auth-authentik.yaml
-  - middleware-redirect-https
+  - auth-basic.yaml
+  - auth-trauth.yaml
+  - auth-authentik.yaml
+  - redirect-https.yaml
   # - redirect
