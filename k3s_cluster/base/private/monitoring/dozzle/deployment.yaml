@@ -27,6 +27,8 @@ spec:
       containers:
         - name: dozzle
           image: amir20/dozzle:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 8080
           env:

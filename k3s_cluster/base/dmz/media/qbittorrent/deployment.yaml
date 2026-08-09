@@ -27,6 +27,8 @@ spec:
       containers:
         - name: qbittorrent
           image: lscr.io/linuxserver/qbittorrent:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           env:
             - name: WEBUI_PORT
               value: "8080"

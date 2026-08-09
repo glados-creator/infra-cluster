@@ -28,6 +28,8 @@ spec:
       containers:
         - name: glance
           image: glanceapp/glance:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 8080
           volumeMounts:

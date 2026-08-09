@@ -32,6 +32,8 @@ spec:
       containers:
         - name: openclaw
           image: ghcr.io/openclaw/openclaw:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 18789   # Gateway UI/API[reference:5]
             - containerPort: 18790   # Bridge[reference:6]

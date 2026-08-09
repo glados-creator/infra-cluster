@@ -92,7 +92,7 @@ echo '''
 mirrors:
   docker.io:
     endpoint:
-      - "http://harbor.main.home/dockerhub"
+      - "http://harbor.main.home/docker"
   ghcr.io:
     endpoint:
       - "http://harbor.main.home/ghcr"

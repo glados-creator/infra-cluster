@@ -32,6 +32,8 @@ spec:
       containers:
         - name: odysseus
           image: ghcr.io/pewdiepie-archdaemon/odysseus:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 7000
           envFrom:

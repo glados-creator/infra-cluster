@@ -28,6 +28,8 @@ spec:
       containers:
         - name: gatus
           image: twinproduction/gatus:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 8080
           volumeMounts:

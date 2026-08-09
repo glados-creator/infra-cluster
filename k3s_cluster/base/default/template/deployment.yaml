@@ -36,6 +36,7 @@ spec:
         # ---------- postgres ----------
         - name: postgres
           image: postgres:18-alpine
+          imagePullPolicy: IfNotPresent
           # Setting restartPolicy: Always makes this a sidecar container.
           restartPolicy: Always
           ports:
@@ -69,6 +70,7 @@ spec:
         # ---------- redis ----------
         - name: redis
           image: redis:alpine
+          imagePullPolicy: IfNotPresent
           # Setting restartPolicy: Always makes this a sidecar container.
           restartPolicy: Always
           ports:
@@ -104,6 +106,7 @@ spec:
         - name: <app-name>
           image: <app-URL>:latest
           imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           envFrom:
             - configMapRef:
                 name: youtarr-config

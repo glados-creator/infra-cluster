@@ -28,6 +28,8 @@ spec:
       containers:
       - name: dns-server
         image: technitium/dns-server:latest
+        imagePullPolicy: IfNotPresent
+        # restartPolicy: Always
         ports:
         - containerPort: 5380 # http-web
         - containerPort: 53443 # https-web

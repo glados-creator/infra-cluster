@@ -27,6 +27,8 @@ spec:
       containers:
         - name: unpackerr
           image: golift/unpackerr:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           env:
             - name: UNPACKERR_WEB_PORT
               value: "8080"

@@ -28,6 +28,8 @@ spec:
       containers:
         - name: vscodium
           image: codercom/code-server:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 8080
           env:

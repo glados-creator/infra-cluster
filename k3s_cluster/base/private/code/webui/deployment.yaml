@@ -28,6 +28,8 @@ spec:
       containers:
         - name: webui
           image: ghcr.io/open-webui/open-webui:main
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 8080
           envFrom:

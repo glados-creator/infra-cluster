@@ -41,6 +41,7 @@ spec:
         - name: openwrt
           image: openwrt/rootfs:latest
           imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 80
             - containerPort: 443

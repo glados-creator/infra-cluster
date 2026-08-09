@@ -28,6 +28,8 @@ spec:
       containers:
         - name: homeassistant
           image: homeassistant/home-assistant:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 8123
           env:

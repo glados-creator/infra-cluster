@@ -28,6 +28,8 @@ spec:
       containers:
         - name: jellyfin
           image: ghcr.io/jellyfin/jellyfin:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 8096
               name: web

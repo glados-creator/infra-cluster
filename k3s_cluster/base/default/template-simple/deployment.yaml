@@ -28,6 +28,8 @@ spec:
       containers:
         - name: <app-name>
           image: <app-URL>:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           envFrom:
             - configMapRef:
                 name: youtarr-config
