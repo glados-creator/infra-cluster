@@ -5,6 +5,7 @@ namePrefix: openwrt-
 namespace: default
 
 resources:
+  - service-account.yaml
   - multus-config.yaml
   - pv.yaml
   - pvc.yaml

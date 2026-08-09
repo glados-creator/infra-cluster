@@ -5,6 +5,7 @@ namePrefix: glance-
 namespace: dmz
 
 resources:
+  - service-account.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml

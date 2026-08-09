@@ -5,6 +5,7 @@ namePrefix: gatus-
 namespace: dmz
 
 resources:
+  - service-account.yaml
   - pvc.yaml
   - pv.yaml
   - deployment.yaml

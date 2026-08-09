@@ -24,6 +24,7 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
+      serviceAccountName: serviceaccount
       containers:
       - name: dns-server
         image: technitium/dns-server:latest

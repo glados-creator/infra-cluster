@@ -117,6 +117,7 @@ todos :
     - [ ] kubevirt
     - [ ] spinkube
     - [ ] rook
+    - [ ] finish adding service account to all for linkerd safety
 - [ ] default
     - [ ] openwrt router
     - [ ] gluetun (VPN, single)

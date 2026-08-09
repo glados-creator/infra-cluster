@@ -36,6 +36,7 @@ spec:
       nodeSelector:
         server: "true"
 
+      serviceAccountName: serviceaccount
       containers:
         - name: openwrt
           image: openwrt/rootfs:latest

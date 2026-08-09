@@ -74,19 +74,19 @@ curl -sfL https://get.k3s.io | sh -s - server \
   # --node-name=k3sm \
 
 
-echo '''
-{
-  "capabilities": {
-    "portMappings": true
-  },
-  "cniVersion": "0.3.1",
-  "logLevel": "verbose",
-  "logToStderr": true,
-  "name": "multus-cni-network",
-  "clusterNetwork": "/host/etc/cni/net.d/10-calico.conflist",
-  "type": "multus-shim"
-}
-''' > /etc/cni/net.d/00-multus.conf
+# echo '''
+# {
+#   "capabilities": {
+#     "portMappings": true
+#   },
+#   "cniVersion": "0.3.1",
+#   "logLevel": "verbose",
+#   "logToStderr": true,
+#   "name": "multus-cni-network",
+#   "clusterNetwork": "/host/etc/cni/net.d/10-calico.conflist",
+#   "type": "multus-shim"
+# }
+# ''' > /etc/cni/net.d/00-multus.conf
 
 echo '''
 mirrors:

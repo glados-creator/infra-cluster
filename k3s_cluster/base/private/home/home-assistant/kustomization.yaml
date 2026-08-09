@@ -5,6 +5,7 @@ namePrefix: homeassistant-
 namespace: private
 
 resources:
+  - service-account.yaml
   - pvc.yaml
   - pv.yaml
   - deployment.yaml

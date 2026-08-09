@@ -24,6 +24,7 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
+      serviceAccountName: serviceaccount
       containers:
         - name: gatus
           image: twinproduction/gatus:latest

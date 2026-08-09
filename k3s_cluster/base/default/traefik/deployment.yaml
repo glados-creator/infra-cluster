@@ -15,7 +15,6 @@ spec:
       labels:
         app: main-traefik
     spec:
-      serviceAccountName: serviceaccount
       tolerations:
         - key: node.kubernetes.io/not-ready
           operator: Exists
@@ -25,6 +24,7 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
+      serviceAccountName: serviceaccount
       containers:
         - name: traefik
           image: traefik:latest
