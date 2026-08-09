@@ -1,0 +1,38 @@
+# 1. SERVER - Defines what we're protecting (Nginx port 80)[reference:2]
+apiVersion: policy.linkerd.io/v1beta1
+kind: Server
+metadata:
+  name: nginx-server
+  namespace: app-mesh
+spec:
+  podSelector:
+    matchLabels:
+      app: nginx-proxy
+  port: 80
+  proxyProtocol: HTTP/1
+---
+# 2. MESHTLSAUTHENTICATION - Defines how clients authenticate[reference:3]
+apiVersion: policy.linkerd.io/v1alpha1
+kind: MeshTLSAuthentication
+metadata:
+  name: python-identity
+  namespace: app-mesh
+spec:
+  identities:
+    - "python-sa.app-mesh.serviceaccount.identity.linkerd.cluster.local"
+---
+# 3. AUTHORIZATIONPOLICY - Binds it all together: ONLY python-sa can access Nginx[reference:4]
+apiVersion: policy.linkerd.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-python-to-nginx
+  namespace: app-mesh
+spec:
+  targetRef:
+    group: policy.linkerd.io
+    kind: Server
+    name: nginx-server
+  requiredAuthenticationRefs:
+    - name: python-identity
+      kind: MeshTLSAuthentication
+      group: policy.linkerd.io
