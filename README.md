@@ -120,6 +120,7 @@ todos :
     - [ ] finish adding service account to all for linkerd safety
 - [ ] default
     - [ ] openwrt router
+    - [ ] netboot-main (PXE, TBD)
     - [ ] gluetun (VPN, single)
     - [ ] honeypot (decoy, single)
     - [ ] redirect
@@ -146,6 +147,8 @@ todos :
         - [ ] halfix (VM/emulator, single)
     - [ ] alternative-frontends/ (*.alt)
         - [ ] matrix + element X https://matrix.org/ecosystem/clients/
+        - [ ] simplex messaging
+        - [ ] irc ?
         - [ ] ? navidrom / my own / Hyperpipe / BeatBump (ytb music alt) ?    
         - [ ] SearXNG / Websurfx / LibreX (search, multi)
         - [ ] Invidious / Piped / Viewtube (YouTube alt, multi)
@@ -164,7 +167,6 @@ todos :
         - [ ] mollysocket (Signal bridge, multi)
         - [ ] RSSHub + Miniflux (RSS, multi/single)
     - [ ] tools/
-        - [ ] netboot-main (PXE, TBD)
         - [ ] headscale (Tailscale alt, multi)
         - [ ] squid (forward proxy, multi)    
         - [ ] ? Guacamole (remote gateway, multi) / webtop ?

@@ -14,7 +14,7 @@ spec:
       match: Host(`glance.main.home`) && PathPrefix(`/outpost.goauthentik.io/`)
       priority: 100
       services:
-        - name: main-authentik-service
+        - name: default/main-authentik-service
           namespace: default
           port: 2288
 

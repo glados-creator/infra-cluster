@@ -6,4 +6,16 @@ namespace: dmz
 
 resources:
   - middleware
-  # - redirect
+  - glance
+  - gatus
+  - media
+  # - docker-registry
+
+secretGenerator:
+  - name: auth-basic-secret
+    envs:
+    - secret.env
+    type: Opaque
+
+generatorOptions:
+  disableNameSuffixHash: true

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: default
+  labels:
+    app: main-netboot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: main-netboot
+  template:
+    metadata:
+      labels:
+        app: main-netboot
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      serviceAccountName: serviceaccount
+      containers:
+        - name: netboot
+          image: netbootxyz/netboot:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 69
+            - containerPort: 80
+            - containerPort: 443
+          volumeMounts:
+            - name: data
+              mountPath: /config
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc

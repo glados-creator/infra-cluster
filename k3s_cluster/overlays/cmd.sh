@@ -16,6 +16,7 @@ mkdir -p /bhole/cluster/default/gatus
 mkdir -p /bhole/cluster/default/dozzle
 mkdir -p /bhole/cluster/default/authentik
 mkdir -p /bhole/cluster/default/authentik/media/public
+mkdir -p /bhole/cluster/default/netboot
 mkdir -p /bhole/cluster/default/openwrt
 mkdir -p /bhole/cluster/default/harbor
 mkdir -p /bhole/cluster/default/harbor/core-data
