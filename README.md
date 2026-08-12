@@ -58,6 +58,8 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
     + dozzle (logging)
     + authentik (auth)
     + Harbor (Docker registry, multi)
+    + netboot
+    + openwrt
 3. public
     + glance (app dir)
     + gatus (monitoring uptime)
@@ -119,8 +121,6 @@ todos :
     - [ ] rook
     - [ ] finish adding service account to all for linkerd safety
 - [ ] default
-    - [ ] openwrt router
-    - [ ] netboot-main (PXE, TBD)
     - [ ] gluetun (VPN, single)
     - [ ] honeypot (decoy, single)
     - [ ] redirect

@@ -23,7 +23,7 @@ namespace: dmz
 # │ Unpackerr       │ 8080    │ 6667  │ Archive extraction (starts at 5656)             │
 # │ Profilarr       │ 6868    │ 6668  │ Radarr/Sonarr profile & custom format sync      │
 # │ YouTarr         │ 3087    │ 6669  │ YouTube playlist monitor (Radarr‑like)          │ 
-# │ SuggestArr      │ 5000    │ 6670  │ YouTube playlist monitor (Radarr‑like)          │ 
+# │ SuggestArr      │ 5000    │ 6670  │ make movies / series watch next suguestion      │ 
 # │ # FlareSolverr  │ 8191    │       │ Cloudflare / DDoS‑GUARD bypass proxy            │
 # └─────────────────┴─────────┴─────────────────────────────────────────────────────────┘
 
