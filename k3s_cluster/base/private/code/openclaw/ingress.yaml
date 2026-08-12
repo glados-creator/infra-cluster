@@ -4,7 +4,7 @@ metadata:
   name: ingressroute
   namespace: private
   labels:
-    app: private-openclaw
+    app: private-code-openclaw
 spec:
   entryPoints:
     - web

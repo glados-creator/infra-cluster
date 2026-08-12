@@ -120,7 +120,7 @@ todos :
     - [ ] spinkube
     - [ ] rook
     - [ ] finish adding service account to all for linkerd safety
-- [ ] default
+- [ ] default (*.main)
     - [ ] gluetun (VPN, single)
     - [ ] honeypot (decoy, single)
     - [ ] redirect
@@ -141,7 +141,7 @@ todos :
         - [ ] ? telnet demo (telnet demo) ?
         - [ ] Forgejo (Git hosting, multi)
         - [ ] ? Forgejo push action runner (...) ?
-    - [ ] game/ (*.gg)
+    - [ ] game/
         - [ ] ? Pterodactyl (game server panel, multi) / modrinth ?
         - [ ] dolphin-games (emulator, single)
         - [ ] halfix (VM/emulator, single)
@@ -173,7 +173,7 @@ todos :
         - [ ] RustDesk (remote desktop, multi)
         - [ ] ? Ente Auth (multi TBD) ?
         - [ ] ? password-manager (e.g., Vaultwarden, multi) ?
-    - [ ] monitoring/
+    - [ ] monitor/
         - [ ] loki
         - [ ] elastic-beats
         - [ ] logstash

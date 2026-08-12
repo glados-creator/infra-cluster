@@ -4,16 +4,16 @@ metadata:
   name: deployment
   namespace: private
   labels:
-    app: private-odysseus
+    app: private-code-odysseus
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: private-odysseus
+      app: private-code-odysseus
   template:
     metadata:
       labels:
-        app: private-odysseus
+        app: private-code-odysseus
     spec:
       tolerations:
         - key: node.kubernetes.io/not-ready

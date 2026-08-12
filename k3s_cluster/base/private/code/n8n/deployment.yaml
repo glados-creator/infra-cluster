@@ -4,16 +4,16 @@ metadata:
   name: deployment
   namespace: private
   labels:
-    app: private-n8n
+    app: private-code-n8n
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: private-n8n
+      app: private-code-n8n
   template:
     metadata:
       labels:
-        app: private-n8n
+        app: private-code-n8n
     spec:
       tolerations:
         - key: node.kubernetes.io/not-ready

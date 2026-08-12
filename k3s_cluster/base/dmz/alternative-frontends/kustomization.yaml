@@ -5,3 +5,8 @@ namePrefix: frontalt-
 namespace: dmz
 
 # resources:
+  # - elementx
+  # - invidious
+  # - libreddit
+  # - matrix
+  # - searxng

@@ -8,6 +8,7 @@ resources:
   - middleware
   - glance
   - gatus
+  # - wordpress
 
 secretGenerator:
   - name: auth-basic-secret

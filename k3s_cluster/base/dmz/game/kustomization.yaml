@@ -5,3 +5,6 @@ namePrefix: game-
 namespace: dmz
 
 # resources:
+  # - dolphin
+  # - halfix
+  # - pterodactyl

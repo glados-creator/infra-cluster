@@ -5,10 +5,10 @@
 | glance     | None                                   | 2200              |
 | gatus      | None                                   | 2201              |
 | redirect   | None                                   | 2202 (TODO)       |
-| netboot    | 172.16.0.9 : 69                        | 2203              |
-| gluetun    | None                                   | 2204 (TODO)       |
-| honeypot   | None                                   | 2205 (TODO)       |
-| linkerd    | None                                   | 2206 (TODO)       |
+| netboot    | 172.16.0.9 : 69                        | 2203 2204         |
+| gluetun    | None                                   | 2205 (TODO)       |
+| honeypot   | None                                   | 2206 (TODO)       |
+| linkerd    | None                                   | 2207 (TODO)       |
 | dozzle     | None                                   | 2215              |
 | openwrt    | 172.16.0.1, 172.16.99.1, 192.168.1.252 | 2240, 2243 (TODO) |
 | traefik    | 172.16.0.2 : 80, 443                   | 2280, 2282        |
@@ -61,7 +61,7 @@
 | dolphin-games | 6611 (TODO) |
 | halfix        | 6612 (TODO) |
 
-#### Alternative Frontends
+#### Alternative Frontends (*.alt)
 | Service            | Port(s)     |
 | --------------------| -------------|
 | Matrix + Element X | 6613 (TODO) |
@@ -118,18 +118,17 @@
 | Miniflux    | 4411 (TODO) |
 
 #### Tools
-| Service          | Port(s)     |
-| ------------------| -------------|
-| headscale        | 4412 (TODO) |
-| squid            | 4413 (TODO) |
-| netboot-playzone | 4414 (TODO) |
-| Guacamole        | 4415 (TODO) |
-| webtop           | 4416 (TODO) |
-| RustDesk         | 4417 (TODO) |
-| Ente-Auth        | 4418 (TODO) |
-| Vaultwarden      | 4419 (TODO) |
+| Service     | Port(s)     |
+| -------------| -------------|
+| headscale   | 4412 (TODO) |
+| squid       | 4413 (TODO) |
+| Guacamole   | 4414 (TODO) |
+| webtop      | 4415 (TODO) |
+| RustDesk    | 4416 (TODO) |
+| Ente-Auth   | 4417 (TODO) |
+| Vaultwarden | 4418 (TODO) |
 
-#### Monitoring
+#### Monitor
 | Service       | Port(s)     |
 | ---------------| -------------|
 | headlamp      | 4420        |

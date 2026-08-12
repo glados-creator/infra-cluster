@@ -14,14 +14,14 @@ spec:
       match: Host(`glance.main.home`) && PathPrefix(`/outpost.goauthentik.io/`)
       priority: 100
       services:
-        - name: default/main-authentik-service
+        - name: main-authentik-service
           namespace: default
           port: 2288
 
     - kind: Rule
       match: Host(`glance.main.home`)
       middlewares:
-       - name: default/main-middleware-auth-basic
+        - name: main-middleware-auth-basic
       services:
         - name: main-glance-service
           port: 2200

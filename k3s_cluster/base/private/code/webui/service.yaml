@@ -4,11 +4,11 @@ metadata:
   name: service
   namespace: private
   labels:
-    app: private-webui
+    app: private-code-webui
 spec:
   type: ClusterIP
   selector:
-    app: private-webui
+    app: private-code-webui
   ports:
     - name: web
       protocol: TCP

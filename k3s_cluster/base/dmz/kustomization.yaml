@@ -9,7 +9,12 @@ resources:
   - glance
   - gatus
   - media
-  # - docker-registry
+  - oss
+  - alternative-frontends
+  - cloud
+  - game
+
+
 
 secretGenerator:
   - name: auth-basic-secret

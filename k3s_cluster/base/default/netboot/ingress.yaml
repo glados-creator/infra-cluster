@@ -12,8 +12,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`netboot.default.home`)
-      middlewares:
-        - name: default-middleware-auth-authentik
+      # middlewares:
+      #   - name: main-middleware-auth-authentik
       services:
-        - name: default-netboot-service
-          port: 6680
+        - name: main-netboot-service
+          port: 2203

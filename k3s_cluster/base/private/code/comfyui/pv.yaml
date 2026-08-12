@@ -4,7 +4,7 @@ metadata:
   name: pv
   namespace: private
   labels:
-    app: private-comfyui
+    app: private-code-comfyui
 spec:
   capacity:
     storage: 100Gi

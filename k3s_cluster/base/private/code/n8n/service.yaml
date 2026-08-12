@@ -4,11 +4,11 @@ metadata:
   name: service
   namespace: private
   labels:
-    app: private-n8n
+    app: private-code-n8n
 spec:
   type: ClusterIP
   selector:
-    app: private-n8n
+    app: private-code-n8n
   ports:
     - name: web
       protocol: TCP

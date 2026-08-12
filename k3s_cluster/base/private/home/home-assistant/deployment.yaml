@@ -4,16 +4,16 @@ metadata:
   name: deployment
   namespace: private
   labels:
-    app: private-homeassistant
+    app: private-home-homeassistant
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: private-homeassistant
+      app: private-home-homeassistant
   template:
     metadata:
       labels:
-        app: private-homeassistant
+        app: private-home-homeassistant
     spec:
       tolerations:
         - key: node.kubernetes.io/not-ready

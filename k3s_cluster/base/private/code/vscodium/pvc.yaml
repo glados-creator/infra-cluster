@@ -5,7 +5,7 @@ metadata:
   name: data-pvc
   namespace: private
   labels:
-    app: private-vscodium
+    app: private-code-vscodium
 spec:
   accessModes: [ReadWriteMany]
   storageClassName: nfs

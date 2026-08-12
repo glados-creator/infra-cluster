@@ -4,16 +4,16 @@ metadata:
   name: deployment
   namespace: private
   labels:
-    app: private-openclaw
+    app: private-code-openclaw
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: private-openclaw
+      app: private-code-openclaw
   template:
     metadata:
       labels:
-        app: private-openclaw
+        app: private-code-openclaw
     spec:
       tolerations:
         - key: node.kubernetes.io/not-ready

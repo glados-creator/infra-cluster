@@ -4,11 +4,11 @@ metadata:
   name: service
   namespace: private
   labels:
-    app: private-homeassistant
+    app: private-home-homeassistant
 spec:
   type: ClusterIP
   selector:
-    app: private-homeassistant
+    app: private-home-homeassistant
   ports:
     - name: web
       protocol: TCP

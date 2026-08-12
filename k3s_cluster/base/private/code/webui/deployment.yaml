@@ -4,16 +4,16 @@ metadata:
   name: deployment
   namespace: private
   labels:
-    app: private-webui
+    app: private-code-webui
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: private-webui
+      app: private-code-webui
   template:
     metadata:
       labels:
-        app: private-webui
+        app: private-code-webui
     spec:
       tolerations:
         - key: node.kubernetes.io/not-ready

@@ -4,16 +4,16 @@ metadata:
   name: deployment
   namespace: private
   labels:
-    app: private-vscodium
+    app: private-code-vscodium
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: private-vscodium
+      app: private-code-vscodium
   template:
     metadata:
       labels:
-        app: private-vscodium
+        app: private-code-vscodium
     spec:
       tolerations:
         - key: node.kubernetes.io/not-ready

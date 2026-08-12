@@ -4,16 +4,16 @@ metadata:
   name: deployment
   namespace: private
   labels:
-    app: private-ollama
+    app: private-code-ollama
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: private-ollama
+      app: private-code-ollama
   template:
     metadata:
       labels:
-        app: private-ollama
+        app: private-code-ollama
     spec:
       tolerations:
         - key: node.kubernetes.io/not-ready

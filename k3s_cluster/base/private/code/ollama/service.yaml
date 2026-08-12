@@ -4,11 +4,11 @@ metadata:
   name: service
   namespace: private
   labels:
-    app: private-ollama
+    app: private-code-ollama
 spec:
   type: ClusterIP
   selector:
-    app: private-ollama
+    app: private-code-ollama
   ports:
     - name: web
       protocol: TCP

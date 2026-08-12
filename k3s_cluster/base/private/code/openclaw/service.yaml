@@ -4,11 +4,11 @@ metadata:
   name: service
   namespace: private
   labels:
-    app: private-openclaw
+    app: private-code-openclaw
 spec:
   type: ClusterIP
   selector:
-    app: private-openclaw
+    app: private-code-openclaw
   ports:
     - name: web
       protocol: TCP

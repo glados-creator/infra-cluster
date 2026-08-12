@@ -5,3 +5,6 @@ namePrefix: cloud-
 namespace: dmz
 
 # resources:
+  # - immich
+  # - opencloud
+  # - paperless

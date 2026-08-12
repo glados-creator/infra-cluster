@@ -12,11 +12,11 @@ spec:
   ports:
     - name: web
       protocol: TCP
-      port: 22XX
+      port: 2203
       targetPort: 80
     - name: websecure
       protocol: TCP
-      port: 22XX
+      port: 2204
       targetPort: 443
 ---
 apiVersion: v1

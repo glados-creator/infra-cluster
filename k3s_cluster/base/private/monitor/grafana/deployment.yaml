@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: private
+  labels:
+    app: private-monitor-grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: private-monitor-grafana
+  template:
+    metadata:
+      labels:
+        app: private-monitor-grafana
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      securityContext:
+        fsGroup: 0
+      serviceAccountName: serviceaccount
+      containers:
+        - name: grafana
+          image: grafana/grafana:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: GF_SERVER_ROOT_URL
+              value: "http://grafana.monitor.private.home"
+            - name: GF_PLUGINS_PREINSTALL
+              value: "grafana-clock-panel"
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/grafana
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc

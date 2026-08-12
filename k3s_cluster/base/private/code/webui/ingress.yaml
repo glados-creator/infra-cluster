@@ -4,7 +4,7 @@ metadata:
   name: ingressroute
   namespace: private
   labels:
-    app: private-webui
+    app: private-code-webui
 spec:
   entryPoints:
     - web

@@ -4,7 +4,7 @@ metadata:
   name: ingressroute
   namespace: private
   labels:
-    app: private-odysseus
+    app: private-code-odysseus
 spec:
   entryPoints:
     - web

@@ -13,7 +13,7 @@ spec:
     - kind: Rule
       match: Host(`glance.public.home`)
       middlewares:
-       - name: prod-public/public-middleware-auth-basic
+        - name: public-middleware-auth-basic
       services:
         - name: public-glance-service
           port: 9900

@@ -5,3 +5,7 @@ namePrefix: feed-
 namespace: private
 
 # resources:
+  # - miniflux
+  # - mollysocket
+  # - ntfy
+  # - rsshub

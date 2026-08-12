@@ -8,9 +8,11 @@ resources:
   - middleware
   - glance
   - gatus
-  - monitoring
+  - monitor
   - code
   - home
+  - feed
+  - tools
 
 secretGenerator:
   - name: auth-basic-secret

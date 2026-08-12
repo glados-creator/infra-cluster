@@ -18,6 +18,7 @@ mkdir -p /bhole/cluster/default/authentik
 mkdir -p /bhole/cluster/default/authentik/media/public
 mkdir -p /bhole/cluster/default/netboot
 mkdir -p /bhole/cluster/default/openwrt
+
 mkdir -p /bhole/cluster/default/harbor
 mkdir -p /bhole/cluster/default/harbor/core-data
 mkdir -p /bhole/cluster/default/harbor/ca_download
@@ -33,12 +34,15 @@ mkdir -p /bhole/cluster/default/harbor/redis
 
 mkdir -p /bhole/cluster/private
 mkdir -p /bhole/cluster/private/gatus
+
 mkdir -p /bhole/cluster/private/monitor/dozzle
 mkdir -p /bhole/cluster/private/monitor/grafana
 mkdir -p /bhole/cluster/private/monitor/grafana/plugins
 mkdir -p /bhole/cluster/private/monitor/prometheus
 mkdir -p /bhole/cluster/private/monitor/headlamp
+
 mkdir -p /bhole/cluster/private/home/homeassistant/
+
 mkdir -p /bhole/cluster/private/code/ollama
 mkdir -p /bhole/cluster/private/code/vscodium
 mkdir -p /bhole/cluster/private/code/n8n
@@ -52,6 +56,10 @@ mkdir -p /bhole/cluster/public/gatus
 
 mkdir -p /bhole/cluster/dmz
 mkdir -p /bhole/cluster/dmz/gatus
+
+mkdir -p  /bhole/cluster/dmz/code/forgejo/
+
+
 mkdir -p /bhole/cluster/dmz/media-stack/
 mkdir -p /bhole/cluster/dmz/media-stack/media
 mkdir -p /bhole/cluster/dmz/media-stack/media/movies
