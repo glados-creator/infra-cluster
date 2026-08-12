@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-oss-forgejo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz-oss-forgejo
+  template:
+    metadata:
+      labels:
+        app: dmz-oss-forgejo
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      serviceAccountName: serviceaccount
+      containers:
+        - name: forgejo
+          image: forgejo/forgejo:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: FORGEJO__server__DOMAIN
+              value: codeberg.oss.dmz.home
+            - name: FORGEJO__server__ROOT_URL
+              value: http://codeberg.oss.dmz.home
+            - name: FORGEJO__server__HTTP_PORT
+              value: "3000"
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc

@@ -57,7 +57,7 @@ mkdir -p /bhole/cluster/public/gatus
 mkdir -p /bhole/cluster/dmz
 mkdir -p /bhole/cluster/dmz/gatus
 
-mkdir -p  /bhole/cluster/dmz/code/forgejo/
+mkdir -p  /bhole/cluster/dmz/oss/forgejo/
 
 
 mkdir -p /bhole/cluster/dmz/media-stack/
