@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-frontalt-searxng
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz-frontalt-searxng
+  template:
+    metadata:
+      labels:
+        app: dmz-frontalt-searxng
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      serviceAccountName: serviceaccount
+      
+      # initContainers:
+      #   # ---------- postgres ----------
+      #   - name: searxng-valkey
+      #     image: valkey/valkey:9-alpine
+      #     imagePullPolicy: IfNotPresent
+      #     # Setting restartPolicy: Always makes this a sidecar container.
+      #     restartPolicy: Always
+      #     command: ["valkey-server", "--save", "30", "1", "--loglevel", "warning"]
+      #     ports:
+      #       - containerPort: 6379
+      #     volumeMounts:
+      #       - name: db
+      #         mountPath: /data/
+
+      containers:
+        - name: searxng
+          image: searxng/searxng:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8888
+          envFrom:
+            - secretRef:
+                name: searxng-secret
+          volumeMounts:
+            - name: config
+              mountPath: /etc/searxng/settings.yml
+              subPath: settings.yml
+            - name: data
+              mountPath: /var/cache/searxng
+      volumes:
+        - name: config
+          configMap:
+            name: searxng-settings
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc

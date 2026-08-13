@@ -1,0 +1,23 @@
+use_default_settings: true
+
+server:
+  base_url: http://searxng.alt.dmz.home
+  bind_address: "0.0.0.0"
+  http_protocol_version: "1.1"
+
+search:
+  safe_search: 0
+  # autocomplete: ""
+  autocomplete_min: 3
+  default_lang: "en"
+  favicon_resolver: "duckduckgo"
+  formats:
+    - html
+    - json
+    - csv
+    - rss
+
+ui:
+  center_alignment: true
+  theme_args:
+    simple_style: black

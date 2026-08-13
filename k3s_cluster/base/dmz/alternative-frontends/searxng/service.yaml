@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: dmz
+  labels:
+    app: dmz-frontalt-searxng
+spec:
+  type: ClusterIP
+  selector:
+    app: dmz-frontalt-searxng
+  ports:
+    - name: web
+      protocol: TCP
+      port: 6609
+      targetPort: 8888

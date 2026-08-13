@@ -34,7 +34,7 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
 - [ ] ? velero ? (PV backup) (but maybe i can with ceph)
 - [~] linkerd (mtls mesh)
 - [~] Generic Device Plugin (usb passtrough)
-- [ ] prometheuse node exporter (metrics) / kube-state-metrics (KSM)
+- [ ] prometheuse node exporter (metrics) / kube-state-metrics (KSM) / altermanager
 - [X] nvidia runtime 
   ```bash
   # to apply the controller label if it's not done automaticly
@@ -66,6 +66,11 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
 4. dmz/demilitarized/priviled
     + glance (app dir)
     + gatus (monitoring uptime)
+    + oss
+      + forgejo / codeberg 
+    + alternative-frontend/frontalt/*.alt
+      + searxng
+      + invidious
     + media
         + Jellyfin
         + Radarr
@@ -139,19 +144,17 @@ todos :
         - [ ] Paperless (docs, multi)
     - [ ] oss/
         - [ ] ? telnet demo (telnet demo) ?
-        - [ ] Forgejo (Git hosting, multi)
         - [ ] ? Forgejo push action runner (...) ?
     - [ ] game/
         - [ ] ? Pterodactyl (game server panel, multi) / modrinth ?
         - [ ] dolphin-games (emulator, single)
         - [ ] halfix (VM/emulator, single)
     - [ ] alternative-frontends/ (*.alt)
+        - [ ] piped
         - [ ] matrix + element X https://matrix.org/ecosystem/clients/
         - [ ] simplex messaging
         - [ ] irc ?
         - [ ] ? navidrom / my own / Hyperpipe / BeatBump (ytb music alt) ?    
-        - [ ] SearXNG / Websurfx / LibreX (search, multi)
-        - [ ] Invidious / Piped / Viewtube (YouTube alt, multi)
         - [ ] Libreddit / Redlib (Reddit alt, multi)
         - [ ] ? AnonymousOverflow (StackOverflow alt, multi) ?
     - [ ] redirect
