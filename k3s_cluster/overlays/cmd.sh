@@ -58,6 +58,9 @@ mkdir -p /bhole/cluster/dmz
 mkdir -p /bhole/cluster/dmz/gatus
 
 mkdir -p  /bhole/cluster/dmz/frontalt/searxng/
+mkdir -p  /bhole/cluster/dmz/frontalt/invidious/
+mkdir -p  /bhole/cluster/dmz/frontalt/invidious/pgdata
+mkdir -p  /bhole/cluster/dmz/frontalt/invidious/companion-cache
 
 mkdir -p  /bhole/cluster/dmz/oss/forgejo/
 

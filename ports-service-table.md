@@ -65,9 +65,10 @@
 | Service            | Port(s)     |
 | --------------------| -------------|
 | Matrix + Element X | 6613 (TODO) |
-| SearXNG            | 6614 (TODO) |
-| Invidious / Piped  | 6615 (TODO) |
-| Libreddit / Redlib | 6616 (TODO) |
+| SearXNG            | 6614        |
+| Invidious          | 6615        |
+| Piped              | 6616 (TODO) |
+| Libreddit / Redlib | 6617 (TODO) |
 
 #### Media
 | Service     | Port(s)          |

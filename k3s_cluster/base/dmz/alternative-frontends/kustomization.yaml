@@ -6,7 +6,7 @@ namespace: dmz
 
 resources:
   # - elementx
-  # - invidious
+  - invidious
   # - libreddit
   # - matrix
   # - piped

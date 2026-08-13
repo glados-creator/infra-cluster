@@ -1,0 +1,116 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-frontalt-invidious
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dmz-frontalt-invidious
+  template:
+    metadata:
+      labels:
+        app: dmz-frontalt-invidious
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+
+      serviceAccountName: serviceaccount
+      initContainers:
+        # ---------- postgres ----------
+        - name: postgres
+          image: postgres:alpine
+          imagePullPolicy: IfNotPresent
+          # Setting restartPolicy: Always makes this a sidecar container.
+          restartPolicy: Always
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - secretRef:
+                name: invidious-secret
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql
+              subPath: pgdata
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - kemal
+                - -d
+                - invidious
+            initialDelaySeconds: 5
+            periodSeconds: 2
+
+        # ---------- invidious-companion ----------
+        # Replaces youtube-trusted-session-generator/inv-sig-helper; required
+        # for video playback to work at all on current Invidious.
+        - name: companion
+          image: quay.io/invidious/invidious-companion:latest
+          imagePullPolicy: IfNotPresent
+          restartPolicy: Always
+          ports:
+            - containerPort: 8282
+          envFrom:
+            - secretRef:
+                name: invidious-secret
+          volumeMounts:
+            - name: data
+              mountPath: /var/tmp/youtubei.js
+              subPath: companion-cache
+          readinessProbe:
+            tcpSocket:
+              port: 8282
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+      containers:
+        - name: invidious
+          image: quay.io/invidious/invidious:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            # Invidious reads its whole config from this file (mounted below)
+            # rather than one env var per setting.
+            - name: CONFIG_FILE
+              value: /invidious/config/config.yml
+          envFrom:
+            - secretRef:
+                name: invidious-secret
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /api/v1/trending
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          volumeMounts:
+            - name: config
+              mountPath: /invidious/config/config.yml
+              subPath: config.yml
+              readOnly: true
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc
+        - name: config
+          secret:
+            secretName: invidious-config
