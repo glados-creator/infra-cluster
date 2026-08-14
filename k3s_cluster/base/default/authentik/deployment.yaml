@@ -26,6 +26,7 @@ spec:
           tolerationSeconds: 10
 
       serviceAccountName: serviceaccount
+      # Ensure PostgreSQL user (uid 999) can write to PVC
       securityContext:
         fsGroup: 999
       
@@ -61,9 +62,9 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 2
 
-        # --- Redis sidecar ---
-        - name: redis
-          image: redis:alpine
+        # --- valkey sidecar ---
+        - name: valkey
+          image: valkey/valkey:alpine
           imagePullPolicy: IfNotPresent
           # Setting restartPolicy: Always makes this a sidecar container.
           restartPolicy: Always
@@ -72,14 +73,14 @@ spec:
           readinessProbe:
             exec:
               command:
-                - redis-cli
+                - valkey-cli
                 - ping
             initialDelaySeconds: 5
             periodSeconds: 5
           livenessProbe:
             exec:
               command:
-                - redis-cli
+                - valkey-cli
                 - ping
             initialDelaySeconds: 5
             periodSeconds: 2
