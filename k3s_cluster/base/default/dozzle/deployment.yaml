@@ -41,6 +41,12 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8080
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 10
       volumes:
         - name: data
           persistentVolumeClaim:

@@ -141,6 +141,12 @@ spec:
               subPath: secretkey
             # - name: trust-certs
             #   mountPath: /harbor_cust_cert
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8080
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 10
 
         # ---------- registry ----------
         - name: registry

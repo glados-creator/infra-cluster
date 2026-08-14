@@ -36,6 +36,12 @@ spec:
             - name: config
               mountPath: /app/config/
               readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
       volumes:
         - name: config
           configMap:

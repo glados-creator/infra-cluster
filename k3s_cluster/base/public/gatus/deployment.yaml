@@ -37,6 +37,12 @@ spec:
               mountPath: /config
             - name: data
               mountPath: /data
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 80
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 10
       volumes:
         - name: config
           configMap:
