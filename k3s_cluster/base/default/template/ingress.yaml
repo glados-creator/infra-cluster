@@ -13,7 +13,7 @@ spec:
     - kind: Rule
       match: Host(`<app-name>.<app-ns>.home`)
       middlewares:
-       - name: <app-ns>-middleware-auth-authentik
+        - name: <app-ns>-middleware-auth-authentik
       services:
         - name: <app-ns>-<app-name>-service
           port: 6680

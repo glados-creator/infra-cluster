@@ -14,10 +14,21 @@ spec:
       labels:
         app: main-dozzle
     spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
       serviceAccountName: serviceaccount
       containers:
         - name: dozzle
           image: amir20/dozzle:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 8080
           env:
@@ -30,6 +41,12 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8080
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 10
       volumes:
         - name: data
           persistentVolumeClaim:

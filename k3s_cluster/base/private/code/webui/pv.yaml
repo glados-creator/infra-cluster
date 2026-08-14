@@ -4,7 +4,7 @@ metadata:
   name: pv
   namespace: private
   labels:
-    app: private-webui
+    app: private-code-webui
 spec:
   capacity:
     storage: 10Gi

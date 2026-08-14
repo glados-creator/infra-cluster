@@ -24,9 +24,12 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
+      serviceAccountName: serviceaccount
       containers:
         - name: gatus
           image: twinproduction/gatus:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 8080
           volumeMounts:

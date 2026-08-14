@@ -5,7 +5,7 @@ metadata:
   name: data-pvc
   namespace: private
   labels:
-    app: private-odysseus
+    app: private-code-odysseus
 spec:
   accessModes: [ReadWriteMany]
   storageClassName: nfs

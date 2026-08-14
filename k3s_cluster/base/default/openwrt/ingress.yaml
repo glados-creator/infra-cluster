@@ -1,0 +1,20 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ingress
+  namespace: default
+  labels:
+    app: main-openwrt
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`openwrt.main.home`)
+      # middlewares:
+      #   - name: main-middleware-auth-authentik
+      services:
+        - name: main-openwrt-service
+          port: 2240
+  #tls: {} 

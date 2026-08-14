@@ -4,7 +4,7 @@ metadata:
   name: pv
   namespace: private
   labels:
-    app: private-openclaw
+    app: private-code-openclaw
 spec:
   capacity:
     storage: 5Gi

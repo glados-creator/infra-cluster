@@ -4,7 +4,7 @@ metadata:
   name: pv
   namespace: private
   labels:
-    app: private-odysseus
+    app: private-code-odysseus
 spec:
   capacity:
     storage: 10Gi

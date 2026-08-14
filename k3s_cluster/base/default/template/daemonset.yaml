@@ -16,6 +16,8 @@ spec:
       containers:
         - name: <app-name>
           image: <app-URL>:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           env:
             - name: FLUENT_ELASTICSEARCH_HOST
               value: "dummy"   # not used; we forward to syslog

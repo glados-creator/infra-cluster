@@ -27,6 +27,8 @@ spec:
       containers:
         - name: sonarr
           image: lscr.io/linuxserver/sonarr:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 8989
               name: web

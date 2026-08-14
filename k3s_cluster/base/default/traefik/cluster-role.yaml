@@ -7,7 +7,7 @@ metadata:
     app: main-traefik
 rules:
   - apiGroups: [""]
-    resources: ["*"]
+    resources: ["services", "endpoints", "secrets", "*"]
     verbs: ["get", "list", "watch"]
 
   - apiGroups: ["discovery.k8s.io"]

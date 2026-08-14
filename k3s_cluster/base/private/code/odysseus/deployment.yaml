@@ -4,16 +4,16 @@ metadata:
   name: deployment
   namespace: private
   labels:
-    app: private-odysseus
+    app: private-code-odysseus
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: private-odysseus
+      app: private-code-odysseus
   template:
     metadata:
       labels:
-        app: private-odysseus
+        app: private-code-odysseus
     spec:
       tolerations:
         - key: node.kubernetes.io/not-ready
@@ -28,9 +28,12 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
+      serviceAccountName: serviceaccount
       containers:
         - name: odysseus
           image: ghcr.io/pewdiepie-archdaemon/odysseus:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 7000
           envFrom:

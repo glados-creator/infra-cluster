@@ -5,3 +5,6 @@ namePrefix: tool-
 namespace: private
 
 # resources:
+  # - headscale
+  # - rustdesk
+  # - squid

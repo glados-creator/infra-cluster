@@ -27,6 +27,8 @@ spec:
       containers:
         - name: profilarr
           image: santiagosayshey/profilarr:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 6868
               name: web

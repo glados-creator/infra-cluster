@@ -24,12 +24,23 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
-      serviceAccountName: serviceaccount
+
+      # nodeSelector:
+      #   kubernetes.io/hostname: rpi5a
+      # nodeSelector:
+      #   server: "true"
+
       # runtimeClassName: nvidia
+      serviceAccountName: serviceaccount
+      # Ensure PostgreSQL user (uid 999) can write to PVC
+      securityContext:
+        fsGroup: 999
+
       initContainers:
         # ---------- postgres ----------
         - name: postgres
-          image: postgres:18-alpine
+          image: postgres:alpine
+          imagePullPolicy: IfNotPresent
           # Setting restartPolicy: Always makes this a sidecar container.
           restartPolicy: Always
           ports:
@@ -43,10 +54,6 @@ spec:
             capabilities:
               add:
                 - CHOWN
-                - DAC_OVERRIDE
-                - SETGID
-                - SETUID
-                - NET_BIND_SERVICE          
           volumeMounts:
             - name: data
               mountPath: /var/lib/postgresql
@@ -60,59 +67,57 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 2
 
-        # ---------- redis ----------
-        - name: redis
-          image: redis:alpine
+        # ---------- valkey ----------
+        - name: valkey
+          image: valkey/valkey:alpine
+          imagePullPolicy: IfNotPresent
           # Setting restartPolicy: Always makes this a sidecar container.
           restartPolicy: Always
           ports:
             - containerPort: 6379
-          securityContext:
-            capabilities:
-              add:
-                - CHOWN
-                - DAC_OVERRIDE
-                - SETGID
-                - SETUID
-                - NET_BIND_SERVICE          
-          volumeMounts:
-            - name: data
-              mountPath: /var/lib/redis
-              subPath: redis
           readinessProbe:
             exec:
               command:
-                - redis-cli
+                - valkey-cli
                 - ping
             initialDelaySeconds: 5
             periodSeconds: 5
           livenessProbe:
             exec:
               command:
-                - redis-cli
+                - valkey-cli
                 - ping
             initialDelaySeconds: 5
             periodSeconds: 2
-      
+
       containers:
         - name: <app-name>
           image: <app-URL>:latest
           imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           envFrom:
             - configMapRef:
                 name: youtarr-config
             - secretRef:
                 name: youtarr-secret
           ports:
-          - containerPort: 53
-            protocol: UDP
-          - containerPort: 80
-          - containerPort: 443
+            - containerPort: 53
+              protocol: UDP
+            - containerPort: 80
+            - containerPort: 443
           securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
             capabilities:
               add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
                 - NET_BIND_SERVICE
                 - NET_ADMIN
+                - NET_RAW
+                - SYS_ADMIN
           resources:
             requests:
               cpu: "500m"
@@ -129,6 +134,12 @@ spec:
             - name: data
               mountPath: /opt/adguardhome/conf
               subPath: conf
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 80
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 10
       volumes:
         - name: data
           persistentVolumeClaim:

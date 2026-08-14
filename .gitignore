@@ -7,4 +7,6 @@
 
 k3s-cluster-tokens**
 
-OLD**
+**.pem
+**.crt
+secretkey

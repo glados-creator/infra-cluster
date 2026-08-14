@@ -1,9 +1,0 @@
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: middleware-auth-basic
-  namespace: public
-spec:
-  basicAuth:
-    secret: public-auth-basic-secret
-    realm: "public-middleware-auth-basic"

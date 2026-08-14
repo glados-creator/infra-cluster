@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: default
+  labels:
+    app: main-netboot
+spec:
+  type: ClusterIP
+  selector:
+    app: main-netboot
+  ports:
+    - name: web
+      protocol: TCP
+      port: 2203
+      targetPort: 80
+    - name: websecure
+      protocol: TCP
+      port: 2204
+      targetPort: 443
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-lb
+  namespace: default
+  labels:
+    app: main-netboot
+  annotations:
+    metallb.io/address-pool: internal-ips
+    metallb.io/loadBalancerIPs: 172.16.0.9
+spec:
+  type: LoadBalancer
+  selector:
+    app: main-netboot
+  ports:
+    - name: TFTP
+      protocol: UDP
+      port: 69
+      targetPort: 69

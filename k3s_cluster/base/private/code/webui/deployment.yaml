@@ -4,16 +4,16 @@ metadata:
   name: deployment
   namespace: private
   labels:
-    app: private-webui
+    app: private-code-webui
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: private-webui
+      app: private-code-webui
   template:
     metadata:
       labels:
-        app: private-webui
+        app: private-code-webui
     spec:
       tolerations:
         - key: node.kubernetes.io/not-ready
@@ -24,9 +24,12 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
+      serviceAccountName: serviceaccount
       containers:
         - name: webui
           image: ghcr.io/open-webui/open-webui:main
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 8080
           envFrom:

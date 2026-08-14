@@ -27,6 +27,8 @@ spec:
       containers:
         - name: jellyseerr
           image: fallenbagel/jellyseerr:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 5055
               name: web

@@ -1,0 +1,27 @@
+# Full reference: https://github.com/iv-org/invidious/blob/master/config/config.example.yml
+
+db:
+  dbname: invidious
+  user: kemal
+  password: CHANGEME_same_as_POSTGRES_PASSWORD_in_secret.env
+  host: 127.0.0.1 # postgres runs as a sidecar in the same pod
+  port: 5432
+  check_tables: true # let invidious create/migrate its own schema on boot
+
+domain: invidious.alt.dmz.home
+https_only: true # trust Traefik's X-Forwarded-Proto instead of serving TLS itself
+external_port: 443
+
+hmac_key: "CHANGEME_generate_a_random_string" # e.g. `openssl rand -hex 32`
+
+invidious_companion:
+  - private_url: "http://127.0.0.1:8282"
+    public_url: "https://invidious.alt.dmz.home/companion" # TODO: needs a matching
+    # Traefik route for /companion -> the companion port (8282) if you want
+    # video playback to work from outside the cluster. Not wired up in
+    # ingress.yaml yet — add a second `routes` entry there once you confirm
+    # this is how you want it exposed.
+invidious_companion_key: "CHANGEME_same_as_SERVER_SECRET_KEY_in_secret.env"
+
+registration_enabled: false # flip to true if you want others to sign up
+statistics_enabled: false

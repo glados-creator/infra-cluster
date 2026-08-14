@@ -4,16 +4,16 @@ metadata:
   name: deployment
   namespace: private
   labels:
-    app: private-comfyui
+    app: private-code-comfyui
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: private-comfyui
+      app: private-code-comfyui
   template:
     metadata:
       labels:
-        app: private-comfyui
+        app: private-code-comfyui
     spec:
       tolerations:
         - key: node.kubernetes.io/not-ready
@@ -24,9 +24,12 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
+      serviceAccountName: serviceaccount
       containers:
         - name: comfyui
           image: ghcr.io/lecode-official/comfyui-docker:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 8188
           env:

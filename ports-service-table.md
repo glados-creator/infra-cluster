@@ -1,111 +1,157 @@
-# system (11xx)
+# Main Services (22xx)
 
-# main (22xx)
-glance             2200
-gatus              2201
-dozzle             2215
-traefik LB static ip 172.16.0.1 LB 80 443 IP 2280 2282
-technitium LB static ip 172.16.0.5 LB 53 853 443 80 8053 IP 2283 2284
+| Service    | LoadBalancer IP(s)                     | Port(s)           |
+| ------------| ----------------------------------------| -------------------|
+| glance     | None                                   | 2200              |
+| gatus      | None                                   | 2201              |
+| redirect   | None                                   | 2202 (TODO)       |
+| netboot    | 172.16.0.9 : 69                        | 2203 2204         |
+| gluetun    | None                                   | 2205 (TODO)       |
+| honeypot   | None                                   | 2206 (TODO)       |
+| linkerd    | None                                   | 2207 (TODO)       |
+| dozzle     | None                                   | 2215              |
+| openwrt    | 172.16.0.1, 172.16.99.1, 192.168.1.252 | 2240, 2243 (TODO) |
+| traefik    | 172.16.0.2 : 80, 443                   | 2280, 2282        |
+| technitium | 172.16.0.3 : 53, 853                   | 2283, 2284        |
+| authentik  | None                                   | 2288, 2289        |
+| harbor     | None                                   | 2290-2294         |
 (kubectl port-forward --address 0.0.0.0 svc/main-technitium-service 2283:2283)
-authentik          2288 2289 (/if/flow/initial-setup/ password URL)
-glueton            TBD
-redirect           2202 TODO
-harbor             IP 2290 2291 2292 2293 2294
 
-# public (99xx)
-glance             9900
-gatus              9901
-redirect           9902 TODO
-wordpress          9904
+---
 
-# dmz (66xx)
-glance             6600
-gatus              6601
-redirect           6602 TODO
+# Public Services (99xx)
 
-### dmz/cloud
-Immich             6604
-OpenCloud          6605
-Paperless          6606
+| Service       | Port(s)     |
+| ---------------| -------------|
+| glance        | 9900        |
+| gatus         | 9901        |
+| redirect      | 9902 (TODO) |
+| personal-site | 9903 (TODO) |
+| wordpress     | 9904 (TODO) |
+| url-shortener | 9905 (TODO) |
 
-### dmz/oss
-Forgejo            6608
-Harbor             6609
+---
 
-### dmz/game
-Pterodactyl        6610
-dolphin-games      6611
-halfix             6612
+# DMZ Services (66xx)
 
-### dmz/alternative-frontends
-matrix-element     6613
-SearXNG            6614
-Invidious-Piped    6615
-Libreddit-Redlib   6616
+#### General
+| Service  | Port(s)     |
+| ----------| -------------|
+| glance   | 6600        |
+| gatus    | 6601        |
+| redirect | 6602 (TODO) |
+| Mailu    | 6603 (TODO) |
 
-### dmz/media
-┌─────────────────┬─────────┬───────┬─────────────────────────────────────────────────┐
-│ Service         │ Port    │ svc   │ Purpose                                         │
-├─────────────────┼─────────┼───────┼─────────────────────────────────────────────────┤
-│ Jellyfin        │ 8096/8920/7359   │ 6650/6651/6653  │ Media server (streaming)     │
-│ Radarr          │ 7878    │ 6654  │ Movie management                                │
-│ Sonarr          │ 8989    │ 6655  │ TV show management                              │
-│ Lidarr          │ 8686    │ 6656  │ Music management                                │
-│ Readarr         │ 8787    │ 6657  │ Book / audiobook management                     │
-│ Kapowarr        │ 5656    │ 6658  │ Comic management                                │
-│ Prowlarr        │ 9696    │ 6659  │ Indexer manager for *arr apps                   │
-│ Jellyseerr      │ 5055    │ 6660  │ Request management & discovery                  │
-│ qBittorrent     │ 8080/6881 │ 6661/6662    │ BitTorrent client (Web UI) (VPNed gluetun hide.me)            │
-│ Tdarr           │ 8265    │ 6663  │ Media transcoding / optimisation                │
-│ Bazarr          │ 6767    │ 6664  │ Subtitle management                             │
-│ Autobrr         │ 7474    │ 6665  │ IRC / announce bot for instant grabs            │
-│ Jellystat       │ 3001    │ 6666  │ Jellyfin usage statistics                       │
-│ Unpackerr       │ 5656    │ 6667  │ Archive extraction (starts at 5656)             │
-│ Profilarr       │ 6868    │ 6668  │ Radarr/Sonarr profile & custom format sync      │
-│ SuggestArr      │ 5000    │ 6670  │ Media Automation & AI-Powered Recommendations   │ 
-│ YouTarr         │ 3087    │ 6669  │ YouTube playlist monitor (Radarr‑like)          │
-└─────────────────┴─────────┴─────────────────────────────────────────────────────────┘
+#### Cloud
+| Service   | Port(s)     |
+| -----------| -------------|
+| Immich    | 6604        |
+| OpenCloud | 6605 (TODO) |
+| Paperless | 6606 (TODO) |
 
-# private (44xx)
-glance             4400
-gatus              4401
-redirect           4402 TODO
+#### OSS
+| Service | Port(s) |
+| ---------| ---------|
+| Forgejo | 6610    |
 
-### private/home
-OctoPrint          4403
-home-assistant     4404
-Excalidraw         4405
-Kiwix              4406
-steam-gaming       4407
+#### Game
+| Service       | Port(s)     |
+| ---------------| -------------|
+| Pterodactyl   | 6620 (TODO) |
+| dolphin-games | 6621 (TODO) |
+| halfix        | 6622 (TODO) |
 
-### private/feed
-ntfy               4408
-mollysocket        4409
-RSSHub             4410
-Miniflux           4411
+#### Alternative Frontends (*.alt)
+| Service            | Port(s)        |
+| --------------------| ----------------|
+| Matrix + Element X | 6623 (TODO)    |
+| SearXNG            | 6624           |
+| Invidious          | 6625 / 6626    |
+| Piped              | 6627 6628 6629 |
+| Libreddit / Redlib | 6630 (TODO)    |
 
-### private/tools
-headscale          4412
-squid              4413
-netboot-playzone   4414
-RustDesk           4417
-Ente-Auth          4418
-Vaultwarden        4419
+#### Media
+| Service     | Port(s)          |
+| -------------| ------------------|
+| Jellyfin    | 6650, 6651, 6653 |
+| Radarr      | 6654             |
+| Sonarr      | 6655             |
+| Lidarr      | 6656             |
+| Readarr     | 6657             |
+| Kapowarr    | 6658             |
+| Prowlarr    | 6659             |
+| Jellyseerr  | 6660             |
+| qBittorrent | 6661, 6662       |
+| Tdarr       | 6663             |
+| Bazarr      | 6664             |
+| Autobrr     | 6665             |
+| Jellystat   | 6666             |
+| Unpackerr   | 6667             |
+| Profilarr   | 6668             |
+| YouTarr     | 6669             |
+| SuggestArr  | 6670 (TODO)      |
 
-### private/monitoring
-headlamp           4420
-grafana            4421
-prometheus         4422
-loki               4423
-elasticsearch      4424
-logstash           4427
-kibana             4428
+---
 
-### private/code
-n8n                4429
-odysseus           4430
-ollama             4431
-openclaw           4432
-vscodium           4433
-webui              4434
-comfyui            4435
+# Private Services (44xx)
+
+| Service  | Port(s)     |
+| ----------| -------------|
+| glance   | 4400        |
+| gatus    | 4401        |
+| redirect | 4402 (TODO) |
+
+#### Home
+| Service        | Port(s)     |
+| ----------------| -------------|
+| OctoPrint      | 4403 (TODO) |
+| home-assistant | 4404        |
+| Excalidraw     | 4405 (TODO) |
+| Kiwix          | 4406 (TODO) |
+| steam-gaming   | 4407 (TODO) |
+
+#### Feed
+| Service     | Port(s)     |
+| -------------| -------------|
+| ntfy        | 4408 (TODO) |
+| mollysocket | 4409 (TODO) |
+| RSSHub      | 4410 (TODO) |
+| Miniflux    | 4411 (TODO) |
+
+#### Tools
+| Service     | Port(s)     |
+| -------------| -------------|
+| headscale   | 4412 (TODO) |
+| squid       | 4413 (TODO) |
+| Guacamole   | 4414 (TODO) |
+| webtop      | 4415 (TODO) |
+| RustDesk    | 4416 (TODO) |
+| Ente-Auth   | 4417 (TODO) |
+| Vaultwarden | 4418 (TODO) |
+
+#### Monitor
+| Service       | Port(s)     |
+| ---------------| -------------|
+| headlamp      | 4420        |
+| grafana       | 4421        |
+| prometheus    | 4422        |
+| loki          | 4423 (TODO) |
+| elasticsearch | 4424 (TODO) |
+| elastic-beats | 4425 (TODO) |
+| datadog       | 4426 (TODO) |
+| logstash      | 4427 (TODO) |
+| kibana        | 4428 (TODO) |
+
+#### Code
+| Service  | Port(s)     |
+| ----------| -------------|
+| n8n      | 4429        |
+| odysseus | 4430        |
+| ollama   | 4431        |
+| openclaw | 4432        |
+| vscodium | 4433        |
+| webui    | 4434        |
+| comfyui  | 4435        |
+| exo AI   | 4436 (TODO) |
+| hermes   | 4437 (TODO) |
+| opencode | 4438 (TODO) |

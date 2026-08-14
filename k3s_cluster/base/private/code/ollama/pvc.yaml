@@ -5,7 +5,7 @@ metadata:
   name: data-pvc
   namespace: private
   labels:
-    app: private-ollama
+    app: private-code-ollama
 spec:
   accessModes: [ReadWriteMany]
   storageClassName: nfs

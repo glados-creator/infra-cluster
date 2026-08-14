@@ -4,19 +4,19 @@ kind: Kustomization
 namePrefix: harbor-
 namespace: default
 
-# | Service       | Port(s)     | Notes |
-# | :---          | :---        | :--- |
-# | core          | 8080 / 8443 | HTTP / HTTPS (likely) |
-# | registry      | 5000        | Container image registry API |
-# | registryctl   | 8081        | Registry control service |
-# | jobservice    | 8082        | Job processing service |
-# | trivy-adapter | 8083        | Vulnerability scanning adapter |
-# | portal        | 8090        | Web UI frontend |
-# | exporter      | 8001        | Default port, untouched |
-# | metric        | 8085        | metric endpoint prometheus |
-# | log (rsyslog) | 1514        | System/logging service |
-# | postgresql    | 5432        | Database |
-# | redis         | 6379        | In-memory cache / broker |
+# | Service         | Port(s)     | Notes                          |
+# | :---            | :---        | :---                           |
+# | core            | 8080 / 8443 | HTTP / HTTPS (likely)          |
+# | registry        | 5000        | Container image registry API   |
+# | registryctl     | 8081        | Registry control service       |
+# | jobservice      | 8082        | Job processing service         |
+# | trivy-adapter   | 8083        | Vulnerability scanning adapter |
+# | portal          | 8090        | Web UI frontend                |
+# | exporter        | 8001        | Default port, untouched        |
+# | metric          | 8085        | metric endpoint prometheus     |
+# | log (rsyslog)   | 1514        | System/logging service         |
+# | postgresql      | 5432        | Database                       |
+# | redis / valkey  | 6379        | In-memory cache / broker       |
 
 resources:
   - service-account.yaml

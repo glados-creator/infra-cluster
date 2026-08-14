@@ -4,7 +4,7 @@ metadata:
   name: pv
   namespace: private
   labels:
-    app: private-homeassistant
+    app: private-home-homeassistant
 spec:
   capacity:
     storage: 5Gi

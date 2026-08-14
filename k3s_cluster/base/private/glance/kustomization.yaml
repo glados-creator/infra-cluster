@@ -5,6 +5,7 @@ namePrefix: glance-
 namespace: private
 
 resources:
+  - service-account.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml

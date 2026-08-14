@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namePrefix: piped-
+namespace: dmz
+
+resources:
+  - service-account.yaml
+  - pvc.yaml
+  - pv.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: piped-config
+    envs:
+      - config.env
+
+secretGenerator:
+  - name: piped-secret
+    envs:
+      - secret.env
+    files:
+      - config.properties=config_properties.env
+    type: Opaque

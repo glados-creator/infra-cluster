@@ -21,21 +21,25 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
 - stitan (ceph todo)
 
 ### CRD Custome Ressources Definition
-- [X] traefik CRD controller (builtin)
-- [X] calico CNI (network)(TODO)
+- [X] calico CNI (network)
+- [~] mutlus CNI plugin (network)(have multiple interfaces)
+- [~] MetalLB (LoadBalancer)
+- [~] traefik CRD reverse proxy
+- [~] metric server (kubectl top api crd for dozzle)
+- [~] vulcano (gang scheduler gpus)
+- [~] keda (trigger action on event)
+- [~] spinkube (launch wasm/wasi pod)
+- [~] kubevirt (proxmox but docker)
+- [~] rook (ceph PV provider)
+- [ ] ? velero ? (PV backup) (but maybe i can with ceph)
+- [~] linkerd (mtls mesh)
+- [~] Generic Device Plugin (usb passtrough)
+- [ ] prometheuse node exporter (metrics) / kube-state-metrics (KSM) / altermanager
 - [X] nvidia runtime 
   ```bash
   # to apply the controller label if it's not done automaticly
   kubectl label node <node-name> nixos-nvidia-cdi=enabled --overwrite
   ```
-- [X] vulcano (gang scheduler gpus)
-- [X] MetalLB (LoadBalancer)
-- [X] metric server (kubectl top api crd for dozzle)
-- [X] keda (trigger action on event)
-- [] kubevirt (proxmox but docker)
-- [] prometheus CRD (monitoring)
-- [] rook (ceph PV provider)
-- [] ? velero ? (PV backup) (but maybe i can with ceph)
 
 ## zones
 
@@ -54,12 +58,22 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
     + dozzle (logging)
     + authentik (auth)
     + Harbor (Docker registry, multi)
+    + netboot
+    + openwrt
 3. public
     + glance (app dir)
     + gatus (monitoring uptime)
 4. dmz/demilitarized/priviled
     + glance (app dir)
     + gatus (monitoring uptime)
+    + oss
+      + forgejo / codeberg 
+    + alternative-frontend/frontalt/*.alt
+      + searxng
+      + invidious
+      + piped
+    + cloud
+      + immich
     + media
         + Jellyfin
         + Radarr
@@ -108,7 +122,13 @@ kubectl apply -f overlay/production
 =============================
 todos : 
 - [ ] finish CRDs
-- [ ] default
+    - [ ] tls auth certificate certificate issuer kittizz.github.io/cert-manager-technitium-webhook/
+    - [ ] generic-device-plugin
+    - [ ] kubevirt
+    - [ ] spinkube
+    - [ ] rook
+    - [ ] finish adding service account to all for linkerd safety
+- [ ] default (*.main)
     - [ ] gluetun (VPN, single)
     - [ ] honeypot (decoy, single)
     - [ ] redirect
@@ -122,22 +142,20 @@ todos :
 - [ ] dmz
     - [ ] Mailu (email server, multi)
     - [ ] cloud/
-        - [ ] Immich (photos, multi)
         - [ ] OpenCloud (file sync, multi)
         - [ ] Paperless (docs, multi)
     - [ ] oss/
         - [ ] ? telnet demo (telnet demo) ?
-        - [ ] Forgejo (Git hosting, multi)
         - [ ] ? Forgejo push action runner (...) ?
-    - [ ] game/ (*.gg)
+    - [ ] game/
         - [ ] ? Pterodactyl (game server panel, multi) / modrinth ?
         - [ ] dolphin-games (emulator, single)
         - [ ] halfix (VM/emulator, single)
     - [ ] alternative-frontends/ (*.alt)
         - [ ] matrix + element X https://matrix.org/ecosystem/clients/
+        - [ ] simplex messaging
+        - [ ] irc ?
         - [ ] ? navidrom / my own / Hyperpipe / BeatBump (ytb music alt) ?    
-        - [ ] SearXNG / Websurfx / LibreX (search, multi)
-        - [ ] Invidious / Piped / Viewtube (YouTube alt, multi)
         - [ ] Libreddit / Redlib (Reddit alt, multi)
         - [ ] ? AnonymousOverflow (StackOverflow alt, multi) ?
     - [ ] redirect
@@ -153,14 +171,13 @@ todos :
         - [ ] mollysocket (Signal bridge, multi)
         - [ ] RSSHub + Miniflux (RSS, multi/single)
     - [ ] tools/
-        - [ ] netboot-main (PXE, TBD)
         - [ ] headscale (Tailscale alt, multi)
         - [ ] squid (forward proxy, multi)    
         - [ ] ? Guacamole (remote gateway, multi) / webtop ?
         - [ ] RustDesk (remote desktop, multi)
         - [ ] ? Ente Auth (multi TBD) ?
         - [ ] ? password-manager (e.g., Vaultwarden, multi) ?
-    - [ ] monitoring/
+    - [ ] monitor/
         - [ ] loki
         - [ ] elastic-beats
         - [ ] logstash
@@ -168,6 +185,8 @@ todos :
         - [ ] kibana
         - [ ] ? datadog ?
     - [ ] code/
+        - [ ] exo AI daemonset ? 
+        - [ ] hermes AI like webui ?
         - [ ] webtop (tmp linux vm)
         - [ ] podman in docker VScodium
         - [ ] opencode
@@ -177,7 +196,6 @@ general TODOS
 - [x] TODO finish doc
 - [ ] repair pod / upgrade pod
     - [ ] add authentik
-    - [ ] authentik clusterRole
     - [ ] n8n N8N_SECURE_COOKIE=false
     - [ ] webui permissions
     - [ ] HA reverse proxy
@@ -196,7 +214,6 @@ general TODOS
     - [ ]  comfyui
     - [ ]  openclaw
     - [ ] gatus home assistant + notif push
-    - [ ] technituim convert to statefull set for static ip for HA
 - [ ] do soci imagesf
 - [ ] do ceph / rock operator
 - [ ] add peripherals

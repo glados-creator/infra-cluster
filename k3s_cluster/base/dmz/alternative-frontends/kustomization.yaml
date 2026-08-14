@@ -4,4 +4,10 @@ kind: Kustomization
 namePrefix: frontalt-
 namespace: dmz
 
-# resources:
+resources:
+  # - elementx
+  - invidious
+  # - libreddit
+  # - matrix
+  - piped
+  - searxng

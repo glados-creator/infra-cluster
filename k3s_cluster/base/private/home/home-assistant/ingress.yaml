@@ -4,7 +4,7 @@ metadata:
   name: ingressroute
   namespace: private
   labels:
-    app: private-homeassistant
+    app: private-home-homeassistant
 spec:
   entryPoints:
     - web

@@ -5,7 +5,7 @@ metadata:
   name: data-pvc
   namespace: private
   labels:
-    app: private-webui
+    app: private-code-webui
 spec:
   accessModes: [ReadWriteMany]
   storageClassName: nfs

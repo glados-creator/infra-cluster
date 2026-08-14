@@ -5,7 +5,7 @@ metadata:
   name: data-pvc
   namespace: private
   labels:
-    app: private-openclaw
+    app: private-code-openclaw
 spec:
   accessModes: [ReadWriteMany]
   storageClassName: nfs

@@ -21,13 +21,62 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-dns
+  name: service-dns-168
+  namespace: default
+  labels:
+    app: main-technitium
+  annotations:
+    metallb.io/address-pool: internal-ips
+    metallb.io/loadBalancerIPs: 192.168.1.3
+spec:
+  type: LoadBalancer
+  selector:
+    app: main-technitium
+  ports:
+    - name: dns-udp
+      port: 53
+      targetPort: 53
+      protocol: UDP
+    - name: dns-tcp
+      port: 53
+      targetPort: 53
+      protocol: TCP
+    - name: dns-over-quic
+      port: 853
+      targetPort: 853
+      protocol: UDP
+    - name: dns-over-tls
+      port: 853
+      targetPort: 853
+      protocol: TCP
+    - name : dns-over-https3 # (HTTP/3)
+      port: 443
+      targetPort: 443
+      protocol: UDP
+    - name : dns-over-https2 # (HTTP/1.1, HTTP/2)
+      port: 443
+      targetPort: 443
+      protocol: TCP
+    - name : dns-over-http # (use with reverse proxy or certbot certificate renewal)
+      port: 80
+      targetPort: 80
+      protocol: TCP
+    - name: dns-over-http-rp # (use with reverse proxy)
+      port: 8053
+      targetPort: 8053
+      protocol: TCP
+---
+# https://github.com/TechnitiumSoftware/DnsServer/blob/master/docker-compose.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-dns-172
   namespace: default
   labels:
     app: main-technitium
   annotations:
     metallb.io/address-pool: public-ips
-    metallb.io/loadBalancerIPs: 172.16.0.1
+    metallb.io/loadBalancerIPs: 172.16.0.3
 spec:
   type: LoadBalancer
   selector:

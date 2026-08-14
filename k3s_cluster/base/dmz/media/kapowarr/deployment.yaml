@@ -27,6 +27,8 @@ spec:
       containers:
         - name: kapowarr
           image: mrcas/kapowarr:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 5656
               name: web

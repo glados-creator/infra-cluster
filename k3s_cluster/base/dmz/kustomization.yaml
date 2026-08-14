@@ -5,14 +5,16 @@ namePrefix: dmz-
 namespace: dmz
 
 resources:
-  - middleware-auth-basic.yaml
-  - middleware-auth-trauth.yaml
-  - middleware-auth-authentik.yaml
-  # - redirect
+  - middleware
   - glance
   - gatus
   - media
-  # - docker-registry
+  - oss
+  - alternative-frontends
+  - cloud
+  - game
+
+
 
 secretGenerator:
   - name: auth-basic-secret

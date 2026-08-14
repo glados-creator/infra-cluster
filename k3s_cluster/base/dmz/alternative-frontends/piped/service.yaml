@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: dmz
+  labels:
+    app: dmz-frontalt-piped
+spec:
+  type: ClusterIP
+  selector:
+    app: dmz-frontalt-piped
+  ports:
+    - name: web # main site
+      protocol: TCP
+      port: 6627
+      targetPort: 80 # piped-frontend container
+    - name: api # piped's frontend calls this as its own hostname
+      protocol: TCP
+      port: 6628
+      targetPort: 8080 # piped backend container
+    - name: proxy # media/video proxy, also its own hostname
+      protocol: TCP
+      port: 6629
+      targetPort: 8080 # piped-proxy container

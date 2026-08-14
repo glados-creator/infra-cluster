@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: private
+  labels:
+    app: private-monitor-prometheus
+spec:
+  type: ClusterIP
+  selector:
+    app: private-monitor-prometheus
+  ports:
+    - name: web
+      protocol: TCP
+      port: 4422
+      targetPort: 9090

@@ -29,7 +29,7 @@ metadata:
     app: <app-ns>-<app-name>
   annotations:
     metallb.io/address-pool: internal-ips
-    # metallb.io/loadBalancerIPs: 192.168.1.1
+    # metallb.io/loadBalancerIPs: 172.16.0.9
 spec:
   type: LoadBalancer
   selector:

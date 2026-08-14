@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namePrefix: invidious-
+namespace: dmz
+
+resources:
+  - service-account.yaml
+  - pvc.yaml
+  - pv.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+  # Full invidious config.yml, mounted as a file into the main container.
+  # Contains db creds + hmac_key + companion key, so it's a Secret not a ConfigMap.
+  - name: invidious-config
+    files:
+      - config.yml=config.yaml
+    type: Opaque
+  # Individual env vars consumed by the postgres + companion sidecar containers.
+  # Keep these in sync with the matching values inside config.yml.
+  - name: invidious-secret
+    envs:
+      - secret.env
+    type: Opaque

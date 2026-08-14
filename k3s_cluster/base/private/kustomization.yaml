@@ -5,15 +5,14 @@ namePrefix: private-
 namespace: private
 
 resources:
-  - middleware-auth-basic.yaml
-  - middleware-auth-trauth.yaml
-  - middleware-auth-authentik.yaml
-  # - redirect
+  - middleware
   - glance
   - gatus
-  - monitoring
+  - monitor
   - code
   - home
+  - feed
+  - tools
 
 secretGenerator:
   - name: auth-basic-secret

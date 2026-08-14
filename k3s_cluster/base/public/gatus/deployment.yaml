@@ -24,9 +24,12 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
+      serviceAccountName: serviceaccount
       containers:
         - name: gatus
           image: twinproduction/gatus:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 8080
           volumeMounts:
@@ -34,6 +37,12 @@ spec:
               mountPath: /config
             - name: data
               mountPath: /data
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 80
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 10
       volumes:
         - name: config
           configMap:

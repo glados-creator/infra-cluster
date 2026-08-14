@@ -31,7 +31,8 @@ spec:
       initContainers:
         # --- postgres sidecar ---
         - name: postgres
-          image: postgres:18-alpine
+          image: postgres:alpine
+          imagePullPolicy: IfNotPresent
           # Setting restartPolicy: Always makes this a sidecar container.
           restartPolicy: Always
           ports:
@@ -60,6 +61,8 @@ spec:
       containers:
         - name: readarr
           image: blampe/rreading-glasses:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           command: ["/main", "serve"]
           args:
             - "--upstream=www.goodreads.com"

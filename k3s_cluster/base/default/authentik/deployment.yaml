@@ -26,13 +26,15 @@ spec:
           tolerationSeconds: 10
 
       serviceAccountName: serviceaccount
+      # Ensure PostgreSQL user (uid 999) can write to PVC
       securityContext:
         fsGroup: 999
       
       initContainers:
         # --- PostgreSQL sidecar ---
         - name: postgres
-          image: postgres:18-alpine
+          image: postgres:alpine
+          imagePullPolicy: IfNotPresent
           # Setting restartPolicy: Always makes this a sidecar container.
           restartPolicy: Always
           ports:
@@ -60,9 +62,10 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 2
 
-        # --- Redis sidecar ---
-        - name: redis
-          image: redis:alpine
+        # --- valkey sidecar ---
+        - name: valkey
+          image: valkey/valkey:alpine
+          imagePullPolicy: IfNotPresent
           # Setting restartPolicy: Always makes this a sidecar container.
           restartPolicy: Always
           ports:
@@ -70,14 +73,14 @@ spec:
           readinessProbe:
             exec:
               command:
-                - redis-cli
+                - valkey-cli
                 - ping
             initialDelaySeconds: 5
             periodSeconds: 5
           livenessProbe:
             exec:
               command:
-                - redis-cli
+                - valkey-cli
                 - ping
             initialDelaySeconds: 5
             periodSeconds: 2
@@ -86,6 +89,8 @@ spec:
         # --- Authentik Server ---
         - name: authentik-server
           image: ghcr.io/goauthentik/server:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           args: ["server"]
           ports:
             - containerPort: 9000   # HTTP
@@ -118,6 +123,8 @@ spec:
         # --- Authentik Worker ---
         - name: authentik-worker
           image: ghcr.io/goauthentik/server:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           args: ["worker"]
           envFrom:
             - configMapRef:

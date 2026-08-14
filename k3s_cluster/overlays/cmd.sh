@@ -15,7 +15,11 @@ mkdir -p /bhole/cluster/default/technitium
 mkdir -p /bhole/cluster/default/gatus
 mkdir -p /bhole/cluster/default/dozzle
 mkdir -p /bhole/cluster/default/authentik
+mkdir -p /bhole/cluster/default/authentik/pgdata
 mkdir -p /bhole/cluster/default/authentik/media/public
+mkdir -p /bhole/cluster/default/netboot
+mkdir -p /bhole/cluster/default/openwrt
+
 mkdir -p /bhole/cluster/default/harbor
 mkdir -p /bhole/cluster/default/harbor/core-data
 mkdir -p /bhole/cluster/default/harbor/ca_download
@@ -26,17 +30,18 @@ mkdir -p /bhole/cluster/default/harbor/trivy-adapter/trivy
 mkdir -p /bhole/cluster/default/harbor/trivy-adapter/reports
 mkdir -p /bhole/cluster/default/harbor/logs
 mkdir -p /bhole/cluster/default/harbor/pgdata
-mkdir -p /bhole/cluster/default/harbor/redis
-
 
 mkdir -p /bhole/cluster/private
 mkdir -p /bhole/cluster/private/gatus
+
 mkdir -p /bhole/cluster/private/monitor/dozzle
 mkdir -p /bhole/cluster/private/monitor/grafana
 mkdir -p /bhole/cluster/private/monitor/grafana/plugins
 mkdir -p /bhole/cluster/private/monitor/prometheus
 mkdir -p /bhole/cluster/private/monitor/headlamp
+
 mkdir -p /bhole/cluster/private/home/homeassistant/
+
 mkdir -p /bhole/cluster/private/code/ollama
 mkdir -p /bhole/cluster/private/code/vscodium
 mkdir -p /bhole/cluster/private/code/n8n
@@ -50,6 +55,20 @@ mkdir -p /bhole/cluster/public/gatus
 
 mkdir -p /bhole/cluster/dmz
 mkdir -p /bhole/cluster/dmz/gatus
+
+mkdir -p /bhole/cluster/dmz/frontalt/searxng/
+mkdir -p /bhole/cluster/dmz/frontalt/invidious/
+mkdir -p /bhole/cluster/dmz/frontalt/invidious/pgdata
+mkdir -p /bhole/cluster/dmz/frontalt/invidious/companion-cache
+mkdir -p /bhole/cluster/dmz/frontalt/piped/
+mkdir -p /bhole/cluster/dmz/frontalt/piped/pgdata
+
+mkdir -p /bhole/cluster/dmz/cloud/immich/
+mkdir -p /bhole/cluster/dmz/cloud/immich/pgdata
+
+mkdir -p /bhole/cluster/dmz/oss/forgejo/
+
+
 mkdir -p /bhole/cluster/dmz/media-stack/
 mkdir -p /bhole/cluster/dmz/media-stack/media
 mkdir -p /bhole/cluster/dmz/media-stack/media/movies
@@ -93,11 +112,19 @@ mkdir -p /bhole/cluster/dmz/media-stack/youtarr/jobs
 mkdir -p /bhole/cluster/dmz/media-stack/youtarr/mysql
 
 sudo chown -R 1000:1000 /bhole/cluster/*
+
 sudo chown -R 999:999 /bhole/cluster/default/authentik
 sudo chown -R 999:999 /bhole/cluster/default/harbor
+
+sudo chown -R 999:999 /bhole/cluster/dmz/frontalt/invidious/
+sudo chown -R 999:999 /bhole/cluster/dmz/frontalt/piped/
+
+sudo chown -R 999:999 /bhole/cluster/dmz/cloud/immich/
+
 sudo chown -R 999:999 /bhole/cluster/dmz/media-stack/jellystat/
 sudo chown -R 999:999 /bhole/cluster/dmz/media-stack/readarr/
 sudo chown -R 999:999 /bhole/cluster/dmz/media-stack/youtarr/
+
 sudo chown -R 1000:1000 /bhole/cluster/private/monitor/grafana
 sudo chown -R 65534:65534 /bhole/cluster/private/monitor/prometheus/
 

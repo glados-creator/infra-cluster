@@ -1,0 +1,1 @@
+https://linkerd.io/docs/tasks/exposing-dashboard/#tweaking-host-requirement

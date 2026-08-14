@@ -5,6 +5,7 @@ namePrefix: gatus-
 namespace: default
 
 resources:
+  - service-account.yaml
   - pvc.yaml
   - pv.yaml
   - deployment.yaml

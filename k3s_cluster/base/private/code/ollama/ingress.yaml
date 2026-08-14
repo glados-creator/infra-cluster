@@ -4,7 +4,7 @@ metadata:
   name: ingressroute
   namespace: private
   labels:
-    app: private-ollama
+    app: private-code-ollama
 spec:
   entryPoints:
     - web

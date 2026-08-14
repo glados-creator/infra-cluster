@@ -4,4 +4,7 @@ kind: Kustomization
 namePrefix: cloud-
 namespace: dmz
 
-# resources:
+resources:
+  - immich
+  # - opencloud
+  # - paperless

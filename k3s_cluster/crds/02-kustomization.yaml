@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# nano /etc/cni/net.d/00-multus.conf
+# add 
+# socket": "/run/multus/multus.sock",
+
+resources:
+  # Multus CNI - thick (client/server) daemonset
+  # features (CNI STATUS support, CNI spec 1.1.0). Pinned to the latest
+  # https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/quickstart.md
+  - multus
+  # - https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset-thick.yml
+  
+  # MetalLB loadbalancer
+  # https://github.com/metallb/metallb
+  - https://raw.githubusercontent.com/metallb/metallb/v0.16.0/config/manifests/metallb-native.yaml
+  # - metallb.yaml
+
+  # needed for spinkube
+  - https://github.com/cert-manager/cert-manager/releases/download/v1.20.0/cert-manager.yaml
+  - https://github.com/spinframework/spin-operator/releases/download/v0.6.1/spin-operator.crds.yaml
+  - https://github.com/spinframework/spin-operator/releases/download/v0.6.1/spin-operator.runtime-class.yaml

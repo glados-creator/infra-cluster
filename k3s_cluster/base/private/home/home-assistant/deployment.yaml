@@ -4,16 +4,16 @@ metadata:
   name: deployment
   namespace: private
   labels:
-    app: private-homeassistant
+    app: private-home-homeassistant
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: private-homeassistant
+      app: private-home-homeassistant
   template:
     metadata:
       labels:
-        app: private-homeassistant
+        app: private-home-homeassistant
     spec:
       tolerations:
         - key: node.kubernetes.io/not-ready
@@ -24,9 +24,12 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
+      serviceAccountName: serviceaccount
       containers:
         - name: homeassistant
           image: homeassistant/home-assistant:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 8123
           env:

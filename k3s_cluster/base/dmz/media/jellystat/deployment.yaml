@@ -32,7 +32,8 @@ spec:
       initContainers:
         # --- postgres sidecar ---
         - name: postgres
-          image: postgres:18-alpine
+          image: postgres:alpine
+          imagePullPolicy: IfNotPresent
           # Setting restartPolicy: Always makes this a sidecar container.
           restartPolicy: Always
           ports:
@@ -59,6 +60,8 @@ spec:
         # --- Jellystat Main ---
         - name: jellystat
           image: ghcr.io/cyfershepard/jellystat:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
           ports:
             - containerPort: 3001
               name: web

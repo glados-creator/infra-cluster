@@ -14,11 +14,11 @@ spec:
       protocol: TCP
       port: 6661
       targetPort: 8080
-    - name: tcp-incoming
-      port: 6662
-      protocol: TCP
-      targetPort: 6881
-    - name: udp-incoming
-      port: 6662
-      protocol: UDP
-      targetPort: 6881
+    # - name: tcp-incoming
+    #   port: 6662
+    #   protocol: TCP
+    #   targetPort: 6881
+    # - name: udp-incoming
+    #   port: 6662
+    #   protocol: UDP
+    #   targetPort: 6881
