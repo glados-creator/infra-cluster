@@ -12,5 +12,9 @@ spec:
   ports:
     - name: web
       protocol: TCP
-      port: 6615
+      port: 6625
       targetPort: 3000
+    - name: companion
+      protocol: TCP
+      port: 6626
+      targetPort: 8282

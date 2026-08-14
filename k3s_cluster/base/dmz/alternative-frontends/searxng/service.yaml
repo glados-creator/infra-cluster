@@ -12,5 +12,5 @@ spec:
   ports:
     - name: web
       protocol: TCP
-      port: 6609
+      port: 6624
       targetPort: 8888

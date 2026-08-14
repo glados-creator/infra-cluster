@@ -16,5 +16,5 @@ spec:
       #   - name: dmz-middleware-auth-authentik
       services:
         - name: dmz-frontalt-searxng-service
-          port: 6609
+          port: 6624
   #tls: {}

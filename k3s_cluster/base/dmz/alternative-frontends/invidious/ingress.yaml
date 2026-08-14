@@ -16,8 +16,8 @@ spec:
     - kind: Rule
       match: Host(`invidious.alt.dmz.home`) && PathPrefix(`/companion`)
       services:
-        - name: dmz-frontalt-invidious-companion-service
-          port: 8282
+        - name: dmz-frontalt-invidious-service
+          port: 6626
 
     - kind: Rule
       match: Host(`invidious.alt.dmz.home`) && !PathPrefix(`/companion`)
@@ -25,5 +25,5 @@ spec:
       #   - name: dmz-middleware-auth-authentik
       services:
         - name: dmz-frontalt-invidious-service
-          port: 6615
+          port: 6625
   #tls: {}

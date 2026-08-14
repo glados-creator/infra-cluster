@@ -12,13 +12,13 @@ spec:
   ports:
     - name: web # main site
       protocol: TCP
-      port: 6616
+      port: 6627
       targetPort: 80 # piped-frontend container
     - name: api # piped's frontend calls this as its own hostname
       protocol: TCP
-      port: 6617
+      port: 6628
       targetPort: 8080 # piped backend container
     - name: proxy # media/video proxy, also its own hostname
       protocol: TCP
-      port: 6618
+      port: 6629
       targetPort: 8080 # piped-proxy container

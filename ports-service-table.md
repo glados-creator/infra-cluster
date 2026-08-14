@@ -52,23 +52,23 @@
 #### OSS
 | Service | Port(s) |
 | ---------| ---------|
-| Forgejo | 6608    |
+| Forgejo | 6610    |
 
 #### Game
 | Service       | Port(s)     |
 | ---------------| -------------|
-| Pterodactyl   | 6610 (TODO) |
-| dolphin-games | 6611 (TODO) |
-| halfix        | 6612 (TODO) |
+| Pterodactyl   | 6620 (TODO) |
+| dolphin-games | 6621 (TODO) |
+| halfix        | 6622 (TODO) |
 
 #### Alternative Frontends (*.alt)
 | Service            | Port(s)        |
 | --------------------| ----------------|
-| Matrix + Element X | 6613 (TODO)    |
-| SearXNG            | 6614           |
-| Invidious          | 6615           |
-| Piped              | 6616 6617 6618 |
-| Libreddit / Redlib | 6619 (TODO)    |
+| Matrix + Element X | 6623 (TODO)    |
+| SearXNG            | 6624           |
+| Invidious          | 6625 / 6626    |
+| Piped              | 6627 6628 6629 |
+| Libreddit / Redlib | 6630 (TODO)    |
 
 #### Media
 | Service     | Port(s)          |

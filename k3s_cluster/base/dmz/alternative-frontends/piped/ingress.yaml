@@ -14,13 +14,13 @@ spec:
       match: Host(`piped-api.alt.dmz.home`)
       services:
         - name: dmz-frontalt-piped-service
-          port: 6617
+          port: 6628
     
     - kind: Rule
       match: Host(`piped-proxy.alt.dmz.home`)
       services:
         - name: dmz-frontalt-piped-service
-          port: 6618
+          port: 6629
     
     - kind: Rule
       match: Host(`piped.alt.dmz.home`)
@@ -28,5 +28,5 @@ spec:
       #   - name: dmz-middleware-auth-authentik
       services:
         - name: dmz-frontalt-piped-service
-          port: 6616
+          port: 6627
   #tls: {}

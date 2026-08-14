@@ -16,5 +16,5 @@ spec:
       #   - name: dmz-middleware-auth-authentik
       services:
         - name: dmz-code-forgejo-service
-          port: 6608
+          port: 6610
   #tls: {}
