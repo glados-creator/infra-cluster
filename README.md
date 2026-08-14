@@ -72,6 +72,8 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
       + searxng
       + invidious
       + piped
+    + cloud
+      + immich
     + media
         + Jellyfin
         + Radarr
@@ -140,7 +142,6 @@ todos :
 - [ ] dmz
     - [ ] Mailu (email server, multi)
     - [ ] cloud/
-        - [ ] Immich (photos, multi)
         - [ ] OpenCloud (file sync, multi)
         - [ ] Paperless (docs, multi)
     - [ ] oss/

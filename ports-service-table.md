@@ -45,14 +45,14 @@
 #### Cloud
 | Service   | Port(s)     |
 | -----------| -------------|
-| Immich    | 6604 (TODO) |
+| Immich    | 6604        |
 | OpenCloud | 6605 (TODO) |
 | Paperless | 6606 (TODO) |
 
 #### OSS
-| Service | Port(s)     |
-| ---------| -------------|
-| Forgejo | 6608 (TODO) |
+| Service | Port(s) |
+| ---------| ---------|
+| Forgejo | 6608    |
 
 #### Game
 | Service       | Port(s)     |

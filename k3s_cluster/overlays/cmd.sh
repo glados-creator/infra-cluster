@@ -30,8 +30,6 @@ mkdir -p /bhole/cluster/default/harbor/trivy-adapter/trivy
 mkdir -p /bhole/cluster/default/harbor/trivy-adapter/reports
 mkdir -p /bhole/cluster/default/harbor/logs
 mkdir -p /bhole/cluster/default/harbor/pgdata
-mkdir -p /bhole/cluster/default/harbor/redis
-
 
 mkdir -p /bhole/cluster/private
 mkdir -p /bhole/cluster/private/gatus
@@ -64,6 +62,9 @@ mkdir -p /bhole/cluster/dmz/frontalt/invidious/pgdata
 mkdir -p /bhole/cluster/dmz/frontalt/invidious/companion-cache
 mkdir -p /bhole/cluster/dmz/frontalt/piped/
 mkdir -p /bhole/cluster/dmz/frontalt/piped/pgdata
+
+mkdir -p /bhole/cluster/dmz/cloud/immich/
+mkdir -p /bhole/cluster/dmz/cloud/immich/pgdata
 
 mkdir -p /bhole/cluster/dmz/oss/forgejo/
 
@@ -117,6 +118,8 @@ sudo chown -R 999:999 /bhole/cluster/default/harbor
 
 sudo chown -R 999:999 /bhole/cluster/dmz/frontalt/invidious/
 sudo chown -R 999:999 /bhole/cluster/dmz/frontalt/piped/
+
+sudo chown -R 999:999 /bhole/cluster/dmz/cloud/immich/
 
 sudo chown -R 999:999 /bhole/cluster/dmz/media-stack/jellystat/
 sudo chown -R 999:999 /bhole/cluster/dmz/media-stack/readarr/
