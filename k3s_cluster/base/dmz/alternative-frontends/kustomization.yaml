@@ -9,5 +9,5 @@ resources:
   - invidious
   # - libreddit
   # - matrix
-  # - piped
+  - piped
   - searxng

@@ -62,13 +62,13 @@
 | halfix        | 6612 (TODO) |
 
 #### Alternative Frontends (*.alt)
-| Service            | Port(s)     |
-| --------------------| -------------|
-| Matrix + Element X | 6613 (TODO) |
-| SearXNG            | 6614        |
-| Invidious          | 6615        |
-| Piped              | 6616 (TODO) |
-| Libreddit / Redlib | 6617 (TODO) |
+| Service            | Port(s)        |
+| --------------------| ----------------|
+| Matrix + Element X | 6613 (TODO)    |
+| SearXNG            | 6614           |
+| Invidious          | 6615           |
+| Piped              | 6616 6617 6618 |
+| Libreddit / Redlib | 6619 (TODO)    |
 
 #### Media
 | Service     | Port(s)          |

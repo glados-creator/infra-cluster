@@ -71,6 +71,7 @@ rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
     + alternative-frontend/frontalt/*.alt
       + searxng
       + invidious
+      + piped
     + media
         + Jellyfin
         + Radarr
@@ -150,7 +151,6 @@ todos :
         - [ ] dolphin-games (emulator, single)
         - [ ] halfix (VM/emulator, single)
     - [ ] alternative-frontends/ (*.alt)
-        - [ ] piped
         - [ ] matrix + element X https://matrix.org/ecosystem/clients/
         - [ ] simplex messaging
         - [ ] irc ?

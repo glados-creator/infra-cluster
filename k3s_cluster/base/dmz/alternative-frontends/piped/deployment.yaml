@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: dmz
+  labels:
+    app: dmz-frontalt-piped
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dmz-frontalt-piped
+  template:
+    metadata:
+      labels:
+        app: dmz-frontalt-piped
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+
+      serviceAccountName: serviceaccount
+
+      initContainers:
+        # ---------- postgres ----------
+        - name: postgres
+          image: postgres:alpine
+          imagePullPolicy: IfNotPresent
+          restartPolicy: Always # sidecar
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: piped-config
+            - secretRef:
+                name: piped-secret
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql
+              subPath: pgdata
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - $(POSTGRES_USER)
+            initialDelaySeconds: 5
+            periodSeconds: 2
+
+        # ---------- piped backend / API ----------
+        - name: backend
+          image: 1337kavin/piped:latest
+          imagePullPolicy: IfNotPresent
+          restartPolicy: Always # sidecar
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: piped-config
+              mountPath: /app/config.properties
+              subPath: config.properties
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+        # ---------- piped-proxy (media proxy) ----------
+        - name: proxy
+          image: 1337kavin/piped-proxy:latest
+          imagePullPolicy: IfNotPresent
+          restartPolicy: Always # sidecar
+          ports:
+            - containerPort: 8080
+
+      containers:
+        # ---------- piped-frontend (this is what clients hit) ----------
+        - name: frontend
+          image: 1337kavin/piped-frontend:latest
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: piped-config
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc
+        - name: piped-config
+          secret:
+            secretName: piped-secret
+            items:
+              - key: config.properties
+                path: config.properties
