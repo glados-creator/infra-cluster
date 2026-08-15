@@ -113,17 +113,17 @@ mkdir -p /bhole/cluster/dmz/media-stack/youtarr/mysql
 
 sudo chown -R 1000:1000 /bhole/cluster/*
 
-sudo chown -R 999:999 /bhole/cluster/default/authentik
-sudo chown -R 999:999 /bhole/cluster/default/harbor
+sudo chown -R 70:70 /bhole/cluster/default/authentik
+sudo chown -R 70:70 /bhole/cluster/default/harbor
 
-sudo chown -R 999:999 /bhole/cluster/dmz/frontalt/invidious/
-sudo chown -R 999:999 /bhole/cluster/dmz/frontalt/piped/
+sudo chown -R 70:70 /bhole/cluster/dmz/frontalt/invidious/
+sudo chown -R 70:70 /bhole/cluster/dmz/frontalt/piped/
 
-sudo chown -R 999:999 /bhole/cluster/dmz/cloud/immich/
+sudo chown -R 70:70 /bhole/cluster/dmz/cloud/immich/
 
-sudo chown -R 999:999 /bhole/cluster/dmz/media-stack/jellystat/
-sudo chown -R 999:999 /bhole/cluster/dmz/media-stack/readarr/
-sudo chown -R 999:999 /bhole/cluster/dmz/media-stack/youtarr/
+sudo chown -R 70:70 /bhole/cluster/dmz/media-stack/jellystat/
+sudo chown -R 70:70 /bhole/cluster/dmz/media-stack/readarr/
+sudo chown -R 70:70 /bhole/cluster/dmz/media-stack/youtarr/
 
 sudo chown -R 1000:1000 /bhole/cluster/private/monitor/grafana
 sudo chown -R 65534:65534 /bhole/cluster/private/monitor/prometheus/

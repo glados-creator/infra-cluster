@@ -34,7 +34,7 @@ spec:
   selector:
     app: main-netboot
   ports:
-    - name: TFTP
+    - name: tftp
       protocol: UDP
       port: 69
       targetPort: 69

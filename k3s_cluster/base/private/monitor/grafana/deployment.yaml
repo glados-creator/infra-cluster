@@ -39,6 +39,10 @@ spec:
               value: "http://grafana.monitor.private.home"
             - name: GF_PLUGINS_PREINSTALL
               value: "grafana-clock-panel"
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
           volumeMounts:
             - name: data
               mountPath: /var/lib/grafana

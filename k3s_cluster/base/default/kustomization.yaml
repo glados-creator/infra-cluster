@@ -6,7 +6,7 @@ namespace: default
 
 resources:
   - middleware
-  - openwrt
+  # - openwrt
   - traefik
   - technitium
   - harbor
@@ -14,7 +14,7 @@ resources:
   - glance
   - gatus
   - dozzle
-  - netboot
+  # - netboot
   # - gluetun
   # - honeypot
   # - linkerd

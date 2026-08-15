@@ -13,4 +13,4 @@ spec:
     - name: web
       protocol: TCP
       port: 6600 # port of that service
-      targetPort: 80 # port of the container
+      targetPort: 8080 # port of the container

@@ -27,7 +27,7 @@ spec:
       serviceAccountName: serviceaccount
       containers:
         - name: forgejo
-          image: forgejo/forgejo:latest
+          image: codeberg.org/forgejo/forgejo:16
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000

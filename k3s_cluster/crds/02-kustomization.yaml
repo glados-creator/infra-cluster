@@ -21,3 +21,14 @@ resources:
   - https://github.com/cert-manager/cert-manager/releases/download/v1.20.0/cert-manager.yaml
   - https://github.com/spinframework/spin-operator/releases/download/v0.6.1/spin-operator.crds.yaml
   - https://github.com/spinframework/spin-operator/releases/download/v0.6.1/spin-operator.runtime-class.yaml
+
+# kustomization.yaml
+patches:
+  - target:
+      kind: Deployment
+      name: metrics-server
+      namespace: kube-system
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --kubelet-insecure-tls

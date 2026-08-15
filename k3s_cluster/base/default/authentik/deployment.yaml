@@ -26,10 +26,10 @@ spec:
           tolerationSeconds: 10
 
       serviceAccountName: serviceaccount
-      # Ensure PostgreSQL user (uid 999) can write to PVC
+      # Ensure PostgreSQL user (uid 70) can write to PVC
       securityContext:
-        fsGroup: 999
-      
+        fsGroup: 70
+
       initContainers:
         # --- PostgreSQL sidecar ---
         - name: postgres
@@ -48,6 +48,10 @@ spec:
                 secretKeyRef:
                   name: authentik-secret
                   key: AUTHENTIK_POSTGRESQL__PASSWORD
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
           volumeMounts:
             - name: data
               mountPath: /var/lib/postgresql
@@ -84,7 +88,7 @@ spec:
                 - ping
             initialDelaySeconds: 5
             periodSeconds: 2
-      
+
       containers:
         # --- Authentik Server ---
         - name: authentik-server
@@ -93,8 +97,8 @@ spec:
           # restartPolicy: Always
           args: ["server"]
           ports:
-            - containerPort: 9000   # HTTP
-            - containerPort: 9443   # HTTPS
+            - containerPort: 9000 # HTTP
+            - containerPort: 9443 # HTTPS
           envFrom:
             - configMapRef:
                 name: authentik-config

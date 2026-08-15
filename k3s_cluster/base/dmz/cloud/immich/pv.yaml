@@ -20,7 +20,7 @@ spec:
     nodeStageSecretRef:
       name: rook-csi-cephfs-node
       namespace: rook-ceph
-    volumeHandle: cephfs-vicus-dmz
+    volumeHandle: cephfs-vicus-dmz-cloud-immich
     volumeAttributes:
       clusterID: rook-ceph   
       fsName: bhole

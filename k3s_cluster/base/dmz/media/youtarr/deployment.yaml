@@ -23,7 +23,7 @@ spec:
           tolerationSeconds: 10
 
       securityContext:
-        fsGroup: 999   # MariaDB user (mysql) uid
+        fsGroup: 70   # MariaDB user (mysql) uid
 
       containers:
         # --- Youtarr main container ---

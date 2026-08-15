@@ -35,9 +35,13 @@ spec:
           ports:
             - containerPort: 9090
           args:
-            - '--config.file=/etc/prometheus/prometheus.yaml'
-            - '--storage.tsdb.path=/prometheus'
-            - '--web.enable-lifecycle'   # optional, for reload via API
+            - "--config.file=/etc/prometheus/prometheus.yaml"
+            - "--storage.tsdb.path=/prometheus"
+            - "--web.enable-lifecycle" # optional, for reload via API
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
           volumeMounts:
             - name: data
               mountPath: /prometheus

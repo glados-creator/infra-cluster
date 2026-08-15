@@ -15,6 +15,6 @@ spec:
       # middlewares:
       #   - name: dmz-middleware-auth-authentik
       services:
-        - name: dmz-code-forgejo-service
+        - name: dmz-oss-forgejo-service
           port: 6610
   #tls: {}

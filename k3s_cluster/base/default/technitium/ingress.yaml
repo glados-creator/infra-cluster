@@ -52,11 +52,11 @@ spec:
     - websecure # dns-over-https3 dns-over-https2
   routes:
     - kind: Rule
-      match: Host(`technitium.main.home`) && PathPrefix(`/dns-query`)
+      match: Host(`dns.technitium.main.home`) #/dns-query
       # middlewares:
       #   - name: set-real-ip
       services:
-        - name: main-technitium-service-dns
+        - name: main-technitium-service-dns-192
           port: 443
   #tls: {}
 ---
@@ -72,11 +72,11 @@ spec:
     - web # dns-over-http
   routes:
     - kind: Rule
-      match: Host(`technitium.main.home`) && PathPrefix(`/dns-query`)
+      match: Host(`dns.technitium.main.home`) #/dns-query
       # middlewares:
       #   - name: set-real-ip
       services:
-        - name: main-technitium-service-dns
+        - name: main-technitium-service-dns-192
           port: 80
   #tls: {}
 ---
@@ -92,10 +92,10 @@ spec:
     - web # dns-over-http-rp
   routes:
     - kind: Rule
-      match: Host(`rp.technitium.main.home`) && PathPrefix(`/dns-query`)
+      match: Host(`dns.technitium.main.home`) #/dns-query
       # middlewares:
       #   - name: set-real-ip
       services:
-        - name: main-technitium-service-dns
+        - name: main-technitium-service-dns-192
           port: 8053
   #tls: {}

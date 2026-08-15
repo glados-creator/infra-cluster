@@ -103,17 +103,17 @@ mkdir -p /mnt/bhole/volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbb
 
 
 # chown
-sudo chown -R 999:999 /mnt/bhole/volumes/k8s-colosseum/vicus-default/daeef6bb-d993-4383-86af-2745a851bf55/authentik
-sudo chown -R 999:999 /mnt/bhole/volumes/k8s-colosseum/vicus-default/daeef6bb-d993-4383-86af-2745a851bf55/harbor
+# sudo chown -R 70:70 /mnt/bhole/volumes/k8s-colosseum/vicus-default/daeef6bb-d993-4383-86af-2745a851bf55/authentik
+# sudo chown -R 70:70 /mnt/bhole/volumes/k8s-colosseum/vicus-default/daeef6bb-d993-4383-86af-2745a851bf55/harbor
 
-sudo chown -R 999:999 /mnt/bhole/volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/frontalt/invidious/
-sudo chown -R 999:999 /mnt/bhole/volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/frontalt/piped/
+# sudo chown -R 70:70 /mnt/bhole/volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/frontalt/invidious/
+# sudo chown -R 70:70 /mnt/bhole/volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/frontalt/piped/
 
-sudo chown -R 999:999 /mnt/bhole/volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/cloud/immich/
+# sudo chown -R 70:70 /mnt/bhole/volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/cloud/immich/
 
-sudo chown -R 999:999 /mnt/bhole/volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/media-stack/jellystat/
-sudo chown -R 999:999 /mnt/bhole/volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/media-stack/readarr/
-sudo chown -R 999:999 /mnt/bhole/volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/media-stack/youtarr/
+# sudo chown -R 70:70 /mnt/bhole/volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/media-stack/jellystat/
+# sudo chown -R 70:70 /mnt/bhole/volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/media-stack/readarr/
+# sudo chown -R 70:70 /mnt/bhole/volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/media-stack/youtarr/
 
 sudo chown -R 1000:1000 /mnt/bhole/volumes/k8s-colosseum/vicus-private/c8e734df-e422-4b77-8ab5-ef8ece645e26/monitor/grafana
 sudo chown -R 65534:65534 /mnt/bhole/volumes/k8s-colosseum/vicus-private/c8e734df-e422-4b77-8ab5-ef8ece645e26/monitor/prometheus/

@@ -26,9 +26,9 @@ spec:
           tolerationSeconds: 10
 
       serviceAccountName: serviceaccount
-      # Ensure PostgreSQL user (uid 999) can write to PVC
+      # Ensure PostgreSQL user (uid 70) can write to PVC
       securityContext:
-        fsGroup: 999
+        fsGroup: 70
 
       initContainers:
         # ---------- postgres ----------

@@ -21,7 +21,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-dns-168
+  name: service-dns-192
   namespace: default
   labels:
     app: main-technitium

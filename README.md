@@ -14,6 +14,13 @@
 
 rpi 2 rpi 1 rpi0W-a/b armV7 too old 32bits so no images for them
 
+TODO : problems
+main openwrt , netboot
+private code n8n file perms , odysseus , openclaw , vscodium , webui
+dmz searxng
+add arcane ? to monitor
+
+
 ### storage
 - rpi5-a/b (temp nfs)
 - big astra (ceph todo)
