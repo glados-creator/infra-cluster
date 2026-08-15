@@ -9,14 +9,19 @@ spec:
   capacity:
     storage: 100Gi
   accessModes:
-    - ReadWriteOnce
-    - ReadOnlyMany
     - ReadWriteMany
-    # - ReadWriteOncePod
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: nfs
-  mountOptions:
-    - nolock
-  nfs:
-    server: 192.168.1.24  # your NFS server IP
-    path: /bhole/cluster/default/harbor/ # your NFS export path
+  storageClassName: "" # cephfs
+  # mountOptions:
+  #   - nolock
+  csi:
+    driver: rook-ceph.cephfs.csi.ceph.com
+    nodeStageSecretRef:
+      name: rook-csi-cephfs-node
+      namespace: rook-ceph
+    volumeHandle: cephfs-vicus-default
+    volumeAttributes:
+      clusterID: rook-ceph   # confirm against: kubectl -n rook-ceph get cm rook-ceph-csi-config -o jsonpath='{.data.csi-cluster-config-json}'
+      fsName: bhole
+      staticVolume: "true"
+      rootPath: /volumes/k8s-colosseum/vicus-default/daeef6bb-d993-4383-86af-2745a851bf55/harbor/

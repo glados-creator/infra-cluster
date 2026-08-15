@@ -7,14 +7,21 @@ metadata:
     app: main-openwrt
 spec:
   capacity:
-    storage: 5Gi
+    storage: 10Gi
   accessModes:
-    - ReadWriteOnce
-    - ReadOnlyMany
     - ReadWriteMany
-    # - ReadWriteOncePod
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: nfs
-  nfs:
-    server: 192.168.1.24
-    path: /bhole/cluster/default/openwrt/
+  storageClassName: "" # cephfs
+  # mountOptions:
+  #   - nolock
+  csi:
+    driver: rook-ceph.cephfs.csi.ceph.com
+    nodeStageSecretRef:
+      name: rook-csi-cephfs-node
+      namespace: rook-ceph
+    volumeHandle: cephfs-vicus-default
+    volumeAttributes:
+      clusterID: rook-ceph   # confirm against: kubectl -n rook-ceph get cm rook-ceph-csi-config -o jsonpath='{.data.csi-cluster-config-json}'
+      fsName: bhole
+      staticVolume: "true"
+      rootPath: /volumes/k8s-colosseum/vicus-default/daeef6bb-d993-4383-86af-2745a851bf55/openwrt/

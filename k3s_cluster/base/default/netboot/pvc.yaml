@@ -6,9 +6,10 @@ metadata:
   labels:
     app: main-netboot
 spec:
-  accessModes: [ReadWriteMany]
-  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "" # cephfs
   volumeName: pv
   resources:
     requests:
-      storage: 10Gi
+      storage: 100Gi

@@ -11,7 +11,7 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: cephfs
+  storageClassName: "" # cephfs
   # mountOptions:
   #   - nolock
   csi:

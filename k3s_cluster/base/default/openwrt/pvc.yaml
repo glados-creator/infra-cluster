@@ -6,9 +6,10 @@ metadata:
   labels:
     app: main-openwrt
 spec:
-  accessModes: [ReadWriteMany]
-  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "" # cephfs
   volumeName: pv
   resources:
     requests:
-      storage: 5Gi
+      storage: 10Gi

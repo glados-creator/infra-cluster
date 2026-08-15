@@ -8,7 +8,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: cephfs
+  storageClassName: "" # cephfs
   volumeName: pv
   resources:
     requests:
