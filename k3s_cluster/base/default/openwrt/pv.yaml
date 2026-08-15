@@ -21,7 +21,7 @@ spec:
       namespace: rook-ceph
     volumeHandle: cephfs-vicus-default
     volumeAttributes:
-      clusterID: rook-ceph   # confirm against: kubectl -n rook-ceph get cm rook-ceph-csi-config -o jsonpath='{.data.csi-cluster-config-json}'
+      clusterID: rook-ceph   
       fsName: bhole
       staticVolume: "true"
       rootPath: /volumes/k8s-colosseum/vicus-default/daeef6bb-d993-4383-86af-2745a851bf55/openwrt/

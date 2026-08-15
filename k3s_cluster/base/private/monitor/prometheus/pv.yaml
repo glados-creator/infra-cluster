@@ -9,11 +9,19 @@ spec:
   capacity:
     storage: 10Gi
   accessModes:
-    - ReadWriteOnce
-    - ReadOnlyMany
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: nfs
-  nfs:
-    server: 192.168.1.24
-    path: /bhole/cluster/private/monitor/prometheus/
+  storageClassName: "" # cephfs
+  # mountOptions:
+  #   - nolock
+  csi:
+    driver: rook-ceph.cephfs.csi.ceph.com
+    nodeStageSecretRef:
+      name: rook-csi-cephfs-node
+      namespace: rook-ceph
+    volumeHandle: cephfs-vicus-private
+    volumeAttributes:
+      clusterID: rook-ceph   
+      fsName: bhole
+      staticVolume: "true"
+      rootPath: /volumes/k8s-colosseum/vicus-private/c8e734df-e422-4b77-8ab5-ef8ece645e26/monitor/prometheus/
