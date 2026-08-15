@@ -6,8 +6,9 @@ metadata:
   labels:
     app: dmz-frontalt-searxng
 spec:
-  accessModes: [ReadWriteMany]
-  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "" # cephfs
   volumeName: pv
   resources:
     requests:

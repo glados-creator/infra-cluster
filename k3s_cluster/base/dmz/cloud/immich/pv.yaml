@@ -10,14 +10,19 @@ spec:
     # this backs the photo/video library, not just app config - size generously
     storage: 128Gi
   accessModes:
-    - ReadWriteOnce
-    - ReadOnlyMany
     - ReadWriteMany
-    # - ReadWriteOncePod
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: nfs
+  storageClassName: "" # cephfs
   # mountOptions:
   #   - nolock
-  nfs:
-    server: 192.168.1.24  # your NFS server IP
-    path: /bhole/cluster/dmz/cloud/immich/ # your NFS export path
+  csi:
+    driver: rook-ceph.cephfs.csi.ceph.com
+    nodeStageSecretRef:
+      name: rook-csi-cephfs-node
+      namespace: rook-ceph
+    volumeHandle: cephfs-vicus-dmz
+    volumeAttributes:
+      clusterID: rook-ceph   
+      fsName: bhole
+      staticVolume: "true"
+      rootPath: /volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/cloud/immich/

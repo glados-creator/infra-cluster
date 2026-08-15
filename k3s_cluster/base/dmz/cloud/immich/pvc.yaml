@@ -6,8 +6,9 @@ metadata:
   labels:
     app: dmz-cloud-immich
 spec:
-  accessModes: [ReadWriteMany]
-  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "" # cephfs
   volumeName: pv
   resources:
     requests:

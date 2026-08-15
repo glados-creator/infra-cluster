@@ -9,11 +9,19 @@ spec:
   capacity:
     storage: 10Gi
   accessModes:
-    - ReadWriteOnce
-    - ReadOnlyMany
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: nfs
-  nfs:
-    server: 192.168.1.24
-    path: /bhole/cluster/dmz/frontalt/searxng/
+  storageClassName: "" # cephfs
+  # mountOptions:
+  #   - nolock
+  csi:
+    driver: rook-ceph.cephfs.csi.ceph.com
+    nodeStageSecretRef:
+      name: rook-csi-cephfs-node
+      namespace: rook-ceph
+    volumeHandle: cephfs-vicus-dmz
+    volumeAttributes:
+      clusterID: rook-ceph   
+      fsName: bhole
+      staticVolume: "true"
+      rootPath: /volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/frontalt/searxng/

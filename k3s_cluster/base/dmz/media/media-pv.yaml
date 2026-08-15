@@ -7,14 +7,21 @@ metadata:
     app: dmz-media
 spec:
   capacity:
-    storage: 250Gi          # can be larger than PVC request
+    storage: 250Gi
   accessModes:
-    - ReadWriteOnce
-    - ReadOnlyMany
     - ReadWriteMany
-    # - ReadWriteOncePod
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: nfs
-  nfs:
-    server: 192.168.1.24  # your NFS server IP
-    path: /bhole/cluster/dmz/media-stack/ # your NFS export path
+  storageClassName: "" # cephfs
+  # mountOptions:
+  #   - nolock
+  csi:
+    driver: rook-ceph.cephfs.csi.ceph.com
+    nodeStageSecretRef:
+      name: rook-csi-cephfs-node
+      namespace: rook-ceph
+    volumeHandle: cephfs-vicus-dmz
+    volumeAttributes:
+      clusterID: rook-ceph   
+      fsName: bhole
+      staticVolume: "true"
+      rootPath: /volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/media-stack/

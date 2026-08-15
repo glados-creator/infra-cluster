@@ -6,8 +6,9 @@ metadata:
   labels:
     app: dmz-media
 spec:
-  accessModes: [ReadWriteMany]
-  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "" # cephfs
   volumeName: media-pv
   resources:
     requests:
