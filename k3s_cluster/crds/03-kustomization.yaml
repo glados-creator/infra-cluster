@@ -34,7 +34,8 @@ resources:
   # https://github.com/rook/rook/releases/tag/v1.20.2
   - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/crds.yaml
   - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/common.yaml
-  - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/csi-operator.yaml
+  - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/common-external.yaml
+  - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/networkpolicy.yaml
 
   # github.com/squat/generic-device-plugin
   - https://raw.githubusercontent.com/squat/generic-device-plugin/main/manifests/generic-device-plugin.yaml

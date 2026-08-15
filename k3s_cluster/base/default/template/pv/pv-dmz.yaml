@@ -2,16 +2,16 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: pv
-  namespace: default
+  namespace: dmz
   labels:
-    app: main-authentik
+    app: dmz-<app-name>
 spec:
   capacity:
-    storage: 10Gi
+    storage: <app-cap>Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: cephfs
+  storageClassName: "" # cephfs
   # mountOptions:
   #   - nolock
   csi:
@@ -19,9 +19,9 @@ spec:
     nodeStageSecretRef:
       name: rook-csi-cephfs-node
       namespace: rook-ceph
-    volumeHandle: cephfs-vicus-default
+    volumeHandle: cephfs-vicus-dmz
     volumeAttributes:
       clusterID: rook-ceph   # confirm against: kubectl -n rook-ceph get cm rook-ceph-csi-config -o jsonpath='{.data.csi-cluster-config-json}'
       fsName: bhole
       staticVolume: "true"
-      rootPath: /volumes/k8s-colosseum/vicus-default/daeef6bb-d993-4383-86af-2745a851bf55/authentik/
+      rootPath: /volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/<app-name>/
