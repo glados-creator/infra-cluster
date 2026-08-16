@@ -1,0 +1,14 @@
+{
+  "name": "infra-cluster-devcontainer",
+  "dockerComposeFile": "docker-compose.yaml",
+  "service": "devcontainer",
+  "workspaceFolder": "/infra-cluster-ct",
+  "extensions": [
+    "ms-kubernetes-tools.vscode-kubernetes-tools",
+    "redhat.vscode-yaml"
+  ],
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/fish"
+  },
+  "forwardPorts": []
+}

@@ -1,0 +1,13 @@
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/infra-cluster-ct   # Mount your current directory into the container
+    command: sleep infinity
+    networks:
+      - dev
+
+networks:
+  dev:
