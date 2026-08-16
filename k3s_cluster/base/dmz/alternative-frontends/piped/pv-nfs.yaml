@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv
+  namespace: dmz
+  labels:
+    app: dmz-frontalt-piped
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+    - ReadOnlyMany
+    - ReadWriteMany
+    # - ReadWriteOncePod
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs
+  # mountOptions:
+  #   - nolock
+  nfs:
+    server: 192.168.1.24 # your NFS server IP
+    path: /bhole/cluster/dmz/frontalt/piped/ # your NFS export path

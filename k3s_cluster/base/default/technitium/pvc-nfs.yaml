@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: technitium-pvc
+  namespace: default
+  labels:
+    app: main-technitium
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+  volumeName: pv
+  resources:
+    requests:
+      storage: 10Gi

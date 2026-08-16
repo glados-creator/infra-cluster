@@ -33,10 +33,10 @@ checks:
     - mismatching-selector
     - no-anti-affinity
     - no-extensions-v1beta
-    # - "no-liveness-probe"
+    - "no-liveness-probe"
     # - "no-node-affinity"
     # - "no-read-only-root-fs"
-    # - "no-readiness-probe"
+    # - no-readiness-probe # only remove IP ...
     # - "no-rolling-update-strategy"
     # - "non-existent-service-account"
     # - "non-isolated-pod"
