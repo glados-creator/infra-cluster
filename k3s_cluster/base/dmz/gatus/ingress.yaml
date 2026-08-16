@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-gatus-service
           port: 6601
-  #tls: {} 
+          #tls: {} 

@@ -2,27 +2,47 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: clusterrole
-  namespace: default 
+  namespace: default
   labels:
     app: main-traefik
 rules:
-  - apiGroups: [""]
-    resources: ["services", "endpoints", "secrets", "*"]
-    verbs: ["get", "list", "watch"]
-
-  - apiGroups: ["discovery.k8s.io"]
-    resources: ["endpointslices"]
-    verbs: ["get", "list", "watch"]
-
-  - apiGroups: ["extensions", "networking.k8s.io"]
-    resources: ["ingresses", "ingressclasses"]
-    verbs: ["get", "list", "watch"]
-
-  - apiGroups: ["extensions"]
-    resources: ["ingresses/status"]
-    verbs: ["update"]
-
-  - apiGroups: ["traefik.io"]
+  - apiGroups:
+      - ""
+    resources:
+      - services
+      - endpoints
+      - secrets
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - discovery.k8s.io
+    resources:
+      - endpointslices
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+      - networking.k8s.io
+    resources:
+      - ingresses
+      - ingressclasses
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+    resources:
+      - ingresses/status
+    verbs:
+      - update
+  - apiGroups:
+      - traefik.io
     resources:
       - middlewares
       - middlewaretcps
@@ -34,8 +54,14 @@ rules:
       - tlsstores
       - serverstransports
       - serverstransporttcps
-    verbs: ["get", "list", "watch"]
-  
-  - apiGroups: ["metrics.k8s.io"]
-    resources: ["pods"]
-    verbs: ["get", "list"]
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - metrics.k8s.io
+    resources:
+      - pods
+    verbs:
+      - get
+      - list

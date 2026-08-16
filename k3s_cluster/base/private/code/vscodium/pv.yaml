@@ -21,7 +21,7 @@ spec:
       namespace: rook-ceph
     volumeHandle: cephfs-vicus-private-code-vscodium
     volumeAttributes:
-      clusterID: rook-ceph   
+      clusterID: rook-ceph
       fsName: bhole
       staticVolume: "true"
       rootPath: /volumes/k8s-colosseum/vicus-private/c8e734df-e422-4b77-8ab5-ef8ece645e26/code/vscodium/

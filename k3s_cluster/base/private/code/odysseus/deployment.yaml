@@ -37,16 +37,17 @@ spec:
           ports:
             - containerPort: 7000
           envFrom:
-          - configMapRef:
-              name: odysseus-config
+            - configMapRef:
+                name: odysseus-config
           resources:
             requests:
-              memory: "256Mi"
+              memory: 256Mi
             limits:
-              memory: "4Gi"
+              memory: 4Gi
           securityContext:
             capabilities:
-              add: ["CAP_SETGID"]
+              add:
+                - CAP_SETGID
           volumeMounts:
             - name: data
               mountPath: /app/data
@@ -59,15 +60,15 @@ spec:
             - name: data
               mountPath: /app/.local
               subPath: local
-            # Optional: mount Docker socket if you want Odysseus to manage containers
-            # - name: docker-socket
-            #   mountPath: /var/run/docker.sock
+              # Optional: mount Docker socket if you want Odysseus to manage containers
+              # - name: docker-socket
+              #   mountPath: /var/run/docker.sock
       volumes:
         - name: data
           persistentVolumeClaim:
             claimName: data-pvc
-        # Optional: Docker socket (uncomment if needed)
-        # - name: docker-socket
-        #   hostPath:
-        #     path: /var/run/docker.sock
-        #     type: Socket
+            # Optional: Docker socket (uncomment if needed)
+            # - name: docker-socket
+            #   hostPath:
+            #     path: /var/run/docker.sock
+            #     type: Socket

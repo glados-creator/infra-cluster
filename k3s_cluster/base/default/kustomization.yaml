@@ -1,9 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namePrefix: main-
 namespace: default
-
 resources:
   - middleware
   # - openwrt
@@ -18,13 +16,11 @@ resources:
   # - gluetun
   # - honeypot
   # - linkerd
-
 secretGenerator:
   - name: auth-basic-secret
     envs:
-    - secret.env
+      - secret.env
     type: Opaque
-
 # secretGenerator:
 #   - name: public-auth-basic-secret
 #     envs:
@@ -48,6 +44,5 @@ secretGenerator:
 #     envs:
 #     - secret.env
 #     type: Opaque
-
 generatorOptions:
   disableNameSuffixHash: true

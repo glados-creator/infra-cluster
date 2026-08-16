@@ -6,4 +6,4 @@ metadata:
 spec:
   basicAuth:
     secret: dmz-auth-basic-secret
-    realm: "dmz-middleware-auth-basic"
+    realm: dmz-middleware-auth-basic

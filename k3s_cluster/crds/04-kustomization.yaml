@@ -3,20 +3,17 @@
 # rm kustomization.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 # to convert helm to kustomize
 # docker run --rm --volume ./:/outside -it --entrypoint /bin/sh  alpine/helm
 # helm template spin-operator oci://ghcr.io/spinframework/charts/spin-operator --version 0.6.1  --namespace spin-operator --create-namespace > spinkube-operator.yaml
-
-resources:  
+resources:
   - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/operator.yaml
   - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/csi-operator.yaml
   # yeah so that emulate the ceph MON MGR
   # - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/cluster.yaml
   # and that create a connection too
   # - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/cluster-external.yaml
-  
-  - https://github.com/spinframework/spin-operator/releases/download/v0.6.1/spin-operator.shim-executor.yaml 
-  
+
+  - https://github.com/spinframework/spin-operator/releases/download/v0.6.1/spin-operator.shim-executor.yaml
   - https://github.com/kubevirt/kubevirt/releases/download/v1.9.0/kubevirt-cr.yaml
   - https://github.com/kubevirt/kubevirt/releases/download/v1.9.0/kubevirt-network-policies.yaml

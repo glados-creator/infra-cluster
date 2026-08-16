@@ -24,12 +24,10 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
-
       serviceAccountName: serviceaccount
       # Ensure PostgreSQL user (uid 70) can write to PVC
       securityContext:
         fsGroup: 70
-
       initContainers:
         # ---------- postgres (immich's fork w/ vector search extension) ----------
         - name: postgres
@@ -65,7 +63,6 @@ spec:
                 - $(DB_DATABASE_NAME)
             initialDelaySeconds: 5
             periodSeconds: 2
-
         # ---------- valkey / valkey ----------
         - name: valkey
           image: valkey/valkey:alpine
@@ -87,7 +84,6 @@ spec:
                 - ping
             initialDelaySeconds: 5
             periodSeconds: 10
-
         # ---------- machine learning (facial recognition, smart search) ----------
         - name: machine-learning
           image: ghcr.io/immich-app/immich-machine-learning:release
@@ -101,12 +97,11 @@ spec:
               subPath: ml-cache
           resources:
             requests:
-              cpu: "500m"
+              cpu: 500m
               memory: 1Gi
             limits:
               cpu: 2
               memory: 4Gi
-
       containers:
         # ---------- immich-server (web UI + API, this is what clients hit) ----------
         - name: immich-server

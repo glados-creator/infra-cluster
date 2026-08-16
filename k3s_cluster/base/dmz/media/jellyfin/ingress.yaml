@@ -16,7 +16,7 @@ spec:
       services:
         - name: dmz-media-jellyfin-service
           port: 6650
-  #tls: {}
+          #tls: {}
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
@@ -36,24 +36,23 @@ spec:
       services:
         - name: dmz-media-jellyfin-service
           port: 6651
-  #tls: {}
-# ---
-# apiVersion: traefik.io/v1alpha1
-# kind: IngressRoute
-# metadata:
-#   name: ingressroute-dlna
-#   namespace: dmz
-#   labels:
-#     app: dmz-media-jellyfin
-# spec:
-#   entryPoints:
-#     - dlna
-#   routes:
-#     - kind: Rule
-#       match: Host(`dlna.jellyfin.media.dmz.home`)
-#       middlewares:
-#         - name: dmz-media-dmz-media-middleware-auth-authentik
-#       services:
-#         - name: dmz-media-jellyfin-service
-#           port: 6653
-#   #tls: {}
+          # ---
+          # apiVersion: traefik.io/v1alpha1
+          # kind: IngressRoute
+          # metadata:
+          #   name: ingressroute-dlna
+          #   namespace: dmz
+          #   labels:
+          #     app: dmz-media-jellyfin
+          # spec:
+          #   entryPoints:
+          #     - dlna
+          #   routes:
+          #     - kind: Rule
+          #       match: Host(`dlna.jellyfin.media.dmz.home`)
+          #       middlewares:
+          #         - name: dmz-media-dmz-media-middleware-auth-authentik
+          #       services:
+          #         - name: dmz-media-jellyfin-service
+          #           port: 6653
+          #   #tls: {}

@@ -6,7 +6,8 @@ metadata:
   labels:
     app: <app-ns>-<app-name>
 spec:
-  accessModes: [ReadWriteMany]
+  accessModes:
+    - ReadWriteMany
   storageClassName: nfs
   volumeName: pv
   resources:

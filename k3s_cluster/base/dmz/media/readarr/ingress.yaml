@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-media-readarr-service
           port: 6657
-  #tls: {} 
+          #tls: {} 

@@ -18,7 +18,6 @@ spec:
       services:
         - name: dmz-frontalt-invidious-service
           port: 6626
-
     - kind: Rule
       match: Host(`invidious.alt.dmz.home`) && !PathPrefix(`/companion`)
       # middlewares:
@@ -26,4 +25,4 @@ spec:
       services:
         - name: dmz-frontalt-invidious-service
           port: 6625
-  #tls: {}
+          #tls: {}

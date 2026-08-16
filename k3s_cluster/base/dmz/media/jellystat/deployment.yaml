@@ -24,11 +24,9 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
-
       # Ensure PostgreSQL user (uid 70) can write to PVC
       securityContext:
         fsGroup: 70
-
       initContainers:
         # --- postgres sidecar ---
         - name: postgres
@@ -55,7 +53,6 @@ spec:
                 - jellystat
             initialDelaySeconds: 5
             periodSeconds: 2
-
       containers:
         # --- Jellystat Main ---
         - name: jellystat
@@ -74,7 +71,6 @@ spec:
             - name: media-storage
               mountPath: /app/backend/data
               subPath: jellystat/data
-
       volumes:
         - name: media-storage
           persistentVolumeClaim:

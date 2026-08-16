@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-glance-service
           port: 6600
-  #tls: {} 
+          #tls: {} 

@@ -2,13 +2,17 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: clusterrole
-  namespace: default 
+  namespace: default
   labels:
     app: main-harbor
 rules:
-  - apiGroups: [""]
+  - apiGroups:
+      - ""
     resources:
-    - pods
-    - namespaces
-    - "*"
-    verbs: ["get", "list", "watch"]
+      - pods
+      - namespaces
+      - '*'
+    verbs:
+      - get
+      - list
+      - watch

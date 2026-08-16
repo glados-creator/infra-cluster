@@ -24,12 +24,10 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
-
       serviceAccountName: serviceaccount
       # Ensure PostgreSQL user (uid 70) can write to PVC
       securityContext:
         fsGroup: 70
-
       initContainers:
         # ---------- postgres ----------
         - name: postgres
@@ -55,7 +53,6 @@ spec:
                 - $(POSTGRES_USER)
             initialDelaySeconds: 5
             periodSeconds: 2
-
         # ---------- piped backend / API ----------
         - name: backend
           image: 1337kavin/piped:latest
@@ -74,7 +71,6 @@ spec:
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 10
-
         # ---------- piped-proxy (media proxy) ----------
         - name: proxy
           image: 1337kavin/piped-proxy:latest
@@ -82,7 +78,6 @@ spec:
           restartPolicy: Always # sidecar
           ports:
             - containerPort: 8080
-
       containers:
         # ---------- piped-frontend (this is what clients hit) ----------
         - name: frontend

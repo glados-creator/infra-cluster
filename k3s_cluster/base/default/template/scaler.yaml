@@ -8,18 +8,18 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: deployment
-  minReplicas: 2       # your redundancy guarantee
-  maxReplicas: 10      # adjust based on your cluster capacity
+  minReplicas: 2 # your redundancy guarantee
+  maxReplicas: 10 # adjust based on your cluster capacity
   metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 70
-  - type: Resource
-    resource:
-      name: memory
-      target:
-        type: Utilization
-        averageUtilization: 80   # optional, less critical for Traefik
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80 # optional, less critical for Traefik

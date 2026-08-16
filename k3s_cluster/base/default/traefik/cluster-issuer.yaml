@@ -12,14 +12,13 @@ spec:
     privateKeySecretRef:
       name: acme-letsencrypt-key-prod
     solvers:
-    - dns01:
-        webhook:
-          groupName: acme.xver.cloud
-          solverName: technitium
-          config:
-            serverUrl: https://your-technitium-dns-server
-            authTokenSecretRef:
-              key: api-token
-              name: technitium-api-token
-
+      - dns01:
+          webhook:
+            groupName: acme.xver.cloud
+            solverName: technitium
+            config:
+              serverUrl: https://your-technitium-dns-server
+              authTokenSecretRef:
+                key: api-token
+                name: technitium-api-token
 # TODO : finish

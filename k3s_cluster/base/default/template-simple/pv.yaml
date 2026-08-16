@@ -16,5 +16,5 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nfs
   nfs:
-    server: 192.168.1.24  # your NFS server IP
+    server: 192.168.1.24 # your NFS server IP
     path: /bhole/cluster/<app-ns>/<app-name>/ # your NFS export path

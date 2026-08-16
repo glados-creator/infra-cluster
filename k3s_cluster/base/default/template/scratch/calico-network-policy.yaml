@@ -8,11 +8,11 @@ spec:
     matchLabels:
       app: nginx-proxy
   policyTypes:
-  - Ingress
+    - Ingress
   ingress:
-  - from:
-    - podSelector:
-        matchLabels:
-          app: python-app
-    ports:
-    - port: 80
+    - from:
+        - podSelector:
+            matchLabels:
+              app: python-app
+      ports:
+        - port: 80

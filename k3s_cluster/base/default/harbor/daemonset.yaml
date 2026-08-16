@@ -20,7 +20,7 @@ spec:
           # restartPolicy: Always
           env:
             - name: FLUENT_ELASTICSEARCH_HOST
-              value: "dummy"   # not used; we forward to syslog
+              value: dummy # not used; we forward to syslog
           volumeMounts:
             - name: varlog
               mountPath: /var/log

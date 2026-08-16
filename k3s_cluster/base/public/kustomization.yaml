@@ -1,20 +1,16 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namePrefix: public-
 namespace: public
-
 resources:
   - middleware
   - glance
   - gatus
   # - wordpress
-
 secretGenerator:
   - name: auth-basic-secret
     envs:
-    - secret.env
+      - secret.env
     type: Opaque
-
 generatorOptions:
   disableNameSuffixHash: true

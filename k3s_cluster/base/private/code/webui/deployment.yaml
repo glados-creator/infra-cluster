@@ -33,16 +33,16 @@ spec:
           ports:
             - containerPort: 8080
           envFrom:
-          - configMapRef:
-              name: webui-config
+            - configMapRef:
+                name: webui-config
           resources:
             requests:
-              memory: "256Mi"
+              memory: 256Mi
             limits:
-              memory: "4Gi"
+              memory: 4Gi
           volumeMounts:
             - name: data
-              mountPath: /app/backend/data   # Persistent storage for conversations, settings, and uploads[reference:2]
+              mountPath: /app/backend/data # Persistent storage for conversations, settings, and uploads[reference:2]
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

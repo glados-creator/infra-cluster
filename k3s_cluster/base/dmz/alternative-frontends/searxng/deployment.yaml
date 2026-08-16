@@ -25,7 +25,6 @@ spec:
           effect: NoExecute
           tolerationSeconds: 10
       serviceAccountName: serviceaccount
-      
       # initContainers:
       #   # ---------- postgres ----------
       #   - name: searxng-valkey
@@ -39,7 +38,6 @@ spec:
       #     volumeMounts:
       #       - name: db
       #         mountPath: /data/
-
       containers:
         - name: searxng
           image: searxng/searxng:latest

@@ -17,4 +17,4 @@ spec:
       services:
         - name: private-code-vscodium-service
           port: 4433
-  # tls: {}
+          # tls: {}

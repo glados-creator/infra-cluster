@@ -36,9 +36,9 @@ spec:
             - containerPort: 3000
           env:
             - name: GF_SERVER_ROOT_URL
-              value: "http://grafana.monitor.private.home"
+              value: http://grafana.monitor.private.home
             - name: GF_PLUGINS_PREINSTALL
-              value: "grafana-clock-panel"
+              value: grafana-clock-panel
           securityContext:
             capabilities:
               add:

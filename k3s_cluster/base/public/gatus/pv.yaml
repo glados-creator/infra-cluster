@@ -21,7 +21,7 @@ spec:
       namespace: rook-ceph
     volumeHandle: cephfs-vicus-public-gatus
     volumeAttributes:
-      clusterID: rook-ceph   
+      clusterID: rook-ceph
       fsName: bhole
       staticVolume: "true"
       rootPath: /volumes/k8s-colosseum/vicus-public/30251adb-9178-40ba-81b3-465cdc0f5ea6/gatus/

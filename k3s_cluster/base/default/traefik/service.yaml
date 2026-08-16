@@ -61,7 +61,7 @@ spec:
     - name: web
       protocol: TCP
       port: 2280
-      targetPort: 8080 
+      targetPort: 8080
     - name: metrics
       protocol: TCP
       port: 2282

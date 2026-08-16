@@ -17,4 +17,4 @@ spec:
       services:
         - name: private-code-comfyui-service
           port: 4435
-  # tls: {}
+          # tls: {}

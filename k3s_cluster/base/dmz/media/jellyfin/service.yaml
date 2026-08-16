@@ -18,7 +18,7 @@ spec:
       protocol: TCP
       port: 6651
       targetPort: 8920
-    # - name: dlna
-    #   protocol: TCP
-    #   port: 6653
-    #   targetPort: 7359
+      # - name: dlna
+      #   protocol: TCP
+      #   port: 6653
+      #   targetPort: 7359

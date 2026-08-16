@@ -6,9 +6,9 @@ metadata:
 spec:
   plugin:
     trauth:
-      domain: ".public.home"
+      domain: .public.home
       # cookiename: "trauth_cookie"
       # cookiepath: "/"
       # cookiesecure: false   # set true if using HTTPS
       # cookiehttponly: true
-      usersfile: "/etc/trauth-public/auth"
+      usersfile: /etc/trauth-public/auth

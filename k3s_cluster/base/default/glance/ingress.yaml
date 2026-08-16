@@ -17,7 +17,6 @@ spec:
         - name: main-authentik-service
           namespace: default
           port: 2288
-
     - kind: Rule
       match: Host(`glance.main.home`)
       middlewares:
@@ -25,4 +24,4 @@ spec:
       services:
         - name: main-glance-service
           port: 2200
-  #tls: {} 
+          #tls: {} 

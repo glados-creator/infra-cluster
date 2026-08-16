@@ -33,16 +33,16 @@ spec:
           ports:
             - containerPort: 5678
           envFrom:
-          - configMapRef:
-              name: n8n-config
+            - configMapRef:
+                name: n8n-config
           resources:
             requests:
-              memory: "128Mi"
+              memory: 128Mi
             limits:
-              memory: "2Gi"
+              memory: 2Gi
           volumeMounts:
             - name: data
-              mountPath: /home/node/.n8n   # n8n stores its data here
+              mountPath: /home/node/.n8n # n8n stores its data here
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

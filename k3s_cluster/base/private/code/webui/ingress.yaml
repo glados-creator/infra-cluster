@@ -17,4 +17,4 @@ spec:
       services:
         - name: private-code-webui-service
           port: 4434
-  # tls: {}
+          # tls: {}

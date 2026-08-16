@@ -38,7 +38,7 @@ spec:
             - containerPort: 7359
               name: dlna
           env:
-            - name : DOTNET_USE_POLLING_FILE_WATCHER
+            - name: DOTNET_USE_POLLING_FILE_WATCHER
               value: "1"
           volumeMounts:
             - name: media-storage
@@ -50,12 +50,12 @@ spec:
             - name: media-storage
               mountPath: /data/media
               subPath: media
-          # resources:
-          #   limits:
-          #     nvidia.com/gpu-all: 1
-          #   requests:
-          #     nvidia.com/gpu-all: 1
+              # resources:
+              #   limits:
+              #     nvidia.com/gpu-all: 1
+              #   requests:
+              #     nvidia.com/gpu-all: 1
       volumes:
         - name: media-storage
           persistentVolumeClaim:
-            claimName:  media-pvc
+            claimName: media-pvc

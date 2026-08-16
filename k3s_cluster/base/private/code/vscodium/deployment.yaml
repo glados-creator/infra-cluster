@@ -41,15 +41,15 @@ spec:
             #   value: "your-password"
             # Set default workspace folder
             - name: WORKSPACE
-              value: "/home/coder/project"
+              value: /home/coder/project
           resources:
             requests:
-              memory: "8Gi"
+              memory: 8Gi
             limits:
-              memory: "32Gi"
+              memory: 32Gi
           volumeMounts:
             - name: data
-              mountPath: /home/coder   # stores all user data and projects
+              mountPath: /home/coder # stores all user data and projects
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

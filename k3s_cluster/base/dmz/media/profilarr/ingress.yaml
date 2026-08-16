@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-media-profilarr-service
           port: 6668
-  #tls: {} 
+          #tls: {} 

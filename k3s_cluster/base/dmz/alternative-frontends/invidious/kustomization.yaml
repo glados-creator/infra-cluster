@@ -1,9 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namePrefix: invidious-
 namespace: dmz
-
 resources:
   - service-account.yaml
   - pvc.yaml
@@ -11,10 +9,8 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
-
 generatorOptions:
   disableNameSuffixHash: true
-
 secretGenerator:
   # Full invidious config.yml, mounted as a file into the main container.
   # Contains db creds + hmac_key + companion key, so it's a Secret not a ConfigMap.

@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-media-jellyseerr-service
           port: 6660
-  #tls: {} 
+          #tls: {} 

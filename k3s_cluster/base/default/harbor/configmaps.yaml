@@ -16,12 +16,12 @@ data:
         @type cri
       </parse>
     </source>
- 
+
     # Add Kubernetes metadata (pod, namespace, container)
     <filter kubernetes.**>
       @type kubernetes_metadata
     </filter>
- 
+
     # Forward to harbor-log service via syslog (TCP)
     # NOTE: the bundled gem is fluent-plugin-remote_syslog, which
     # registers itself as type "remote_syslog", not "syslog".
@@ -252,7 +252,7 @@ metadata:
   name: jobservice-config
   namespace: default
 data:
-  config.yml: |
+  config.yml: |-
     ---
     protocol: "http"
     port: 8082

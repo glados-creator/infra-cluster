@@ -68,16 +68,16 @@ spec:
               mountPath: /etc/trauth-dmz
             - name: trauth-secret-main # no cross namespace
               mountPath: /etc/trauth-dmz-media
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 80
-          #   initialDelaySeconds: 5
-          #   periodSeconds: 10
+              # readinessProbe:
+              #   httpGet:
+              #     path: /
+              #     port: 80
+              #   initialDelaySeconds: 5
+              #   periodSeconds: 10
       volumes:
-      - name: trauth-secret-main
-        secret:
-          secretName: main-auth-basic-secret
+        - name: trauth-secret-main
+          secret:
+            secretName: main-auth-basic-secret
       # - name: trauth-secret-private
       #   secret:
       #     secretName: private-auth-basic-secret

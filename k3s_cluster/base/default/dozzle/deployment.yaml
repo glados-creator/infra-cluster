@@ -33,20 +33,20 @@ spec:
             - containerPort: 8080
           env:
             - name: DOZZLE_MODE
-              value: "k8s"
+              value: k8s
             - name: DOZZLE_ALL_NAMESPACES
               value: "true"
             - name: DOZZLE_LEVEL
-              value: "info"
+              value: info
           volumeMounts:
             - name: data
               mountPath: /data
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8080
-          #   initialDelaySeconds: 5
-          #   periodSeconds: 10
+              # readinessProbe:
+              #   httpGet:
+              #     path: /
+              #     port: 8080
+              #   initialDelaySeconds: 5
+              #   periodSeconds: 10
       volumes:
         - name: data
           persistentVolumeClaim:

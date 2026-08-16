@@ -1,39 +1,38 @@
 checks:
   # Don't add defaults automatically – we hand-pick everything
   doNotAutoAddDefaults: true
-
   # Include only these checks (listed explicitly)
   include:
     # - "access-to-create-pods"
     # - "access-to-secrets"
-    - "cluster-admin-role-binding"
-    - "dangling-horizontalpodautoscaler"
-    - "dangling-ingress"
-    - "dangling-networkpolicy"
-    - "dangling-networkpolicypeer-podselector"
-    - "dangling-service"
-    - "dangling-servicemonitor"
+    - cluster-admin-role-binding
+    - dangling-horizontalpodautoscaler
+    - dangling-ingress
+    - dangling-networkpolicy
+    - dangling-networkpolicypeer-podselector
+    - dangling-service
+    - dangling-servicemonitor
     # - "default-service-account"
     # - "deprecated-service-account-field"
     # - "dnsconfig-options"
-    - "docker-sock"
+    - docker-sock
     # - "drop-net-raw-capability"
     # - "duplicate-env-var"
-    - "env-value-from"
-    - "env-var-secret"
+    - env-value-from
+    - env-var-secret
     # - "exposed-services"
-    - "host-ipc"
-    - "host-network"
-    - "host-pid"
+    - host-ipc
+    - host-network
+    - host-pid
     # - "hpa-minimum-three-replicas"
-    - "invalid-target-ports"
+    - invalid-target-ports
     # - "job-ttl-seconds-after-finished"
     # - "latest-tag"
     # - "liveness-port"
     # - "minimum-three-replicas"
-    - "mismatching-selector"
-    - "no-anti-affinity"
-    - "no-extensions-v1beta"
+    - mismatching-selector
+    - no-anti-affinity
+    - no-extensions-v1beta
     # - "no-liveness-probe"
     # - "no-node-affinity"
     # - "no-read-only-root-fs"
@@ -46,7 +45,7 @@ checks:
     # - "pdb-unhealthy-pod-eviction-policy"
     # - "priority-class-name"
     # - "privilege-escalation-container"
-    - "privileged-container"
+    - privileged-container
     # - "privileged-ports"
     # - "read-secret-from-env-var"
     # - "readiness-port"

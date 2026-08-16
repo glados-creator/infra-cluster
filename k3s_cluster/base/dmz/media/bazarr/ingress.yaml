@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-media-bazarr-service
           port: 6664
-  #tls: {} 
+          #tls: {} 

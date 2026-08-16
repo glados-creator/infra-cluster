@@ -32,10 +32,8 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
-      
       nodeSelector:
         server: "true"
-
       serviceAccountName: serviceaccount
       containers:
         - name: openwrt
@@ -52,15 +50,15 @@ spec:
                 - NET_ADMIN
                 - NET_RAW
                 - SYS_ADMIN
-          # volumeMounts:
-          #   - name: data
-          #     mountPath: /etc         # persist OpenWrt config
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 80
-          #   initialDelaySeconds: 5
-          #   periodSeconds: 10
+                # volumeMounts:
+                #   - name: data
+                #     mountPath: /etc         # persist OpenWrt config
+                # readinessProbe:
+                #   httpGet:
+                #     path: /
+                #     port: 80
+                #   initialDelaySeconds: 5
+                #   periodSeconds: 10
       volumes:
         - name: data
           persistentVolumeClaim:

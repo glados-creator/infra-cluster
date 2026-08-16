@@ -25,7 +25,6 @@ pages:
                   - title: Glueton
                     url: http://glueton.main.home
                     description: TBD (coming soon)
-
               - title: Other Dashboards
                 links:
                   - title: Glance (Public)

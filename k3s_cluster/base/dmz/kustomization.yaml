@@ -1,9 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namePrefix: dmz-
 namespace: dmz
-
 resources:
   - middleware
   - glance
@@ -13,14 +11,10 @@ resources:
   - alternative-frontends
   - cloud
   - game
-
-
-
 secretGenerator:
   - name: auth-basic-secret
     envs:
-    - secret.env
+      - secret.env
     type: Opaque
-
 generatorOptions:
   disableNameSuffixHash: true

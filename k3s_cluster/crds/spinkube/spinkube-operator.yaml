@@ -8,7 +8,7 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 ---
 # Source: spin-operator/templates/serviceaccount.yaml
@@ -24,10 +24,9 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
-  annotations:
-    {}
+  annotations: {}
 ---
 # Source: spin-operator/templates/manager-rbac.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -39,75 +38,75 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 rules:
-- apiGroups:
-  - ""
-  resources:
-  - events
-  verbs:
-  - create
-  - patch
-- apiGroups:
-  - ""
-  resources:
-  - secrets
-  - services
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - apps
-  resources:
-  - deployments
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - apps
-  resources:
-  - deployments/status
-  verbs:
-  - get
-- apiGroups:
-  - core.spinkube.dev
-  resources:
-  - spinappexecutors
-  - spinapps
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - core.spinkube.dev
-  resources:
-  - spinappexecutors/finalizers
-  verbs:
-  - update
-- apiGroups:
-  - core.spinkube.dev
-  resources:
-  - spinappexecutors/status
-  - spinapps/status
-  verbs:
-  - get
-  - patch
-  - update
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - create
+      - patch
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+      - services
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - deployments/status
+    verbs:
+      - get
+  - apiGroups:
+      - core.spinkube.dev
+    resources:
+      - spinappexecutors
+      - spinapps
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - core.spinkube.dev
+    resources:
+      - spinappexecutors/finalizers
+    verbs:
+      - update
+  - apiGroups:
+      - core.spinkube.dev
+    resources:
+      - spinappexecutors/status
+      - spinapps/status
+    verbs:
+      - get
+      - patch
+      - update
 ---
 # Source: spin-operator/templates/metrics-auth-rbac.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -119,21 +118,21 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 rules:
-- apiGroups:
-  - authentication.k8s.io
-  resources:
-  - tokenreviews
-  verbs:
-  - create
-- apiGroups:
-  - authorization.k8s.io
-  resources:
-  - subjectaccessreviews
-  verbs:
-  - create
+  - apiGroups:
+      - authentication.k8s.io
+    resources:
+      - tokenreviews
+    verbs:
+      - create
+  - apiGroups:
+      - authorization.k8s.io
+    resources:
+      - subjectaccessreviews
+    verbs:
+      - create
 ---
 # Source: spin-operator/templates/metrics-reader-rbac.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -145,13 +144,13 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 rules:
-- nonResourceURLs:
-  - /metrics
-  verbs:
-  - get
+  - nonResourceURLs:
+      - /metrics
+    verbs:
+      - get
 ---
 # Source: spin-operator/templates/metrics-role-and-binding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -166,21 +165,21 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 rules:
-- apiGroups:
-  - authentication.k8s.io
-  resources:
-  - tokenreviews
-  verbs:
-  - create
-- apiGroups:
-  - authorization.k8s.io
-  resources:
-  - subjectaccessreviews
-  verbs:
-  - create
+  - apiGroups:
+      - authentication.k8s.io
+    resources:
+      - tokenreviews
+    verbs:
+      - create
+  - apiGroups:
+      - authorization.k8s.io
+    resources:
+      - subjectaccessreviews
+    verbs:
+      - create
 ---
 # Source: spin-operator/templates/manager-rbac.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -195,16 +194,16 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: 'spin-operator-manager-role'
+  name: spin-operator-manager-role
 subjects:
-- kind: ServiceAccount
-  name: 'spin-operator-controller-manager'
-  namespace: 'spin-operator'
+  - kind: ServiceAccount
+    name: spin-operator-controller-manager
+    namespace: spin-operator
 ---
 # Source: spin-operator/templates/metrics-auth-rbac.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -216,16 +215,16 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: 'spin-operator-metrics-auth-role'
+  name: spin-operator-metrics-auth-role
 subjects:
-- kind: ServiceAccount
-  name: 'spin-operator-controller-manager'
-  namespace: 'spin-operator'
+  - kind: ServiceAccount
+    name: spin-operator-controller-manager
+    namespace: spin-operator
 ---
 # Source: spin-operator/templates/metrics-role-and-binding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -240,16 +239,16 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: 'spin-operator-metrics-role'
+  name: spin-operator-metrics-role
 subjects:
-- kind: ServiceAccount
-  name: 'spin-operator-controller-manager'
-  namespace: 'spin-operator'
+  - kind: ServiceAccount
+    name: spin-operator-controller-manager
+    namespace: spin-operator
 ---
 # Source: spin-operator/templates/leader-election-rbac.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -264,40 +263,40 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 rules:
-- apiGroups:
-  - ""
-  resources:
-  - configmaps
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - update
-  - patch
-  - delete
-- apiGroups:
-  - coordination.k8s.io
-  resources:
-  - leases
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - update
-  - patch
-  - delete
-- apiGroups:
-  - ""
-  resources:
-  - events
-  verbs:
-  - create
-  - patch
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - create
+      - patch
 ---
 # Source: spin-operator/templates/leader-election-rbac.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -312,16 +311,16 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: 'spin-operator-leader-election-role'
+  name: spin-operator-leader-election-role
 subjects:
-- kind: ServiceAccount
-  name: 'spin-operator-controller-manager'
-  namespace: 'spin-operator'
+  - kind: ServiceAccount
+    name: spin-operator-controller-manager
+    namespace: spin-operator
 ---
 # Source: spin-operator/templates/metrics-service.yaml
 apiVersion: v1
@@ -334,7 +333,7 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 spec:
   type: ClusterIP
@@ -343,10 +342,10 @@ spec:
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
   ports:
-  - name: https
-    port: 8443
-    protocol: TCP
-    targetPort: 8443
+    - name: https
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
 ---
 # Source: spin-operator/templates/webhook-service.yaml
 apiVersion: v1
@@ -361,7 +360,7 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 spec:
   type: ClusterIP
@@ -370,9 +369,9 @@ spec:
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
   ports:
-  - port: 443
-    protocol: TCP
-    targetPort: 9443
+    - port: 443
+      protocol: TCP
+      targetPort: 9443
 ---
 # Source: spin-operator/templates/deployment.yaml
 apiVersion: apps/v1
@@ -388,7 +387,7 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 spec:
   replicas: 1
@@ -410,71 +409,71 @@ spec:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/arch
-                operator: In
-                values:
-                - amd64
-                - arm64
-              - key: kubernetes.io/os
-                operator: In
-                values:
-                - linux
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+                      - arm64
+                  - key: kubernetes.io/os
+                    operator: In
+                    values:
+                      - linux
       containers:
-      - args:
-        - --health-probe-bind-address=:8082
-        - --metrics-bind-address=:8443
-        - --leader-elect
-        - --enable-webhooks
-        command:
-        - /manager
-        env:
-        - name: KUBERNETES_CLUSTER_DOMAIN
-          value: "cluster.local"
-        image: ghcr.io/spinframework/spin-operator:v0.6.1
-        imagePullPolicy: IfNotPresent
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 8082
-          initialDelaySeconds: 15
-          periodSeconds: 20
-        name: manager
-        ports:
-        - containerPort: 9443
-          name: webhook-server
-          protocol: TCP
-        readinessProbe:
-          httpGet:
-            path: /readyz
-            port: 8082
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        resources:
-          limits:
-            cpu: 500m
-            memory: 128Mi
-          requests:
-            cpu: 10m
-            memory: 64Mi
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-        volumeMounts:
-        - mountPath: /tmp/k8s-webhook-server/serving-certs
-          name: cert
-          readOnly: true
+        - args:
+            - --health-probe-bind-address=:8082
+            - --metrics-bind-address=:8443
+            - --leader-elect
+            - --enable-webhooks
+          command:
+            - /manager
+          env:
+            - name: KUBERNETES_CLUSTER_DOMAIN
+              value: cluster.local
+          image: ghcr.io/spinframework/spin-operator:v0.6.1
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8082
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          name: manager
+          ports:
+            - containerPort: 9443
+              name: webhook-server
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8082
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - mountPath: /tmp/k8s-webhook-server/serving-certs
+              name: cert
+              readOnly: true
       securityContext:
         runAsNonRoot: true
       serviceAccountName: spin-operator-controller-manager
       terminationGracePeriodSeconds: 10
       volumes:
-      - name: cert
-        secret:
-          defaultMode: 420
-          secretName: webhook-server-cert
+        - name: cert
+          secret:
+            defaultMode: 420
+            secretName: webhook-server-cert
 ---
 # Source: spin-operator/templates/mutating-webhook-configuration.yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -488,49 +487,49 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 webhooks:
-- admissionReviewVersions:
-  - v1
-  clientConfig:
-    service:
-      name: 'spin-operator-webhook-service'
-      namespace: 'spin-operator'
-      path: /mutate-core-spinkube-dev-v1alpha1-spinapp
-  failurePolicy: Fail
-  name: mspinapp.kb.io
-  rules:
-  - apiGroups:
-    - core.spinkube.dev
-    apiVersions:
-    - v1alpha1
-    operations:
-    - CREATE
-    - UPDATE
-    resources:
-    - spinapps
-  sideEffects: None
-- admissionReviewVersions:
-  - v1
-  clientConfig:
-    service:
-      name: 'spin-operator-webhook-service'
-      namespace: 'spin-operator'
-      path: /mutate-core-spinkube-dev-v1alpha1-spinappexecutor
-  failurePolicy: Fail
-  name: mspinappexecutor.kb.io
-  rules:
-  - apiGroups:
-    - core.spinkube.dev
-    apiVersions:
-    - v1alpha1
-    operations:
-    - CREATE
-    - UPDATE
-    resources:
-    - spinappexecutors
-  sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      service:
+        name: spin-operator-webhook-service
+        namespace: spin-operator
+        path: /mutate-core-spinkube-dev-v1alpha1-spinapp
+    failurePolicy: Fail
+    name: mspinapp.kb.io
+    rules:
+      - apiGroups:
+          - core.spinkube.dev
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - spinapps
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      service:
+        name: spin-operator-webhook-service
+        namespace: spin-operator
+        path: /mutate-core-spinkube-dev-v1alpha1-spinappexecutor
+    failurePolicy: Fail
+    name: mspinappexecutor.kb.io
+    rules:
+      - apiGroups:
+          - core.spinkube.dev
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - spinappexecutors
+    sideEffects: None
 ---
 # Source: spin-operator/templates/validating-webhook-configuration.yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -544,49 +543,49 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 webhooks:
-- admissionReviewVersions:
-  - v1
-  clientConfig:
-    service:
-      name: 'spin-operator-webhook-service'
-      namespace: 'spin-operator'
-      path: /validate-core-spinkube-dev-v1alpha1-spinapp
-  failurePolicy: Fail
-  name: vspinapp.kb.io
-  rules:
-  - apiGroups:
-    - core.spinkube.dev
-    apiVersions:
-    - v1alpha1
-    operations:
-    - CREATE
-    - UPDATE
-    resources:
-    - spinapps
-  sideEffects: None
-- admissionReviewVersions:
-  - v1
-  clientConfig:
-    service:
-      name: 'spin-operator-webhook-service'
-      namespace: 'spin-operator'
-      path: /validate-core-spinkube-dev-v1alpha1-spinappexecutor
-  failurePolicy: Fail
-  name: vspinappexecutor.kb.io
-  rules:
-  - apiGroups:
-    - core.spinkube.dev
-    apiVersions:
-    - v1alpha1
-    operations:
-    - CREATE
-    - UPDATE
-    resources:
-    - spinappexecutors
-  sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      service:
+        name: spin-operator-webhook-service
+        namespace: spin-operator
+        path: /validate-core-spinkube-dev-v1alpha1-spinapp
+    failurePolicy: Fail
+    name: vspinapp.kb.io
+    rules:
+      - apiGroups:
+          - core.spinkube.dev
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - spinapps
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      service:
+        name: spin-operator-webhook-service
+        namespace: spin-operator
+        path: /validate-core-spinkube-dev-v1alpha1-spinappexecutor
+    failurePolicy: Fail
+    name: vspinappexecutor.kb.io
+    rules:
+      - apiGroups:
+          - core.spinkube.dev
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - spinappexecutors
+    sideEffects: None
 ---
 # Source: spin-operator/templates/serving-cert.yaml
 apiVersion: cert-manager.io/v1
@@ -598,15 +597,15 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 spec:
   dnsNames:
-  - 'spin-operator-webhook-service.spin-operator.svc'
-  - 'spin-operator-webhook-service.spin-operator.svc.cluster.local'
+    - spin-operator-webhook-service.spin-operator.svc
+    - spin-operator-webhook-service.spin-operator.svc.cluster.local
   issuerRef:
     kind: Issuer
-    name: 'spin-operator-selfsigned-issuer'
+    name: spin-operator-selfsigned-issuer
   secretName: webhook-server-cert
 ---
 # Source: spin-operator/templates/selfsigned-issuer.yaml
@@ -619,7 +618,7 @@ metadata:
     helm.sh/chart: spin-operator-0.6.1
     app.kubernetes.io/name: spin-operator
     app.kubernetes.io/instance: spin-operator
-    app.kubernetes.io/version: "v0.6.1"
+    app.kubernetes.io/version: v0.6.1
     app.kubernetes.io/managed-by: Helm
 spec:
   selfSigned: {}

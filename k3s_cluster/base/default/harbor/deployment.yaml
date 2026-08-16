@@ -24,12 +24,10 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
-
       serviceAccountName: serviceaccount
       # Ensure PostgreSQL user (uid 70) can write to PVC
       securityContext:
         fsGroup: 70
-
       initContainers:
         # ---------- postgres ----------
         - name: postgres
@@ -60,7 +58,6 @@ spec:
                 - postgres
             initialDelaySeconds: 5
             periodSeconds: 2
-
         # ---------- valkey ----------
         - name: valkey
           image: valkey/valkey:alpine
@@ -83,7 +80,6 @@ spec:
                 - ping
             initialDelaySeconds: 5
             periodSeconds: 2
-      
       containers:
         # ---------- core ----------
         - name: core
@@ -124,15 +120,14 @@ spec:
             - name: core-secretkey
               mountPath: /etc/core/key
               subPath: secretkey
-            # - name: trust-certs
-            #   mountPath: /harbor_cust_cert
+              # - name: trust-certs
+              #   mountPath: /harbor_cust_cert
           # readinessProbe:
           #   httpGet:
           #     path: /
           #     port: 8080
           #   initialDelaySeconds: 5
           #   periodSeconds: 10
-
         # ---------- registry ----------
         - name: registry
           image: goharbor/registry-photon:v2.15.2
@@ -148,7 +143,7 @@ spec:
                 - SETGID
                 - SETUID
                 - SYS_ADMIN
-                - NET_BIND_SERVICE          
+                - NET_BIND_SERVICE
           volumeMounts:
             - name: data
               mountPath: /storage
@@ -159,9 +154,8 @@ spec:
             - name: registry-root-crt
               mountPath: /etc/registry/root.crt
               subPath: root.crt
-            # - name: trust-certs
-            #   mountPath: /harbor_cust_cert
-
+              # - name: trust-certs
+              #   mountPath: /harbor_cust_cert
         # ---------- registryctl ----------
         - name: registryctl
           image: goharbor/harbor-registryctl:v2.15.2
@@ -187,7 +181,7 @@ spec:
                 - SETGID
                 - SETUID
                 - SYS_ADMIN
-                - NET_BIND_SERVICE          
+                - NET_BIND_SERVICE
           volumeMounts:
             - name: data
               mountPath: /storage
@@ -198,9 +192,8 @@ spec:
             - name: registryctl-config
               mountPath: /etc/registryctl/config.yml
               subPath: config.yml
-            # - name: trust-certs
-            #   mountPath: /harbor_cust_cert
-
+              # - name: trust-certs
+              #   mountPath: /harbor_cust_cert
         # ---------- portal (web console, static files only) ----------
         - name: portal
           image: goharbor/harbor-portal:v2.15.2
@@ -213,12 +206,11 @@ spec:
               add:
                 - CHOWN
                 - SYS_ADMIN
-                - NET_BIND_SERVICE          
+                - NET_BIND_SERVICE
           volumeMounts:
             - name: portal-config
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
-
         # ---------- jobservice ----------
         - name: jobservice
           image: goharbor/harbor-jobservice:v2.15.2
@@ -242,7 +234,7 @@ spec:
                 - SETGID
                 - SETUID
                 - SYS_ADMIN
-                - NET_BIND_SERVICE          
+                - NET_BIND_SERVICE
           volumeMounts:
             - name: data
               mountPath: /var/log/jobs
@@ -250,9 +242,8 @@ spec:
             - name: jobservice-config
               mountPath: /etc/jobservice/config.yml
               subPath: config.yml
-            # - name: trust-certs
-            #   mountPath: /harbor_cust_cert
-
+              # - name: trust-certs
+              #   mountPath: /harbor_cust_cert
         # ---------- trivy-adapter ----------
         - name: trivy-adapter
           image: goharbor/trivy-adapter-photon:v2.15.2
@@ -273,7 +264,7 @@ spec:
                 - SETGID
                 - SETUID
                 - SYS_ADMIN
-                - NET_BIND_SERVICE          
+                - NET_BIND_SERVICE
           volumeMounts:
             - name: data
               mountPath: /home/scanner/.cache/trivy
@@ -281,9 +272,8 @@ spec:
             - name: data
               mountPath: /home/scanner/.cache/reports
               subPath: trivy-adapter/reports
-            # - name: trust-certs
-            #   mountPath: /harbor_cust_cert
-
+              # - name: trust-certs
+              #   mountPath: /harbor_cust_cert
         # ---------- log ----------
         - name: log
           image: goharbor/harbor-log:v2.15.2
@@ -299,7 +289,7 @@ spec:
                 - SETGID
                 - SETUID
                 - SYS_ADMIN
-                - NET_BIND_SERVICE          
+                - NET_BIND_SERVICE
           volumeMounts:
             - name: data
               mountPath: /var/log/docker
@@ -310,7 +300,6 @@ spec:
             - name: log-config
               mountPath: /etc/rsyslog.d/rsyslog_docker.conf
               subPath: rsyslog_docker.conf
-
         # ---------- exporter ----------
         - name: exporter
           image: goharbor/harbor-exporter:v2.15.2
@@ -333,11 +322,10 @@ spec:
                 - SETGID
                 - SETUID
                 - SYS_ADMIN
-                - NET_BIND_SERVICE          
-          # volumeMounts:
-          #   - name: trust-certs
-          #     mountPath: /harbor_cust_cert
-
+                - NET_BIND_SERVICE
+                # volumeMounts:
+                #   - name: trust-certs
+                #     mountPath: /harbor_cust_cert
       volumes:
         - name: data
           persistentVolumeClaim:

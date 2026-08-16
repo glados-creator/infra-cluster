@@ -17,4 +17,4 @@ spec:
       services:
         - name: private-home-homeassistant-service
           port: 4404
-  # tls: {}
+          # tls: {}

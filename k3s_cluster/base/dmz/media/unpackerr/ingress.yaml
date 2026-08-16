@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-media-unpackerr-service
           port: 6667
-  #tls: {} 
+          #tls: {} 

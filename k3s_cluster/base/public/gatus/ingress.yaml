@@ -17,4 +17,4 @@ spec:
       services:
         - name: public-gatus-service
           port: 9901
-  #tls: {} 
+          #tls: {} 

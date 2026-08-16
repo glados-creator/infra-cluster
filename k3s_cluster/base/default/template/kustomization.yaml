@@ -1,9 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namePrefix: <app-name>-
 namespace: <app-ns>
-
 resources:
   - service-account.yaml
   - cluster-role.yaml
@@ -14,15 +12,12 @@ resources:
   - service.yaml
   - ingress.yaml
   # - scaler.yaml
-
 generatorOptions:
   disableNameSuffixHash: true
-
 configMapGenerator:
   - name: glance-config
     files:
       - glance.yml=config.yaml
-
 secretGenerator:
   - name: youtarr-secret
     envs:

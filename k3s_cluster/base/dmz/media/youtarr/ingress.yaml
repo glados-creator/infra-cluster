@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-media-youtarr-service
           port: 6669
-  #tls: {} 
+          #tls: {} 

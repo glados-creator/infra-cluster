@@ -6,9 +6,9 @@ metadata:
 spec:
   plugin:
     trauth:
-      domain: ".media.dmz.home"
+      domain: .media.dmz.home
       # cookiename: "trauth_cookie"
       # cookiepath: "/"
       # cookiesecure: false   # set true if using HTTPS
       # cookiehttponly: true
-      usersfile: "/etc/trauth-dmz-media/auth"
+      usersfile: /etc/trauth-dmz-media/auth

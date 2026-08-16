@@ -16,7 +16,6 @@ pages:
                   - title: Netboot
                     url: http://netboot.private.home
                     description: Netboot playzone (TODO)
-
               - title: Monitoring Stack
                 links:
                   - title: Dozzle
@@ -46,7 +45,6 @@ pages:
                   - title: Datadog
                     url: http://datadog.monitor.private.home
                     description: External monitoring (TODO)
-
               - title: Code & AI (TODO)
                 links:
                   - title: Ollama
@@ -64,7 +62,6 @@ pages:
                   - title: Openclaw
                     url: http://openclaw.private.home
                     description: AI agent (TODO)
-
               - title: Other Dashboards
                 links:
                   - title: Main Glance

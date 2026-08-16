@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-media-tdarr-service
           port: 6663
-  #tls: {} 
+          #tls: {} 

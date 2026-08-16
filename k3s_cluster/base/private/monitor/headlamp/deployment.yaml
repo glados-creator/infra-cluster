@@ -34,7 +34,7 @@ spec:
             - containerPort: 8080
           env:
             - name: HEADLAMP_CLUSTER_NAME
-              value: "my-cluster"
+              value: my-cluster
           volumeMounts:
             - name: data
               mountPath: /headlamp/config

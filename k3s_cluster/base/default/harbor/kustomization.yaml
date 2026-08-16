@@ -1,9 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namePrefix: harbor-
 namespace: default
-
 # | Service         | Port(s)     | Notes                          |
 # | :---            | :---        | :---                           |
 # | core            | 8080 / 8443 | HTTP / HTTPS (likely)          |
@@ -17,7 +15,6 @@ namespace: default
 # | log (rsyslog)   | 1514        | System/logging service         |
 # | postgresql      | 5432        | Database                       |
 # | redis / valkey  | 6379        | In-memory cache / broker       |
-
 resources:
   - service-account.yaml
   - cluster-role.yaml
@@ -29,19 +26,17 @@ resources:
   - ingress.yaml
   - daemonset.yaml
   - configmaps.yaml
-
 generatorOptions:
   disableNameSuffixHash: true
-
 configMapGenerator:
   - name: harbor-config
     envs:
       - config.env
-  # - name: harbor-trust-certs
-  #   files:
-  #     - ca.crt
-  #     # Add more CA files here as needed, e.g. another 'ca2.crt' line —
-  #     # each becomes its own key in the ConfigMap by filename.
+# - name: harbor-trust-certs
+#   files:
+#     - ca.crt
+#     # Add more CA files here as needed, e.g. another 'ca2.crt' line —
+#     # each becomes its own key in the ConfigMap by filename.
 
 secretGenerator:
   - name: harbor-secret

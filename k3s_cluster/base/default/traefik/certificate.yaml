@@ -6,8 +6,8 @@ metadata:
 spec:
   secretName: example-com-tls
   dnsNames:
-  - example.com
-  - *.example.com
+    - example.com
+  # - example.com
   issuerRef:
     name: technitium-letsencrypt
     kind: ClusterIssuer

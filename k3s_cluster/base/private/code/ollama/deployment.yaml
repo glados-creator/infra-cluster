@@ -34,19 +34,19 @@ spec:
             - containerPort: 11434
           env:
             - name: OLLAMA_KEEP_ALIVE # how long a model stay in memory
-              value: "5m"       # optional
+              value: 5m # optional
             - name: OLLAMA_HOST
-              value: "0.0.0.0"
+              value: 0.0.0.0
           resources:
             requests:
-              memory: "8Gi"
+              memory: 8Gi
               nvidia.com/gpu-all: 1
             limits:
-              memory: "64Gi"
+              memory: 64Gi
               nvidia.com/gpu-all: 1
           volumeMounts:
             - name: data
-              mountPath: /root/.ollama   # model storage directory
+              mountPath: /root/.ollama # model storage directory
       volumes:
         - name: data
           persistentVolumeClaim:

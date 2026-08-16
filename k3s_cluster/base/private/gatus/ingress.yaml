@@ -17,4 +17,4 @@ spec:
       services:
         - name: private-gatus-service
           port: 4401
-  #tls: {} 
+          #tls: {} 

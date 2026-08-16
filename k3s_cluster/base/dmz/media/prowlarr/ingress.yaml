@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-media-prowlarr-service
           port: 6659
-  #tls: {} 
+          #tls: {} 

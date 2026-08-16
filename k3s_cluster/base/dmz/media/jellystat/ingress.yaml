@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-media-jellystat-service
           port: 6666
-  #tls: {} 
+          #tls: {} 

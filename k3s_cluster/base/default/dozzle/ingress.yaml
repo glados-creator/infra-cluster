@@ -17,4 +17,4 @@ spec:
       services:
         - name: main-dozzle-service
           port: 2215
-  #tls: {} 
+          #tls: {} 

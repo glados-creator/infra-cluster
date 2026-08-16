@@ -21,7 +21,7 @@ spec:
       namespace: rook-ceph
     volumeHandle: cephfs-vicus-dmz-frontalt-piped
     volumeAttributes:
-      clusterID: rook-ceph   
+      clusterID: rook-ceph
       fsName: bhole
       staticVolume: "true"
       rootPath: /volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/frontalt/piped/

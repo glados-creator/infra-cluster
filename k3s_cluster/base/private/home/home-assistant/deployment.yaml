@@ -34,7 +34,7 @@ spec:
             - containerPort: 8123
           env:
             - name: TZ
-              value: "Europe/Paris"
+              value: Europe/Paris
           volumeMounts:
             - name: data
               mountPath: /config

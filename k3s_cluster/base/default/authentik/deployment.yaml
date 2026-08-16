@@ -24,12 +24,10 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
-
       serviceAccountName: serviceaccount
       # Ensure PostgreSQL user (uid 70) can write to PVC
       securityContext:
         fsGroup: 70
-
       initContainers:
         # --- PostgreSQL sidecar ---
         - name: postgres
@@ -65,7 +63,6 @@ spec:
                 - authentik
             initialDelaySeconds: 5
             periodSeconds: 2
-
         # --- valkey sidecar ---
         - name: valkey
           image: valkey/valkey:alpine
@@ -88,14 +85,14 @@ spec:
                 - ping
             initialDelaySeconds: 5
             periodSeconds: 2
-
       containers:
         # --- Authentik Server ---
         - name: authentik-server
           image: ghcr.io/goauthentik/server:latest
           imagePullPolicy: IfNotPresent
           # restartPolicy: Always
-          args: ["server"]
+          args:
+            - server
           ports:
             - containerPort: 9000 # HTTP
             - containerPort: 9443 # HTTPS
@@ -123,13 +120,13 @@ spec:
               port: 9000
             initialDelaySeconds: 10
             periodSeconds: 5
-
         # --- Authentik Worker ---
         - name: authentik-worker
           image: ghcr.io/goauthentik/server:latest
           imagePullPolicy: IfNotPresent
           # restartPolicy: Always
-          args: ["worker"]
+          args:
+            - worker
           envFrom:
             - configMapRef:
                 name: authentik-config
@@ -145,7 +142,6 @@ spec:
             - name: data
               mountPath: /custom-templates
               subPath: custom-templates
-
       volumes:
         - name: data
           persistentVolumeClaim:

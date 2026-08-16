@@ -17,4 +17,4 @@ spec:
       services:
         - name: private-code-odysseus-service
           port: 4430
-  # tls: {}
+          # tls: {}

@@ -27,7 +27,6 @@ spec:
       # Ensure PostgreSQL user (uid 70) can write to PVC
       securityContext:
         fsGroup: 70
-      
       initContainers:
         # --- postgres sidecar ---
         - name: postgres
@@ -39,9 +38,9 @@ spec:
             - containerPort: 5432
           env:
             - name: POSTGRES_DATABASE
-              value: "readarr-glasses"
+              value: readarr-glasses
             - name: POSTGRES_USER
-              value: "readarr-glasses"
+              value: readarr-glasses
           envFrom:
             - secretRef:
                 name: readarr-secret
@@ -57,22 +56,23 @@ spec:
                 - readarr-glasses
             initialDelaySeconds: 5
             periodSeconds: 2
-
       containers:
         - name: readarr
           image: blampe/rreading-glasses:latest
           imagePullPolicy: IfNotPresent
           # restartPolicy: Always
-          command: ["/main", "serve"]
+          command:
+            - /main
+            - serve
           args:
-            - "--upstream=www.goodreads.com"
+            - --upstream=www.goodreads.com
           env:
             - name: POSTGRES_HOST
-              value: "127.0.0.1"
+              value: 127.0.0.1
             - name: POSTGRES_DATABASE
-              value: "readarr-glasses"
+              value: readarr-glasses
             - name: POSTGRES_USER
-              value: "readarr-glasses"
+              value: readarr-glasses
           envFrom:
             - secretRef:
                 name: readarr-secret
@@ -89,8 +89,7 @@ spec:
             - name: media-storage
               mountPath: /downloads
               subPath: downloads/readarr
-
       volumes:
         - name: media-storage
           persistentVolumeClaim:
-            claimName:  media-pvc
+            claimName: media-pvc

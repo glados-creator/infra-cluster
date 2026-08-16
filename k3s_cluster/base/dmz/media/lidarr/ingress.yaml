@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-media-lidarr-service
           port: 6656
-  #tls: {} 
+          #tls: {} 

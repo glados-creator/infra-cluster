@@ -1,9 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namePrefix: media-
 namespace: dmz
-
 # ┌─────────────────┬─────────┬───────┬─────────────────────────────────────────────────┐
 # │ Service         │ Port    │ svc   │ Purpose                                         │
 # ├─────────────────┼─────────┼───────┼─────────────────────────────────────────────────┤
@@ -26,7 +24,6 @@ namespace: dmz
 # │ SuggestArr      │ 5000    │ 6670  │ make movies / series watch next suguestion      │ 
 # │ # FlareSolverr  │ 8191    │       │ Cloudflare / DDoS‑GUARD bypass proxy            │
 # └─────────────────┴─────────┴─────────────────────────────────────────────────────────┘
-
 resources:
   - middleware-auth-basic.yaml
   - middleware-auth-trauth.yaml
@@ -50,13 +47,10 @@ resources:
   - profilarr
   - youtarr
   # - suggestarr
-  
-
 secretGenerator:
   - name: media-auth-basic-secret
     envs:
-    - secret.env
+      - secret.env
     type: Opaque
-
 generatorOptions:
   disableNameSuffixHash: true

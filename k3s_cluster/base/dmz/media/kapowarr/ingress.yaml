@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-media-kapowarr-service
           port: 6658
-  #tls: {} 
+          #tls: {} 

@@ -17,4 +17,4 @@ spec:
       services:
         - name: private-glance-service
           port: 4400
-  #tls: {} 
+          #tls: {} 

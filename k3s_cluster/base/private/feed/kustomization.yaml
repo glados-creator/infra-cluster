@@ -1,11 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namePrefix: feed-
 namespace: private
-
 # resources:
-  # - miniflux
-  # - mollysocket
-  # - ntfy
-  # - rsshub
+# - miniflux
+# - mollysocket
+# - ntfy
+# - rsshub

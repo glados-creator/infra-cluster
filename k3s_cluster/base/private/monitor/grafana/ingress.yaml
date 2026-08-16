@@ -17,4 +17,4 @@ spec:
       services:
         - name: private-monitor-grafana-service
           port: 4421
-  # tls: {}
+          # tls: {}

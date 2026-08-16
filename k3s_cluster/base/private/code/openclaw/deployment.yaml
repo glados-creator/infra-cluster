@@ -35,20 +35,20 @@ spec:
           imagePullPolicy: IfNotPresent
           # restartPolicy: Always
           ports:
-            - containerPort: 18789   # Gateway UI/API[reference:5]
-            - containerPort: 18790   # Bridge[reference:6]
-            # like yeah i could do the cli and browser too
+            - containerPort: 18789 # Gateway UI/API[reference:5]
+            - containerPort: 18790 # Bridge[reference:6]
+              # like yeah i could do the cli and browser too
           envFrom:
-          - configMapRef:
-              name: openclaw-config
+            - configMapRef:
+                name: openclaw-config
           resources:
             requests:
-              memory: "4Gi"
+              memory: 4Gi
             limits:
-              memory: "8Gi"
+              memory: 8Gi
           volumeMounts:
             - name: data
-              mountPath: /home/node/.openclaw          # Config, canvas, cron[reference:10]
+              mountPath: /home/node/.openclaw # Config, canvas, cron[reference:10]
             - name: data
               mountPath: /home/node/.openclaw/workspace
               subPath: workspace

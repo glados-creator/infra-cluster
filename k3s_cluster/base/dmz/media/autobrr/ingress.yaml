@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-media-autobrr-service
           port: 6665
-  #tls: {} 
+          #tls: {} 

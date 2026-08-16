@@ -39,10 +39,10 @@ spec:
               value: "1000"
           resources:
             requests:
-              memory: "8Gi"
+              memory: 8Gi
               nvidia.com/gpu-all: 1
             limits:
-              memory: "16Gi"
+              memory: 16Gi
               nvidia.com/gpu-all: 1
           volumeMounts:
             - name: data

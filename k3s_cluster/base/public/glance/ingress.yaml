@@ -17,4 +17,4 @@ spec:
       services:
         - name: public-glance-service
           port: 9900
-  #tls: {} 
+          #tls: {} 

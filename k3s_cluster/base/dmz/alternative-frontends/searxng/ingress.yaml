@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-frontalt-searxng-service
           port: 6624
-  #tls: {}
+          #tls: {}

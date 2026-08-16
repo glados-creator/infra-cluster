@@ -17,4 +17,4 @@ spec:
       services:
         - name: private-monitor-dozzle-service
           port: 4415
-  #tls: {} 
+          #tls: {} 

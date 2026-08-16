@@ -10,7 +10,6 @@ pages:
                   - title: DMZ Gatus
                     url: http://gatus.dmz.home
                     description: DMZ monitoring
-
               - title: Media Services
                 links:
                   - title: Jellyfin
@@ -61,7 +60,6 @@ pages:
                   - title: YouTarr
                     url: http://youtarr.media.dmz.home
                     description: YouTube playlist monitor
-
               - title: Other Dashboards
                 links:
                   - title: Main Glance

@@ -15,13 +15,11 @@ spec:
       services:
         - name: dmz-frontalt-piped-service
           port: 6628
-    
     - kind: Rule
       match: Host(`piped-proxy.alt.dmz.home`)
       services:
         - name: dmz-frontalt-piped-service
           port: 6629
-    
     - kind: Rule
       match: Host(`piped.alt.dmz.home`)
       # middlewares:

@@ -6,4 +6,4 @@ metadata:
 spec:
   basicAuth:
     secret: private-auth-basic-secret
-    realm: "private-middleware-auth-basic"
+    realm: private-middleware-auth-basic

@@ -17,4 +17,4 @@ spec:
       services:
         - name: private-code-ollama-service
           port: 4431
-  # tls: {}
+          # tls: {}

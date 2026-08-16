@@ -33,7 +33,6 @@ spec:
           ports:
             - containerPort: 5380 # http-web
             - containerPort: 53443 # https-web
-
             - containerPort: 53 # dns-udp
               protocol: UDP
             - containerPort: 53 # dns-tcp
@@ -62,12 +61,12 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /etc/dns
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 80
-          #   initialDelaySeconds: 5
-          #   periodSeconds: 10
+              # readinessProbe:
+              #   httpGet:
+              #     path: /
+              #     port: 80
+              #   initialDelaySeconds: 5
+              #   periodSeconds: 10
       volumes:
         - name: config
           persistentVolumeClaim:

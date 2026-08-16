@@ -17,4 +17,4 @@ spec:
       services:
         - name: dmz-media-qbittorrent-service
           port: 6661
-  #tls: {}
+          #tls: {}
