@@ -32,3 +32,6 @@ iface wlan0 inet static
 
 
 rc-service networking restart
+
+# update dns else everything fire with 1970 clock
+echo "nameserver 1.1.1.1" >> /etc/resolvconf.conf

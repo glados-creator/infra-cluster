@@ -19,6 +19,7 @@ main openwrt , netboot
 private code n8n file perms , odysseus , openclaw , vscodium , webui
 dmz searxng
 add arcane ? to monitor
+harbor traefik and nginx dumb
 
 
 ### storage
