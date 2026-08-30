@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: linkerd-dashboard
+  namespace: linkerd-viz
+spec:
+  entryPoints:
+    - web  # or websecure for HTTPS
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`linkerd.main.home`)
+      services:
+        - name: web
+          port: 8084

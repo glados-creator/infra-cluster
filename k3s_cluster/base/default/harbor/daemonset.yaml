@@ -13,6 +13,9 @@ spec:
         app: main-harbor
     spec:
       serviceAccountName: serviceaccount
+      nodeSelector:
+        kubernetes.io/arch: amd64
+
       containers:
         - name: fluentd
           image: fluent/fluentd-kubernetes-daemonset:v1-debian-syslog

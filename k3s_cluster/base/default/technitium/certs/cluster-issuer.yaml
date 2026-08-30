@@ -1,0 +1,29 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned-issuer
+spec:
+  selfSigned: {}
+---
+# apiVersion: cert-manager.io/v1
+# kind: ClusterIssuer
+# metadata:
+#   name: technitium-letsencrypt
+#   namespace: default
+# spec:
+#   acme:
+#     server: https://acme-v02.api.letsencrypt.org/directory
+#     email: a@a.com   # change to your email
+#     privateKeySecretRef:
+#       name: acme-letsencrypt-key-prod
+#     solvers:
+#       - dns01:
+#           webhook:
+#             groupName: dns.webhook.cert-manager.io
+#             solverName: technitium
+#             config:
+#               # This must be the webhook's internal service URL (not the DNS server)
+#               url: https://my-webhook-cert-manager-technitium-webhook.cert-manager.svc.cluster.local
+#               # Note: the webhook itself will use its own config to find Technitium
+#               # The token is referenced in the webhook's config, not here
+#               # (Do NOT put the token here – it's redundant)

@@ -6,14 +6,29 @@ kind: Kustomization
 # to convert helm to kustomize
 # docker run --rm --volume ./:/outside -it --entrypoint /bin/sh  alpine/helm
 # helm template spin-operator oci://ghcr.io/spinframework/charts/spin-operator --version 0.6.1  --namespace spin-operator --create-namespace > spinkube-operator.yaml
+
+# helm template my-webhook kittizz/cert-manager-technitium-webhook \
+#   --namespace cert-manager \
+#   --set groupName=dns.webhook.cert-manager.io \
+#   --set solverName=technitium \
+#   --set config.technitiumUrl="http://technitium-dns.default.svc.cluster.local:5380" \
+#   --set config.apiTokenSecretRef.name="technitium-api-token" \
+#   --set config.apiTokenSecretRef.key="token" > cert-manager-technitium-webhook.yaml
+
 resources:
+  - metallb.yaml
+  - linkerd-url.yaml
+  # - technitium-webhook.yaml
+   
   - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/operator.yaml
   - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/csi-operator.yaml
   # yeah so that emulate the ceph MON MGR
   # - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/cluster.yaml
   # and that create a connection too
   # - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/cluster-external.yaml
+  - rook.yaml
 
   - https://github.com/spinframework/spin-operator/releases/download/v0.6.1/spin-operator.shim-executor.yaml
   - https://github.com/kubevirt/kubevirt/releases/download/v1.9.0/kubevirt-cr.yaml
-  - https://github.com/kubevirt/kubevirt/releases/download/v1.9.0/kubevirt-network-policies.yaml
+  # - https://github.com/kubevirt/kubevirt/releases/download/v1.9.0/kubevirt-network-policies.yaml
+  - kubevirt-fix.yaml

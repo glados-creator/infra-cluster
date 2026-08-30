@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-all
+  namespace: kubevirt
+spec:
+  podSelector: {}          # applies to all pods in the namespace
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - {}                    # allow all incoming traffic
+  egress:
+  - {}                    # allow all outgoing traffic

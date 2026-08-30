@@ -1,0 +1,31 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: home-wildcard-tls
+  namespace: default   # or wherever your apps live
+spec:
+  secretName: home-wildcard-tls-secret
+  commonName: "*.home"
+  dnsNames:
+    - "*.home"
+    - "home"
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+  # Optional: add a duration and renewBefore if you want rotation
+  duration: 8760h # 1 year
+  renewBefore: 720h # 30 days
+---
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: home-wildcard-tls
+#   namespace: default   # or wherever your app resides
+# spec:
+#   secretName: home-wildcard-tls-secret
+#   dnsNames:
+#     - "*.home"
+#     - "home"
+#   issuerRef:
+#     name: technitium-letsencrypt
+#     kind: ClusterIssuer

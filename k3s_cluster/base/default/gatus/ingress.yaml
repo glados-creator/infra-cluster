@@ -17,4 +17,5 @@ spec:
       services:
         - name: main-gatus-service
           port: 2201
-          #tls: {} 
+  tls:
+    secretName: home-wildcard-tls-secret

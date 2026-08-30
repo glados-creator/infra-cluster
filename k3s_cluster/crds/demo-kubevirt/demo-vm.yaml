@@ -1,0 +1,79 @@
+# https://kubevirt.io/user-guide/user_workloads/presets/
+# kubectl get vmi ubuntu-cloud-vm -o jsonpath='{.status.interfaces[0].ipAddress}'
+# List all VMs	kubectl get vms
+# List running VM instances (VMI)	kubectl get vmis
+# View VM details	kubectl describe vm <name>
+# View VMI details	kubectl describe vmi <name>
+# Delete a VM	kubectl delete vm <name>
+# Start a VM (set running=true)	kubectl patch vm <name> -p '{"spec":{"running":true}}' --type merge
+# Stop a VM (set running=false)	kubectl patch vm <name> -p '{"spec":{"running":false}}' --type merge
+# Check VM logs	kubectl logs <virt-launcher-pod-name>
+---
+# 1. DataVolume that downloads the official Ubuntu cloud image into a Ceph PVC
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: ubuntu-cloud-disk
+  namespace: default
+spec:
+  source:
+    http:
+      url: "https://cloud-images.ubuntu.com/releases/22.04/release/ubuntu-22.04-server-cloudimg-amd64.img"
+  pvc:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 20Gi
+    # storageClassName: ceph-rbd   # <-- change to your Ceph StorageClass name
+---
+# 2. The VirtualMachine that uses the imported image
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: ubuntu-cloud-vm
+  namespace: default
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        kubevirt.io/domain: ubuntu-cloud-vm
+    spec:
+      domain:
+        cpu:
+          cores: 2
+        resources:
+          requests:
+            memory: 4Gi
+        devices:
+          disks:
+          - name: rootdisk
+            disk:
+              bus: virtio
+          - name: cloudinitdisk
+            disk:
+              bus: virtio
+          interfaces:
+          - name: default
+            masquerade: {}   # NAT network, gives VM an IP
+      networks:
+      - name: default
+        pod: {}
+      volumes:
+      - name: rootdisk
+        dataVolume:
+          name: ubuntu-cloud-disk   # references the DataVolume above
+      - name: cloudinitdisk
+        cloudInitNoCloud:
+          userData: |
+            #cloud-config
+            hostname: ubuntu-cloud-vm
+            manage_etc_hosts: true
+            password: ubuntu
+            chpasswd: { expire: False }
+            ssh_pwauth: True
+            packages:
+              - qemu-guest-agent
+            runcmd:
+              - systemctl enable --now qemu-guest-agent
