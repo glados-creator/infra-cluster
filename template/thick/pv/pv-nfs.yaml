@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv
+  namespace: <app-ns>
+  labels:
+    app: <app-ns>-<app-name>
+spec:
+  capacity:
+    storage: <app-cap>Gi
+  accessModes:
+    - ReadWriteOnce
+    - ReadOnlyMany
+    - ReadWriteMany
+    # - ReadWriteOncePod
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs
+  # mountOptions:
+  #   - nolock
+  nfs:
+    server: 192.168.1.24 # your NFS server IP
+    path: /bhole/cluster/<app-ns>/<app-name>/ # your NFS export path

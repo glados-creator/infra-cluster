@@ -1,0 +1,142 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: <app-ns>
+  labels:
+    app: <app-ns>-<app-name>
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: <app-ns>-<app-name>
+  template:
+    metadata:
+      labels:
+        app: <app-ns>-<app-name>
+    spec:
+      tolerations:
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 10
+      # nodeSelector:
+      #   kubernetes.io/hostname: rpi5a
+      # nodeSelector:
+      #   server: "true"
+
+      # runtimeClassName: nvidia
+      serviceAccountName: sa
+      # Ensure PostgreSQL user (uid 70) can write to PVC
+      securityContext:
+        fsGroup: 70
+      initContainers:
+        # ---------- postgres ----------
+        - name: postgres
+          image: postgres:alpine
+          imagePullPolicy: IfNotPresent
+          # Setting restartPolicy: Always makes this a sidecar container.
+          restartPolicy: Always
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: harbor-config
+            - secretRef:
+                name: harbor-secret
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql
+              subPath: pgdata
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - postgres
+            initialDelaySeconds: 5
+            periodSeconds: 2
+        # ---------- valkey ----------
+        - name: valkey
+          image: valkey/valkey:alpine
+          imagePullPolicy: IfNotPresent
+          # Setting restartPolicy: Always makes this a sidecar container.
+          restartPolicy: Always
+          ports:
+            - containerPort: 6379
+          readinessProbe:
+            exec:
+              command:
+                - valkey-cli
+                - ping
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+                - valkey-cli
+                - ping
+            initialDelaySeconds: 5
+            periodSeconds: 2
+      containers:
+        - name: <app-name>
+          image: <app-URL>:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: youtarr-config
+            - secretRef:
+                name: youtarr-secret
+          ports:
+            - containerPort: 53
+              protocol: UDP
+            - containerPort: 80
+            - containerPort: 443
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
+                - NET_BIND_SERVICE
+                - NET_ADMIN
+                - NET_RAW
+                - SYS_ADMIN
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+              # nvidia.com/gpu-all: 1
+            limits:
+              cpu: 2
+              memory: 4Gi
+              # nvidia.com/gpu-all: 1
+          volumeMounts:
+            - name: data
+              mountPath: /opt/adguardhome/work
+              subPath: work
+            - name: data
+              mountPath: /opt/adguardhome/conf
+              subPath: conf
+              # readinessProbe:
+              #   httpGet:
+              #     path: /
+              #     port: 80
+              #   initialDelaySeconds: 5
+              #   periodSeconds: 10
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc

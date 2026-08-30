@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+  namespace: <app-ns>
+  labels:
+    app: <app-ns>-<app-name>
+spec:
+  type: ClusterIP
+  selector:
+    app: <app-ns>-<app-name>
+  ports:
+    - name: web
+      protocol: TCP
+      port: 6680 # port of that service
+      targetPort: 80 # port of the container
+    - name: websecure
+      protocol: TCP
+      port: 6680
+      targetPort: 443

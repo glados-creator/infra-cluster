@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: daemonset
+  namespace: <app-ns>
+spec:
+  selector:
+    matchLabels:
+      app: <app-ns>-<app-name>
+  template:
+    metadata:
+      labels:
+        app: <app-ns>-<app-name>
+    spec:
+      serviceAccountName: sa
+      containers:
+        - name: <app-name>
+          image: <app-URL>:latest
+          imagePullPolicy: IfNotPresent
+          # restartPolicy: Always
+          env:
+            - name: FLUENT_ELASTICSEARCH_HOST
+              value: dummy # not used; we forward to syslog
+          volumeMounts:
+            - name: varlog
+              mountPath: /var/log
+      volumes:
+        - name: varlog
+          hostPath:
+            path: /var/log

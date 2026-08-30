@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-pvc
+  namespace: private
+  labels:
+    app: private-<app-name>
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "" # cephfs
+  volumeName: pv
+  resources:
+    requests:
+      storage: <app-cap>Gi
