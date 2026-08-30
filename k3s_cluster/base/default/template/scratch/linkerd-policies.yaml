@@ -19,7 +19,7 @@ metadata:
   namespace: app-mesh
 spec:
   identities:
-    - python-sa.app-mesh.serviceaccount.identity.linkerd.cluster.local
+    - python-sa.app-mesh.sa.identity.linkerd.cluster.local
 ---
 # 3. AUTHORIZATIONPOLICY - Binds it all together: ONLY python-sa can access Nginx[reference:4]
 apiVersion: policy.linkerd.io/v1beta1

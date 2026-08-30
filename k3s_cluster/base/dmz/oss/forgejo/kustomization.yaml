@@ -3,9 +3,9 @@ kind: Kustomization
 namePrefix: forgejo-
 namespace: dmz
 resources:
-  - service-account.yaml
-  - pv.yaml
-  - pvc.yaml
+  - sa.yaml
+  - pv-cephfs.yaml
+  - pvc-cephfs.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml

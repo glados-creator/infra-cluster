@@ -24,7 +24,7 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
-      serviceAccountName: serviceaccount
+      serviceAccountName: sa
       containers:
         - name: webui
           image: ghcr.io/open-webui/open-webui:main

@@ -20,7 +20,7 @@ spec:
       hostNetwork: true
       hostPID: true
       tolerations:
-        - operator: Exists   # runs on control‑planes too
+        - operator: Exists # runs on control‑planes too
       containers:
         - name: main-node-exporter
           image: ghcr.io/prometheus/node-exporter:master-distroless

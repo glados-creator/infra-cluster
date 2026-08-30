@@ -16,11 +16,11 @@ namespace: default
 # | postgresql      | 5432        | Database                       |
 # | redis / valkey  | 6379        | In-memory cache / broker       |
 resources:
-  - service-account.yaml
+  - sa.yaml
   - cluster-role.yaml
   - cluster-role-binding.yaml
-  - pvc.yaml
-  - pv.yaml
+  - pvc-cephfs.yaml
+  - pv-cephfs.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml

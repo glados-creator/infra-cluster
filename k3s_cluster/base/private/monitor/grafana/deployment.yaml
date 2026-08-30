@@ -26,7 +26,7 @@ spec:
           tolerationSeconds: 10
       securityContext:
         fsGroup: 0
-      serviceAccountName: serviceaccount
+      serviceAccountName: sa
       containers:
         - name: grafana
           image: grafana/grafana:latest

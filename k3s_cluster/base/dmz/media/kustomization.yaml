@@ -28,8 +28,8 @@ resources:
   - middleware-auth-basic.yaml
   - middleware-auth-trauth.yaml
   - middleware-auth-authentik.yaml
-  - media-pv.yaml
-  - media-pvc.yaml
+  - pv-cephfs.yaml
+  - pvc-cephfs.yaml
   - jellyfin
   - radarr
   - sonarr

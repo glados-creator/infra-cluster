@@ -4,11 +4,11 @@ metadata:
   name: allow-all
   namespace: kubevirt
 spec:
-  podSelector: {}          # applies to all pods in the namespace
+  podSelector: {} # applies to all pods in the namespace
   policyTypes:
-  - Ingress
-  - Egress
+    - Ingress
+    - Egress
   ingress:
-  - {}                    # allow all incoming traffic
+    - {} # allow all incoming traffic
   egress:
-  - {}                    # allow all outgoing traffic
+    - {} # allow all outgoing traffic

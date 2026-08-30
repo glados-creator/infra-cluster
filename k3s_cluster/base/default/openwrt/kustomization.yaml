@@ -3,10 +3,10 @@ kind: Kustomization
 namePrefix: openwrt-
 namespace: default
 resources:
-  - service-account.yaml
+  - sa.yaml
   - multus-config.yaml
-  - pv.yaml
-  - pvc.yaml
+  - pv-cephfs.yaml
+  - pvc-cephfs.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml

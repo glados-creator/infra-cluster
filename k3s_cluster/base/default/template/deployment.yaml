@@ -30,7 +30,7 @@ spec:
       #   server: "true"
 
       # runtimeClassName: nvidia
-      serviceAccountName: serviceaccount
+      serviceAccountName: sa
       # Ensure PostgreSQL user (uid 70) can write to PVC
       securityContext:
         fsGroup: 70

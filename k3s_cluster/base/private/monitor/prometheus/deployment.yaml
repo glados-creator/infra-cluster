@@ -26,7 +26,7 @@ spec:
           tolerationSeconds: 10
       securityContext:
         fsGroup: 65534
-      serviceAccountName: serviceaccount
+      serviceAccountName: sa
       containers:
         - name: prometheus
           image: prom/prometheus:latest

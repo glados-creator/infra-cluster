@@ -34,7 +34,8 @@ spec:
           tolerationSeconds: 10
       nodeSelector:
         server: "true"
-      serviceAccountName: serviceaccount
+
+      serviceAccountName: sa
       containers:
         - name: openwrt
           image: openwrt/rootfs:latest

@@ -24,7 +24,7 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
-      serviceAccountName: serviceaccount
+      serviceAccountName: sa
       # Ensure PostgreSQL user (uid 70) can write to PVC
       securityContext:
         fsGroup: 70

@@ -3,9 +3,9 @@ kind: Kustomization
 namePrefix: webui-
 namespace: private
 resources:
-  - service-account.yaml
-  - pvc.yaml
-  - pv.yaml
+  - sa.yaml
+  - pvc-cephfs.yaml
+  - pv-cephfs.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml

@@ -24,7 +24,7 @@ spec:
           operator: Exists
           effect: NoExecute
           tolerationSeconds: 10
-      serviceAccountName: serviceaccount
+      serviceAccountName: sa
       containers:
         - name: <app-name>
           image: <app-URL>:latest

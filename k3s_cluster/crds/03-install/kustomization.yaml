@@ -33,8 +33,6 @@ resources:
 
   # idk linkerd 
   - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.5.1/standard-install.yaml
-
   # nvidia gpu runtime
   - ../nvidia
 # TODO : patch here for generic-device-plugin --device
-

@@ -28,7 +28,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
-      serviceAccountName: serviceaccount
+      serviceAccountName: sa
       containers:
         - name: openclaw
           image: ghcr.io/openclaw/openclaw:latest

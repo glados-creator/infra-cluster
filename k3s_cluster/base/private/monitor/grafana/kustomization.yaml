@@ -3,9 +3,9 @@ kind: Kustomization
 namePrefix: grafana-
 namespace: private
 resources:
-  - pvc.yaml
-  - pv.yaml
+  - pvc-cephfs.yaml
+  - pv-cephfs.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml
-  - service-account.yaml
+  - sa.yaml

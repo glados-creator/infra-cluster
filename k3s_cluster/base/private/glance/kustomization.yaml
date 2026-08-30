@@ -3,7 +3,7 @@ kind: Kustomization
 namePrefix: glance-
 namespace: private
 resources:
-  - service-account.yaml
+  - sa.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml

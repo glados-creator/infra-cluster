@@ -12,7 +12,7 @@ spec:
       labels:
         app: <app-ns>-<app-name>
     spec:
-      serviceAccountName: serviceaccount
+      serviceAccountName: sa
       containers:
         - name: <app-name>
           image: <app-URL>:latest

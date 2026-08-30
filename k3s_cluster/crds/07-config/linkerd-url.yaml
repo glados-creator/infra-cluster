@@ -5,7 +5,7 @@ metadata:
   namespace: linkerd-viz
 spec:
   entryPoints:
-    - web  # or websecure for HTTPS
+    - web # or websecure for HTTPS
     - websecure
   routes:
     - kind: Rule

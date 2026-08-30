@@ -10,5 +10,5 @@ roleRef:
   name: clusterrole
 subjects:
   - kind: ServiceAccount
-    name: serviceaccount
+    name: sa
     namespace: private

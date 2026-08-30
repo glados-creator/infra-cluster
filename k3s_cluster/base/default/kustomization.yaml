@@ -16,7 +16,6 @@ resources:
   # - netboot
   # - gluetun
   # - honeypot
-
 secretGenerator:
   - name: auth-basic-secret
     envs:

@@ -4,7 +4,6 @@ metadata:
   name: selfsigned-issuer
 spec:
   selfSigned: {}
----
 # apiVersion: cert-manager.io/v1
 # kind: ClusterIssuer
 # metadata:
@@ -27,3 +26,5 @@ spec:
 #               # Note: the webhook itself will use its own config to find Technitium
 #               # The token is referenced in the webhook's config, not here
 #               # (Do NOT put the token here – it's redundant)
+---
+
