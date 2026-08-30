@@ -2,37 +2,37 @@
 apiVersion: policy.linkerd.io/v1beta1
 kind: Server
 metadata:
-  name: nginx-server
-  namespace: app-mesh
+  name: server
+  namespace: default
 spec:
   podSelector:
     matchLabels:
-      app: nginx-proxy
-  port: 80
-  proxyProtocol: HTTP/1
+      app: main-dozzle
+  port: 8080
+  proxyProtocol: HTTP/1.1
 ---
 # 2. MESHTLSAUTHENTICATION - Defines how clients authenticate[reference:3]
 apiVersion: policy.linkerd.io/v1beta1
 kind: MeshTLSAuthentication
 metadata:
-  name: python-identity
-  namespace: app-mesh
+  name: identity
+  namespace: default
 spec:
   identities:
-    - python-sa.app-mesh.serviceaccount.identity.linkerd.cluster.local
+    - main-treafik-sa.default.serviceaccount.identity.linkerd.cluster.local
 ---
 # 3. AUTHORIZATIONPOLICY - Binds it all together: ONLY python-sa can access Nginx[reference:4]
 apiVersion: policy.linkerd.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: allow-python-to-nginx
-  namespace: app-mesh
+  name: auth
+  namespace: default
 spec:
   targetRef:
     group: policy.linkerd.io
     kind: Server
-    name: nginx-server
+    name: main-treafik-server
   requiredAuthenticationRefs:
-    - name: python-identity
+    - name: main-dozzle-identity
       kind: MeshTLSAuthentication
       group: policy.linkerd.io

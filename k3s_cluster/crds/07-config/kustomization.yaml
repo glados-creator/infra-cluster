@@ -30,5 +30,7 @@ resources:
 
   - https://github.com/spinframework/spin-operator/releases/download/v0.6.1/spin-operator.shim-executor.yaml
   - https://github.com/kubevirt/kubevirt/releases/download/v1.9.0/kubevirt-cr.yaml
+  - https://github.com/kubevirt/containerized-data-importer/releases/latest/download/cdi-operator.yaml
+  - https://github.com/kubevirt/containerized-data-importer/releases/latest/download/cdi-cr.yaml
   # - https://github.com/kubevirt/kubevirt/releases/download/v1.9.0/kubevirt-network-policies.yaml
   - kubevirt-fix.yaml

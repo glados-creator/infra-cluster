@@ -3,10 +3,10 @@ kind: Kustomization
 namePrefix: code-
 namespace: private
 resources:
-  - n8n
+  # - n8n
   - ollama
-  - odysseus
+  # - odysseus
   - vscodium
-  - openclaw
-  - webui
-  - comfyui
+  # - openclaw
+  # - webui
+  # - comfyui

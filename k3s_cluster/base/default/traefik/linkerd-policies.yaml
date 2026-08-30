@@ -1,0 +1,12 @@
+# 1. SERVER - Defines what we're protecting (Nginx port 80)[reference:2]
+apiVersion: policy.linkerd.io/v1beta1
+kind: Server
+metadata:
+  name: server
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      app: main-treafik
+  port: 80
+  proxyProtocol: HTTP/1.1

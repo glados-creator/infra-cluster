@@ -1,6 +1,17 @@
-# helm template gpu-operator nvidia/gpu-operator
+# helm template gpu-operator nvidia/gpu-operator \
+#   --namespace gpu-operator --create-namespace \
+#   --set driver.enabled=false \          # MUST be false - uses your host driver
+#   --set toolkit.enabled=false \         # MUST be false - uses your host toolkit
+#   --set devicePlugin.enabled=true \     # MUST be true - advertises GPUs to k8s
+#   --set vfioManager.enabled=false \     # STRONGLY recommended - prevents unbinding
+#   --set cdi.enabled=false \             # Recommended - avoids CDI file issues
+#   --set devicePlugin.config.name=device-plugin-config \
+#   --set devicePlugin.config.default=default > gpu-operator.yaml
+
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: gpu-operator
 resources:
+  - namespaces.yaml
   - gpu-operator.yaml
+  - device-plugin-config.yaml

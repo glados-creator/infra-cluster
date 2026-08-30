@@ -4,18 +4,19 @@ namePrefix: main-
 namespace: default
 resources:
   - middleware
-  # - openwrt
+  - openwrt
   - traefik
   - technitium
   - harbor
   - authentik
+  - node-exporter
   - glance
   - gatus
   - dozzle
   # - netboot
   # - gluetun
   # - honeypot
-  # - linkerd
+
 secretGenerator:
   - name: auth-basic-secret
     envs:
