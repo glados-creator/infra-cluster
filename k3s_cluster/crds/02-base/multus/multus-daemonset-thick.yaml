@@ -149,8 +149,8 @@ spec:
         app: multus
         name: multus
     spec:
-      nodeSelector:
-        server: "true"
+      # nodeSelector:
+      #   server: "true"
       hostNetwork: true
       hostPID: true
       tolerations:
