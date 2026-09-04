@@ -23,9 +23,8 @@ apk add nfs-utils
 
 # install and cp multus ... cni thingy
 apk add cni-plugins
-sudo cp /usr/libexec/cni/ipvlan /opt/cni/bin/
-sudo cp /usr/libexec/cni/static /opt/cni/bin/
-sudo chmod +x /opt/cni/bin/ipvlan /opt/cni/bin/static
+sudo cp /usr/libexec/cni/* /opt/cni/bin/
+sudo chmod +x /opt/cni/bin/*
 
 sudo mkdir -p /bhole
 rc-update add netmount
@@ -58,7 +57,8 @@ curl https://get.k3s.io | INSTALL_K3S_EXEC="server \
   --disable=servicelb \
   --node-name=k3sm \
   --node-label=server=true \
-  --kubelet-arg=--fail-swap-on=false" bash
+  --kubelet-arg=--fail-swap-on=false \
+  --kube-proxy-arg=--proxy-mode=nftables" bash
 
 curl -sfL https://get.k3s.io | sh -s - server \
   --token XXX \
@@ -70,7 +70,8 @@ curl -sfL https://get.k3s.io | sh -s - server \
   --disable=servicelb \
   --disable=metrics-server \
   --node-label=server=true \
-  --kubelet-arg=--fail-swap-on=false
+  --kubelet-arg=--fail-swap-on=false \
+  --kube-proxy-arg=--proxy-mode=nftables
   # --cluster-init \
   # --node-name=k3sm \
 

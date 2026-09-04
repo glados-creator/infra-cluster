@@ -4,9 +4,25 @@ metadata:
   name: default
 spec:
   calicoNetwork:
+    linuxDataplane: Nftables
+    bgp: Enabled
     containerIPForwarding: Enabled
+    mtu: 1450  # 1500 uplink MTU minus 50 bytes VXLAN overhead — adjust if your uplink MTU differs
+    nodeAddressAutodetectionV4:
+      firstFound: false
+      kubernetes: NodeInternalIP
+    nodeAddressAutodetectionV6:
+      firstFound: false
+      kubernetes: NodeInternalIP
     ipPools:
       - name: default-ipv4-ippool
         cidr: 10.42.0.0/16
         encapsulation: VXLAN
         natOutgoing: Enabled
+        nodeSelector: all()
+---
+apiVersion: operator.tigera.io/v1
+kind: APIServer
+metadata:
+  name: default
+spec: {}
