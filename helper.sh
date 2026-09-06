@@ -1,0 +1,2 @@
+kubectl annotate node astra projectcalico.org/IPv4Address=192.168.1.12/24 --overwrite
+kubectl get ns -o json | jq -r '.items[] | select(.status.phase=="Terminating") | .metadata.name' | xargs -n1 -I{} sh -c 'kubectl get namespace {} -o json | jq ".spec.finalizers = []" | kubectl replace --raw "/api/v1/namespaces/{}/finalize" -f -'
