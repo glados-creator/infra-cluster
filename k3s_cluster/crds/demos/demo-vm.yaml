@@ -34,7 +34,7 @@ metadata:
   name: ubuntu-cloud-vm
   namespace: default
 spec:
-  running: true
+  runStrategy: Manual
   template:
     metadata:
       labels:
