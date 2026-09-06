@@ -22,6 +22,6 @@ spec:
     volumeHandle: cephfs-vicus-default-openwrt
     volumeAttributes:
       clusterID: rook-ceph
-      fsName: bhole
+      fsName: bholefs
       staticVolume: "true"
-      rootPath: /volumes/k8s-colosseum/vicus-default/daeef6bb-d993-4383-86af-2745a851bf55/openwrt/
+      rootPath: /volumes/colosseum/vicus-default/effbd7ff-fd15-4e5a-93a2-4be7039fb06b/openwrt/ # get path + k8s-colosseum -> colosseum

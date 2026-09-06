@@ -24,4 +24,4 @@ spec:
       clusterID: rook-ceph
       fsName: bhole
       staticVolume: "true"
-      rootPath: /volumes/k8s-colosseum/vicus-private/c8e734df-e422-4b77-8ab5-ef8ece645e26/home/homeassistant/
+      rootPath: /volumes/colosseum/vicus-private/4a6c2f11-9025-429e-adc6-80f3f029c43e/home/homeassistant/

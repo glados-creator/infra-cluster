@@ -24,4 +24,4 @@ spec:
       clusterID: rook-ceph
       fsName: bhole
       staticVolume: "true"
-      rootPath: /volumes/k8s-colosseum/vicus-default/daeef6bb-d993-4383-86af-2745a851bf55/dozzle/
+      rootPath: /volumes/colosseum/vicus-default/effbd7ff-fd15-4e5a-93a2-4be7039fb06b/dozzle/

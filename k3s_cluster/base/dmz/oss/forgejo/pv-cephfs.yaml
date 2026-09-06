@@ -24,4 +24,4 @@ spec:
       clusterID: rook-ceph
       fsName: bhole
       staticVolume: "true"
-      rootPath: /volumes/k8s-colosseum/vicus-dmz/8496c355-8ebf-4b44-836e-3bbbf7c1d88d/oss/forgejo/
+      rootPath: /volumes/colosseum/vicus-dmz/08622c4f-fd51-4c77-8d1c-9a5d3c6e6d66/oss/forgejo/
