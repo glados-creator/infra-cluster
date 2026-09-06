@@ -12,4 +12,4 @@ data:
         failRequestsGreaterThanOne: true
         resources:
         - name: nvidia.com/gpu-all
-          replicas: 4
+          replicas: 10
