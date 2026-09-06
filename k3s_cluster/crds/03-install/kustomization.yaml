@@ -1,8 +1,5 @@
-# cp 02-kustomization.yaml kustomization.yaml
-# kubectl apply -k .
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-# curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 resources:
   # Traefik CRDs + RBAC
   # https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-crd/
