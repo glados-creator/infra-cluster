@@ -57,3 +57,7 @@ spec:
 #   ceph fs subvolume getpath bholefs "$sv" colosseum
 # done
 # ceph fs subvolume create bhole bholefs
+
+# DELETE
+# kubectl -n rook-ceph patch cephfilesystemsubvolumegroup colosseum -p '{"metadata":{"finalizers":[]}}' --type=merge
+# kubectl -n rook-ceph patch cephfilesystem bholefs -p '{"metadata":{"finalizers":[]}}' --type=merge
