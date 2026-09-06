@@ -1,5 +1,5 @@
-# 1. SERVER - Defines what we're protecting (Nginx port 80)[reference:2]
-apiVersion: policy.linkerd.io/v1beta1
+# 1. SERVER - Defines what we're protecting
+apiVersion: policy.linkerd.io/v1beta3
 kind: Server
 metadata:
   name: server
@@ -9,10 +9,10 @@ spec:
     matchLabels:
       app: main-dozzle
   port: 8080
-  proxyProtocol: HTTP/1.1
+  proxyProtocol: HTTP/1
 ---
-# 2. MESHTLSAUTHENTICATION - Defines how clients authenticate[reference:3]
-apiVersion: policy.linkerd.io/v1beta1
+# 2. MESHTLSAUTHENTICATION - Defines how clients authenticate
+apiVersion: policy.linkerd.io/v1alpha1
 kind: MeshTLSAuthentication
 metadata:
   name: identity
@@ -21,8 +21,8 @@ spec:
   identities:
     - main-treafik-sa.default.sa.identity.linkerd.cluster.local
 ---
-# 3. AUTHORIZATIONPOLICY - Binds it all together: ONLY python-sa can access Nginx[reference:4]
-apiVersion: policy.linkerd.io/v1beta1
+# 3. AUTHORIZATIONPOLICY - Binds it all together
+apiVersion: policy.linkerd.io/v1alpha1
 kind: AuthorizationPolicy
 metadata:
   name: auth
@@ -31,8 +31,8 @@ spec:
   targetRef:
     group: policy.linkerd.io
     kind: Server
-    name: main-treafik-server
+    name: server
   requiredAuthenticationRefs:
-    - name: main-dozzle-identity
+    - name: identity
       kind: MeshTLSAuthentication
       group: policy.linkerd.io
