@@ -1,3 +1,24 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: bholefs
+provisioner: rook-ceph.cephfs.csi.ceph.com
+parameters:
+  clusterID: rook-ceph
+  fsName: bholefs
+  pool: bholefs-bhole_data
+  subvolumeGroup: colosseum
+  csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+  csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+  csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+  csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+  csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+  csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+mountOptions:
+  - discard
+---
 apiVersion: ceph.rook.io/v1
 kind: CephFilesystem
 metadata:
@@ -18,7 +39,7 @@ spec:
   preserveFilesystemOnDelete: true
   metadataServer:
     activeCount: 1
-    activeStandby: true
+    # activeStandby: true
 ---
 apiVersion: ceph.rook.io/v1
 kind: CephFilesystemSubVolumeGroup
@@ -28,6 +49,7 @@ metadata:
 spec:
   filesystemName: bholefs
 
+# kubectl -n rook-ceph get cephcluster
 # kubectl -n rook-ceph exec -it deploy/rook-ceph-tools -- bash
 # 
 # for sv in vicus-default vicus-private vicus-dmz vicus-public; do

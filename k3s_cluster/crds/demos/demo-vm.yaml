@@ -25,7 +25,7 @@ spec:
     resources:
       requests:
         storage: 20Gi
-        # storageClassName: ceph-rbd   # <-- change to your Ceph StorageClass name
+    storageClassName: bholefs
 ---
 # 2. The VirtualMachine that uses the imported image
 apiVersion: kubevirt.io/v1
