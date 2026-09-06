@@ -22,6 +22,6 @@ spec:
     volumeHandle: cephfs-vicus-private-code-openclaw
     volumeAttributes:
       clusterID: rook-ceph
-      fsName: bhole
+      fsName: bholefs
       staticVolume: "true"
       rootPath: /volumes/colosseum/vicus-private/4a6c2f11-9025-429e-adc6-80f3f029c43e/code/openclaw/

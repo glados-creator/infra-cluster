@@ -22,6 +22,6 @@ spec:
     volumeHandle: cephfs-vicus-default-harbor
     volumeAttributes:
       clusterID: rook-ceph
-      fsName: bhole
+      fsName: bholefs
       staticVolume: "true"
       rootPath: /volumes/colosseum/vicus-default/effbd7ff-fd15-4e5a-93a2-4be7039fb06b/harbor/

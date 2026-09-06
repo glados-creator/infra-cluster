@@ -24,4 +24,4 @@ spec:
       clusterID: rook-ceph
       fsName: bholefs
       staticVolume: "true"
-      rootPath: /volumes/colosseum/vicus-default/effbd7ff-fd15-4e5a-93a2-4be7039fb06b/openwrt/ # get path + k8s-colosseum -> colosseum
+      rootPath: /volumes/colosseum/vicus-default/effbd7ff-fd15-4e5a-93a2-4be7039fb06b/openwrt/
