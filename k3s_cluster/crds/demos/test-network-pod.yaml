@@ -3,7 +3,11 @@ kind: Pod
 metadata:
   name: test-net-pod
   annotations:
-    k8s.v1.cni.cncf.io/networks: net-a,net-b
+    k8s.v1.cni.cncf.io/networks: |
+      [
+        { "name": "net-a", "interface": "eth1" },
+        { "name": "net-b", "interface": "eth2" }
+      ]
 spec:
   containers:
   - name: test

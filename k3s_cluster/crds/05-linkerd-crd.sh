@@ -1,4 +1,4 @@
-set -ex 
+set -x 
 
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
