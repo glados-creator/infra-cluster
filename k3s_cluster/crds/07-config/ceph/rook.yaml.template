@@ -39,11 +39,11 @@ spec:
     useAllNodes: false
     useAllDevices: false
     nodes:
-      - name: "titan"
+      - name: "stitan"
         devices:
-          - name: "/dev/disk/by-id/<titan-id>"
+          - name: "/dev/disk/by-id/<stitan-id>"
           # config:
-          #     metadataDevice: "/dev/disk/by-id/<titan-nvme-id>"
+          #     metadataDevice: "/dev/disk/by-id/<stitan-nvme-id>"
       - name: "astra"
         devices:
           - name: "/dev/disk/by-id/<astra-id>"
