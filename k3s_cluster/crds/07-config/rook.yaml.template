@@ -1,0 +1,64 @@
+apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph
+spec:
+  cephVersion:
+    image: quay.io/ceph/ceph:v20.2.3 # TODO update once update
+  dataDirHostPath: /var/lib/rook
+  mon:
+    count: 5
+    allowMultiplePerNode: false
+  mgr:
+    count: 2
+    modules:
+      - name: pg_autoscaler
+        enabled: true
+      - name: balancer
+        enabled: true
+  dashboard:
+    enabled: true
+    ssl: false # traefik rproxy
+  monitoring:
+    enabled: false # create a prometheus-operator CRDs ServiceMonitor
+  resources:
+    mon:
+      requests:
+        memory: "8Gi"
+    mgr:
+      requests:
+        memory: "8Gi"
+    osd:
+      requests:
+        memory: "8Gi"
+  # placement:
+  #   mon:
+  #     nodeAffinity:
+  storage:
+    useAllNodes: false
+    useAllDevices: false
+    nodes:
+      - name: "titan"
+        devices:
+          - name: "/dev/disk/by-id/<titan-id>"
+          # config:
+          #     metadataDevice: "/dev/disk/by-id/<titan-nvme-id>"
+      - name: "astra"
+        devices:
+          - name: "/dev/disk/by-id/<astra-id>"
+          - name: "/dev/disk/by-id/<astra-id>"
+          - name: "/dev/disk/by-id/<astra-id>"
+      - name: "jupiter"
+        devices:
+          - name: "/dev/disk/by-id/<jupiter-id>"
+          - name: "/dev/disk/by-id/<jupiter-id>"
+          - name: "/dev/disk/by-id/<jupiter-id>"
+          - name: "/dev/disk/by-id/<jupiter-id>"
+      - name: "rpi5a"
+        devices:
+          - name: "/dev/disk/by-id/<rpi5a-id>"
+          - name: "/dev/disk/by-id/<rpi5a-id>"
+      - name: "rpi5b"
+        devices:
+          - name: "/dev/disk/by-id/<rpi5b-id>"

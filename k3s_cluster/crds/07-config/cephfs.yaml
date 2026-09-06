@@ -1,0 +1,37 @@
+apiVersion: ceph.rook.io/v1
+kind: CephFilesystem
+metadata:
+  name: bholefs
+  namespace: rook-ceph
+spec:
+  metadataPool:
+   # - name: bhole_metadata ?
+    replicated:
+      size: 1
+    # deviceClass: nvme
+  dataPools:
+    - name: bhole_data
+      failureDomain: host
+      replicated:
+        size: 1
+      # deviceClass: hdd
+  preserveFilesystemOnDelete: true
+  metadataServer:
+    activeCount: 1
+    activeStandby: true
+---
+apiVersion: ceph.rook.io/v1
+kind: CephFilesystemSubVolumeGroup
+metadata:
+  name: colosseum
+  namespace: rook-ceph
+spec:
+  filesystemName: bholefs
+
+# kubectl -n rook-ceph exec -it deploy/rook-ceph-tools -- bash
+# 
+# for sv in vicus-default vicus-private vicus-dmz vicus-public; do
+#   ceph fs subvolume create bholefs "$sv" colosseum
+#   ceph fs subvolume getpath bholefs "$sv" colosseum
+# done
+# ceph fs subvolume create bhole bholefs
