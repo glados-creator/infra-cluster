@@ -27,18 +27,8 @@ resources:
   - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/common.yaml
   - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/common-external.yaml
   - https://raw.githubusercontent.com/rook/rook/v1.20.2/deploy/examples/networkpolicy.yaml
-  # github.com/squat/generic-device-plugin
-  - https://raw.githubusercontent.com/squat/generic-device-plugin/main/manifests/generic-device-plugin.yaml
-  # https://kittizz.github.io/cert-manager-technitium-webhook/
 
   # idk linkerd
   - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.5.1/standard-install.yaml
   # nvidia gpu runtime
   - nvidia
-# TODO : patch here for generic-device-plugin --device
-patches:
-  - path: usb-patch.yaml
-    target:
-      kind: DaemonSet
-      name: generic-device-plugin
-      namespace: kube-system

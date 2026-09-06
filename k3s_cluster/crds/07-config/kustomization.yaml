@@ -32,3 +32,16 @@ resources:
   - https://github.com/kubevirt/containerized-data-importer/releases/latest/download/cdi-cr.yaml
   # - https://github.com/kubevirt/kubevirt/releases/download/v1.9.0/kubevirt-network-policies.yaml
   - kubevirt-fix.yaml
+
+  # github.com/squat/generic-device-plugin
+  - https://raw.githubusercontent.com/squat/generic-device-plugin/main/manifests/generic-device-plugin.yaml
+  # https://kittizz.github.io/cert-manager-technitium-webhook/
+  # - technitium-webhook.yaml
+
+# TODO : patch here for generic-device-plugin --device
+patches:
+  - path: usb-patch.yaml
+    target:
+      kind: DaemonSet
+      name: generic-device-plugin
+      namespace: kube-system
