@@ -10,6 +10,9 @@ metadata:
       ]
 spec:
   containers:
-  - name: test
-    image: nicolaka/netshoot
-    command: ["sleep", "infinity"]
+    - name: test
+      image: nicolaka/netshoot
+      command:
+        - sleep
+        - infinity
+# kubectl exec -it test-net-pod -- /bin/bash

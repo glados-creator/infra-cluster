@@ -7,9 +7,9 @@ spec:
   template:
     spec:
       containers:
-      - name: generic-device-plugin
-        # Replace the entire args array with only the USB device
-        $patch: replace
-        args:
-        - --device
-        - '{"name": "sandisk", "groups": [{"usb": [{"vendor": "0781", "product": "5591"}]}]}'
+        - name: generic-device-plugin
+          # Replace the entire args array with only the USB device
+          $patch: replace
+          args:
+            - --device
+            - '{"name": "sandisk", "groups": [{"usb": [{"vendor": "0781", "product": "5591"}]}]}'

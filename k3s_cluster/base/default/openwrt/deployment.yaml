@@ -35,7 +35,6 @@ spec:
       nodeSelector:
         # server: "true"
         kubernetes.io/arch: amd64
-
       serviceAccountName: sa
       containers:
         - name: openwrt

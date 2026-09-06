@@ -7,7 +7,7 @@ spec:
     linuxDataplane: Nftables
     bgp: Enabled
     containerIPForwarding: Enabled
-    mtu: 1450  # 1500 uplink MTU minus 50 bytes VXLAN overhead — adjust if your uplink MTU differs
+    mtu: 1450 # 1500 uplink MTU minus 50 bytes VXLAN overhead — adjust if your uplink MTU differs
     nodeAddressAutodetectionV4:
       firstFound: false
       kubernetes: NodeInternalIP
