@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: k3s-homelab-ca
+  # Must live in the cert-manager cluster-resource-namespace (default: cert-manager)
+  # so the ClusterIssuer below can read the resulting secret.
+  namespace: cert-manager
+spec:
+  isCA: true
+  commonName: k3s-homelab-ca
+  secretName: k3s-homelab-ca-secret
+  duration: 87600h   # 10 years - it's a root CA, not a leaf cert
+  renewBefore: 720h
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: selfsigned-bootstrap
+    kind: ClusterIssuer
+    group: cert-manager.io

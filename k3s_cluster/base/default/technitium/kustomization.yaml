@@ -10,7 +10,7 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
-  - certs
+  # - certs
 configMapGenerator:
   - name: technitium-config
     envs:

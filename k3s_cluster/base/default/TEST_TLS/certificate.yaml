@@ -1,0 +1,22 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: traefik-wildcard
+  # Namespace Traefik itself runs in - change to "kube-system" if you're
+  # using k3s's built-in Traefik, or your own "traefik" namespace otherwise.
+  namespace: traefik
+spec:
+  secretName: traefik-wildcard-tls
+  duration: 2160h    # 90 days
+  renewBefore: 360h  # renew 15 days before expiry
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  dnsNames:
+    # CHANGE THIS to whatever local domain you want, e.g. *.lab, *.home.arpa
+    - "*.k3s.home"
+    - "k3s.home"
+  issuerRef:
+    name: k3s-homelab-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io

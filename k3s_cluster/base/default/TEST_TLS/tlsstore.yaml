@@ -1,0 +1,10 @@
+apiVersion: traefik.io/v1alpha1
+kind: TLSStore
+metadata:
+  # Must be named "default" - Traefik automatically picks this up as the
+  # fallback cert for any HTTPS request that doesn't match an SNI-specific store.
+  name: default
+  namespace: traefik   # match the namespace used in certificate.yaml
+spec:
+  defaultCertificate:
+    secretName: traefik-wildcard-tls
