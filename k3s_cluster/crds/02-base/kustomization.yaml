@@ -13,6 +13,6 @@ resources:
   # - metallb.yaml
 
   # needed for spinkube
-  - https://github.com/cert-manager/cert-manager/releases/download/v1.20.0/cert-manager.yaml
+  - https://github.com/cert-manager/cert-manager/releases/download/v1.20.1/cert-manager.yaml
   - https://github.com/spinframework/spin-operator/releases/download/v0.6.1/spin-operator.crds.yaml
   - https://github.com/spinframework/spin-operator/releases/download/v0.6.1/spin-operator.runtime-class.yaml
