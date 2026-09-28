@@ -10,6 +10,8 @@ metadata:
   labels:
     environment: prod
     zone: public
+  # annotation:
+  #   linkerd.io/inject:enabled
 ---
 apiVersion: v1
 kind: Namespace

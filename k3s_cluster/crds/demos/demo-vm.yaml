@@ -1,44 +1,90 @@
 # https://kubevirt.io/user-guide/user_workloads/presets/
-# kubectl get vmi ubuntu-cloud-vm -o jsonpath='{.status.interfaces[0].ipAddress}'
+# kubectl get vm ubuntu-vm 
+# kubectl get vmi ubuntu-vm -o jsonpath='{.status.interfaces[0].ipAddress}'
 # List all VMs	kubectl get vms
 # List running VM instances (VMI)	kubectl get vmis
-# View VM details	kubectl describe vm <name>
-# View VMI details	kubectl describe vmi <name>
-# Delete a VM	kubectl delete vm <name>
-# Start a VM (set running=true)	kubectl patch vm <name> -p '{"spec":{"running":true}}' --type merge
-# Stop a VM (set running=false)	kubectl patch vm <name> -p '{"spec":{"running":false}}' --type merge
+# View VM details	kubectl describe vm ubuntu-vm
+# View VMI details	kubectl describe vmi ubuntu-vm
+# Delete a VM	kubectl delete vm ubuntu-vm
+# Start a VM (set running=true)	kubectl patch vm ubuntu-vm -n default --type merge -p '{"spec":{"runStrategy":"Always"}}'
+# Stop a VM (set running=false)	kubectl patch vm ubuntu-vm -n default --type merge -p '{"spec":{"runStrategy":"Halted"}}'
 # Check VM logs	kubectl logs <virt-launcher-pod-name>
+# virtctl console ubuntu-vm -n default
+# virtctl vnc ubuntu-vm -n default
+
+# RAW SSH
+# kubectl exec -it -n default $(kubectl get vmi ubuntu-vm -n default -o jsonpath='{.status.interfaces[0].name}' 2>/dev/null || echo "") -- true 2>/dev/null
+# VIRTCTL
+# VERSION=$(kubectl get kubevirt.kubevirt.io/kubevirt -n kubevirt -o jsonpath='{.status.observedKubeVirtVersion}' 2>/dev/null || echo "v1.0.0")
+# ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
+# curl -L -o virtctl https://github.com/kubevirt/kubevirt/releases/download/${VERSION}/virtctl-${VERSION}-linux-${ARCH}
+# chmod +x virtctl
+# sudo mv virtctl /usr/local/bin/
 ---
-# 1. DataVolume that downloads the official Ubuntu cloud image into a Ceph PVC
-apiVersion: cdi.kubevirt.io/v1beta1
-kind: DataVolume
+apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
-  name: ubuntu-cloud-disk
+  name: ubuntu-pvc
   namespace: default
 spec:
-  source:
-    http:
-      url: https://cloud-images.ubuntu.com/releases/22.04/release/ubuntu-22.04-server-cloudimg-amd64.img
-  pvc:
-    accessModes:
-      - ReadWriteOnce
-    resources:
-      requests:
-        storage: 20Gi
-    storageClassName: bholefs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 64Gi
+  storageClassName: bholesc # Your CephFS StorageClass
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: iso-loader
+  namespace: default
+spec:
+  restartPolicy: Never
+  containers:
+    - name: loader
+      image: alpine:3.20
+      command: ["sh", "-c"]
+      args:
+        - |
+          apk add --no-cache curl
+          curl -L -o /iso/ubuntu.iso https://cloud-images.ubuntu.com/releases/22.04/release/ubuntu-22.04-server-cloudimg-amd64.img
+      volumeMounts:
+        - name: iso
+          mountPath: /iso
+  volumes:
+    - name: iso
+      persistentVolumeClaim:
+        claimName: ubuntu-pvc
+# apiVersion: upload.cdi.kubevirt.io/v1beta1
+# kind: UploadTokenRequest
+# metadata:
+#   name: iso-upload-token
+#   namespace: default
+# spec:
+#   pvcName: ubuntu-pvc
+# upload ISO
+# TOKEN=$(kubectl get uploadtokenrequest iso-upload-token -n default -o jsonpath='{.status.token}')
+# kubectl port-forward -n cdi svc/cdi-uploadproxy 8443:443
+# curl -v --insecure \
+#  -H "Authorization: Bearer $TOKEN" \
+#  --data-binary @/path/to/your/ubuntu.iso \
+#  https://localhost:8443/v1beta1/upload
 ---
 # 2. The VirtualMachine that uses the imported image
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
-  name: ubuntu-cloud-vm
+  name: ubuntu-vm
   namespace: default
 spec:
+  securityContext:
+    fsGroupChangePolicy: OnRootMismatch
   runStrategy: Manual
   template:
     metadata:
       labels:
-        kubevirt.io/domain: ubuntu-cloud-vm
+        kubevirt.io/domain: ubuntu-vm
     spec:
       domain:
         cpu:
@@ -48,32 +94,16 @@ spec:
             memory: 4Gi
         devices:
           disks:
-            - name: rootdisk
-              disk:
-                bus: virtio
-            - name: cloudinitdisk
-              disk:
-                bus: virtio
+            - name: cdrom
+              cdrom:
+                bus: sata
           interfaces:
             - name: default
-              masquerade: {} # NAT network, gives VM an IP
+              masquerade: {}
       networks:
         - name: default
           pod: {}
       volumes:
-        - name: rootdisk
-          dataVolume:
-            name: ubuntu-cloud-disk # references the DataVolume above
-        - name: cloudinitdisk
-          cloudInitNoCloud:
-            userData: |-
-              #cloud-config
-              hostname: ubuntu-cloud-vm
-              manage_etc_hosts: true
-              password: ubuntu
-              chpasswd: { expire: False }
-              ssh_pwauth: True
-              packages:
-                - qemu-guest-agent
-              runcmd:
-                - systemctl enable --now qemu-guest-agent
+        - name: cdrom
+          persistentVolumeClaim:
+            claimName: ubuntu-pvc

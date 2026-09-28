@@ -29,3 +29,9 @@ etcdctl \
   member remove <member-id>
 
 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/var/lib/rancher/k3s/server/tls/etcd/server-ca.crt --cert=/var/lib/rancher/k3s/server/tls/etcd/server-client.crt --key=/var/lib/rancher/k3s/server/tls/etcd/server-client.key
+
+
+rm -rf /var/lib/rook/
+rm -rf /var/lib/rancher/k3s/server/db/*
+cd /var/lib/kubelet/
+rm -rf device-plugins/* image_manager/* plugins/* plugins_registry/* pod-resources/* seccomp/* pods/*

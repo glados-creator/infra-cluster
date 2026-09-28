@@ -5,10 +5,10 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: quay.io/ceph/ceph:v20.2.3 # TODO update once update
+    image: quay.io/ceph/ceph:v20.2.4
   dataDirHostPath: /var/lib/rook
   mon:
-    count: 5
+    count: 3
     allowMultiplePerNode: false
   mgr:
     count: 2
@@ -25,40 +25,41 @@ spec:
   resources:
     mon:
       requests:
-        memory: "8Gi"
+        memory: "1Gi"
     mgr:
       requests:
-        memory: "8Gi"
+        memory: "1Gi"
     osd:
       requests:
-        memory: "8Gi"
+        memory: "1Gi"
   # placement:
   #   mon:
   #     nodeAffinity:
   storage:
+    # wipeDevicesFromOtherClusters: true
     useAllNodes: false
     useAllDevices: false
     nodes:
       - name: "stitan"
         devices:
-          - name: "/dev/disk/by-id/<stitan-id>"
+          - name: "/dev/disk/by-id/ata-ST8000DM004-2U9188_ZR15PPH9" # sda 8TB
           # config:
-          #     metadataDevice: "/dev/disk/by-id/<stitan-nvme-id>"
+          #     metadataDevice: "/dev/disk/by-id/<titan-nvme-id>"
       - name: "astra"
         devices:
-          - name: "/dev/disk/by-id/<astra-id>"
-          - name: "/dev/disk/by-id/<astra-id>"
-          - name: "/dev/disk/by-id/<astra-id>"
+          - name: "/dev/disk/by-id/ata-ST500DM002-1BD142_Z6EP7JTM" # sda 500G
+          - name: "/dev/disk/by-id/ata-Hitachi_HDS721050CLA662_JP1572FN0A3WYK" # sdc 500G
+          - name: "/dev/disk/by-id/ata-ST500LM012_HN-M500MBB_S2RSJ9CD389991" # sdd 500G
       - name: "jupiter"
         devices:
-          - name: "/dev/disk/by-id/<jupiter-id>"
-          - name: "/dev/disk/by-id/<jupiter-id>"
-          - name: "/dev/disk/by-id/<jupiter-id>"
-          - name: "/dev/disk/by-id/<jupiter-id>"
-      - name: "rpi5a"
-        devices:
-          - name: "/dev/disk/by-id/<rpi5a-id>"
-          - name: "/dev/disk/by-id/<rpi5a-id>"
-      - name: "rpi5b"
-        devices:
-          - name: "/dev/disk/by-id/<rpi5b-id>"
+          - name: "/dev/disk/by-id/ata-WDC_WDS200T2B0A-00SM50_204223801686" # sda 2T hdd
+          - name: "/dev/disk/by-id/ata-GIGABYTE_GP-GSTFS31100TNTD_SN202308906817" # sdb 1T hdd 
+          - name: "/dev/disk/by-id/ata-TPH00402000GB_0_HLTEV024" # sdc 2T ssd
+          - name: "/dev/disk/by-id/ata-WDC_WD20EZRX-00SPEB0_WD-WCC4E3CK662F" # sdd 2T 
+      # - name: "rpi5a"
+      #   devices:
+      #     # - name: "/dev/disk/by-id/<rpi5a-id>"
+      #     - name: "/dev/disk/by-id/nvme-BIWIN_NV3500_512GB_2539086310481" # nvme1n1 500G
+      # - name: "rpi5b"
+      #   devices:
+      #     - name: "/dev/disk/by-id/<rpi5b-id>"

@@ -13,3 +13,4 @@ resources:
   - rook.yaml
   - cephfs.yaml
   - ceph-url.yaml
+  # - cephsc.yaml
