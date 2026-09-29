@@ -18,4 +18,5 @@ linkerd viz install \
   --set prometheusUrl=http://private-monitor-prometheus-service.prod-private.svc.cluster.local:4420 \
   --set web.enforcedHostRegex='^(localhost|0\.0\.0\.0|web\.linkerd-viz\.svc\.cluster\.local|web\.linkerd-viz\.svc|\[::1\]|linkerd\.main\.home)(:\d+)?$' \
   | kubectl apply -f -
-linkerd check
+
+# linkerd check

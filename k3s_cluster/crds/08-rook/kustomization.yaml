@@ -11,6 +11,6 @@ resources:
   
   - https://raw.githubusercontent.com/rook/rook/master/deploy/examples/toolbox.yaml
   - rook.yaml
-  - cephfs.yaml
+  # - cephfs.yaml
   - ceph-url.yaml
   # - cephsc.yaml

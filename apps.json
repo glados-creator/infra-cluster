@@ -1,0 +1,987 @@
+{
+  "apps": {
+    "default/authentik": {
+      "group": "",
+      "name": "authentik",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": true,
+        "config_env": true,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": true,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/default/authentik",
+      "zone": "default"
+    },
+    "default/dozzle": {
+      "group": "",
+      "name": "dozzle",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": true,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": true,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/default/dozzle",
+      "zone": "default"
+    },
+    "default/gatus": {
+      "group": "",
+      "name": "gatus",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/default/gatus",
+      "zone": "default"
+    },
+    "default/glance": {
+      "group": "",
+      "name": "glance",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/default/glance",
+      "zone": "default"
+    },
+    "default/harbor": {
+      "group": "",
+      "name": "harbor",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": true,
+        "config_env": true,
+        "daemonset": true,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": true,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/default/harbor",
+      "zone": "default"
+    },
+    "default/netboot": {
+      "group": "",
+      "name": "netboot",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/default/netboot",
+      "zone": "default"
+    },
+    "default/node-exporter": {
+      "group": "",
+      "name": "node-exporter",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": true,
+        "gpu": false,
+        "ingress": false,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/default/node-exporter",
+      "zone": "default"
+    },
+    "default/openwrt": {
+      "group": "",
+      "name": "openwrt",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/default/openwrt",
+      "zone": "default"
+    },
+    "default/technitium": {
+      "group": "",
+      "name": "technitium",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": true,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": true,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/default/technitium",
+      "zone": "default"
+    },
+    "default/traefik": {
+      "group": "",
+      "name": "traefik",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": true,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": true,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/default/traefik",
+      "zone": "default"
+    },
+    "dmz/alternative-frontends/invidious": {
+      "group": "alternative-frontends",
+      "name": "invidious",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": true,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/dmz/alternative-frontends/invidious",
+      "zone": "dmz"
+    },
+    "dmz/alternative-frontends/piped": {
+      "group": "alternative-frontends",
+      "name": "piped",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": true,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": true,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/dmz/alternative-frontends/piped",
+      "zone": "dmz"
+    },
+    "dmz/alternative-frontends/searxng": {
+      "group": "alternative-frontends",
+      "name": "searxng",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": true,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/dmz/alternative-frontends/searxng",
+      "zone": "dmz"
+    },
+    "dmz/cloud/immich": {
+      "group": "cloud",
+      "name": "immich",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": true,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": true,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/dmz/cloud/immich",
+      "zone": "dmz"
+    },
+    "dmz/gatus": {
+      "group": "",
+      "name": "gatus",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/dmz/gatus",
+      "zone": "dmz"
+    },
+    "dmz/glance": {
+      "group": "",
+      "name": "glance",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/dmz/glance",
+      "zone": "dmz"
+    },
+    "dmz/media/autobrr": {
+      "group": "media",
+      "name": "autobrr",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/autobrr",
+      "zone": "dmz"
+    },
+    "dmz/media/bazarr": {
+      "group": "media",
+      "name": "bazarr",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/bazarr",
+      "zone": "dmz"
+    },
+    "dmz/media/jellyfin": {
+      "group": "media",
+      "name": "jellyfin",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/jellyfin",
+      "zone": "dmz"
+    },
+    "dmz/media/jellyseerr": {
+      "group": "media",
+      "name": "jellyseerr",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/jellyseerr",
+      "zone": "dmz"
+    },
+    "dmz/media/jellystat": {
+      "group": "media",
+      "name": "jellystat",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": true,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": true,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/jellystat",
+      "zone": "dmz"
+    },
+    "dmz/media/kapowarr": {
+      "group": "media",
+      "name": "kapowarr",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/kapowarr",
+      "zone": "dmz"
+    },
+    "dmz/media/lidarr": {
+      "group": "media",
+      "name": "lidarr",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/lidarr",
+      "zone": "dmz"
+    },
+    "dmz/media/profilarr": {
+      "group": "media",
+      "name": "profilarr",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/profilarr",
+      "zone": "dmz"
+    },
+    "dmz/media/prowlarr": {
+      "group": "media",
+      "name": "prowlarr",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/prowlarr",
+      "zone": "dmz"
+    },
+    "dmz/media/qbittorrent": {
+      "group": "media",
+      "name": "qbittorrent",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/qbittorrent",
+      "zone": "dmz"
+    },
+    "dmz/media/radarr": {
+      "group": "media",
+      "name": "radarr",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/radarr",
+      "zone": "dmz"
+    },
+    "dmz/media/readarr": {
+      "group": "media",
+      "name": "readarr",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": true,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/readarr",
+      "zone": "dmz"
+    },
+    "dmz/media/sonarr": {
+      "group": "media",
+      "name": "sonarr",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/sonarr",
+      "zone": "dmz"
+    },
+    "dmz/media/tdarr": {
+      "group": "media",
+      "name": "tdarr",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/tdarr",
+      "zone": "dmz"
+    },
+    "dmz/media/unpackerr": {
+      "group": "media",
+      "name": "unpackerr",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/unpackerr",
+      "zone": "dmz"
+    },
+    "dmz/media/youtarr": {
+      "group": "media",
+      "name": "youtarr",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": true,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": true,
+        "service_account": false
+      },
+      "path": "k3s_cluster/base/dmz/media/youtarr",
+      "zone": "dmz"
+    },
+    "dmz/oss/forgejo": {
+      "group": "oss",
+      "name": "forgejo",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/dmz/oss/forgejo",
+      "zone": "dmz"
+    },
+    "private/code/comfyui": {
+      "group": "code",
+      "name": "comfyui",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": true,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/private/code/comfyui",
+      "zone": "private"
+    },
+    "private/code/n8n": {
+      "group": "code",
+      "name": "n8n",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": true,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/private/code/n8n",
+      "zone": "private"
+    },
+    "private/code/odysseus": {
+      "group": "code",
+      "name": "odysseus",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": true,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/private/code/odysseus",
+      "zone": "private"
+    },
+    "private/code/ollama": {
+      "group": "code",
+      "name": "ollama",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": true,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/private/code/ollama",
+      "zone": "private"
+    },
+    "private/code/openclaw": {
+      "group": "code",
+      "name": "openclaw",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": true,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/private/code/openclaw",
+      "zone": "private"
+    },
+    "private/code/vscodium": {
+      "group": "code",
+      "name": "vscodium",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/private/code/vscodium",
+      "zone": "private"
+    },
+    "private/code/webui": {
+      "group": "code",
+      "name": "webui",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": true,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/private/code/webui",
+      "zone": "private"
+    },
+    "private/gatus": {
+      "group": "",
+      "name": "gatus",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/private/gatus",
+      "zone": "private"
+    },
+    "private/glance": {
+      "group": "",
+      "name": "glance",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/private/glance",
+      "zone": "private"
+    },
+    "private/home/home-assistant": {
+      "group": "home",
+      "name": "home-assistant",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/private/home/home-assistant",
+      "zone": "private"
+    },
+    "private/monitor/dozzle": {
+      "group": "monitor",
+      "name": "dozzle",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": true,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/private/monitor/dozzle",
+      "zone": "private"
+    },
+    "private/monitor/grafana": {
+      "group": "monitor",
+      "name": "grafana",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/private/monitor/grafana",
+      "zone": "private"
+    },
+    "private/monitor/headlamp": {
+      "group": "monitor",
+      "name": "headlamp",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": true,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/private/monitor/headlamp",
+      "zone": "private"
+    },
+    "private/monitor/prometheus": {
+      "group": "monitor",
+      "name": "prometheus",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/private/monitor/prometheus",
+      "zone": "private"
+    },
+    "public/gatus": {
+      "group": "",
+      "name": "gatus",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": true,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": true,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/public/gatus",
+      "zone": "public"
+    },
+    "public/glance": {
+      "group": "",
+      "name": "glance",
+      "options": {
+        "authentik_auth": false,
+        "ceph_pv": false,
+        "cluster_role": false,
+        "config_env": false,
+        "daemonset": false,
+        "gpu": false,
+        "ingress": true,
+        "linkerd": false,
+        "middleware": false,
+        "nfs_pv": false,
+        "secret_env": false,
+        "service_account": true
+      },
+      "path": "k3s_cluster/base/public/glance",
+      "zone": "public"
+    }
+  },
+  "base": "k3s_cluster/base",
+  "generated_at": "2026-09-28T05:39:44+00:00",
+  "version": 1
+}
