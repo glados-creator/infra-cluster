@@ -1,0 +1,17 @@
+# django
+Django==6.1.1
+asgiref
+sqlparse
+
+django-debug-toolbar
+django-extensions
+djangorestframework
+django-bootstrap5
+pygraphviz
+pydotplus
+coverage
+
+# tooling
+isort
+autopep8
+flake8

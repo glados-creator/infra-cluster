@@ -22,4 +22,4 @@ devenv.local.yaml
 .pre-commit-config.yaml
 
 *.pyc
-**/venv/
+**/venv**
