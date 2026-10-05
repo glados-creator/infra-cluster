@@ -1,66 +1,63 @@
 """Pure data. No I/O, no rendering. This is the source of truth."""
 from __future__ import annotations
 from dataclasses import dataclass, field
-from typing import Literal
+from typing import Literal, Union
+
+
+# ---------- type aliases ----------
 
 Storage = Literal["none", "cephfs", "nfs"]
 Proto   = Literal["TCP", "UDP"]
 Kind    = Literal["Deployment", "DaemonSet", "StatefulSet"]
 
 
-# ---------- primitives ----------
-
-@dataclass
-class Port:
-    number: int
-    name:   str = "http"
-    proto:  Proto = "TCP"
-    expose: bool = True          # also goes into service.yaml
-
+# ---------- mounts ----------
 
 @dataclass
 class Config:
-    key:   str
-    value: str
+    """ConfigMap-backed mount. Also registers into configMapGenerator."""
+    name: str
+    at:   str
+    file: str
+    ro:   bool = True
 
 
 @dataclass
-class Secret:
-    key:   str
-    value: str
+class Volume:
+    """PVC / emptyDir / hostPath mount."""
+    name:      str
+    at:        str
+    size:      str | None = None
+    storage:   Storage = "cephfs"
+    ro:        bool = False
+    sub_path:  str | None = None
+    host_path: str | None = None
 
 
 @dataclass
-class Mount:
-    name:  str                   # logical name -> volume name + pvc-<name>
-    at:    str                   # container mountPath
-    size:  str | None = None     # None -> emptyDir
-    ro:    bool = False
+class SecretMount:
+    """Secret-backed mount (from secretGenerator)."""
+    name:     str
+    at:       str
+    env_file: str
+    ro:       bool = True
 
 
-@dataclass
-class Container:
-    name:   str
-    image:  str
-    ports:  list[Port]   = field(default_factory=list)
-    config: list[Config] = field(default_factory=list)
-    secret: list[Secret] = field(default_factory=list)
-    mounts: list[Mount]  = field(default_factory=list)
-    args:   list[str]    = field(default_factory=list)
-    cmd:    list[str]    = field(default_factory=list)
-    cpu:    str | None   = None
-    mem:    str | None   = None
+Mount = Union[Config, Volume, SecretMount]
 
+
+# ---------- ports ----------
 
 @dataclass
-class Ingress:
-    host: str
-    port: str = "http"           # Port.name
-    auth: str | None = None      # middleware, e.g. "auth-authentik"
-    tls:  bool = True
+class Port:
+    number:       int
+    name:         str = "http"
+    proto:        Proto = "TCP"
+    expose:       bool = True
+    service_port: int | None = None
 
 
-# ---------- RBAC ----------
+# ---------- rbac ----------
 
 @dataclass
 class PolicyRule:
@@ -75,22 +72,53 @@ class PolicyRule:
 class ServiceAccount:
     name:              str = "sa"
     rules:             list[PolicyRule] = field(default_factory=list)
-    cluster_role_name: str | None = None    # default: f"{app}-role"
-    binding_name:      str | None = None    # default: f"{app}-rb"
+    cluster_role_name: str | None = None
+    binding_name:      str | None = None
 
     @property
     def needs_cluster_role(self) -> bool:
         return bool(self.rules)
 
 
-# ---------- app ----------
+# ---------- container ----------
+
+@dataclass
+class Container:
+    image:  str
+    name:   str | None = None
+    ports:  list[Port]  = field(default_factory=list)
+    mounts: list[Mount] = field(default_factory=list)
+    env:    dict[str, str] = field(default_factory=dict)
+    args:   list[str] = field(default_factory=list)
+    cmd:    list[str] = field(default_factory=list)
+    cpu:    str | None = None
+    mem:    str | None = None
+
+
+# ---------- ingress ----------
+
+@dataclass
+class Ingress:
+    host: str
+    port: str = "http"
+    auth: str | None = None
+    tls:  bool = True
+
+
+# ---------- options ----------
 
 @dataclass
 class Options:
     storage: Storage = "none"
     linkerd: bool = False
     gpu:     bool = False
+    service: bool = True
+    ingress: bool = True
+    hpa:     bool = False
+    rbac:    bool = True
 
+
+# ---------- app ----------
 
 @dataclass
 class App:
@@ -100,7 +128,6 @@ class App:
     replicas:        int = 1
     options:         Options = field(default_factory=Options)
     ingress:         Ingress | None = None
-    namespace:       str | None = None       # None -> overlay decides
     tolerations:     list[dict] = field(default_factory=list)
     service_account: ServiceAccount | None = None
 
@@ -112,7 +139,7 @@ class Folder:
     name:     str
     children: list["App | Folder"] = field(default_factory=list)
 
-    def app(self, **kw) -> App:
+    def app(self, **kw) -> "App":
         a = App(**kw)
         self.children.append(a)
         return a
@@ -124,6 +151,58 @@ class Folder:
         f = Folder(name)
         self.children.append(f)
         return f
+
+
+@dataclass
+class Namespace:
+    name:     str
+    k8s_name: str | None = None
+    children: list["App | Folder"] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        if self.k8s_name is None:
+            self.k8s_name = "default" if self.name == "main" else self.name
+
+    def app(self, **kw) -> "App":
+        a = App(**kw)
+        self.children.append(a)
+        return a
+
+    def folder(self, name: str) -> "Folder":
+        for c in self.children:
+            if isinstance(c, Folder) and c.name == name:
+                return c
+        f = Folder(name)
+        self.children.append(f)
+        return f
+
+
+@dataclass
+class Environment:
+    name:       str
+    namespaces: list[Namespace] = field(default_factory=list)
+
+    def ns(self, name: str) -> Namespace:
+        for n in self.namespaces:
+            if n.name == name:
+                return n
+        n = Namespace(name)
+        self.namespaces.append(n)
+        return n
+
+
+@dataclass
+class Tree:
+    environments: list[Environment] = field(default_factory=list)
+    main:         Namespace = field(default_factory=lambda: Namespace("main"))
+
+    def env(self, name: str) -> Environment:
+        for e in self.environments:
+            if e.name == name:
+                return e
+        e = Environment(name)
+        self.environments.append(e)
+        return e
 
 
 Node = App | Folder
