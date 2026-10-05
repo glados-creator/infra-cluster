@@ -35,6 +35,10 @@ spec:
   # placement:
   #   mon:
   #     nodeAffinity:
+  # cephConfig:
+  #   mon:
+  #     mon_enable_old_auth_methods: "false"
+  #     auth_allow_insecure_global_id_reclaim: "false"
   storage:
     # wipeDevicesFromOtherClusters: true
     useAllNodes: false
