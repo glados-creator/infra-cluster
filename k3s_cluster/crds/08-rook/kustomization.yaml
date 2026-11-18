@@ -1,6 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+# kubectl apply --server-side -f https://raw.githubusercontent.com/rook/rook/v1.20.7/deploy/examples/csi-operator.yaml
+# kubectl -n rook-ceph get clientprofile => pv clusterID
+
 resources:
   - https://raw.githubusercontent.com/rook/rook/v1.20.7/deploy/examples/operator.yaml
   - https://raw.githubusercontent.com/rook/rook/v1.20.7/deploy/examples/csi-operator.yaml
@@ -11,6 +14,7 @@ resources:
   
   - https://raw.githubusercontent.com/rook/rook/master/deploy/examples/toolbox.yaml
   - rook.yaml
-  # - cephfs.yaml
+  - cephfs.yaml
   - ceph-url.yaml
-  # - cephsc.yaml
+  - cephsc.yaml
+
