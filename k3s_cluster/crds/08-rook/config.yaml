@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rook-ceph-operator-config
+  namespace: rook-ceph
+data:
+  CSI_FORCE_CEPHFS_KERNEL_CLIENT: "false"
+---
+apiVersion: csi.ceph.io/v1
+kind: Driver
+metadata:
+  name: rook-ceph.cephfs.csi.ceph.com
+  namespace: rook-ceph
+spec:
+  cephFsClientType: autodetect

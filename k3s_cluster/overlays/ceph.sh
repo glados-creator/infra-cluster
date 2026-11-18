@@ -2,11 +2,11 @@ set -x
 
 # Get the mons + key from Rook
 # kubectl -n rook-ceph exec -it deploy/rook-ceph-tools -- ceph mon dump
-# kubectl -n rook-ceph exec -it deploy/rook-ceph-tools -- ceph auth get-key client.admin
+# kubectl -n rook-ceph exec -it deploy/rook-ceph-tools -- ceph auth get client.admin
 # 
 # sudo mkdir -p /mnt/bhole
-# echo "<admin-key>" | sudo tee /etc/ceph/admin.secret
-# sudo chmod 600 /etc/ceph/admin.secret
+# sudo nano /etc/ceph/ceph.client.admin.keyring
+# sudo chmod 600 /etc/ceph/ceph.client.admin.keyring
 # 
 # # Kernel client (needs ceph.ko — may not work on NixOS)
 # sudo mount -t ceph mon1:6789/ /mnt/bhole -o name=admin,secretfile=/etc/ceph/admin.secret
@@ -17,7 +17,8 @@ set -x
 # sudo ceph-fuse /mnt/bhole \
 #   -n client.admin \
 #   -k /etc/ceph/ceph.client.admin.keyring \
-#   -m mon1:6789,mon2:6789,mon3:6789
+#   -m 10.43.60.86:6789,10.43.226.104:6789,10.43.124.244:6789 \
+#   --client_mds_namespace=bholefs
 
 Vdefault=$(kubectl -n rook-ceph exec -it deploy/rook-ceph-tools -- ceph fs subvolume getpath bholefs vicus-default --group_name colosseum | tr -d '\r')
 Vprivate=$(kubectl -n rook-ceph exec -it deploy/rook-ceph-tools -- ceph fs subvolume getpath bholefs vicus-private --group_name colosseum | tr -d '\r')
